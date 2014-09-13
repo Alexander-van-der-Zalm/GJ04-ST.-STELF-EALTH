@@ -14,6 +14,9 @@ public class CharacterController : MonoBehaviour
 
     private string velXStr = "VelocityX";
     private string velYStr = "VelocityY";
+    private string bounceAnimVar = "Bounce";
+
+    public float BounceTime = 0.3f;
 
     private Vector2 movementInput = new Vector2();
 
@@ -78,5 +81,17 @@ public class CharacterController : MonoBehaviour
             Flip();
         else if (dir < 0 && !facingLeft)
             Flip();
+    }
+
+    public void SetBounce()
+    {
+        StartCoroutine(SetBounceCR());
+    }
+
+    private IEnumerator SetBounceCR()
+    {
+        an.SetBool(bounceAnimVar, true);
+        yield return new WaitForSeconds(BounceTime);
+        an.SetBool(bounceAnimVar, false);
     }
 }

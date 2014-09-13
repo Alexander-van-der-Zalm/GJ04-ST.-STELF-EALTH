@@ -12,7 +12,7 @@ public class PickPocket : MonoBehaviour
     private int bouncesAllowed;
     private  IHasMoolah wallet;
     private string validTag = "IHasMoolah";
-    
+
     void Start () 
     {
         wallet = GetComponent<IHasMoolah>();
@@ -110,6 +110,7 @@ public class PickPocket : MonoBehaviour
         if (bouncesAllowed > 0 && other.gameObject.CompareTag(validTag))
         {
             Debug.Log("ValidBounce");
+            other.gameObject.GetComponent<CharacterController>().SetBounce();
             IHasMoolah otherMoolah = other.gameObject.GetComponent<IHasMoolah>();
             // Handle Bounce
             newValidBounceDelay(otherMoolah);
