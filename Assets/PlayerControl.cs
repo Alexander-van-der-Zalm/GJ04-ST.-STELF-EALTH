@@ -11,9 +11,9 @@ public class PlayerControl : MonoBehaviour
     }
     
     public ControlScheme ControlScheme;
-
-
-    private Vector2 Input;
+    
+   
+    public Vector2 Input;
 
     private CharacterController cc;
     
