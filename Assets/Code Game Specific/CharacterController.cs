@@ -33,13 +33,17 @@ public class CharacterController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
     {
+        // Change this potentially
+        if(!an.GetBool(bounceAnimVar))
+            CheckFlipBy(rb.velocity.x);
+        // Change this potentially
         rb.velocity = movementInput * MaximumVelocity;
 
         // Set animator
         an.SetFloat(velXStr, rb.velocity.x);
         an.SetFloat(velYStr, rb.velocity.y);
 
-        CheckFlipBy(movementInput.x);
+        
         HandleZDepth();
 	}
 
@@ -91,6 +95,7 @@ public class CharacterController : MonoBehaviour
     private IEnumerator SetBounceCR()
     {
         an.SetBool(bounceAnimVar, true);
+        CheckFlipBy(-rb.velocity.x);
         yield return new WaitForSeconds(BounceTime);
         an.SetBool(bounceAnimVar, false);
     }
