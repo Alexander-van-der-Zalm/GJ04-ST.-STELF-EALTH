@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D)),RequireComponent(typeof(Animator))]
 public class CharacterController : MonoBehaviour 
 {
     public float MaximumVelocity = 10;
@@ -10,6 +10,10 @@ public class CharacterController : MonoBehaviour
 
     private Transform tr;
     private Rigidbody2D rb;
+    private Animator an;
+
+    private string velXStr = "VelocityX";
+    private string velYStr = "VelocityY";
 
     private Vector2 movementInput = new Vector2();
 
@@ -18,6 +22,7 @@ public class CharacterController : MonoBehaviour
     {
         tr = transform;
         rb = rigidbody2D;
+        an = GetComponent<Animator>();
         rb.gravityScale = 0;
         rb.fixedAngle = true;
 	}
@@ -26,6 +31,11 @@ public class CharacterController : MonoBehaviour
 	void FixedUpdate () 
     {
         rb.velocity = movementInput * MaximumVelocity;
+
+        // Set animator
+        an.SetFloat(velXStr, rb.velocity.x);
+        an.SetFloat(velYStr, rb.velocity.y);
+
         CheckFlipBy(movementInput.x);
         HandleZDepth();
 	}
