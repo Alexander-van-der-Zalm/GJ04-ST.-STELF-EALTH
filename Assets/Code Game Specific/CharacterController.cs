@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D)),RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]//,RequireComponent(typeof(Animator))]
 public class CharacterController : MonoBehaviour 
 {
     public float MaximumVelocity = 10;
@@ -25,7 +25,7 @@ public class CharacterController : MonoBehaviour
     {
         tr = transform;
         rb = rigidbody2D;
-        an = GetComponent<Animator>();
+        an = GetComponentInChildren<Animator>();
         rb.gravityScale = 0;
         rb.fixedAngle = true;
 	}

@@ -16,7 +16,7 @@ public class MaterialController : MonoBehaviour
     {
         tr = transform;
         // mat = new Material(GetComponent<SpriteRenderer>().material);
-        renderer = GetComponent<SpriteRenderer>();
+        renderer = GetComponentInChildren<SpriteRenderer>();
         //.renderer..color =
 
 	}
