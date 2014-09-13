@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
     private Transform tr;
     private Rigidbody2D rb;
 
-    public Vector2 movementInput = new Vector2();
+    private Vector2 movementInput = new Vector2();
 
     // Use this for initialization
 	void Start () 
@@ -23,9 +23,10 @@ public class CharacterController : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
     {
         rb.velocity = movementInput * MaximumVelocity;
+        CheckFlipBy(movementInput.x);
         HandleZDepth();
 	}
 
@@ -33,7 +34,8 @@ public class CharacterController : MonoBehaviour
     {
         movementInput.x = horizontalInput;
         movementInput.y = verticalInput;
-        movementInput.Normalize();
+        if(movementInput.magnitude>1)
+            movementInput.Normalize();
     }
 
     private void HandleZDepth()
@@ -49,5 +51,22 @@ public class CharacterController : MonoBehaviour
         Vector3 localScale = tr.localScale;
         localScale.x = -localScale.x;
         tr.localScale = localScale;
+    }
+
+    /// <summary>
+    /// dir positive for right
+    /// dir negative for left
+    /// </summary>
+    /// <param name="dir"></param>
+    private void CheckFlipBy(float dir)
+    {
+        if (dir == 0)
+            return;
+        dir = Mathf.Sign(dir);
+
+        if (dir > 0 && facingLeft)
+            Flip();
+        else if (dir < 0 && !facingLeft)
+            Flip();
     }
 }
