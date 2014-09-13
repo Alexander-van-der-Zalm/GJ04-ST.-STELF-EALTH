@@ -1,0 +1,12 @@
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\UnityVS.GJ03-ParagonShmup.CSharp.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\UnityVS.GJ03-ParagonShmup.CSharp.pdb
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\XInputDotNetPure.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\obj\Debug\UnityVS.GJ03-ParagonShmup.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\obj\Debug\UnityVS.GJ03-ParagonShmup.CSharp.dll
+C:\Users\Alexander\Documents\GitHub\GJ03-ParagonShmup\obj\Debug\UnityVS.GJ03-ParagonShmup.CSharp.pdb

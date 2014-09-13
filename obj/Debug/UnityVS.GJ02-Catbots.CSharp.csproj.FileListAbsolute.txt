@@ -1,0 +1,12 @@
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\obj\Debug\UnityVS.GJ02-Catbots.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\UnityVS.GJ02-Catbots.CSharp.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\UnityVS.GJ02-Catbots.CSharp.pdb
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\XInputDotNetPure.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\obj\Debug\UnityVS.GJ02-Catbots.CSharp.dll
+C:\Users\Alexander\Documents\GitHub\GJ02-Catbots\obj\Debug\UnityVS.GJ02-Catbots.CSharp.pdb
