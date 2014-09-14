@@ -16,9 +16,13 @@ public class CharacterController : MonoBehaviour
     private string velYStr = "VelocityY";
     private string bounceAnimVar = "Bounce";
 
+    private string bounceSoundString = "Bump";
+    private int bounceSoundVariations = 3;
+
     public float BounceTime = 0.3f;
 
     private Vector2 movementInput = new Vector2();
+    
 
     // Use this for initialization
 	void Start () 
@@ -45,7 +49,13 @@ public class CharacterController : MonoBehaviour
 
         
         HandleZDepth();
+        ResetInput();
 	}
+
+    private void ResetInput()
+    {
+        movementInput = Vector2.zero;
+    }
 
     public void SetInput(float horizontalInput, float verticalInput)
     {
@@ -95,8 +105,17 @@ public class CharacterController : MonoBehaviour
     private IEnumerator SetBounceCR()
     {
         an.SetBool(bounceAnimVar, true);
+        PlayBounceSound();
         CheckFlipBy(-rb.velocity.x);
         yield return new WaitForSeconds(BounceTime);
         an.SetBool(bounceAnimVar, false);
+    }
+
+    private void PlayBounceSound()
+    {
+        int indexNumber = Random.Range(1, bounceSoundVariations);
+        string sampleName = bounceSoundString + indexNumber;
+        //Debug.Log(sampleName);
+        AudioManager.Play(AudioManager.FindSampleFromCurrentLibrary(sampleName), tr);
     }
 }
