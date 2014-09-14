@@ -19,7 +19,7 @@ public class PickPocket : MonoBehaviour
     private bool wantToPickPocket = false;
     private bool collided;
     private int bouncesAllowed;
-    private  IHasMoolah wallet;
+    private IHasMoolah wallet;
     private string validTag = "IHasMoolah";
 
     void Start () 

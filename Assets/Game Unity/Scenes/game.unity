@@ -121,8 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &26288585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,8 +565,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &166967317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,8 +898,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &247856179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,8 +1080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &280315107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1536,8 +1544,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &444374465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,8 +2051,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 1
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &593849015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,8 +2167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &594192147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,8 +2283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &599053813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,8 +2991,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &844481367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3291,8 +3309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &965981168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3587,8 +3607,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1116579718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3812,8 +3834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1201540452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3976,8 +4000,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1224879967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4256,8 +4282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1285494069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4681,8 +4709,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1347855264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5541,6 +5571,54 @@ MonoBehaviour:
       Spread: 0
       MaxDistance: 500
       Pan2D: 1
+  - Name: Bump1
+    Clip: {fileID: 8300000, guid: d852348c9e1f4a24292f645106ce442f, type: 3}
+    Layer: 2
+    Settings:
+      Volume: 1
+      Loop: 0
+      Priority: 128
+      Pitch: 1
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      DopplerLevel: 1
+      PanLevel: 1
+      Spread: 0
+      MaxDistance: 500
+      Pan2D: 1
+  - Name: Bump2
+    Clip: {fileID: 8300000, guid: eeb8844eb9b34a74591c16cb275b0f41, type: 3}
+    Layer: 2
+    Settings:
+      Volume: 1
+      Loop: 0
+      Priority: 128
+      Pitch: 1
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      DopplerLevel: 1
+      PanLevel: 1
+      Spread: 0
+      MaxDistance: 500
+      Pan2D: 1
+  - Name: Bump3
+    Clip: {fileID: 8300000, guid: ca7e73f4324a0e0468e2e624a4531906, type: 3}
+    Layer: 2
+    Settings:
+      Volume: 1
+      Loop: 0
+      Priority: 128
+      Pitch: 1
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      DopplerLevel: 1
+      PanLevel: 1
+      Spread: 0
+      MaxDistance: 500
+      Pan2D: 1
 --- !u!114 &1548375873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5757,8 +5835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1598058102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5936,8 +6016,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!1 &1669967336
 GameObject:
   m_ObjectHideFlags: 0
@@ -5985,8 +6067,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1669967339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6199,8 +6283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1705276954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6464,8 +6550,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1738917121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6759,8 +6847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1779839534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7023,8 +7113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1810562113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7137,8 +7229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1825797489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7483,8 +7577,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MOVE: 0
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
+  Distance: 0
+  StoppingRange: .5
 --- !u!114 &1962706455
 MonoBehaviour:
   m_ObjectHideFlags: 0
