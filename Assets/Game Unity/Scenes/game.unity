@@ -102,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 26288582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.527639985, y: .452439994, z: -1.44000006}
+  m_LocalPosition: {x: 12.6190004, y: .452439994, z: -1.44000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1538003465}
@@ -768,7 +768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194980971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.353320003, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1624648962}
@@ -2718,7 +2718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f81a03ff8423e4f81bfb1fb5ae4eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaximumVelocity: 2
+  MaximumVelocity: 5
   BounceTime: .300000012
 --- !u!50 &783526616
 Rigidbody2D:
@@ -2799,9 +2799,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47454e151eb9354d98b78506605be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickPocketWindow: .300000012
-  wantToPickPocket: 0
-  collided: 0
+  PickPocketBeforeBounce: .100000001
+  PickPocketAfterBounce: .150000006
+  PickPocketClipNames:
+  - Steal1
+  - Steal2
+  samples: []
 --- !u!58 &783526621
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5475,6 +5478,138 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d6b6d3f85e027374ab33948629a623d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1548375871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1548375876}
+  - 114: {fileID: 1548375875}
+  - 114: {fileID: 1548375874}
+  - 114: {fileID: 1548375873}
+  - 114: {fileID: 1548375872}
+  m_Layer: 0
+  m_Name: GlobalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1548375872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548375871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e482eae304d744196dffff00cd47ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Samples:
+  - Name: Steal2
+    Clip: {fileID: 8300000, guid: 6572e1265b6e7e94780ae4d9c912bf3e, type: 3}
+    Layer: 2
+    Settings:
+      Volume: 1
+      Loop: 0
+      Priority: 128
+      Pitch: 1
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      DopplerLevel: 1
+      PanLevel: 1
+      Spread: 0
+      MaxDistance: 500
+      Pan2D: 1
+  - Name: Steal1
+    Clip: {fileID: 8300000, guid: e1afc0d31afc2934d84b8335e4d6197a, type: 3}
+    Layer: 2
+    Settings:
+      Volume: 1
+      Loop: 0
+      Priority: 128
+      Pitch: 1
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      DopplerLevel: 1
+      PanLevel: 1
+      Spread: 0
+      MaxDistance: 500
+      Pan2D: 1
+--- !u!114 &1548375873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548375871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bedf149b55667e449b308f1a7959c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioLayerManager: {fileID: 1548375874}
+  AudioLibrary: {fileID: 1548375872}
+--- !u!114 &1548375874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548375871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6326d04a4d7f1499e2baf1a21823e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioLayerSettings:
+  - layer: 0
+    Volume: 1
+    Mute: 0
+    MaxClips: -1
+    ClipsPlaying: 0
+  - layer: 1
+    Volume: 1
+    Mute: 0
+    MaxClips: -1
+    ClipsPlaying: 0
+  - layer: 2
+    Volume: 1
+    Mute: 0
+    MaxClips: -1
+    ClipsPlaying: 0
+  - layer: 3
+    Volume: 1
+    Mute: 0
+    MaxClips: -1
+    ClipsPlaying: 0
+--- !u!114 &1548375875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548375871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2a7e80dce106e469a90ce81775ceb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ControlSchemes: []
+--- !u!4 &1548375876
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1548375871}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &1556671690
 GameObject:
   m_ObjectHideFlags: 0
@@ -5717,7 +5852,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1624648961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.72179997, y: 1.13689995, z: -1.44000006}
+  m_LocalPosition: {x: -10.1210003, y: 1.13689995, z: -1.44000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2104567971}
