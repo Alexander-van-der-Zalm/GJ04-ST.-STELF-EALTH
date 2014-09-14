@@ -9,5 +9,6 @@ public class AI_Order : MonoBehaviour
     public virtual void StartOrder(AI_UtilityBox box)
     {
         this.box = box;
+        IsFinished = false;
     }
 }

@@ -30,7 +30,7 @@ public class AI_MovementController : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0))
             {
-                Stop();
+                //Stop();
                 Dest = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Start(Dest);
             }
@@ -40,6 +40,7 @@ public class AI_MovementController : MonoBehaviour
 
     public void Start(Vector2 destination)//, float stoppingrange = 0)
     {
+        Stop();
         StartCoroutine(OrderMoveToCR(destination));
     }
 
