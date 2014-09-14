@@ -10,6 +10,7 @@ public class AI_LineOfSightTriangle : MonoBehaviour
     public Vector2 LastKnownDirection;
 
     public GameObject target;
+    
     private bool lastLOS;
 
     public void FixedUpdate()
@@ -20,7 +21,7 @@ public class AI_LineOfSightTriangle : MonoBehaviour
             LastKnownDirection = target.rigidbody2D.velocity;
         }
 
-        //RotateTowardsV2(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        RotateTowardsV2(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         lastLOS = LOS;
         LOS = false;
     }
@@ -37,6 +38,6 @@ public class AI_LineOfSightTriangle : MonoBehaviour
     {
         //Debug.Log("Player in LOS");
         LOS = true;
-        target = other.gameObject;
+        target = other.gameObject.transform.parent.gameObject;
     }
 }
