@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
-public class AIMovementController : MonoBehaviour 
+public class AI_MovementController : MonoBehaviour 
 {
     private Transform tr;
     private CharacterController cc;
