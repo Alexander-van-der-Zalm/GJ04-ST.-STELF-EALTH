@@ -17,7 +17,7 @@ public class CharacterController : MonoBehaviour
     private string bounceAnimVar = "Bounce";
 
     private string bounceSoundString = "Bump";
-    private int bounceSoundVariations = 3;
+    private int bounceSoundVariations = 1;
 
     public float BounceTime = 0.3f;
 
@@ -113,9 +113,9 @@ public class CharacterController : MonoBehaviour
 
     private void PlayBounceSound()
     {
-        int indexNumber = Random.Range(1, bounceSoundVariations);
+        int indexNumber = Random.Range(1, bounceSoundVariations+1);
         string sampleName = bounceSoundString + indexNumber;
-        //Debug.Log(sampleName);
+        Debug.Log(sampleName);
         AudioManager.Play(AudioManager.FindSampleFromCurrentLibrary(sampleName), tr);
     }
 }
