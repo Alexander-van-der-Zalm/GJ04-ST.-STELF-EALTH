@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour
 
         
         HandleZDepth();
-        ResetInput();
+        //ResetInput();
 	}
 
     private void ResetInput()
