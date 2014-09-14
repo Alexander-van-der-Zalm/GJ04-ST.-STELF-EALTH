@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour
     public float BounceTime = 0.3f;
 
     private Vector2 movementInput = new Vector2();
+    
 
     // Use this for initialization
 	void Start () 
@@ -45,7 +46,13 @@ public class CharacterController : MonoBehaviour
 
         
         HandleZDepth();
+        ResetInput();
 	}
+
+    private void ResetInput()
+    {
+        movementInput = Vector2.zero;
+    }
 
     public void SetInput(float horizontalInput, float verticalInput)
     {
