@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(IHasMoolah))]
 public class PickPocket : MonoBehaviour 
 {
-    public float PickPocketWindow = 0.3f;
+    //public float PickPocketWindow = 0.3f;
+
+    public float PickPocketBeforeBounce = 0.1f;
+    public float PickPocketAfterBounce = 0.15f;
+
+    //public List<AudioClip> PickPocketSoundFX;
+
+    public List<string> PickPocketClipNames = new List<string>();
+    public List<AudioSample> samples;
 
     private bool pressed;
-    public bool wantToPickPocket = false;
-    public bool collided;
+    private bool wantToPickPocket = false;
+    private bool collided;
     private int bouncesAllowed;
     private  IHasMoolah wallet;
     private string validTag = "IHasMoolah";
@@ -16,6 +25,11 @@ public class PickPocket : MonoBehaviour
     void Start () 
     {
         wallet = GetComponent<IHasMoolah>();
+        samples = new List<AudioSample>();
+        foreach (string str in PickPocketClipNames)
+        {
+            samples.Add(AudioManager.FindSampleFromCurrentLibrary(str));
+        }
     }
 
     #region Input
@@ -37,6 +51,9 @@ public class PickPocket : MonoBehaviour
         {
             wallet.Moolah += stealAmount;
             otherGuysMoolah.Moolah = 0;
+            int randomIndex = Random.Range(0,PickPocketClipNames.Count);
+
+            AudioManager.Play(samples[randomIndex],transform.position);
         }
 
         Debug.Log("PickPocket Succes: Stole " + stealAmount);
@@ -47,13 +64,13 @@ public class PickPocket : MonoBehaviour
 
     private IEnumerator newValidInputDelayCR()
     {
-        float pickPocketInputDelayWindow = 0.5f * PickPocketWindow;
+        //float pickPocketInputDelayWindow = 0.5f * PickPocketWindow;
         float start = Time.timeSinceLevelLoad;
 
         pressed = false;
         wantToPickPocket = true;
 
-        while(Time.timeSinceLevelLoad - start < pickPocketInputDelayWindow)
+        while (Time.timeSinceLevelLoad - start < PickPocketBeforeBounce)
         {
             if (pressed || !wantToPickPocket)
                 yield break;
@@ -69,10 +86,10 @@ public class PickPocket : MonoBehaviour
 
     private IEnumerator newValidBounceDelayCR(IHasMoolah otherMoolah)
     {
-        float pickPocketInputDelayWindow = 0.5f * PickPocketWindow;
+        //float pickPocketInputDelayWindow = 0.5f * PickPocketWindow;
         float start = Time.timeSinceLevelLoad;
-        
-        while (Time.timeSinceLevelLoad - start < pickPocketInputDelayWindow)
+
+        while (Time.timeSinceLevelLoad - start < PickPocketAfterBounce)
         {
             if(wantToPickPocket)
             {
