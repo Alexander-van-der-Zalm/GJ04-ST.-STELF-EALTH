@@ -12,13 +12,12 @@ public class AI_State_Follow : AI_State
     {
         Reset();
         Resume();
-
     }
 
     private void NewOrderList(Transform trans)
     {
         Orders = new List<AI_Order>();
-        AI_Order_Chase chase = new AI_Order_Chase();
+        Orders.Add(new AI_Order_Chase());
         
         
         //Orders.Add(new )

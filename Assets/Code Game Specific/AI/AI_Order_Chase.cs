@@ -7,7 +7,17 @@ public class AI_Order_Chase : AI_Order
     {
         base.StartOrder(box);
 
-        //StartCoroutine(ChaseCoroutine())
+        StartCoroutine(ChaseCoroutine());
+    }
+
+    private IEnumerator ChaseCoroutine()
+    {
+        while(box.Los.LOS)
+        {
+            box.Controller.Start(box.Los.target.transform.position);
+            yield return null;
+        }
+        IsFinished = true;
     }
 	
 }

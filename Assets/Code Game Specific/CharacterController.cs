@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]//,RequireComponent(typeof(Animator))]
 public class CharacterController : MonoBehaviour 
 {
+    public GameObject Sprite;
     public float MaximumVelocity = 10;
 
     private bool facingLeft = true;
@@ -75,9 +76,12 @@ public class CharacterController : MonoBehaviour
     private void Flip()
     {
         facingLeft = !facingLeft;
-        Vector3 localScale = tr.localScale;
+        Transform tra = tr;
+        if (Sprite != null)
+            tra = Sprite.transform;
+        Vector3 localScale = tra.localScale;
         localScale.x = -localScale.x;
-        tr.localScale = localScale;
+        tra.localScale = localScale;
     }
 
     /// <summary>
