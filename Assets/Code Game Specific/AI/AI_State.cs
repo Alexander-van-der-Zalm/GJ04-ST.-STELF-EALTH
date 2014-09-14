@@ -32,6 +32,9 @@ public class AI_State : MonoBehaviour
     // Main coroutine
     private IEnumerator StateCR()
     {
+        // Start the first order
+        Orders[index].StartOrder(box);
+
         while(!paused)
         {
             // Keep running till paused

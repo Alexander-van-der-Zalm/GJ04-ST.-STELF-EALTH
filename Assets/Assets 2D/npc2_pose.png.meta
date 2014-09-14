@@ -5,6 +5,7 @@ labels:
 TextureImporter:
   fileIDToRecycleName:
     21300000: npc_ph
+    21300002: npc2_pose
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
