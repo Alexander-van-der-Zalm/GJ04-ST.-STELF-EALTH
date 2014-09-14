@@ -58,6 +58,8 @@ public class AIMovementController : MonoBehaviour
             Distance = getDistance(destination);
             yield return null;
         }
+
+        cc.SetInput(0, 0);
     }
 
     private float getDistance(Vector2 destination)
