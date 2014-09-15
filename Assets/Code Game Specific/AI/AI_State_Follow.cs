@@ -6,14 +6,9 @@ public class AI_State_Follow : AI_State
     public void Start()
     {
         NewOrderList();
+        // Think about re-entering LOS while in this state
     }
 	
-    //public void Follow(Transform trans)
-    //{
-    //    Reset();
-    //    Resume();
-    //}
-
     private void NewOrderList()
     {
         Orders = new List<AI_Order>();
@@ -21,5 +16,11 @@ public class AI_State_Follow : AI_State
         //Orders.Add(GetComponentInChildren<AI_Order>());
         
         //Orders.Add(new )
+    }
+
+    public override void Resume()
+    {
+        base.Resume();
+        Reset();
     }
 }

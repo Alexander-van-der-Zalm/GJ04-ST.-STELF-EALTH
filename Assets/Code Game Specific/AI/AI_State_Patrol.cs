@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AI_State_Patrol : MonoBehaviour {
+public class AI_State_Patrol : AI_State 
+{
 
 	// Use this for initialization
 	void Start () {

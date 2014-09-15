@@ -6,14 +6,22 @@ public class AI_State : MonoBehaviour
 {
     // Orders to loop through
     protected List<AI_Order> Orders =  new List<AI_Order>();
-    protected bool paused = true;
-    protected int index = 0;
     protected AI_UtilityBox box;
+
+    private bool paused = true;
+    private int index = 0;
+
+    protected bool OrderLoops;
+
+    // Set to true if you want to let lower priority tasks take over
+    public bool IsFinished = false;
 
     public void Create(AI_UtilityBox boks)
     {
         box = boks;
     }
+
+    #region Pause & Resume
 
     // Stops the main CoRoutine
     public virtual void Pause()
@@ -29,6 +37,8 @@ public class AI_State : MonoBehaviour
         StartCoroutine(StateCR());
     }
 
+    #endregion
+
     // Main coroutine
     private IEnumerator StateCR()
     {
@@ -41,8 +51,17 @@ public class AI_State : MonoBehaviour
             // Raise the index if the order is finished
             if(Orders[index].IsFinished)
             {
-                index = (index+1)%Orders.Count;
-                Orders[index].StartOrder(box);
+                Debug.Log("Order " + index + " is finished");
+                //index = (index+1)%Orders.Count;
+                index++;
+                if(index<Orders.Count)
+                    Orders[index].StartOrder(box);
+                else
+                {
+                    IsFinished = true;
+                    yield break;
+                }
+               
             }
             yield return null;
         }
@@ -54,4 +73,9 @@ public class AI_State : MonoBehaviour
         index = 0;
     }
 	
+
+    public void ChangeOrderIndex(int newIndex)
+    {
+
+    }
 }

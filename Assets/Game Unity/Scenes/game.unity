@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickToOrder: 1
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
   Distance: 0
   StoppingRange: .5
@@ -1807,6 +1807,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
+      propertyPath: ClickToOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
   m_RootGameObject: {fileID: 503100699}
@@ -2386,7 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickToOrder: 0
+  ClickToOrder: 1
   Dest: {x: 0, y: 0}
   Distance: 0
   StoppingRange: .5
@@ -2512,6 +2516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &1373782133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,6 +2529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!1 &1488144645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,6 +3281,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+      propertyPath: ClickToOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
   m_RootGameObject: {fileID: 1373782122}
@@ -3326,6 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d5f45cca4bae84a9f50b8a3260309a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &1910311581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3338,6 +3349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &1910311582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,6 +3362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &1910311583
 MonoBehaviour:
   m_ObjectHideFlags: 0
