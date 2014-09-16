@@ -21,7 +21,7 @@ public class HandleSpriteOrdering : MonoBehaviour
     {
 	    foreach(SpriteRenderer rndr in renderers)
         {
-            rndr.sortingOrder = (int)tr.position.y*-10;
+            rndr.sortingOrder = (int)(tr.position.y*-10);
         }
 	}
 }
