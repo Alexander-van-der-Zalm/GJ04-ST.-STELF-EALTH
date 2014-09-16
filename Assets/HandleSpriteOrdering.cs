@@ -8,20 +8,28 @@ public class HandleSpriteOrdering : MonoBehaviour
 {
     List<SpriteRenderer> renderers;
     Transform tr;
-
+    public bool Static;
 	// Use this for initialization
 	void Start () 
     {
         renderers = GetComponentsInChildren<SpriteRenderer>().ToList();
         tr = transform;
+        RedoSortingOrder();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    foreach(SpriteRenderer rndr in renderers)
-        {
-            rndr.sortingOrder = (int)(tr.position.y*-10);
-        }
+        if (Static)
+            return;
+        RedoSortingOrder();
 	}
+
+    private void RedoSortingOrder()
+    {
+        foreach (SpriteRenderer rndr in renderers)
+        {
+            rndr.sortingOrder = (int)(tr.position.y * -10);
+        }
+    }
 }
