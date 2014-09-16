@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour
         an.SetFloat(velYStr, rb.velocity.y);
 
         
-        HandleZDepth();
+        //HandleZDepth();
         //ResetInput();
 	}
 

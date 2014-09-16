@@ -260,7 +260,7 @@ Transform:
   - {fileID: 1171354192}
   - {fileID: 261590615}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &236226930
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &261590614
@@ -513,7 +513,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &503100699
@@ -531,6 +531,7 @@ GameObject:
   - 114: {fileID: 503100703}
   - 114: {fileID: 503100702}
   - 114: {fileID: 503100701}
+  - 114: {fileID: 503100708}
   m_Layer: 0
   m_Name: NPC02
   m_TagString: IHasMoolah
@@ -545,7 +546,7 @@ Transform:
   m_PrefabInternal: {fileID: 994634841}
   m_GameObject: {fileID: 503100699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.01058292, y: 3.39914298, z: -.443736076}
+  m_LocalPosition: {x: -5.01210022, y: 3.39910007, z: -.44374001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1615537048}
@@ -655,6 +656,17 @@ MonoBehaviour:
   SkinTint: {r: 1, g: 1, b: 1, a: 0}
   ClothingTint: {r: 1, g: 1, b: 1, a: 0}
   LightTint: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &503100708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 503100699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &525694116
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +715,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &539087712
@@ -721,6 +733,7 @@ GameObject:
   - 114: {fileID: 539087716}
   - 114: {fileID: 539087715}
   - 114: {fileID: 539087714}
+  - 114: {fileID: 539087721}
   m_Layer: 0
   m_Name: NPC
   m_TagString: IHasMoolah
@@ -735,7 +748,7 @@ Transform:
   m_PrefabInternal: {fileID: 816905091}
   m_GameObject: {fileID: 539087712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.07658339, y: -.283657074, z: -.443736076}
+  m_LocalPosition: {x: -2.07809997, y: -.283659995, z: -.44374001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1684676112}
@@ -845,6 +858,17 @@ MonoBehaviour:
   SkinTint: {r: 1, g: 1, b: 1, a: 0}
   ClothingTint: {r: 1, g: 1, b: 1, a: 0}
   LightTint: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &539087721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 539087712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &572171076
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,6 +927,7 @@ GameObject:
   - 114: {fileID: 692287751}
   - 114: {fileID: 692287750}
   - 114: {fileID: 692287749}
+  - 114: {fileID: 692287756}
   m_Layer: 0
   m_Name: NPC
   m_TagString: IHasMoolah
@@ -917,7 +942,7 @@ Transform:
   m_PrefabInternal: {fileID: 1228859420}
   m_GameObject: {fileID: 692287747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.05318356, y: 2.50704288, z: -.443736076}
+  m_LocalPosition: {x: -6.0546999, y: 2.50699997, z: -.44374001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1032390403}
@@ -1027,6 +1052,17 @@ MonoBehaviour:
   SkinTint: {r: 1, g: 1, b: 1, a: 0}
   ClothingTint: {r: 1, g: 1, b: 1, a: 0}
   LightTint: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &692287756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692287747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &725224362
 Prefab:
   m_ObjectHideFlags: 0
@@ -1064,7 +1100,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: ada6438c94df4f046859487b8259cbb5, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: ada6438c94df4f046859487b8259cbb5, type: 2}
       propertyPath: m_Layer
@@ -1166,6 +1202,7 @@ GameObject:
   - 114: {fileID: 783526620}
   - 58: {fileID: 783526621}
   - 114: {fileID: 783526622}
+  - 114: {fileID: 783526623}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1246,7 +1283,7 @@ Transform:
   - {fileID: 1488144651}
   - {fileID: 808384410}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &783526619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,6 +1352,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Moolah: 3
+--- !u!114 &783526623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783526613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &808384409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1411,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -80
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &809522900
@@ -1414,7 +1462,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &816905091
@@ -1426,15 +1474,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.07658339
+      value: -2.07809997
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.283657074
+      value: -.283659995
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: -.44374001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1470,15 +1518,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.11918306
+      value: -3.12069988
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.17575717
+      value: -1.17579997
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: -.44374001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1765,7 +1813,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &994634841
@@ -1777,15 +1825,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.01058292
+      value: -5.01210022
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.39914298
+      value: 3.39910007
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: -.44374001
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d821ed81c3675e3459890456f0c10d6a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1993,15 +2041,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.05318356
+      value: -6.0546999
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.50704288
+      value: 2.50699997
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: -.44374001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2077,7 +2125,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!95 &1323567880
@@ -2228,7 +2276,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1355950192
@@ -2296,7 +2344,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300002, guid: d6b6d3f85e027374ab33948629a623d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1370865206
@@ -2357,6 +2405,7 @@ GameObject:
   - 114: {fileID: 1373782131}
   - 114: {fileID: 1373782133}
   - 114: {fileID: 1373782132}
+  - 114: {fileID: 1373782134}
   m_Layer: 0
   m_Name: GUARD
   m_TagString: IHasMoolah
@@ -2472,7 +2521,7 @@ Transform:
   m_PrefabInternal: {fileID: 1876574480}
   m_GameObject: {fileID: 1373782122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.34058332, y: 2.50704288, z: -.443736076}
+  m_LocalPosition: {x: -3.13849998, y: 2.12969995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1490391060}
@@ -2530,6 +2579,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsFinished: 0
+--- !u!114 &1373782134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1373782122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1488144645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,7 +2643,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -80
   m_Sprite: {fileID: 21300000, guid: d6b6d3f85e027374ab33948629a623d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1488144651
@@ -2959,6 +3019,7 @@ GameObject:
   - 114: {fileID: 1624648963}
   - 114: {fileID: 1624648968}
   - 114: {fileID: 1624648969}
+  - 114: {fileID: 1624648970}
   m_Layer: 0
   m_Name: NPC
   m_TagString: IHasMoolah
@@ -2973,7 +3034,7 @@ Transform:
   m_PrefabInternal: {fileID: 2098459679}
   m_GameObject: {fileID: 1624648961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.05318356, y: 2.50704288, z: -.443736076}
+  m_LocalPosition: {x: -6.0546999, y: 2.50699997, z: -.44374001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 149275724}
@@ -3083,6 +3144,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AlertSpriteGameObject: {fileID: 2104567970}
   Alerted: 0
+--- !u!114 &1624648970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1624648961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1657257690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3220,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1684676111
@@ -3251,15 +3323,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400012, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.34058332
+      value: -3.13849998
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.50704288
+      value: 2.12969995
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3519,6 +3591,7 @@ GameObject:
   - 114: {fileID: 2068122755}
   - 114: {fileID: 2068122754}
   - 114: {fileID: 2068122753}
+  - 114: {fileID: 2068122760}
   m_Layer: 0
   m_Name: NPC
   m_TagString: IHasMoolah
@@ -3533,7 +3606,7 @@ Transform:
   m_PrefabInternal: {fileID: 834400197}
   m_GameObject: {fileID: 2068122751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.11918306, y: -1.17575717, z: -.443736076}
+  m_LocalPosition: {x: -3.12069988, y: -1.17579997, z: -.44374001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1370865207}
@@ -3643,6 +3716,17 @@ MonoBehaviour:
   SkinTint: {r: 1, g: 1, b: 1, a: 0}
   ClothingTint: {r: 1, g: 1, b: 1, a: 0}
   LightTint: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &2068122760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2068122751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2098459679
 Prefab:
   m_ObjectHideFlags: 0
@@ -3652,15 +3736,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.05318356
+      value: -6.0546999
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.50704288
+      value: 2.50699997
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.443736076
+      value: -.44374001
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 8b8b82b71f6a69b438c8cf970e958756, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3774,7 +3858,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &2138116961
