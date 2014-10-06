@@ -7,13 +7,12 @@ public class BT_Selector : BT_Composite
 {
     #region Constructor
 
-    public BT_Selector(AI_Agent agent, params BT_Behavior[] children) :base(agent)
+    public BT_Selector(params BT_Behavior[] children)
     {
         Constructor(children.ToList());
     }
 
-    public BT_Selector(AI_Agent agent, List<BT_Behavior> children)
-        : base(agent)
+    public BT_Selector(List<BT_Behavior> children)
     {
         Constructor(children);
     }
@@ -29,11 +28,11 @@ public class BT_Selector : BT_Composite
 
     #region Update
 
-    protected override Status update()
+    protected override Status update(AI_Agent agent)
     {
         for(int i = 0; i < Children.Count; i++)
         {
-            Status s = Children[i].Tick();
+            Status s = Children[i].Tick(agent);
 
             // Continue on failed
             // Return succes, invalid and running

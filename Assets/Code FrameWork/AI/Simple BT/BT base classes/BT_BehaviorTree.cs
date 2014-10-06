@@ -23,20 +23,20 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region Init & Update
 
-    // Use this for initialization
-	void Start () 
-    {
-        //TestTreeFunctionality();
-        if(Tree != null)
-            StartCoroutine(updateCR());
-	}
+    //// Use this for initialization
+    //void Start () 
+    //{
+    //    //TestTreeFunctionality();
+    //    if(Tree != null)
+    //        StartCoroutine(updateCR());
+    //}
 
     // Update loop
-    private IEnumerator updateCR()
+    public IEnumerator updateCR(AI_Agent agent)
     {
         while (Application.isPlaying)
         {
-            Tree.Tick();
+            Tree.Tick(agent);
 
             yield return new WaitForSeconds(1.0f/UpdateFrequency);
         }
@@ -46,34 +46,36 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region Test actions
 
-    private void TestBTBasicCompontents()
+    public void TestBTBasicCompontents()
     {
         int errors = 0;
 
-        BT_BehaviorDelegator f = new BT_BehaviorDelegator(agent,BT_Behavior.NodeDescription.BT_NodeType.Action, failUpdate);
+        BT_BehaviorDelegator f = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, failUpdate);
         f.Description.Name = "Fail";
-        BT_BehaviorDelegator s = new BT_BehaviorDelegator(agent, BT_Behavior.NodeDescription.BT_NodeType.Action, succesUpdate);
+        BT_BehaviorDelegator s = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, succesUpdate);
         s.Description.Name = "Succes";
-        BT_BehaviorDelegator r = new BT_BehaviorDelegator(agent, BT_Behavior.NodeDescription.BT_NodeType.Action, runningUpdate);
+        BT_BehaviorDelegator r = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, runningUpdate);
         r.Description.Name = "Running";
 
         // Check the selector
-        errorCheck(new BT_Selector(agent, f, f, r, s), Status.Running, ref errors);
-        errorCheck(new BT_Selector(agent, f, f, f, f), Status.Failed, ref errors);
-        errorCheck(new BT_Selector(agent, f, f, s, f), Status.Succes, ref errors);
+        errorCheck(new BT_Selector(f, f, r, s), Status.Running, ref errors);
+        errorCheck(new BT_Selector(f, f, f, f), Status.Failed, ref errors);
+        errorCheck(new BT_Selector(f, f, s, f), Status.Succes, ref errors);
 
         // Check the sequencer
-        errorCheck(new BT_Sequencer(agent, s, s, r, f), Status.Running, ref errors);
-        errorCheck(new BT_Sequencer(agent, f, f, f, f), Status.Failed, ref errors);
-        errorCheck(new BT_Sequencer(agent, s, s, s, s), Status.Succes, ref errors);
+        errorCheck(new BT_Sequencer(s, s, r, f), Status.Running, ref errors);
+        errorCheck(new BT_Sequencer(f, f, f, f), Status.Failed, ref errors);
+        errorCheck(new BT_Sequencer(s, s, s, s), Status.Succes, ref errors);
 
         if (errors != 0)
-            Debug.Log("Behavior Tree test UNSSUCCESFULL - Errors: " + errors);
+            Debug.Log("Behavior Tree test FAILED - " + errors + " Errors." );
+        else
+            Debug.Log("Behavior Tree test SUCCES - 0 Errors.");
     }
 
     private void errorCheck(BT_Behavior behavior, Status returnStatus, ref int errors)
     {
-        Status beh = behavior.Tick();
+        Status beh = behavior.Tick(null);
 
         // Check if it is the correct return type and if its not invalid
         if (beh != returnStatus)
@@ -82,17 +84,17 @@ public class BT_BehaviorTree : MonoBehaviour
             errors++;
     }
 
-    private BT_Behavior.Status failUpdate(BT_Behavior.NodeDescription node)
+    private BT_Behavior.Status failUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
     {
         return BT_Behavior.Status.Failed;
     }
 
-    private BT_Behavior.Status succesUpdate(BT_Behavior.NodeDescription node)
+    private BT_Behavior.Status succesUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
     {
         return BT_Behavior.Status.Succes;
     }
 
-    private BT_Behavior.Status runningUpdate(BT_Behavior.NodeDescription node)
+    private BT_Behavior.Status runningUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
     {
         return BT_Behavior.Status.Running;
     }

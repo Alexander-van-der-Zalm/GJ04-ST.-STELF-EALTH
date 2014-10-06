@@ -21,9 +21,8 @@ public class BT_Behavior
         public string Description;
         public BT_NodeType Type;
 
-        // TODO Local n global blackboard parameters
-
         // TODO Public node paramters
+        public AI_Blackboard NodeBlackBoard;
     }
 
     public enum Status
@@ -41,15 +40,6 @@ public class BT_Behavior
     public NodeDescription Description = new NodeDescription();
     protected AI_Agent Agent;
     private Status status = Status.Invalid;
-
-    #endregion
-
-    #region Constructor
-
-    public BT_Behavior(AI_Agent agent)
-    {
-        Agent = agent;
-    }
 
     #endregion
 

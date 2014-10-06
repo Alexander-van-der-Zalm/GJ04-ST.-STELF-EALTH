@@ -9,13 +9,14 @@ public class AI_Agent : MonoBehaviour
     public AI_Blackboard LocalBlackboard;
 
     public BT_BehaviorTree BehaviorTree;
+    public string Name;
 
     void Start()
     {
         LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
-
-        if(BehaviorTree != null)
-            BehaviorTree
+        Name = gameObject.name + " " + gameObject.GetInstanceID();
+        if (BehaviorTree != null)
+            StartCoroutine(BehaviorTree.updateCR(this));
         //TestBlackBoard();
     }
 

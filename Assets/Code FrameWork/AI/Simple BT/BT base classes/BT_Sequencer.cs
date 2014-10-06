@@ -7,13 +7,12 @@ public class BT_Sequencer : BT_Composite
 {
     #region Constructor
 
-    public BT_Sequencer(AI_Agent agent, params BT_Behavior[] children) : base(agent)
+    public BT_Sequencer(params BT_Behavior[] children) 
     {
         Constructor(children.ToList());
     }
 
-    public BT_Sequencer(AI_Agent agent, List<BT_Behavior> children)
-        : base(agent)
+    public BT_Sequencer(List<BT_Behavior> children)
     {
         Constructor(children);
     }
@@ -27,11 +26,11 @@ public class BT_Sequencer : BT_Composite
 
     #endregion 
 
-    protected override Status update()
+    protected override Status update(AI_Agent agent)
     {
         for (int i = 0; i < Children.Count; i++)
         {
-            Status s = Children[i].Tick();
+            Status s = Children[i].Tick(agent);
 
             // Continue on succes
             // Return failed, invalid and running

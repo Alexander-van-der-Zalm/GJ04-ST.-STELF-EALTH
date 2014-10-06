@@ -3,15 +3,15 @@ using System.Collections;
 
 public class BT_BehaviorDelegator : BT_Behavior 
 {
-    public delegate Status UpdateDelegate(NodeDescription description);
-    public delegate void InitDelegate(NodeDescription description);
-    public delegate void TerminateDelegate(NodeDescription description, Status status);
+    public delegate Status UpdateDelegate(AI_Agent agent, NodeDescription description);
+    public delegate void InitDelegate(AI_Agent agent, NodeDescription description);
+    public delegate void TerminateDelegate(AI_Agent agent, NodeDescription description, Status status);
 
     private InitDelegate init;
     private TerminateDelegate terminate;
     private UpdateDelegate updatedel;
 
-    public BT_BehaviorDelegator(AI_Agent agent, NodeDescription.BT_NodeType type, UpdateDelegate update, InitDelegate onInit = null, TerminateDelegate onTerm = null) : base (agent)
+    public BT_BehaviorDelegator(NodeDescription.BT_NodeType type, UpdateDelegate update, InitDelegate onInit = null, TerminateDelegate onTerm = null)
     {
         Description.Type = type;
         init = onInit;
@@ -19,20 +19,20 @@ public class BT_BehaviorDelegator : BT_Behavior
         terminate = onTerm;
     }
 
-    protected override Status update()
+    protected override Status update(AI_Agent agent)
     {
-        return updatedel(Description);
+        return updatedel(agent, Description);
     }
 
-    protected override void onInitialize()
+    protected override void onInitialize(AI_Agent agent)
     {
         if(init!=null)
-            init(Description);
+            init(agent, Description);
     }
 
-    protected override void onTerminate(Status status)
+    protected override void onTerminate(AI_Agent agent, Status status)
     {
         if(terminate!=null)
-            terminate(Description, status);
+            terminate(agent, Description, status);
     }
 }

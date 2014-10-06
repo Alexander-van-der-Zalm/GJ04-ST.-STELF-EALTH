@@ -3,8 +3,7 @@ using System.Collections;
 
 public class BT_Decorator : BT_Behavior 
 {
-    public BT_Decorator(AI_Agent agent)
-        : base(agent)
+    public BT_Decorator()
     {
         Description.Type = NodeDescription.BT_NodeType.Decorator;
     } 
