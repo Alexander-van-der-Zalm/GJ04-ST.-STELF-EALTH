@@ -39,7 +39,14 @@ public class BT_Behavior
     #region fields
 
     public NodeDescription Description = new NodeDescription();
+   // public AI_Agent Agent;
     private Status status = Status.Invalid;
+
+    #endregion
+
+    #region Constructor
+
+//public BT_Behavior()
 
     #endregion
 
@@ -52,6 +59,8 @@ public class BT_Behavior
     //public virtual void Instantiate() { }
 
     #endregion
+
+    #region Tick function
 
     public Status Tick() 
     {
@@ -70,4 +79,5 @@ public class BT_Behavior
 
         return status;
     }
+    #endregion
 }

@@ -11,14 +11,20 @@ public class BT_BehaviorTree : MonoBehaviour
     BT_Behavior Tree;
     List<BT_UINode> Nodes;
 
+    public void SetTree(BT_Behavior root)
+    {
+        Tree = root;
+        // TODO Setup UI nodes
+    }
+
     #region Init & Update
 
     // Use this for initialization
 	void Start () 
     {
         //TestTreeFunctionality();
-
-        StartCoroutine(updateCR());
+        if(Tree != null)
+            StartCoroutine(updateCR());
 	}
 
     // Update loop
