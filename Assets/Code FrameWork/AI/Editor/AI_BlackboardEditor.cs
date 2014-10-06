@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEditor;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(AI_Blackboard))]
 public class AI_BlackboardEditor : EditorPlus 
@@ -15,19 +16,14 @@ public class AI_BlackboardEditor : EditorPlus
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
-        foreach(string str in bb.objectPool.Keys)
+
+        List<string> keys = bb.objectPool.Keys.ToList();
+
+        foreach (string str in keys)
         {
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(str + " | " + bb.objectPool[str]);
-            //SerializedObject obj = new SerializedObject(bb.objectPool[str]);
-            //EditorGUILayout.PropertyField()
-            GUILayout.EndHorizontal();
+            bb.objectPool[str] = EditorField(bb.objectPool[str], str);
         }
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
-        //foreach(string str in )
-        //foreach(string str in bb.ObjectPool)
-
-        //base.OnInspectorGUI();
     }
 }

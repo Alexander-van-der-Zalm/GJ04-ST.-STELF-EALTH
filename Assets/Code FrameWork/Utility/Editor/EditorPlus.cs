@@ -67,4 +67,55 @@ public class EditorPlus : Editor
     }
 
     #endregion
+
+    #region Draw Every/Alot of Types
+
+    protected object EditorField(object value, string label, params GUILayoutOption[] options)//, GUIContent glabel)
+    {
+        // Early exit out if empty
+        if (value == null)
+            return null;
+
+        object returnvalue = value;
+        //Debug.Log(value.GetType().ToString() +  " " + label);
+
+        //GUILayout.BeginHorizontal();
+
+        switch(value.GetType().ToString())
+        {
+            case "UnityEngine.Vector4":
+                returnvalue = EditorGUILayout.Vector4Field(label, (Vector4)value, options);
+                break;
+            case "UnityEngine.Vector3":
+                returnvalue = EditorGUILayout.Vector3Field(label, (Vector3)value, options);
+                break;
+            case "UnityEngine.Vector2":
+                returnvalue = EditorGUILayout.Vector2Field(label, (Vector2)value, options);
+                break;
+            case "System.Single":
+                returnvalue = EditorGUILayout.FloatField(label, (float)value, options);
+                break;
+            case "System.Int32":
+                returnvalue = EditorGUILayout.IntField(label, (int)value, options);
+                break;
+            case "System.Boolean":
+                returnvalue = EditorGUILayout.Toggle(label, (bool)value, options);
+                break;
+            case "System.String":
+                returnvalue = EditorGUILayout.TextField(label, (string)value, options);
+                break;
+            default:
+                EditorGUILayout.LabelField(label, value.ToString() + " - undifined", options);
+                //Debug.Log("EditorPlus.EditorField does not contain definition for " + value.GetType().ToString());
+                break;
+
+        }
+        //GUILayout.EndHorizontal();
+
+        return returnvalue;
+    }
+
+
+
+    #endregion
 }

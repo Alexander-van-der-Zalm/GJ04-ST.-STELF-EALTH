@@ -2424,6 +2424,8 @@ GameObject:
   - 114: {fileID: 1373782132}
   - 114: {fileID: 1373782134}
   - 114: {fileID: 1373782135}
+  - 114: {fileID: 1373782136}
+  - 114: {fileID: 1373782137}
   m_Layer: 0
   m_Name: GUARD
   m_TagString: IHasMoolah
@@ -2618,6 +2620,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 834905afdc45a964a8af4facdebaf1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdateFrequency: 60
+--- !u!114 &1373782136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1373782122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260830214f0f40a499b89e2230a0cd15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalBlackboard: {fileID: 0}
+  BehaviorTree: {fileID: 0}
+--- !u!114 &1373782137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1373782122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1488144645
