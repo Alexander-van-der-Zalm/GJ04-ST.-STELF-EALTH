@@ -19,7 +19,7 @@ public class BT_Sequencer : BT_Composite
     
     private void Constructor(List<BT_Behavior> children)
     {
-        Description.Type = NodeDescription.BT_NodeType.Selector;
+        Description.Type = NodeDescription.BT_NodeType.Sequencer;
 
         Children = children;
     }

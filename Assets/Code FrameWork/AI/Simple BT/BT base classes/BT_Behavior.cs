@@ -4,8 +4,9 @@ using System.Collections;
 /// <summary>
 /// Base class where Actions, Conditions, Composits: Sequencers and Selectors and Decorators are based on
 /// </summary>
-public class BT_Behavior 
+public class BT_Behavior
 {
+    #region Class and enum
     public class NodeDescription
     {
         public enum BT_NodeType
@@ -33,8 +34,14 @@ public class BT_Behavior
         Invalid
     }
 
-    public NodeDescription Description;
+    #endregion
+
+    #region fields
+
+    public NodeDescription Description = new NodeDescription();
     private Status status = Status.Invalid;
+
+    #endregion
 
     protected virtual Status update() { return Status.Invalid; }
     protected virtual void onInitialize() { }
@@ -48,12 +55,15 @@ public class BT_Behavior
         if (status == Status.Invalid)
             onInitialize();
 
+        
         // Update the behaviour
         status = update();
 
         // Stop if not still running
         if (status != Status.Running)
             onTerminate(status);
+
+        Debug.Log(Description.Type + " - " + Description.Name + " - " + status);
 
         return status;
     }

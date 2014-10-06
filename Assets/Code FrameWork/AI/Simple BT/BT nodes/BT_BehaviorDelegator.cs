@@ -26,11 +26,13 @@ public class BT_BehaviorDelegator : BT_Behavior
 
     protected override void onInitialize()
     {
-        init(Description);
+        if(init!=null)
+            init(Description);
     }
 
     protected override void onTerminate(Status status)
     {
-        terminate(Description, status);
+        if(terminate!=null)
+            terminate(Description, status);
     }
 }
