@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 public class AI_Blackboard : MonoBehaviour 
 {
-    Dictionary<string, object> objectPool = new Dictionary<string,object>();
+    
+    public Dictionary<string, object> objectPool = new Dictionary<string,object>();
 
     public T GetObject<T>(string name)
     {
         return (T)objectPool[name];
+    }
+
+    public object GetObject(string name)
+    {
+        return objectPool[name];
     }
 
     public void SetObject(string name, object obj)
