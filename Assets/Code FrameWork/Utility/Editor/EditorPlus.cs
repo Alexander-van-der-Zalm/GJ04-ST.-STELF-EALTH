@@ -72,14 +72,14 @@ public class EditorPlus : Editor
 
     protected object EditorField(object value, string label, params GUILayoutOption[] options)//, GUIContent glabel)
     {
-        // Early exit out if empty
+        // Early case if empty
         if (value == null)
-            return null;
+        {
+            EditorGUILayout.LabelField(label, "null", options);
+            return value;
+        }
 
         object returnvalue = value;
-        //Debug.Log(value.GetType().ToString() +  " " + label);
-
-        //GUILayout.BeginHorizontal();
 
         switch(value.GetType().ToString())
         {
@@ -110,7 +110,6 @@ public class EditorPlus : Editor
                 break;
 
         }
-        //GUILayout.EndHorizontal();
 
         return returnvalue;
     }
