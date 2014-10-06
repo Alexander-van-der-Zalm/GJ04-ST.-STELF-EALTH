@@ -23,6 +23,7 @@ public class AI_BlackboardEditor : EditorPlus
         {
             bb.objectPool[str] = EditorField(bb.objectPool[str], str);
         }
+
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
     }

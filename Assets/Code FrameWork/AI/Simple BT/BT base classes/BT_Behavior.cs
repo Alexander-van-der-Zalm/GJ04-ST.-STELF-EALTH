@@ -55,28 +55,26 @@ public class BT_Behavior
 
     #region virtual functions
 
-    protected virtual Status update() { return Status.Invalid; }
-    protected virtual void onInitialize() { }
-    protected virtual void onTerminate(Status status) { }
-
-    //public virtual void Instantiate() { }
+    protected virtual Status update(AI_Agent agent) { return Status.Invalid; }
+    protected virtual void onInitialize(AI_Agent agent) { }
+    protected virtual void onTerminate(AI_Agent agent, Status status) { }
 
     #endregion
 
     #region Tick function
 
-    public Status Tick() 
+    public Status Tick(AI_Agent agent) 
     {
         // Start if not yet initialized
         if (status == Status.Invalid)
-            onInitialize();
+            onInitialize(agent);
 
         // Update the behaviour
-        status = update();
+        status = update(agent);
 
         // Stop if not still running
         if (status != Status.Running)
-            onTerminate(status);
+            onTerminate(agent, status);
 
         Debug.Log(Description.Type + " - " + Description.Name + " - " + status);
 

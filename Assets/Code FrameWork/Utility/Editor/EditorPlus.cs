@@ -70,7 +70,7 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected object EditorField(object value, string label, bool labelField = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
         // Early case if empty
         if (value == null)
@@ -78,9 +78,15 @@ public class EditorPlus : Editor
             EditorGUILayout.LabelField(label, "null", options);
             return value;
         }
+        if(labelField)
+        {
+            EditorGUILayout.LabelField(label, value.ToString(), options);
+            return value;
+        }
 
         object returnvalue = value;
 
+        // AutoHandle by type
         switch(value.GetType().ToString())
         {
             case "UnityEngine.Vector4":

@@ -3,9 +3,10 @@ using System.Collections;
 
 public class AI_Agent : MonoBehaviour 
 {
+    // Blackboards to store shared info
     public AI_Blackboard GlobalBlackboard;
-    //[HideInInspector]
-    private AI_Blackboard LocalBlackboard;
+    [HideInInspector]
+    public AI_Blackboard LocalBlackboard;
 
     public BT_BehaviorTree BehaviorTree;
 
@@ -13,6 +14,8 @@ public class AI_Agent : MonoBehaviour
     {
         LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
 
+        if(BehaviorTree != null)
+            BehaviorTree
         //TestBlackBoard();
     }
 

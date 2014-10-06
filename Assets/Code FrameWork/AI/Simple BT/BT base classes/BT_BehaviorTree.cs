@@ -12,10 +12,13 @@ public class BT_BehaviorTree : MonoBehaviour
     List<BT_UINode> Nodes;
     AI_Agent agent;
 
-    public void SetTree(BT_Behavior root)
+    public void SetTree(BT_Behavior root, AI_Agent agent)
     {
         Tree = root;
+        this.agent = agent;
+
         // TODO Setup UI nodes
+
     }
 
     #region Init & Update
