@@ -39,14 +39,17 @@ public class BT_Behavior
     #region fields
 
     public NodeDescription Description = new NodeDescription();
-   // public AI_Agent Agent;
+    protected AI_Agent Agent;
     private Status status = Status.Invalid;
 
     #endregion
 
     #region Constructor
 
-//public BT_Behavior()
+    public BT_Behavior(AI_Agent agent)
+    {
+        Agent = agent;
+    }
 
     #endregion
 

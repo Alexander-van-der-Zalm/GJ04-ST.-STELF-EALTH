@@ -10,6 +10,7 @@ public class BT_BehaviorTree : MonoBehaviour
 
     BT_Behavior Tree;
     List<BT_UINode> Nodes;
+    AI_Agent agent;
 
     public void SetTree(BT_Behavior root)
     {
@@ -46,22 +47,22 @@ public class BT_BehaviorTree : MonoBehaviour
     {
         int errors = 0;
 
-        BT_BehaviorDelegator f = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, failUpdate);
+        BT_BehaviorDelegator f = new BT_BehaviorDelegator(agent,BT_Behavior.NodeDescription.BT_NodeType.Action, failUpdate);
         f.Description.Name = "Fail";
-        BT_BehaviorDelegator s = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, succesUpdate);
+        BT_BehaviorDelegator s = new BT_BehaviorDelegator(agent, BT_Behavior.NodeDescription.BT_NodeType.Action, succesUpdate);
         s.Description.Name = "Succes";
-        BT_BehaviorDelegator r = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, runningUpdate);
+        BT_BehaviorDelegator r = new BT_BehaviorDelegator(agent, BT_Behavior.NodeDescription.BT_NodeType.Action, runningUpdate);
         r.Description.Name = "Running";
 
         // Check the selector
-        errorCheck(new BT_Selector(f, f, r, s), Status.Running, ref errors);
-        errorCheck(new BT_Selector(f, f, f, f), Status.Failed, ref errors);
-        errorCheck(new BT_Selector(f, f, s, f), Status.Succes, ref errors);
+        errorCheck(new BT_Selector(agent, f, f, r, s), Status.Running, ref errors);
+        errorCheck(new BT_Selector(agent, f, f, f, f), Status.Failed, ref errors);
+        errorCheck(new BT_Selector(agent, f, f, s, f), Status.Succes, ref errors);
 
         // Check the sequencer
-        errorCheck(new BT_Sequencer(s, s, r, f), Status.Running, ref errors);
-        errorCheck(new BT_Sequencer(f, f, f, f), Status.Failed, ref errors);
-        errorCheck(new BT_Sequencer(s, s, s, s), Status.Succes, ref errors);
+        errorCheck(new BT_Sequencer(agent, s, s, r, f), Status.Running, ref errors);
+        errorCheck(new BT_Sequencer(agent, f, f, f, f), Status.Failed, ref errors);
+        errorCheck(new BT_Sequencer(agent, s, s, s, s), Status.Succes, ref errors);
 
         if (errors != 0)
             Debug.Log("Behavior Tree test UNSSUCCESFULL - Errors: " + errors);

@@ -11,7 +11,7 @@ public class BT_BehaviorDelegator : BT_Behavior
     private TerminateDelegate terminate;
     private UpdateDelegate updatedel;
 
-    public BT_BehaviorDelegator(NodeDescription.BT_NodeType type, UpdateDelegate update, InitDelegate onInit = null, TerminateDelegate onTerm = null)
+    public BT_BehaviorDelegator(AI_Agent agent, NodeDescription.BT_NodeType type, UpdateDelegate update, InitDelegate onInit = null, TerminateDelegate onTerm = null) : base (agent)
     {
         Description.Type = type;
         init = onInit;

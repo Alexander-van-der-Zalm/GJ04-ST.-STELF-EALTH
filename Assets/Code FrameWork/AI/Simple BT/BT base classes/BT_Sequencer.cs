@@ -7,12 +7,13 @@ public class BT_Sequencer : BT_Composite
 {
     #region Constructor
 
-    public BT_Sequencer(params BT_Behavior[] children)
+    public BT_Sequencer(AI_Agent agent, params BT_Behavior[] children) : base(agent)
     {
         Constructor(children.ToList());
     }
 
-    public BT_Sequencer(List<BT_Behavior> children)
+    public BT_Sequencer(AI_Agent agent, List<BT_Behavior> children)
+        : base(agent)
     {
         Constructor(children);
     }
