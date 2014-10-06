@@ -337,6 +337,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 261590615}
+  - 114: {fileID: 261590616}
   m_Layer: 0
   m_Name: Guards
   m_TagString: Untagged
@@ -357,6 +358,17 @@ Transform:
   - {fileID: 1373782130}
   m_Father: {fileID: 194980972}
   m_RootOrder: 1
+--- !u!114 &261590616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 261590614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &316362101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,8 +2646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260830214f0f40a499b89e2230a0cd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalBlackboard: {fileID: 0}
-  BehaviorTree: {fileID: 0}
+  GlobalBlackboard: {fileID: 261590616}
+  LocalBlackboard: {fileID: 0}
+  BehaviorTree: {fileID: 1373782135}
+  Name: 
 --- !u!114 &1373782137
 MonoBehaviour:
   m_ObjectHideFlags: 0

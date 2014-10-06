@@ -9,15 +9,19 @@ public class AI_Agent : MonoBehaviour
     public AI_Blackboard LocalBlackboard;
 
     public BT_BehaviorTree BehaviorTree;
+    [ReadOnly]
     public string Name;
 
     void Start()
     {
         LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
         Name = gameObject.name + " " + gameObject.GetInstanceID();
+
+        BehaviorTree.TestBTBasicCompontents();
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));
-        //TestBlackBoard();
+        
+        TestBlackBoard();
     }
 
     private void TestBlackBoard()
@@ -33,5 +37,6 @@ public class AI_Agent : MonoBehaviour
 
         Vector3 v3 = LocalBlackboard.GetObject<Vector3>("TestV3");
         object obj = LocalBlackboard.GetObject("TestV3");
+        object obj2 = LocalBlackboard.GetObject("blabla");
     }
 }

@@ -34,6 +34,11 @@ public class BT_BehaviorTree : MonoBehaviour
     // Update loop
     public IEnumerator updateCR(AI_Agent agent)
     {
+        if(Tree == null)
+        {
+            Debug.Log("BT_BehaviorTree not populated.");
+             yield break;
+        }
         while (Application.isPlaying)
         {
             Tree.Tick(agent);
