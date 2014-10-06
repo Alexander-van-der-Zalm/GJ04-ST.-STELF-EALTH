@@ -8,21 +8,33 @@ public class AI_Agent : MonoBehaviour
     [HideInInspector]
     public AI_Blackboard LocalBlackboard;
 
+    public object this[string name]
+    {
+        get { return LocalBlackboard.GetObject(name); }
+        set { LocalBlackboard.SetObject(name, value); }
+    }
+
     public BT_BehaviorTree BehaviorTree;
     [ReadOnly]
     public string Name;
 
     void Start()
     {
-        LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
         Name = gameObject.name + " " + gameObject.GetInstanceID();
+
+        LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
         LocalBlackboard.SetObject("Name", Name);
-        LocalBlackboard.SetObject("DebugTree", false);
-        BehaviorTree.TestBTBasicCompontents();
+        LocalBlackboard.SetObject("DebugTree", true);
+        LocalBlackboard.SetObject("Depth", 0);
+
+
+        BehaviorTree.SetAgent(this);
+        //BehaviorTree.TestDepth();
+        //BehaviorTree.TestBTBasicCompontents();
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));
         
-        TestBlackBoard();
+        //TestBlackBoard();
     }
 
     private void TestBlackBoard()

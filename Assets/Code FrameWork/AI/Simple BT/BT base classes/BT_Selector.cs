@@ -30,6 +30,8 @@ public class BT_Selector : BT_Composite
 
     protected override Status update(AI_Agent agent)
     {
+        base.update(agent);
+
         for(int i = 0; i < Children.Count; i++)
         {
             Status s = Children[i].Tick(agent);

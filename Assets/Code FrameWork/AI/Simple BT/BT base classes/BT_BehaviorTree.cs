@@ -12,9 +12,8 @@ public class BT_BehaviorTree : MonoBehaviour
     List<BT_UINode> Nodes;
     AI_Agent agent;
 
-    public void SetTree(BT_Behavior root, AI_Agent agent)
+    public void SetAgent(AI_Agent agent)
     {
-        Tree = root;
         this.agent = agent;
 
         // TODO Setup UI nodes
@@ -55,12 +54,10 @@ public class BT_BehaviorTree : MonoBehaviour
     {
         int errors = 0;
 
-        BT_BehaviorDelegator f = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, failUpdate);
-        f.Description.Name = "Fail";
-        BT_BehaviorDelegator s = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, succesUpdate);
-        s.Description.Name = "Succes";
-        BT_BehaviorDelegator r = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, runningUpdate);
-        r.Description.Name = "Running";
+        BT_BehaviorDelegator f = getBeh(failUpdate, "Fail");
+        BT_BehaviorDelegator s = getBeh(succesUpdate, "Succes");
+        BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
+        BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
 
         // Check the selector
         errorCheck(new BT_Selector(f, f, r, s), Status.Running, ref errors);
@@ -78,9 +75,34 @@ public class BT_BehaviorTree : MonoBehaviour
             Debug.Log("Behavior Tree test SUCCES - 0 Errors.");
     }
 
+    public void TestDepth()
+    {
+        BT_BehaviorDelegator f = getBeh(failUpdate, "Fail");
+        BT_BehaviorDelegator s = getBeh(succesUpdate, "Succes");
+        BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
+        BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
+
+        BT_Behavior tree = sel(sel(sel(sel(b, s),s),s),s);
+
+        tree.Tick(agent);
+
+    }
+
+    private BT_Selector sel(params BT_Behavior[] behaviors)
+    {
+        return new BT_Selector(behaviors);
+    }
+
+    private BT_BehaviorDelegator getBeh(BT_BehaviorDelegator.UpdateDelegate del, string name)
+    {
+        BT_BehaviorDelegator b = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, del);
+        b.Description.Name = name;
+        return b;
+    }
+
     private void errorCheck(BT_Behavior behavior, Status returnStatus, ref int errors)
     {
-        Status beh = behavior.Tick(null);
+        Status beh = behavior.Tick(agent);
 
         // Check if it is the correct return type and if its not invalid
         if (beh != returnStatus)
@@ -102,6 +124,13 @@ public class BT_BehaviorTree : MonoBehaviour
     private BT_Behavior.Status runningUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
     {
         return BT_Behavior.Status.Running;
+    }
+
+    private BT_Behavior.Status pauseUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
+    {
+        int Depth = (int)agent["Depth"];
+        Debug.Break();
+        return Status.Succes;
     }
 
     #endregion
