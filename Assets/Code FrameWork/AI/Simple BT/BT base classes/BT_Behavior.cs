@@ -43,11 +43,15 @@ public class BT_Behavior
 
     #endregion
 
+    #region virtual functions
+
     protected virtual Status update() { return Status.Invalid; }
     protected virtual void onInitialize() { }
     protected virtual void onTerminate(Status status) { }
 
-    public virtual void Instantiate() { }
+    //public virtual void Instantiate() { }
+
+    #endregion
 
     public Status Tick() 
     {
@@ -55,7 +59,6 @@ public class BT_Behavior
         if (status == Status.Invalid)
             onInitialize();
 
-        
         // Update the behaviour
         status = update();
 

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BT_Action : BT_Behavior 
 {
-    public override void Instantiate()
+    public BT_Action()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
     }
