@@ -41,6 +41,8 @@ public class BT_Behavior
     protected AI_Agent Agent;
     private Status status = Status.Invalid;
 
+    private string debugTree = "DebugTree";
+
     #endregion
 
     #region virtual functions
@@ -66,7 +68,8 @@ public class BT_Behavior
         if (status != Status.Running)
             onTerminate(agent, status);
 
-        Debug.Log(Description.Type + " - " + Description.Name + " - " + status);
+        if (agent!=null && agent.LocalBlackboard.GetObject<bool>(debugTree,true))
+            Debug.Log(Description.Type + " - " + Description.Name + " - " + status);
 
         return status;
     }
