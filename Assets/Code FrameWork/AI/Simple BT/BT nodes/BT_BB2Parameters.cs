@@ -21,4 +21,16 @@ public class BT_BB2Parameters : BT_BBParameter
         Description.NodeBlackBoard[parameter2] = bbParameter2;
         Description.NodeBlackBoard[parameter2bb] = param2;
     }
+
+    protected object GetObject2(AI_Agent agent)
+    {
+        return GetObject(agent, parameter2, parameter2bb, param2IsObject);
+    }
+
+    protected void SetObject2(AI_Agent agent, object obj)
+    {
+        if (param2IsObject)
+            Debug.Log("BT_BB2Parameters.SetObject2 is trying to set an object but param2 is an object");
+        SetObject(agent, parameter2, parameter2bb, obj);
+    }
 }

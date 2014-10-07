@@ -12,6 +12,16 @@ public class BT_BBParameter : BT_Behavior
         Description.NodeBlackBoard[parameter1bb] = accesparam1;
     }
 
+    protected object GetObject1(AI_Agent agent)
+    {
+        return GetObject(agent, parameter1, parameter1bb, false);
+    }
+
+    protected void SetObject1(AI_Agent agent, object obj)
+    {
+        SetObject(agent, parameter1, parameter1bb, obj);
+    }
+
     protected object GetObject(AI_Agent agent, string nodeBBParameter, string localOrGlobalBBnodeParamter, bool isObject)
     {
         // If the object is stored directly in the node blackboard, return it

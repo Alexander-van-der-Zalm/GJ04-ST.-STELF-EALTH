@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Status = BT_Behavior.Status;
+using System;
+using System.Reflection;
 
 public class BT_BehaviorTree : MonoBehaviour
 {
@@ -197,7 +200,16 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #region Action: Queue push, pop, checkSize
         string queueP1 = "TestQueue";
-        agent[queueP1] = new Queue();
+        Queue<int> q = new Queue<int>();
+        q.Enqueue(6);
+        q.Enqueue(4);
+        q.Enqueue(2);
+
+        BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
+        //int testooh = (int)whatev.GetFromGenericQueue(q);
+        Debug.Log((int)whatev.GetFromGenericQueue(q));
+        Debug.Log((int)whatev.GetFromGenericQueue(q));
+        Debug.Log((int)whatev.GetFromGenericQueue(q));
 
         #endregion
 
