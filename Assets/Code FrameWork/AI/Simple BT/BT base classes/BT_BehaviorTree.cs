@@ -195,6 +195,12 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
+        #region Action: Queue push, pop, checkSize
+        string queueP1 = "TestQueue";
+        agent[queueP1] = new Queue();
+
+        #endregion
+
         if ((int)agent["Depth"] != 0)
             errors++;
 

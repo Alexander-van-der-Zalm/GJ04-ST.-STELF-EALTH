@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BT_CheckEqualBBParameter : BT_BBParameter 
+public class BT_CheckEqualBBParameter : BT_BB2Parameters 
 {
     public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
         : base(bbParameter, accesparam1, equalObject)

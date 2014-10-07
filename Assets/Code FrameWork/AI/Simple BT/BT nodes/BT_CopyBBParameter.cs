@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Copies an object from the blackboard or directly passed on an object on the blackboard
 /// </summary>
-public class BT_CopyBBParameter : BT_BBParameter 
+public class BT_CopyBBParameter : BT_BB2Parameters 
 {
     public BT_CopyBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
         : base(bbParameter, accesparam1, setObject)

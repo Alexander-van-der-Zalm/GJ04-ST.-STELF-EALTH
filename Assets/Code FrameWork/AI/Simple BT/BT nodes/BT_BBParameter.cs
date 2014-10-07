@@ -4,31 +4,13 @@ using System.Collections;
 public class BT_BBParameter : BT_Behavior 
 {
     protected string parameter1 = "Parameter1";
-    protected string parameter2 = "Parameter2";
     protected string parameter1bb = "Parameter1BB";
-    protected string parameter2bb = "Parameter2BB";
-    protected bool param2IsObject = false;
 
-    public BT_BBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject):base()
+    public BT_BBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1):base()
     {
         Description.NodeBlackBoard[parameter1] = bbParameter;
-        Description.NodeBlackBoard[parameter2] = equalObject;
-
         Description.NodeBlackBoard[parameter1bb] = accesparam1;
-        Description.NodeBlackBoard[parameter2bb] = null;
-        param2IsObject = true;
     }
-
-    public BT_BBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-        : base()
-    {
-        Description.NodeBlackBoard[parameter1] = bbParameter1;
-        Description.NodeBlackBoard[parameter2] = bbParameter2;
-
-        Description.NodeBlackBoard[parameter1bb] = param1;
-        Description.NodeBlackBoard[parameter2bb] = param2;
-    }
-
 
     protected object GetObject(AI_Agent agent, string nodeBBParameter, string localOrGlobalBBnodeParamter, bool isObject)
     {
