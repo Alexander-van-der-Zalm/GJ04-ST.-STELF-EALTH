@@ -124,9 +124,11 @@ public class BT_BehaviorTree : MonoBehaviour
         agent[p2, local] = int2;
 
         errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors);
+        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors);
 
         agent[p2, local] = int3;
         errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors);
+        errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors);
         
         // cross global and local int check
         agent[p1, global] = int1;
@@ -164,6 +166,32 @@ public class BT_BehaviorTree : MonoBehaviour
         errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors);
         errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors);
 
+
+        #endregion
+
+        #region Action: Copy BB value
+
+        // int copy
+        // Check first
+        agent[p1, local] = int1;
+        agent[p2, local] = int2;
+
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors);
+        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors);
+
+        // now copy in 3
+        errorCheck(copy(p1, local, 3), Status.Succes, ref errors);
+        // Check if it went allright
+        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors);
+        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors);
+
+        // now copy from p1 to p2
+        errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors);
+ 
+        // Check
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors);
+        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors);
+        errorCheck(eqBB(p2, local, 3), Status.Succes, ref errors);
 
         #endregion
 
@@ -209,9 +237,24 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region BT Component Syntactic Sugar
 
+    private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_CopyBBParameter(bbParameter1, param1, obj);
+    }
+
     private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
         return new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_CheckEqualBBParameter(bbParameter1, param1, obj);
     }
 
     private BT_AlwayFail fail(BT_Behavior child)
