@@ -1,49 +1,29 @@
 ﻿using UnityEngine;
-using System.Reflection;
-using System.Collections;
-using System.Collections.Generic;
-using System;
+using Framework.Collections;
 
 public class BT_QueuePop : BT_BB2Parameters 
 {
-    //public BT_QueuePop(string bbParameter, AI_Agent.BlackBoard accesparam1)
-    //    : base(bbParameter, accesparam1)
-    //{
-    //    Description.Type = NodeDescription.BT_NodeType.Action;
-    //}
-
-    public BT_QueuePop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-        : base(bbParameter1, param1, bbParameter2,param2)
+    public BT_QueuePop(string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
+        : base(queueBBParameter, queueBBAccessType, poppedObjectSaveBBParameter, objectBBAccessType)
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
     }
 
     protected override Status update(AI_Agent agent)
     {
-        // Get the object from queue
-        object queue = GetObject2(agent);
-
-        MethodInfo method = typeof(BT_QueuePop).GetMethod("GenericDequeue");
-        MethodInfo generic = method.MakeGenericMethod(queue.GetType());
-        Debug.Log(generic.Name + " - " + queue.GetType().ToString());
-        object obj2 = generic.Invoke(this, null);
-        
-        // Set dequeued object to the second slot
-        SetObject2(agent, obj2);
+        // Get queue from the blackboard
+        object obj = GetObject1(agent);
+        // Check if it is actually the right type of queue
+        if (obj.GetType().GetGenericTypeDefinition() != typeof(Queue<>))
+        {
+            Debug.Log("BT_QueuePush has invalid object behind paramters, needs: " + typeof(Queue<>));
+            return Status.Invalid;
+        }
+        // Cast
+        IQueue q = (IQueue)obj;
+        // Save popped item to blackboard
+        SetObject2(agent, q.Get());
 
         return Status.Succes;
     }
-
-    //public object GetFromGenericQueue(object obj)
-    //{
-    //    MethodInfo method = typeof(BT_QueuePop).GetMethod("GenericDequeue");
-    //    MethodInfo generic = method.MakeGenericMethod(obj.GetType().GetGenericArguments()[0]);
-        
-    //    return generic.Invoke(this, new object[] { obj });
-    //}
-
-    //public object GenericDequeue<T>(Queue<T> q)
-    //{
-    //    return (object) q.Dequeue();
-    //}
 }

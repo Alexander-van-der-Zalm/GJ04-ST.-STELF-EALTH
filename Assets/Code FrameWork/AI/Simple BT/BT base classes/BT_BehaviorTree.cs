@@ -204,6 +204,41 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #region Action: Queue push, pop, checkSize
         string queueP1 = "TestQueue";
+        string qCompare = "TestQueueComparer";
+
+        // Create queue and populate
+        fc.Queue<int> queue1 = new fc.Queue<int>();
+        queue1.Add(1);
+        queue1.Add(2);
+        queue1.Add(3);
+
+        // Populate the board
+        agent[queueP1, local] = queue1;
+        agent[qCompare, local] = -1;
+
+        // Check size
+        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors);
+
+        // Check push
+        errorCheck(qPush(queueP1, local, 4), Status.Succes, ref errors);
+        errorCheck(qSize(queueP1, local, 4), Status.Succes, ref errors);
+
+        // Check pop
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors);
+        errorCheck(eqBB(qCompare, local, 1), Status.Succes, ref errors);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        errorCheck(eqBB(qCompare, local, 2), Status.Succes, ref errors);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        errorCheck(eqBB(qCompare, local, 3), Status.Succes, ref errors);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        Debug.Log(agent[qCompare, local]);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
+        errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors);
+
+        #region Test stuff
         //Queue<int> q = new Queue<int>();
         //q.Enqueue(6);
         //q.Enqueue(4);
@@ -215,28 +250,29 @@ public class BT_BehaviorTree : MonoBehaviour
         //Debug.Log((int)whatev.GetFromGenericQueue(q));
         //Debug.Log((int)whatev.GetFromGenericQueue(q));
 
-        List<int> test = new List<int>() { 1, 2, 3 };
-        IList list = (IList)test;
-        Debug.Log(list[0]);
+        //List<int> test = new List<int>() { 1, 2, 3 };
+        //IList list = (IList)test;
+        //Debug.Log(list[0]);
 
 
-        fc.Stack<int> stack1 = new fc.Stack<int>();
-        fc.Stack<string> stack2 = new fc.Stack<string>();
-        stack1.Add(1);
-        stack1.Add(2);
-        stack1.Add(3);
+        //fc.Stack<int> stack1 = new fc.Stack<int>();
+        //fc.Stack<string> stack2 = new fc.Stack<string>();
+        //stack1.Add(1);
+        //stack1.Add(2);
+        //stack1.Add(3);
 
-        Debug.Log(stack1.Count + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
-        fc.Queue<int> queue1 = new fc.Queue<int>();
-        queue1.Add(1);
-        queue1.Add(2);
-        queue1.Add(3);
+        //Debug.Log(stack1.GetType().GetGenericTypeDefinition() + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
+        //fc.Queue<int> queue1 = new fc.Queue<int>();
+        //queue1.Add(1);
+        //queue1.Add(2);
+        //queue1.Add(3);
 
-        fc.IQueue queueI = queue1;
+        //fc.IQueue queueI = queue1;
+        //Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
+        //Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
+        //Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
+        #endregion
 
-        //Debug.Log(queue1.Count + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
-        Debug.Log(queueI.Count + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
-        
         #endregion
 
         if ((int)agent["Depth"] != 0)
@@ -247,6 +283,8 @@ public class BT_BehaviorTree : MonoBehaviour
         else
             Debug.Log("Behavior Tree test SUCCES - 0 Errors.");
     }
+
+    #region Helpers
 
     private void SetAgent(AI_Agent.BlackBoard access, string p1, string p2, object obj1, object obj2)
     {
@@ -279,7 +317,34 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #endregion
 
+    #endregion
+
     #region BT Component Syntactic Sugar
+
+    private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return new BT_QueuePush(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_QueuePush(bbParameter1, param1, obj);
+    }
+
+    private BT_QueuePop qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return new BT_QueuePop(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return new BT_QueueCheckSizeEqual(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
+    }
 
     private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
