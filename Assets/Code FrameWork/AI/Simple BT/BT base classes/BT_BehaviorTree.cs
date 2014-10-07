@@ -234,7 +234,7 @@ public class BT_BehaviorTree : MonoBehaviour
         errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
         errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors);
         errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
-        Debug.Log(agent[qCompare, local]);
+        //Debug.Log(agent[qCompare, local]);
         errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors);
         errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors);
 
