@@ -37,10 +37,10 @@ public class BT_Sequencer : BT_Composite
             // Continue on succes
             // Return failed, invalid and running
             if (s != Status.Succes)
-                return s;
+                return exit(agent,s);
         }
 
         // Return succes if all the nodes are hit
-        return Status.Succes;
+        return exit(agent,Status.Succes);
     }
 }

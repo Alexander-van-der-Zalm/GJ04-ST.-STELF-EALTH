@@ -59,15 +59,27 @@ public class BT_BehaviorTree : MonoBehaviour
         BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
         BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
 
+        if ((int)agent["Depth"] != 0)
+            errors++;
+
+        //SetAgentDebug(true);
+
         // Check the selector
         errorCheck(new BT_Selector(f, f, r, s), Status.Running, ref errors);
         errorCheck(new BT_Selector(f, f, f, f), Status.Failed, ref errors);
         errorCheck(new BT_Selector(f, f, s, f), Status.Succes, ref errors);
 
         // Check the sequencer
+        
         errorCheck(new BT_Sequencer(s, s, r, f), Status.Running, ref errors);
+        errorCheck(new BT_Sequencer(s, s, r, s), Status.Running, ref errors);
         errorCheck(new BT_Sequencer(f, f, f, f), Status.Failed, ref errors);
         errorCheck(new BT_Sequencer(s, s, s, s), Status.Succes, ref errors);
+
+        TestDepth();
+
+        if ((int)agent["Depth"] != 0)
+            errors++;
 
         if (errors != 0)
             Debug.Log("Behavior Tree test FAILED - " + errors + " Errors." );
@@ -82,10 +94,9 @@ public class BT_BehaviorTree : MonoBehaviour
         BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
         BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
 
-        BT_Behavior tree = sel(sel(sel(sel(b, s),s),s),s);
+        BT_Behavior tree = sel(sel(sel(sel(s, s),s),s),s);
 
         tree.Tick(agent);
-
     }
 
     private BT_Selector sel(params BT_Behavior[] behaviors)
@@ -131,6 +142,11 @@ public class BT_BehaviorTree : MonoBehaviour
         int Depth = (int)agent["Depth"];
         Debug.Break();
         return Status.Succes;
+    }
+
+    private void SetAgentDebug(bool debug)
+    {
+        agent.LocalBlackboard.SetObject("DebugTree", debug);
     }
 
     #endregion

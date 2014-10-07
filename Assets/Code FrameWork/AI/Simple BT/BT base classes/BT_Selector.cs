@@ -39,11 +39,11 @@ public class BT_Selector : BT_Composite
             // Continue on failed
             // Return succes, invalid and running
             if (s != Status.Failed)
-                return s;
+                return exit(agent,s);
         }
 
         // Return failed if all the nodes are hit
-        return Status.Failed;
+        return exit(agent,Status.Failed);
     }
 
     #endregion

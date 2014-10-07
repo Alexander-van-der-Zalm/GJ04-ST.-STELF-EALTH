@@ -24,13 +24,13 @@ public class AI_Agent : MonoBehaviour
 
         LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
         LocalBlackboard.SetObject("Name", Name);
-        LocalBlackboard.SetObject("DebugTree", true);
+        LocalBlackboard.SetObject("DebugTree", false);
         LocalBlackboard.SetObject("Depth", 0);
 
 
         BehaviorTree.SetAgent(this);
         //BehaviorTree.TestDepth();
-        //BehaviorTree.TestBTBasicCompontents();
+        BehaviorTree.TestBTBasicCompontents();
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));
         
