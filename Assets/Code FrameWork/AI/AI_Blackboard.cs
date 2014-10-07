@@ -6,6 +6,12 @@ public class AI_Blackboard : MonoBehaviour
     
     public Dictionary<string, object> objectPool = new Dictionary<string,object>();
 
+    public object this[string name]
+    {
+        get { return GetObject(name); }
+        set { SetObject(name, value); }
+    }
+
     public T GetObject<T>(string name, bool createIfNonexistant = false)
     {
         // Early exit if non-existant

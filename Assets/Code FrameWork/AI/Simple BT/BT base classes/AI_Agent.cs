@@ -3,6 +3,12 @@ using System.Collections;
 
 public class AI_Agent : MonoBehaviour 
 {
+    public enum BlackBoard
+    {
+        local,
+        global
+    }
+    
     // Blackboards to store shared info
     public AI_Blackboard GlobalBlackboard;
     [HideInInspector]
