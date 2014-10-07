@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Linq;
+using Framework.Collections;
 using System.Collections;
 using System.Collections.Generic;
 using Status = BT_Behavior.Status;
+using fc = Framework.Collections;
+
+
 using System;
 using System.Reflection;
 
@@ -200,17 +204,39 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #region Action: Queue push, pop, checkSize
         string queueP1 = "TestQueue";
-        Queue<int> q = new Queue<int>();
-        q.Enqueue(6);
-        q.Enqueue(4);
-        q.Enqueue(2);
+        //Queue<int> q = new Queue<int>();
+        //q.Enqueue(6);
+        //q.Enqueue(4);
+        //q.Enqueue(2);
 
-        BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
-        //int testooh = (int)whatev.GetFromGenericQueue(q);
-        Debug.Log((int)whatev.GetFromGenericQueue(q));
-        Debug.Log((int)whatev.GetFromGenericQueue(q));
-        Debug.Log((int)whatev.GetFromGenericQueue(q));
+        //BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
+        ////int testooh = (int)whatev.GetFromGenericQueue(q);
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
 
+        List<int> test = new List<int>() { 1, 2, 3 };
+        IList list = (IList)test;
+        Debug.Log(list[0]);
+
+
+        fc.Stack<int> stack1 = new fc.Stack<int>();
+        fc.Stack<string> stack2 = new fc.Stack<string>();
+        stack1.Add(1);
+        stack1.Add(2);
+        stack1.Add(3);
+
+        Debug.Log(stack1.Count + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
+        fc.Queue<int> queue1 = new fc.Queue<int>();
+        queue1.Add(1);
+        queue1.Add(2);
+        queue1.Add(3);
+
+        fc.IQueue queueI = queue1;
+
+        //Debug.Log(queue1.Count + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
+        Debug.Log(queueI.Count + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
+        
         #endregion
 
         if ((int)agent["Depth"] != 0)

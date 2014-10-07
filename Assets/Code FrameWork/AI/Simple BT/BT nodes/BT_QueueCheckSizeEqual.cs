@@ -17,9 +17,10 @@ public class BT_QueueCheckSizeEqual : BT_BB2Parameters
 
     protected override Status update(AI_Agent agent)
     {
-        Queue q = (Queue)GetObject1(agent);
-        int size = (int)GetObject2(agent);
+        //Queue q = (Queue)GetObject1(agent);
+        //int size = (int)GetObject2(agent);
 
-        return q.Count == size ? Status.Succes : Status.Failed;
+        //return q.Count == size ? Status.Succes : Status.Failed;
+        return Status.Failed;
     }
 }

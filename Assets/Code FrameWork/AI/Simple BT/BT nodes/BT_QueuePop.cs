@@ -34,16 +34,16 @@ public class BT_QueuePop : BT_BB2Parameters
         return Status.Succes;
     }
 
-    public object GetFromGenericQueue(object obj)
-    {
-        MethodInfo method = typeof(BT_QueuePop).GetMethod("GenericDequeue");
-        MethodInfo generic = method.MakeGenericMethod(obj.GetType().GetGenericArguments()[0]);
+    //public object GetFromGenericQueue(object obj)
+    //{
+    //    MethodInfo method = typeof(BT_QueuePop).GetMethod("GenericDequeue");
+    //    MethodInfo generic = method.MakeGenericMethod(obj.GetType().GetGenericArguments()[0]);
         
-        return generic.Invoke(this, new object[] { obj });
-    }
+    //    return generic.Invoke(this, new object[] { obj });
+    //}
 
-    public object GenericDequeue<T>(Queue<T> q)
-    {
-        return (object) q.Dequeue();
-    }
+    //public object GenericDequeue<T>(Queue<T> q)
+    //{
+    //    return (object) q.Dequeue();
+    //}
 }
