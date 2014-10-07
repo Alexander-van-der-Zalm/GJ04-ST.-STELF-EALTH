@@ -29,12 +29,15 @@ public class AI_Agent : MonoBehaviour
 
 
         BehaviorTree.SetAgent(this);
-        //BehaviorTree.TestDepth();
+        
+        // Test behaviors
         BehaviorTree.TestBTBasicCompontents();
+        //TestBlackBoard();
+
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));
         
-        //TestBlackBoard();
+        
     }
 
     private void TestBlackBoard()
