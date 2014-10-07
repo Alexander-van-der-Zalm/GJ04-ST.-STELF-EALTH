@@ -22,7 +22,7 @@ public class BT_Behavior
         public BT_NodeType Type;
 
         // TODO Public node paramters
-        public AI_Blackboard NodeBlackBoard;
+        public AI_Blackboard NodeBlackBoard = new AI_Blackboard();
     }
 
     public enum Status

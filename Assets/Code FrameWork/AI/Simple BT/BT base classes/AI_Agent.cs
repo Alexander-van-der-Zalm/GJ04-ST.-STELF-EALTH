@@ -20,6 +20,12 @@ public class AI_Agent : MonoBehaviour
         set { LocalBlackboard.SetObject(name, value); }
     }
 
+    public object this[string name, BlackBoard acces]
+    {
+        get { return (acces == BlackBoard.local) ? LocalBlackboard.GetObject(name) : GlobalBlackboard.GetObject(name);}
+        set { if(acces == BlackBoard.local) LocalBlackboard.SetObject(name, value); else GlobalBlackboard.SetObject(name, value);}
+    }
+
     public BT_BehaviorTree BehaviorTree;
     [ReadOnly]
     public string Name;

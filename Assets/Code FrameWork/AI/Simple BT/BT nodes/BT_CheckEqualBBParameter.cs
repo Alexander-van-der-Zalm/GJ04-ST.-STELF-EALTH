@@ -9,16 +9,16 @@ public class BT_CheckEqualBBParameter : BT_Condition
     string parameter2bb = "Parameter2BB";
     bool param2IsObject = false;
 
-    public BT_CheckEqualBBParameter(string bbParameter, object equalObject, AI_Agent.BlackBoard param1):base()
+    public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject):base()
     {
         Description.NodeBlackBoard[parameter1] = bbParameter;
         Description.NodeBlackBoard[parameter2] = equalObject;
 
-        Description.NodeBlackBoard[parameter1bb] = param1;
+        Description.NodeBlackBoard[parameter1bb] = accesparam1;
         Description.NodeBlackBoard[parameter2bb] = null;
     }
 
-    public BT_CheckEqualBBParameter(string bbParameter1, string bbParameter2, AI_Agent.BlackBoard param1, AI_Agent.BlackBoard param2)
+    public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
         : base()
     {
         Description.NodeBlackBoard[parameter1] = bbParameter1;
