@@ -3,6 +3,12 @@ using System.Collections;
 
 public class AI_Agent : MonoBehaviour 
 {
+    public enum BlackBoard
+    {
+        local,
+        global
+    }
+    
     // Blackboards to store shared info
     public AI_Blackboard GlobalBlackboard;
     [HideInInspector]
@@ -12,6 +18,12 @@ public class AI_Agent : MonoBehaviour
     {
         get { return LocalBlackboard.GetObject(name); }
         set { LocalBlackboard.SetObject(name, value); }
+    }
+
+    public object this[string name, BlackBoard acces]
+    {
+        get { return (acces == BlackBoard.local) ? LocalBlackboard.GetObject(name) : GlobalBlackboard.GetObject(name);}
+        set { if(acces == BlackBoard.local) LocalBlackboard.SetObject(name, value); else GlobalBlackboard.SetObject(name, value);}
     }
 
     public BT_BehaviorTree BehaviorTree;
@@ -24,17 +36,20 @@ public class AI_Agent : MonoBehaviour
 
         LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
         LocalBlackboard.SetObject("Name", Name);
-        LocalBlackboard.SetObject("DebugTree", true);
+        LocalBlackboard.SetObject("DebugTree", false);
         LocalBlackboard.SetObject("Depth", 0);
 
 
         BehaviorTree.SetAgent(this);
-        //BehaviorTree.TestDepth();
-        //BehaviorTree.TestBTBasicCompontents();
+        
+        // Test behaviors
+        BehaviorTree.TestBTBasicCompontents();
+        //TestBlackBoard();
+
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));
         
-        //TestBlackBoard();
+        
     }
 
     private void TestBlackBoard()

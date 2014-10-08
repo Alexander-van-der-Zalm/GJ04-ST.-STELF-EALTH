@@ -22,7 +22,7 @@ public class BT_Behavior
         public BT_NodeType Type;
 
         // TODO Public node paramters
-        public AI_Blackboard NodeBlackBoard;
+        public AI_Blackboard NodeBlackBoard = new AI_Blackboard();
     }
 
     public enum Status
@@ -69,7 +69,10 @@ public class BT_Behavior
             onTerminate(agent, status);
 
         if (agent!=null && agent.LocalBlackboard.GetObject<bool>(debugTree,true))
-            Debug.Log(Description.Type + " - " + Description.Name + " - " + status);
+        {
+            Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
+        }
+            
 
         return status;
     }
