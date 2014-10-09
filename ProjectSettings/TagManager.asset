@@ -43,35 +43,23 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
-  - name: Sky
+  - name: BG
+    userID: 1
+    uniqueID: 1598616445
+    locked: 0
+  - name: BGProps
+    userID: 2
+    uniqueID: 2454826299
+    locked: 0
+  - name: NPC
+    userID: 3
+    uniqueID: 1708189487
+    locked: 0
+  - name: Front
+    userID: 4
+    uniqueID: 2184212105
+    locked: 0
+  - name: UI
     userID: 5
     uniqueID: 1865538189
     locked: 1
-  - name: Clouds
-    userID: 7
-    uniqueID: 834408081
-    locked: 0
-  - name: DistantBuildings
-    userID: 1
-    uniqueID: 3759640853
-    locked: 0
-  - name: Level
-    userID: 3
-    uniqueID: 4081136285
-    locked: 0
-  - name: BG_Objects
-    userID: 8
-    uniqueID: 3813959525
-    locked: 0
-  - name: PlayerMain
-    userID: 2
-    uniqueID: 3125974453
-    locked: 0
-  - name: PlayerMoving
-    userID: 4
-    uniqueID: 2090033299
-    locked: 0
-  - name: FG_Objects
-    userID: 6
-    uniqueID: 3582944025
-    locked: 0

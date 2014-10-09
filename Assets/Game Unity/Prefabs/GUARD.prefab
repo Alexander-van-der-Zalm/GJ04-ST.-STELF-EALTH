@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,6 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,6 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,6 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d5f45cca4bae84a9f50b8a3260309a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsFinished: 0
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -647,7 +652,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1708189487
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ce962167f67f83346928154ba57cf54a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
