@@ -14,7 +14,8 @@ public class HandleSpriteOrdering : MonoBehaviour
     {
         renderers = GetComponentsInChildren<SpriteRenderer>().ToList();
         tr = transform;
-        RedoSortingOrder();
+        if (!Static)
+            RedoSortingOrder();
 	}
 	
 	// Update is called once per frame

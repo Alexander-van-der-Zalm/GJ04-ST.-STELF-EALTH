@@ -15,6 +15,8 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400012}
   m_Layer: 0
   m_Name: NPC02
   m_TagString: IHasMoolah
@@ -94,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.01058292, y: 3.39914298, z: -.443736076}
+  m_LocalPosition: {x: -5.01210022, y: 3.39910007, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -110,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0310000181, y: -1.03609991, z: .195800066}
+  m_LocalPosition: {x: -.0310000181, y: -.230000004, z: .195800066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -176,7 +178,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Radius: .25
-  m_Center: {x: 0, y: -1}
+  m_Center: {x: 0, y: 0}
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -187,7 +189,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: .5, y: 1.79999995}
-  m_Center: {x: 0, y: 0}
+  m_Center: {x: 0, y: 1}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -227,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickToOrder: 1
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
   Distance: 0
   StoppingRange: .5
@@ -271,6 +273,30 @@ MonoBehaviour:
   SkinTint: {r: 1, g: 1, b: 1, a: 0}
   ClothingTint: {r: 1, g: 1, b: 1, a: 0}
   LightTint: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Static: 0
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Static: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -289,8 +315,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2454826299
+  m_SortingOrder: -33
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
@@ -334,7 +360,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1708189487
-  m_SortingOrder: 0
+  m_SortingOrder: -33
   m_Sprite: {fileID: 21300000, guid: d6b6d3f85e027374ab33948629a623d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

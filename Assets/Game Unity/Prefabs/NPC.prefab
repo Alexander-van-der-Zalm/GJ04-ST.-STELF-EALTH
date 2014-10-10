@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: NPC
   m_TagString: IHasMoolah
@@ -106,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.1210003, y: 1.13689995, z: -1.44000006}
+  m_LocalPosition: {x: -3.86369991, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -134,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0310000181, y: -1.03609991, z: .195800066}
+  m_LocalPosition: {x: -.0310000181, y: -.140000001, z: .195800066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -146,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.0228850003, z: 0}
+  m_LocalPosition: {x: 0, y: .946669996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -176,7 +177,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Radius: .25
-  m_Center: {x: 0, y: -1}
+  m_Center: {x: 0, y: 0}
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -271,6 +272,18 @@ MonoBehaviour:
   Dest: {x: 0, y: 0}
   Distance: 0
   StoppingRange: .5
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Static: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -290,7 +303,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1708189487
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300000, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
@@ -333,8 +346,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1708189487
+  m_SortingOrder: -20
   m_Sprite: {fileID: 21300000, guid: 83a4675fd45bfa647a97f3ba703c4323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
