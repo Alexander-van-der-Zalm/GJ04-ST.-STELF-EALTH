@@ -48,24 +48,11 @@ public class BT_UINodeEditor : EditorPlus
         if (GUILayout.Button("Replace node"))
             node.Node = (BT_Behavior)Activator.CreateInstance(l1[selectedClass]);
 
-
-        //GetNodeDescription
-        //var methods = l1[selectedClass].GetMethods(BindingFlags.Public | BindingFlags.Static);
-
-        //var q5 = from m in methods
-        //         where m.Name == "GetNodeDescription"
-        //         select m;
-
-        //MethodInfo mi = q5.FirstOrDefault();
-
-        //NodeDescription descr = (NodeDescription)mi.Invoke(null, null);
-
-        if (node == null)
+        if (node.Node == null)
             return;
 
         EditorGUILayout.LabelField("Name: ",node.Node.Description.Name);
         EditorGUILayout.LabelField(node.Node.Description.Description);
-        //EditorGUILayout.LabelField("Name: ", node.Node.Description.Type.ToString());
 
         // Show all the fields from the selected class
         var fields = l1[selectedClass].GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
