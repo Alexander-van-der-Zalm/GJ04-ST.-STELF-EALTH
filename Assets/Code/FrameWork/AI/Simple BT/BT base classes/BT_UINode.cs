@@ -14,6 +14,7 @@ public class BT_UINode : MonoBehaviour
     public BT_BehaviorTree Tree;
     public BT_Behavior Parent;
     public List<BT_Behavior> Children;
+    public Vector3 Position;
 
     public void SetParent(BT_UINode node)
     {
@@ -32,5 +33,10 @@ public class BT_UINode : MonoBehaviour
         return false;
     }
 
-   
+
+
+    internal void ChangeNode(BT_UINode node)
+    {
+        throw new NotImplementedException();
+    }
 }

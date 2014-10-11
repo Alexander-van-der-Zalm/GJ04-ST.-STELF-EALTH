@@ -439,4 +439,9 @@ public class BT_BehaviorTree : MonoBehaviour
     }
 
     #endregion
+
+    internal List<BT_UINode> GetUINodes()
+    {
+        throw new NotImplementedException();
+    }
 }

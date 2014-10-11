@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System;
 
 [ExecuteInEditMode]
 public class uGuiLockScale : MonoBehaviour
@@ -24,4 +26,12 @@ public class uGuiLockScale : MonoBehaviour
         rtr.localScale = rectScale;
         //Debug.Log("Called me?");
 	}
+
+    internal void SetScaleFromUnits(float NodeSize)
+    {
+        float cWidth = (float)Screen.width;
+        float iWidth = GetComponent<Image>().preferredWidth;
+        
+        throw new NotImplementedException();
+    }
 }
