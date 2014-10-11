@@ -4,11 +4,19 @@ using System.Collections;
 /// <summary>
 /// Base class where Actions, Conditions, Composits: Sequencers and Selectors and Decorators are based on
 /// </summary>
-public class BT_Behavior
+[System.Serializable]
+public class BT_Behavior:ScriptableObject
 {
     #region Class and enum
     public class NodeDescription
     {
+        public NodeDescription(BT_NodeType type = BT_NodeType.Action, string name = "NoNameSet", string description = "I need a description.")
+        {
+            Name = name;
+            Type = type;
+            Description = description;
+        }
+        
         public enum BT_NodeType
         {
             Action,
@@ -17,11 +25,12 @@ public class BT_Behavior
             Decorator,
             Condition
         }
-        public string Name;
-        public string Description;
-        public BT_NodeType Type;
+        public string Name = "NotSet";
+        public string Description = "IAM DESCRIPTIONORS";
+        public BT_NodeType Type = BT_NodeType.Action;
 
         // TODO Public node paramters
+        // Seperate out to "Instance" specific
         public AI_Blackboard NodeBlackBoard = new AI_Blackboard();
     }
 

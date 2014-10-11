@@ -6,6 +6,7 @@ public class BT_Composite : BT_Behavior
 {
     protected List<BT_Behavior> Children;
     private string depth = "Depth";
+    
     protected override Status update(AI_Agent agent)
     {
         if (agent != null)

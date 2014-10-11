@@ -70,7 +70,7 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label, bool labelField = false, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected object EditorField(object value, string label = "", bool labelField = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
         // Early case if empty
         if (value == null)

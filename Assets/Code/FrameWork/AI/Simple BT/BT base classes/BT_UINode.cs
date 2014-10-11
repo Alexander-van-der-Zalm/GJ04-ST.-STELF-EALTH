@@ -1,20 +1,36 @@
 ﻿using UnityEngine;
+using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class BT_UINode : MonoBehaviour 
 {
+    public BT_Behavior.NodeDescription.BT_NodeType Type;
     public BT_Behavior Node;
     public int X, Y;
 
-    // TODO figure out the rest
+    public BT_BehaviorTree Tree;
+    public BT_Behavior Parent;
+    public List<BT_Behavior> Children;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void SetParent(BT_UINode node)
+    {
+        Type type = node.Node.GetType();
+        if(isValidParent(node))
+            Parent = node.Node;
+    }
+
+    private bool isValidParent(BT_UINode node)
+    {
+        Type type = node.Node.GetType();
+        
+        if(type.IsSubclassOf(typeof(BT_Composite))||type.IsSubclassOf(typeof(BT_Decorator)))
+            return true;
+
+        return false;
+    }
+
+   
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Reflection;
+using System.Linq;
 
 public class AI_Agent : MonoBehaviour 
 {
@@ -45,6 +47,13 @@ public class AI_Agent : MonoBehaviour
         // Test behaviors
         BehaviorTree.TestBTBasicCompontents();
         //TestBlackBoard();
+
+
+        var c = from t in Assembly.GetExecutingAssembly().GetTypes()
+                where t.IsClass && t.IsSubclassOf(typeof(BT_Selector))
+                select t.Name.ToString();
+
+        DebugHelper.LogList<string>(c.ToList());
 
         if (BehaviorTree != null)
             StartCoroutine(BehaviorTree.updateCR(this));

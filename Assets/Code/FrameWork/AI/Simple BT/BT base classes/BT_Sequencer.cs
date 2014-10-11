@@ -7,6 +7,11 @@ public class BT_Sequencer : BT_Composite
 {
     #region Constructor
 
+    public BT_Sequencer()
+    {
+        SetDescription();
+    }
+
     public BT_Sequencer(params BT_Behavior[] children) 
     {
         Constructor(children.ToList());
@@ -19,9 +24,17 @@ public class BT_Sequencer : BT_Composite
     
     private void Constructor(List<BT_Behavior> children)
     {
-        Description.Type = NodeDescription.BT_NodeType.Sequencer;
+        
+        SetDescription();
 
         Children = children;
+    }
+
+    private void SetDescription()
+    {
+        Description.Type = NodeDescription.BT_NodeType.Sequencer;
+        Description.Name = "Sequencer";
+        Description.Description = "Keeps going if children are succesfull, early exits if: failed, invalid ör running";
     }
 
     #endregion 

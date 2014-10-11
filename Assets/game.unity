@@ -1424,6 +1424,7 @@ GameObject:
   - 114: {fileID: 626695371}
   - 114: {fileID: 626695370}
   - 114: {fileID: 626695369}
+  - 114: {fileID: 626695373}
   m_Layer: 0
   m_Name: BTNode
   m_TagString: Untagged
@@ -1505,6 +1506,21 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 626695367}
   m_HideIfInvisible: 0
+--- !u!114 &626695373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 626695367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab1e5cc293ed1444b56e950f2adc515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
+  Node: {fileID: 0}
+  X: 0
+  Y: 0
 --- !u!1 &743206606
 GameObject:
   m_ObjectHideFlags: 0
