@@ -32,6 +32,9 @@ public class uGuiLockScale : MonoBehaviour
         float cWidth = (float)Screen.width;
         float iWidth = GetComponent<Image>().preferredWidth;
         
+        // Pixel per unit??
+        //Camera.ScreenToWorldPoint
+
         throw new NotImplementedException();
     }
 }
