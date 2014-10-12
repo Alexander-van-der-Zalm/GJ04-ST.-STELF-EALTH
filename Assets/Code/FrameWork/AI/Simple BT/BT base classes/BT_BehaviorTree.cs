@@ -17,9 +17,9 @@ public class BT_BehaviorTree : MonoBehaviour
     [Range(0.00000000001f,60)]
     public float UpdateFrequency = 10;
 
-    BT_Behavior Tree;
-    List<BT_UINode> Nodes;
-    AI_Agent agent;
+    private BT_Behavior Tree;
+    private List<BT_UINode> Nodes;
+    private AI_Agent agent;
 
     #endregion
 
@@ -442,6 +442,41 @@ public class BT_BehaviorTree : MonoBehaviour
 
     internal List<BT_UINode> GetUINodes()
     {
+        if (Nodes == null)
+            return DefaultUINodeList();
+
+        // Decide how to handle script initilalization of extra tree nodes
+
+        return Nodes;
+    }
+
+    private List<BT_UINode> DefaultUINodeList()
+    {
         throw new NotImplementedException();
     }
+
+    // Add node
+
+    // Remove node
+
+    // Connect (child & parent)
+    public bool Connect(BT_Behavior child, BT_Composite parent)
+    {
+        // Solve the how do I know if it already exists in the nodelist
+        // - Search existing nodes == equal?
+        
+        // Connect parent and child
+        // - BT_Behaviors
+        // - BT_UINode
+
+        return true;
+    }
+
+    public bool Connect(BT_Behavior child, BT_Decorator parent)
+    {
+
+        return true;
+    }
+
+    // Disconnect (child & parent)
 }
