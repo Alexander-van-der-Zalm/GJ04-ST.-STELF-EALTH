@@ -61,12 +61,6 @@ public class BT_Behavior:ScriptableObject
 
     #endregion
 
-    #region Properties
-
-
-
-    #endregion
-
     #region virtual functions
 
     protected virtual Status update(AI_Agent agent) { return Status.Invalid; }
@@ -101,9 +95,30 @@ public class BT_Behavior:ScriptableObject
 
         return status;
     }
-    #endregion
 
-    #region Acces Agent Parameters
+    public Status Tick(AI_Agent agent, int id)
+    {
+        // Start if not yet initialized
+        if (status == Status.Invalid)
+            onInitialize(agent);
 
+        // Update the behaviour
+        status = update(agent);
+
+        // Stop if not still running
+        if (status != Status.Running)
+            onTerminate(agent, status);
+
+        if (agent != null && agent.LocalBlackboard.GetObject<bool>(debugTree, true))
+        {
+            Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
+        }
+
+        // Save the last state
+        // Move to parameterized bb or something similar
+        //Description.LastStatus = status;
+
+        return status;
+    }
     #endregion
 }

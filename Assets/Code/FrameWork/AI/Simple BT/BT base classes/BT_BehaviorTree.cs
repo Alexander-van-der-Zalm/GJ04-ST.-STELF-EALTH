@@ -455,6 +455,8 @@ public class BT_BehaviorTree : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    #region Connect
+
     // Add node
 
     // Remove node
@@ -477,6 +479,8 @@ public class BT_BehaviorTree : MonoBehaviour
 
         return true;
     }
+
+    #endregion
 
     // Disconnect (child & parent)
 }

@@ -2,7 +2,10 @@
 using System.Collections;
 using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
+using Status = BT_Behavior.Status;
 
+[RequireComponent(typeof(AI_Blackboard))]
 public class AI_Agent : MonoBehaviour
 {
     #region Enum
@@ -11,6 +14,25 @@ public class AI_Agent : MonoBehaviour
     {
         local,
         global
+    }
+
+    #endregion
+
+    #region Class
+
+    [System.Serializable]
+    public class AI_BehaviorStatus
+    {
+        public List<int> Children;
+        public Status Status;
+        public int ID;
+
+        AI_BehaviorStatus(int id, params int[] childrenIDs)
+        {
+            this.Status = Status.Invalid;
+            ID = id;
+            Children = childrenIDs.ToList();
+        }
     }
 
     #endregion
@@ -25,9 +47,13 @@ public class AI_Agent : MonoBehaviour
     [ReadOnly]
     public string Name;
 
+    private List<AI_BehaviorStatus> TreeMemory;
+
     #endregion
 
     #region Properties
+
+    #region Blackboard accessors
 
     public object this[string name]
     {
@@ -39,6 +65,23 @@ public class AI_Agent : MonoBehaviour
     {
         get { return (acces == BlackBoard.local) ? LocalBlackboard.GetObject(name) : GlobalBlackboard.GetObject(name);}
         set { if(acces == BlackBoard.local) LocalBlackboard.SetObject(name, value); else GlobalBlackboard.SetObject(name, value);}
+    }
+
+    #endregion
+
+    public Status this[int index]
+    {
+        get { return TreeMemory[index].Status; }
+        set { TreeMemory[index].Status = value;}
+    }
+
+    /// <summary>
+    /// Returns the ID of the child
+    /// </summary>
+    public int this[int nodeIndex, int childIndex]
+    {
+        get { return childIndex < TreeMemory[nodeIndex].Children.Count ? TreeMemory[nodeIndex].Children[childIndex] : -1; }
+       // set { TreeMemory[childIndex].Status = value; }
     }
 
     #endregion
