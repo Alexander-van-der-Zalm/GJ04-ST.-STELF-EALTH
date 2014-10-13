@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+[System.Serializable]
 public class AI_Blackboard : MonoBehaviour 
 {
-    
+    public string Name = "AI BlackBoard";
     public Dictionary<string, object> objectPool = new Dictionary<string,object>();
 
     public object this[string name]

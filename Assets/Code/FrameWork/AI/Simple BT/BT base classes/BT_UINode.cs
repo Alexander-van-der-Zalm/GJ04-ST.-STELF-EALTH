@@ -5,18 +5,35 @@ using System.Collections;
 using System.Collections.Generic;
 
 [ExecuteInEditMode]
-public class BT_UINode : MonoBehaviour 
+public class BT_UINode : MonoBehaviour
 {
+    #region Fields
     public Vector3 Position;
     public BT_Behavior Node;
 
     public BT_BehaviorTree Tree;
     public BT_Behavior Parent;
     public List<BT_Behavior> Children;
-    
+
     public BT_Behavior.NodeDescription.BT_NodeType Type;
-    
+
+    //public List<AI_AgentBlackBoardAccessParameter> Test;
+
+    private AI_Blackboard param;
     private RectTransform rtr;
+
+    #endregion
+
+    #region Constructor
+
+    void Start()
+    {
+        param = this.GetOrAddComponent<AI_Blackboard>();
+        param.Name = "Public Node parameters";
+    }
+
+    #endregion
+
 
     public void SetParent(BT_UINode node)
     {
@@ -53,7 +70,7 @@ public class BT_UINode : MonoBehaviour
         Parent = node.Parent;
         Children = node.Children;
         Tree = node.Tree;
-
+        param.objectPool = node.Node.Description.NodeBlackBoard.objectPool;
         Type = node.Type;
     }
 }

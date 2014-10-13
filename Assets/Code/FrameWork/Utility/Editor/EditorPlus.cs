@@ -110,6 +110,9 @@ public class EditorPlus : Editor
             case "System.String":
                 returnvalue = EditorGUILayout.TextField(label, (string)value, options);
                 break;
+            case "AI_AgentBlackBoardAccessParameter":
+                AI_AgentBlackBoardAccessParameterDrawer.CustomDraw(label,(AI_AgentBlackBoardAccessParameter)value);
+                break;
             default:
                 EditorGUILayout.LabelField(label, value.ToString() + " - undifined", options);
                 //Debug.Log("EditorPlus.EditorField does not contain definition for " + value.GetType().ToString());

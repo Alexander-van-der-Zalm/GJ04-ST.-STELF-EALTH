@@ -7,12 +7,11 @@ using System.Collections.Generic;
 [CustomEditor(typeof(AI_Blackboard))]
 public class AI_BlackboardEditor : EditorPlus 
 {
-
     public override void OnInspectorGUI()
     {
         AI_Blackboard bb = (AI_Blackboard)target;
 
-        EditorGUILayout.LabelField("Local Blackboard");
+        EditorGUILayout.LabelField(bb.Name);
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
@@ -28,3 +27,6 @@ public class AI_BlackboardEditor : EditorPlus
         GUILayout.EndVertical();
     }
 }
+
+
+
