@@ -3,8 +3,9 @@ using Framework.Collections;
 
 public class BT_QueuePop : BT_Action 
 {
-    string Queue = "Queue";
-    string Value = "ReturnSetValueLocation";
+    const string Queue = "Queue";
+    const string Value = "ReturnSetValueLocation";
+
     public BT_QueuePop(string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
        // : //base(queueBBParameter, queueBBAccessType, poppedObjectSaveBBParameter, objectBBAccessType)
     {

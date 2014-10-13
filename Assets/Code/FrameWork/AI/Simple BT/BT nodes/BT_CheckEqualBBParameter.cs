@@ -1,24 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BT_CheckEqualBBParameter : BT_BB2Parameters 
+public class BT_CheckEqualBBParameter : BT_Action 
 {
-    public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
-        : base(bbParameter, accesparam1, equalObject)
+    private const string P1 = "Parameter1";
+    private const string P2 = "Parameter2";
+    private const string Obj = "ObjectToCompare";
+    private const string IsObject = "SecondParamterIsObject";
+
+    #region Constructors
+
+    public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, object equalObject)
     {
-        Description.Type = NodeDescription.BT_NodeType.Condition;
+        description();
+        this[P1] = accesparam1;
+        this[Obj] = equalObject;
+        this[IsObject] = true;
     }
 
-    public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-        : base(bbParameter1, param1, bbParameter2,param2)
+    public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
+        : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), equalObject)
     {
-        Description.Type = NodeDescription.BT_NodeType.Condition;
     }
+    public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    {
+        description();
+        this[P1] = accesparam1;
+        this[P2] = accesparam2;
+        this[IsObject] = false;
+    }
+    public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+        : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
+    {
+    }
+
+    private void description()
+    {
+        Description.Type = NodeDescription.BT_NodeType.Action;
+        Description.Name = "BT_CheckEqualBBParameter";
+        Description.Description = "Succeeds if objects are equal and fails otherwise";
+    }
+
+    #endregion
+
 
     protected override Status update(AI_Agent agent)
     {
-        object obj1 = GetObject(agent,parameter1,parameter1bb,false);
-        object obj2 = GetObject(agent, parameter2, parameter2bb, param2IsObject);
+        // Get the objects
+        object obj1 = GetAgentObject(Par(P1),agent);
+        object obj2;
+        if ((bool)this[IsObject])
+            obj2 = this[Obj];
+        else
+            obj2 = GetAgentObject(Par(P2), agent);
 
         // If equals, then succes, else failed
         return obj1.Equals(obj2) ? Status.Succes : Status.Failed;

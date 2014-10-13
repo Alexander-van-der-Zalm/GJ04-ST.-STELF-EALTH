@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BT_BehaviorDelegator : BT_Behavior 
+public class BT_BehaviorDelegator : BT_Action 
 {
     public delegate Status UpdateDelegate(AI_Agent agent, NodeDescription description);
     public delegate void InitDelegate(AI_Agent agent, NodeDescription description);
