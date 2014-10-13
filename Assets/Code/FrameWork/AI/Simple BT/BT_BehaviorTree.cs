@@ -21,6 +21,10 @@ public class BT_BehaviorTree : MonoBehaviour
     private List<BT_UINode> UINodes;
     private Dictionary<int,BT_TreeNode> TreeNodes;
 
+    private int TreeIteration = 0;
+
+    public int Version { get { return TreeIteration; } }
+
     #endregion
 
     #region Init & Update
@@ -92,6 +96,8 @@ public class BT_BehaviorTree : MonoBehaviour
         TestDepth(agent);
 
         #endregion
+
+        #region ReActivate Soon
 
         //#region Decorators: Invert & alwaysFail
 
@@ -275,6 +281,8 @@ public class BT_BehaviorTree : MonoBehaviour
 
         //#endregion
 
+        #endregion
+
         if ((int)agent["Depth"] != 0)
             errors++;
 
@@ -309,6 +317,7 @@ public class BT_BehaviorTree : MonoBehaviour
     private void errorCheck(BT_TreeNode root, Status returnStatus, ref int errors, AI_Agent agent)
     {
         RebuildTree(root);
+        agent.CheckTreeVersion();
         Status beh = root.Tick(agent);
 
         // Check if it is the correct return type and if its not invalid
@@ -448,7 +457,6 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #endregion
 
-
     #region Rebuild Tree (recursive)
 
     private int IDcounter;
@@ -460,6 +468,9 @@ public class BT_BehaviorTree : MonoBehaviour
         // Recursive crawl to fill the dictionary
         TreeNodes = new Dictionary<int, BT_TreeNode>();
         TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
+
+        // Set the new tree iteration
+        TreeIteration = TreeIteration + 1 % int.MaxValue;
     }
 
     private Dictionary<int, BT_TreeNode> RecursiveTreeNodeCrawl(Dictionary<int, BT_TreeNode> dic, BT_TreeNode node)
@@ -508,6 +519,14 @@ public class BT_BehaviorTree : MonoBehaviour
 
     public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
     {
+        // Check if parents type supports children
+        Type type = parent.Node.GetType();
+        if (!type.IsAssignableFrom(typeof(BT_HasChild)))
+            Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
+
+        if (type.IsAssignableFrom(typeof(BT_Decorator)) && children.Count() > 1)
+            Debug.LogError("BT_BehaviorTree.AddChildren adding multiple children is not supported for:" + type.ToString());
+        
         // Set parents children
         parent.Children.AddRange(children);
 
@@ -517,6 +536,10 @@ public class BT_BehaviorTree : MonoBehaviour
 
         return parent;
     }
+
+    #endregion
+
+    #region Disconnect Children
 
     #endregion
 
@@ -543,25 +566,13 @@ public class BT_BehaviorTree : MonoBehaviour
     // Remove node
 
     // Connect (child & parent)
-    public bool Connect(BT_Composite parent,  BT_Behavior child)
-    {
-        // Solve the how do I know if it already exists in the nodelist
-        // - Search existing nodes == equal?
-        
-        // Connect parent and child
-        // - BT_Behaviors
-        // - BT_UINode
-
-        return true;
-    }
-
-    public bool Connect(BT_Decorator parent, BT_Behavior child)
-    {
-
-        return true;
-    }
 
     #endregion
 
     // Disconnect (child & parent)
+
+    internal Dictionary<int, Status> GetNewNodeStatus()
+    {
+        throw new NotImplementedException();
+    }
 }

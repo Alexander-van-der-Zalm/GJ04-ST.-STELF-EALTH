@@ -29,6 +29,8 @@ public class AI_Agent : MonoBehaviour
     public string Name;
 
     private Dictionary<int,Status> NodeStatus;
+    private int TreeVersion = 0;
+    private IEnumerator TreeCoroutine;
 
     #endregion
 
@@ -83,17 +85,8 @@ public class AI_Agent : MonoBehaviour
         Tree.TestBTBasicCompontents(this);
         //TestBlackBoard();
 
+        StartTree();
 
-        var c = from t in Assembly.GetExecutingAssembly().GetTypes()
-                where t.IsClass && t.IsSubclassOf(typeof(BT_Selector))
-                select t.Name.ToString();
-
-        DebugHelper.LogList<string>(c.ToList());
-
-        if (Tree != null)
-            StartCoroutine(Tree.updateCR(this));
-        
-        
     }
 
     private void TestBlackBoard()
@@ -112,8 +105,44 @@ public class AI_Agent : MonoBehaviour
         object obj2 = LocalBlackboard.GetObject("blabla");
     }
 
-    internal void SetTree(BT_TreeNode tree)
+    internal void CheckTreeVersion()
     {
-        throw new System.NotImplementedException();
+        if (TreeVersion == Tree.Version)
+            return;
+
+        // Stop the old version of the tree
+        StopTree();
+        //Debug.Log("CheckTreeVersion needs a stop coroutine function");
+
+        // Clear local black board
+        LocalBlackboard = new AI_Blackboard();
+
+        // TODO unnasign values from global blackboard set by the old tree
+
+        // Get the new status memory structure
+        NodeStatus = Tree.GetNewNodeStatus();
+        
+        // Update the version
+        TreeVersion = Tree.Version;
+
+        // Restart the tree
+        StartTree();
+    }
+
+    private void StartTree()
+    {
+        if (Tree == null)
+        {
+            Debug.LogError("AI_Agent cant start tree when null");
+            return;
+        }
+        
+        TreeCoroutine = Tree.updateCR(this);
+        StartCoroutine(TreeCoroutine);
+    }
+
+    private void StopTree()
+    {
+        StopCoroutine(TreeCoroutine);
     }
 }
