@@ -46,13 +46,13 @@ public class BT_UINodeEditor : EditorPlus
         
         var l1 = q1.ToList();
         if (GUILayout.Button("Replace node"))
-            node.Node = (BT_Behavior)Activator.CreateInstance(l1[selectedClass]);
+            node.Node.Node = (BT_Behavior)Activator.CreateInstance(l1[selectedClass]);
 
-        if (node.Node == null)
+        if (node.Node.Node == null)
             return;
 
-        EditorGUILayout.LabelField("Name: ",node.Node.Description.Name);
-        EditorGUILayout.LabelField(node.Node.Description.Description);
+        EditorGUILayout.LabelField("Name: ",node.Node.Node.Description.Name);
+        EditorGUILayout.LabelField(node.Node.Node.Description.Description);
 
         // Show all the fields from the selected class
         var fields = l1[selectedClass].GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
