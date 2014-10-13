@@ -44,7 +44,7 @@ public class BT_CheckEqualBBParameter : BT_Action
     #endregion
 
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
         // Get the objects
         object obj1 = GetAgentObject(Par(P1),agent);

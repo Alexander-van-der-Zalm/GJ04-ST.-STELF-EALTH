@@ -3,11 +3,17 @@ using System.Collections;
 
 public class BT_Inverter : BT_Decorator 
 {
-    public BT_Inverter(BT_Behavior child) : base(child) { }
+    public BT_Inverter() : base()
+    {
+        Description.Type = NodeDescription.BT_NodeType.Decorator;
+        Description.Name = "BT_Inverter";
+        Description.Description = "Pushes a value to the queue from the agents blackboard";
+    }
+
     
     protected override Status update(AI_Agent agent,int id)
     {
-        return invert(agent[id,0].Tick(agent,id));
+        return exit(agent,invert(agent.Tree.GetFirstChild(id).Tick(agent)));
     }
 
     private Status invert(Status status)

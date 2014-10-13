@@ -21,11 +21,6 @@ public class BT_BehaviorTree : MonoBehaviour
     private List<BT_UINode> UINodes;
     private Dictionary<int,BT_TreeNode> TreeNodes;
 
-    public List<BT_TreeNode> GetChildren(int index)
-    {
-        return TreeNodes[index].Children;
-    }
-
     #endregion
 
     #region Init & Update
@@ -444,6 +439,18 @@ public class BT_BehaviorTree : MonoBehaviour
     //}
 
     #endregion
+
+
+    public BT_TreeNode GetFirstChild(int index)
+    {
+        return TreeNodes[index].Children.FirstOrDefault();
+    }
+
+    public List<BT_TreeNode> GetChildren(int index)
+    {
+        return TreeNodes[index].Children;
+    }
+
 
     internal List<BT_UINode> GetUINodes()
     {

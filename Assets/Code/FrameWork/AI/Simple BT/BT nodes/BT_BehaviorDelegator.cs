@@ -19,18 +19,18 @@ public class BT_BehaviorDelegator : BT_Action
         terminate = onTerm;
     }
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
         return updatedel(agent, Description);
     }
 
-    protected override void onInitialize(AI_Agent agent)
+    protected override void onInitialize(AI_Agent agent, int id)
     {
         if(init!=null)
             init(agent, Description);
     }
 
-    protected override void onTerminate(AI_Agent agent, Status status)
+    protected override void onTerminate(AI_Agent agent, int id, Status status)
     {
         if(terminate!=null)
             terminate(agent, Description, status);

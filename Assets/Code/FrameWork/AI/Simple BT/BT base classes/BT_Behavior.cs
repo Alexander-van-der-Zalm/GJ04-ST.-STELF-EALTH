@@ -13,8 +13,7 @@ public class BT_Behavior:ScriptableObject
         public enum BT_NodeType
         {
             Action,
-            Sequencer,
-            Selector,
+            Composite,
             Decorator,
             Condition
         }

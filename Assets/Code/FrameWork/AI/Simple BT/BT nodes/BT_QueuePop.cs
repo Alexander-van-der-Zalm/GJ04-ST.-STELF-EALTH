@@ -32,7 +32,7 @@ public class BT_QueuePop : BT_QueueBase
     }
 
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
         // Get queue from the blackboard
         object obj = GetAgentObject(Par(Queue),agent);

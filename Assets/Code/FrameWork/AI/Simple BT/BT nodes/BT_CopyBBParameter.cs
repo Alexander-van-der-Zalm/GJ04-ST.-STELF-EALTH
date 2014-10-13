@@ -42,7 +42,7 @@ public class BT_CopyBBParameter : BT_Action
         Description.Description = "Copies the values from slot2 to slot1 and then succeeds";
     }
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
         // Get the object from slot 2
         object objectToCopy;

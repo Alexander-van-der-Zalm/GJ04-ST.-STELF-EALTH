@@ -38,7 +38,7 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
         Description.Description = "Pushes a value to the queue from the agents blackboard";
     }
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
         // Get queue from the blackboard
         object obj = GetAgentObject(Par(Queue), agent);

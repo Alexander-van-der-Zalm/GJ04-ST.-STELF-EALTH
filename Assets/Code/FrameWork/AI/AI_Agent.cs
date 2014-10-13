@@ -80,7 +80,7 @@ public class AI_Agent : MonoBehaviour
         //BehaviorTree.SetAgent(this);
         
         // Test behaviors
-        BehaviorTree.TestBTBasicCompontents(this);
+        Tree.TestBTBasicCompontents(this);
         //TestBlackBoard();
 
 
@@ -90,15 +90,10 @@ public class AI_Agent : MonoBehaviour
 
         DebugHelper.LogList<string>(c.ToList());
 
-        if (BehaviorTree != null)
-            StartCoroutine(BehaviorTree.updateCR(this));
+        if (Tree != null)
+            StartCoroutine(Tree.updateCR(this));
         
         
-    }
-
-    public int GetChildrenCount(int nodeIndex)
-    {
-        return TreeMemory[nodeIndex].Children.Count;
     }
 
     private void TestBlackBoard()
