@@ -9,8 +9,9 @@ public class BT_AlwayFail : BT_Decorator
         Description.Description = "Always returns failed";
     }
 
-    protected override BT_Behavior.Status DecoraterMethod(AI_Agent agent, int id)
+    protected override BT_Behavior.Status update(AI_Agent agent, int id)
     {
-        return Status.Failed;
+        agent.Tree.GetFirstChild(id).Tick(agent);
+        return exit(agent, Status.Failed);
     }
 }
