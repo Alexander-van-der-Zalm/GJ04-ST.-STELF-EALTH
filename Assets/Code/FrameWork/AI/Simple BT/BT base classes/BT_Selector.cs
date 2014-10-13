@@ -7,34 +7,34 @@ public class BT_Selector : BT_Composite
 {
     #region Constructor
 
-    public BT_Selector(params BT_Behavior[] children)
-    {
-        Constructor(children.ToList());
-    }
+    //public BT_Selector(params BT_Behavior[] children)
+    //{
+    //    Constructor(children.ToList());
+    //}
 
-    public BT_Selector(List<BT_Behavior> children)
-    {
-        Constructor(children);
-    }
+    //public BT_Selector(List<BT_Behavior> children)
+    //{
+    //    Constructor(children);
+    //}
     
-    private void Constructor(List<BT_Behavior> children)
-    {
-        Description.Type = NodeDescription.BT_NodeType.Selector;
+    //private void Constructor(List<BT_Behavior> children)
+    //{
+    //    Description.Type = NodeDescription.BT_NodeType.Selector;
 
-        Children = children;
-    }
+    //    Children = children;
+    //}
 
     #endregion
 
     #region Update
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent, int id)
     {
-        base.update(agent);
+        base.update(agent,id);
 
-        for(int i = 0; i < Children.Count; i++)
+        for (int i = 0; i < agent.GetChildrenCount(id); i++)
         {
-            Status s = Children[i].Tick(agent);
+            Status s = agent[id,i].Tick(agent,id);
 
             // Continue on failed
             // Return succes, invalid and running

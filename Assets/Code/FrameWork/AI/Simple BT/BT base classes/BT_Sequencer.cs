@@ -12,23 +12,23 @@ public class BT_Sequencer : BT_Composite
         SetDescription();
     }
 
-    public BT_Sequencer(params BT_Behavior[] children) 
-    {
-        Constructor(children.ToList());
-    }
+    //public BT_Sequencer(params BT_Behavior[] children) 
+    //{
+    //    Constructor(children.ToList());
+    //}
 
-    public BT_Sequencer(List<BT_Behavior> children)
-    {
-        Constructor(children);
-    }
+    //public BT_Sequencer(List<BT_Behavior> children)
+    //{
+    //    Constructor(children);
+    //}
     
-    private void Constructor(List<BT_Behavior> children)
-    {
+    //private void Constructor(List<BT_Behavior> children)
+    //{
         
-        SetDescription();
+    //    SetDescription();
 
-        Children = children;
-    }
+    //    Children = children;
+    //}
 
     private void SetDescription()
     {
@@ -39,13 +39,13 @@ public class BT_Sequencer : BT_Composite
 
     #endregion 
 
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent,int id)
     {
-        base.update(agent);
+        base.update(agent,id);
 
-        for (int i = 0; i < Children.Count; i++)
+        for (int i = 0; i < agent.GetChildrenCount(id); i++)
         {
-            Status s = Children[i].Tick(agent);
+            Status s = agent[id, i].Tick(agent, id);
 
             // Continue on succes
             // Return failed, invalid and running

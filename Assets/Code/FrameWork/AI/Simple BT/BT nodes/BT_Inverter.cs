@@ -5,9 +5,9 @@ public class BT_Inverter : BT_Decorator
 {
     public BT_Inverter(BT_Behavior child) : base(child) { }
     
-    protected override Status update(AI_Agent agent)
+    protected override Status update(AI_Agent agent,int id)
     {
-        return invert(child.Tick(agent));
+        return invert(agent[id,0].Tick(agent,id));
     }
 
     private Status invert(Status status)

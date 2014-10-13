@@ -55,7 +55,7 @@ public class BT_Behavior:ScriptableObject
     public NodeDescription Description = new NodeDescription();
 
     //protected AI_Agent Agent;
-    private Status status = Status.Invalid;
+    //private Status status = Status.Invalid;
 
     private string debugTree = "DebugTree";
 
@@ -63,51 +63,58 @@ public class BT_Behavior:ScriptableObject
 
     #region virtual functions
 
-    protected virtual Status update(AI_Agent agent) { return Status.Invalid; }
-    protected virtual void onInitialize(AI_Agent agent) { }
-    protected virtual void onTerminate(AI_Agent agent, Status status) { }
+    //protected virtual Status update(AI_Agent agent) { return Status.Invalid; }
+    //protected virtual void onInitialize(AI_Agent agent) { }
+    //protected virtual void onTerminate(AI_Agent agent, Status status) { }
+    protected virtual Status update(AI_Agent agent,int id) { return Status.Invalid; }
+    protected virtual void onInitialize(AI_Agent agent, int id) { }
+    protected virtual void onTerminate(AI_Agent agent, int id, Status status) { }
 
     #endregion
 
     #region Tick function
 
-    public Status Tick(AI_Agent agent) 
-    {
-        // Start if not yet initialized
-        if (status == Status.Invalid)
-            onInitialize(agent);
+    #region OlD
+    //public Status Tick(AI_Agent agent) 
+    //{
+    //    // Start if not yet initialized
+    //    if (status == Status.Invalid)
+    //        onInitialize(agent);
 
-        // Update the behaviour
-        status = update(agent);
+    //    // Update the behaviour
+    //    status = update(agent);
 
-        // Stop if not still running
-        if (status != Status.Running)
-            onTerminate(agent, status);
+    //    // Stop if not still running
+    //    if (status != Status.Running)
+    //        onTerminate(agent, status);
 
-        if (agent!=null && agent.LocalBlackboard.GetObject<bool>(debugTree,true))
-        {
-            Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
-        }
+    //    if (agent!=null && agent.LocalBlackboard.GetObject<bool>(debugTree,true))
+    //    {
+    //        Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
+    //    }
             
-        // Save the last state
-        // Move to parameterized bb or something similar
-        //Description.LastStatus = status;
+    //    // Save the last state
+    //    // Move to parameterized bb or something similar
+    //    //Description.LastStatus = status;
 
-        return status;
-    }
+    //    return status;
+    //}
+    #endregion
 
     public Status Tick(AI_Agent agent, int id)
     {
         // Start if not yet initialized
-        if (status == Status.Invalid)
-            onInitialize(agent);
+        if (agent[id] == Status.Invalid)
+            onInitialize(agent,id);
 
         // Update the behaviour
-        status = update(agent);
+        // Save the state to the agent
+        Status status = update(agent, id);
+        agent[id] = status;
 
         // Stop if not still running
         if (status != Status.Running)
-            onTerminate(agent, status);
+            onTerminate(agent, id, status);
 
         if (agent != null && agent.LocalBlackboard.GetObject<bool>(debugTree, true))
         {
@@ -116,8 +123,6 @@ public class BT_Behavior:ScriptableObject
 
         // Save the last state
         // Move to parameterized bb or something similar
-        //Description.LastStatus = status;
-
         return status;
     }
     #endregion

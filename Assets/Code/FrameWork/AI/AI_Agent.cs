@@ -18,24 +18,6 @@ public class AI_Agent : MonoBehaviour
 
     #endregion
 
-    #region Class
-
-    [System.Serializable]
-    public class AI_BehaviorStatus
-    {
-        public List<int> Children;
-        public Status Status;
-        public int ID;
-
-        AI_BehaviorStatus(int id, params int[] childrenIDs)
-        {
-            this.Status = Status.Invalid;
-            ID = id;
-            Children = childrenIDs.ToList();
-        }
-    }
-
-    #endregion
 
     #region Fields
 
@@ -43,11 +25,11 @@ public class AI_Agent : MonoBehaviour
     public AI_Blackboard GlobalBlackboard;
     [HideInInspector]
     public AI_Blackboard LocalBlackboard;
-    public BT_BehaviorTree BehaviorTree;
+    public BT_BehaviorTree Tree;
     [ReadOnly]
     public string Name;
 
-    private List<AI_BehaviorStatus> TreeMemory;
+    private List<Status> NodeStatus;
 
     #endregion
 
@@ -71,8 +53,8 @@ public class AI_Agent : MonoBehaviour
 
     public Status this[int index]
     {
-        get { return TreeMemory[index].Status; }
-        set { TreeMemory[index].Status = value;}
+        get { return NodeStatus[index]; }
+        set { NodeStatus[index] = value; }
     }
 
     /// <summary>
@@ -113,6 +95,11 @@ public class AI_Agent : MonoBehaviour
             StartCoroutine(BehaviorTree.updateCR(this));
         
         
+    }
+
+    public int GetChildrenCount(int nodeIndex)
+    {
+        return TreeMemory[nodeIndex].Children.Count;
     }
 
     private void TestBlackBoard()
