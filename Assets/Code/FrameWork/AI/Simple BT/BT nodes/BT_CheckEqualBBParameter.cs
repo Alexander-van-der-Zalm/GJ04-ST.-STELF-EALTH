@@ -6,7 +6,7 @@ public class BT_CheckEqualBBParameter : BT_Action
     private const string P1 = "Parameter1";
     private const string P2 = "Parameter2";
     private const string Obj = "ObjectToCompare";
-    private const string IsObject = "SecondParamterIsObject";
+    private const string IsObject = "SecondParameterIsObject";
 
     #region Constructors
 
