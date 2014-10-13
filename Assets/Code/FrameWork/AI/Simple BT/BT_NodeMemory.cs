@@ -18,7 +18,13 @@ public class BT_TreeNode
     public bool IsRoot { get { return Parent == null; } }
 
     #endregion
-    BT_TreeNode(int id, BT_Behavior behaviour, params BT_TreeNode[] childrenMem)
+
+    public BT_TreeNode(BT_Behavior behavior)
+    {
+        Node = behavior;
+    }
+
+    public BT_TreeNode(int id, BT_Behavior behaviour, params BT_TreeNode[] childrenMem)
     {
         Node = behaviour;
         ID = id;

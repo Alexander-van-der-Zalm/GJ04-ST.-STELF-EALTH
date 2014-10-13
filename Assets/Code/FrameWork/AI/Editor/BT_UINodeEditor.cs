@@ -77,10 +77,8 @@ public class BT_UINodeEditor : EditorPlus
                 return typeof(BT_Condition);
             case nodeType.Decorator:
                 return typeof(BT_Decorator);
-            case nodeType.Selector:
-                return typeof(BT_Selector);
-            case nodeType.Sequencer:
-                return typeof(BT_Sequencer);
+            case nodeType.Composite:
+                return typeof(BT_Composite);
         }
         return typeof(BT_Behavior);
     }

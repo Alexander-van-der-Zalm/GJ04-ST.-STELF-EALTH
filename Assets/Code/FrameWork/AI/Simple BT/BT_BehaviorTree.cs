@@ -59,10 +59,10 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #region Standard nodes
 
-        BT_BehaviorDelegator f = getBeh(failUpdate, "Fail");
-        BT_BehaviorDelegator s = getBeh(succesUpdate, "Succes");
-        BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
-        BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
+        BT_TreeNode f = UDel(failUpdate, "Fail");
+        BT_TreeNode s = UDel(succesUpdate, "Succes");
+        BT_TreeNode r = UDel(runningUpdate, "Running");
+        BT_TreeNode b = UDel(pauseUpdate, "Pause");
 
         #endregion
 
@@ -93,187 +93,187 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
-        #region Decorators: Invert & alwaysFail
+        //#region Decorators: Invert & alwaysFail
 
-        // Check the inverter
-        errorCheck(inv(s), Status.Failed, ref errors, agent);
-        errorCheck(inv(f), Status.Succes, ref errors, agent);
-        errorCheck(inv(r), Status.Running, ref errors, agent);
+        //// Check the inverter
+        //errorCheck(inv(s), Status.Failed, ref errors, agent);
+        //errorCheck(inv(f), Status.Succes, ref errors, agent);
+        //errorCheck(inv(r), Status.Running, ref errors, agent);
 
-        // Check the alwaysFailed
-        errorCheck(fail(s), Status.Failed, ref errors, agent);
-        errorCheck(fail(f), Status.Failed, ref errors, agent);
-        errorCheck(fail(r), Status.Failed, ref errors, agent);
+        //// Check the alwaysFailed
+        //errorCheck(fail(s), Status.Failed, ref errors, agent);
+        //errorCheck(fail(f), Status.Failed, ref errors, agent);
+        //errorCheck(fail(r), Status.Failed, ref errors, agent);
 
-        #endregion
+        //#endregion
 
-        #region Condition: CheckEqualBBParameter
+        //#region Condition: CheckEqualBBParameter
 
-        // Things to compare
-        int int1 = 0;
-        int int2 = 0;
-        int int3 = 1;
-        string str1 = "bla";
-        string str2 = "bla";
-        string str3 = "notbla";
-        Vector3 v1 = Vector3.zero;
-        Vector3 v2 = Vector3.zero;
-        Vector3 v3 = Vector3.up;
+        //// Things to compare
+        //int int1 = 0;
+        //int int2 = 0;
+        //int int3 = 1;
+        //string str1 = "bla";
+        //string str2 = "bla";
+        //string str3 = "notbla";
+        //Vector3 v1 = Vector3.zero;
+        //Vector3 v2 = Vector3.zero;
+        //Vector3 v3 = Vector3.up;
 
-        // BB params
-        string p1 = "TestParam1";
-        string p2 = "TestParam2";
-        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
-        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+        //// BB params
+        //string p1 = "TestParam1";
+        //string p2 = "TestParam2";
+        //AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        //AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
 
-        // Simple int check
-        agent[p1, local] = int1;
-        agent[p2, local] = int2;
+        //// Simple int check
+        //agent[p1, local] = int1;
+        //agent[p2, local] = int2;
 
-        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
-        agent[p2, local] = int3;
-        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors, agent);
+        //agent[p2, local] = int3;
+        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        //errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors, agent);
         
-        // cross global and local int check
-        agent[p1, global] = int1;
-        agent[p2, global] = int3;
-        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        //// cross global and local int check
+        //agent[p1, global] = int1;
+        //agent[p2, global] = int3;
+        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
-        // string check
-        agent[p1, local] = str1;
-        agent[p2, local] = str2;
+        //// string check
+        //agent[p1, local] = str1;
+        //agent[p2, local] = str2;
 
-        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
-        agent[p2, local] = int3;
-        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        //agent[p2, local] = int3;
+        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
-        // cross global and local int check
-        agent[p1, global] = str1;
-        agent[p2, global] = str3;
-        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        //// cross global and local int check
+        //agent[p1, global] = str1;
+        //agent[p2, global] = str3;
+        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
-        // Vector3 check
-        agent[p1, local] = v1;
-        agent[p2, local] = v2;
+        //// Vector3 check
+        //agent[p1, local] = v1;
+        //agent[p2, local] = v2;
 
-        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
-        agent[p2, local] = v3;
-        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        //agent[p2, local] = v3;
+        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
-        // cross global and local int check
-        agent[p1, global] = v1;
-        agent[p2, global] = v3;
-        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        //// cross global and local int check
+        //agent[p1, global] = v1;
+        //agent[p2, global] = v3;
+        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
 
-        #endregion
+        //#endregion
 
-        #region Action: Copy BB value
+        //#region Action: Copy BB value
 
-        // int copy
-        // Check first
-        agent[p1, local] = int1;
-        agent[p2, local] = int2;
+        //// int copy
+        //// Check first
+        //agent[p1, local] = int1;
+        //agent[p2, local] = int2;
 
-        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
-        // now copy in 3
-        errorCheck(copy(p1, local, 3), Status.Succes, ref errors, agent);
-        // Check if it went allright
-        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        //// now copy in 3
+        //errorCheck(copy(p1, local, 3), Status.Succes, ref errors, agent);
+        //// Check if it went allright
+        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        //errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
 
-        // now copy from p1 to p2
-        errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors, agent);
+        //// now copy from p1 to p2
+        //errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors, agent);
  
-        // Check
-        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(p2, local, 3), Status.Succes, ref errors, agent);
+        //// Check
+        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(p2, local, 3), Status.Succes, ref errors, agent);
 
-        #endregion
+        //#endregion
 
-        #region Action: Queue push, pop, checkSize
-        string queueP1 = "TestQueue";
-        string qCompare = "TestQueueComparer";
+        //#region Action: Queue push, pop, checkSize
+        //string queueP1 = "TestQueue";
+        //string qCompare = "TestQueueComparer";
 
-        // Create queue and populate
-        fc.Queue<int> queue1 = new fc.Queue<int>();
-        queue1.Add(1);
-        queue1.Add(2);
-        queue1.Add(3);
-
-        // Populate the board
-        agent[queueP1, local] = queue1;
-        agent[qCompare, local] = -1;
-
-        // Check size
-        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-
-        // Check push
-        errorCheck(qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
-        errorCheck(qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
-
-        // Check pop
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //Debug.Log(agent[qCompare, local]);
-        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
-
-        #region Test stuff
-        //Queue<int> q = new Queue<int>();
-        //q.Enqueue(6);
-        //q.Enqueue(4);
-        //q.Enqueue(2);
-
-        //BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
-        ////int testooh = (int)whatev.GetFromGenericQueue(q);
-        //Debug.Log((int)whatev.GetFromGenericQueue(q));
-        //Debug.Log((int)whatev.GetFromGenericQueue(q));
-        //Debug.Log((int)whatev.GetFromGenericQueue(q));
-
-        //List<int> test = new List<int>() { 1, 2, 3 };
-        //IList list = (IList)test;
-        //Debug.Log(list[0]);
-
-
-        //fc.Stack<int> stack1 = new fc.Stack<int>();
-        //fc.Stack<string> stack2 = new fc.Stack<string>();
-        //stack1.Add(1);
-        //stack1.Add(2);
-        //stack1.Add(3);
-
-        //Debug.Log(stack1.GetType().GetGenericTypeDefinition() + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
+        //// Create queue and populate
         //fc.Queue<int> queue1 = new fc.Queue<int>();
         //queue1.Add(1);
         //queue1.Add(2);
         //queue1.Add(3);
 
-        //fc.IQueue queueI = queue1;
-        //Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
-        //Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
-        //Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
-        #endregion
+        //// Populate the board
+        //agent[queueP1, local] = queue1;
+        //agent[qCompare, local] = -1;
 
-        #endregion
+        //// Check size
+        //errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+
+        //// Check push
+        //errorCheck(qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
+
+        //// Check pop
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        ////Debug.Log(agent[qCompare, local]);
+        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
+
+        //#region Test stuff
+        ////Queue<int> q = new Queue<int>();
+        ////q.Enqueue(6);
+        ////q.Enqueue(4);
+        ////q.Enqueue(2);
+
+        ////BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
+        //////int testooh = (int)whatev.GetFromGenericQueue(q);
+        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
+        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
+        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
+
+        ////List<int> test = new List<int>() { 1, 2, 3 };
+        ////IList list = (IList)test;
+        ////Debug.Log(list[0]);
+
+
+        ////fc.Stack<int> stack1 = new fc.Stack<int>();
+        ////fc.Stack<string> stack2 = new fc.Stack<string>();
+        ////stack1.Add(1);
+        ////stack1.Add(2);
+        ////stack1.Add(3);
+
+        ////Debug.Log(stack1.GetType().GetGenericTypeDefinition() + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
+        ////fc.Queue<int> queue1 = new fc.Queue<int>();
+        ////queue1.Add(1);
+        ////queue1.Add(2);
+        ////queue1.Add(3);
+
+        ////fc.IQueue queueI = queue1;
+        ////Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
+        ////Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
+        ////Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
+        //#endregion
+
+        //#endregion
 
         if ((int)agent["Depth"] != 0)
             errors++;
@@ -294,14 +294,14 @@ public class BT_BehaviorTree : MonoBehaviour
 
     public void TestDepth(AI_Agent agent)
     {
-        BT_BehaviorDelegator f = getBeh(failUpdate, "Fail");
-        BT_BehaviorDelegator s = getBeh(succesUpdate, "Succes");
-        BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
-        BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
+        BT_TreeNode f = UDel(failUpdate, "Fail");
+        BT_TreeNode s = UDel(succesUpdate, "Succes");
+        BT_TreeNode r = UDel(runningUpdate, "Running");
+        BT_TreeNode b = UDel(pauseUpdate, "Pause");
 
         BT_TreeNode tree = sel(sel(sel(sel(s, s), s), s), s);
 
-        RebuildTree(root);
+        RebuildTree(tree);
 
         tree.Tick(agent);
     }
@@ -324,80 +324,85 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region BT Component Syntactic Sugar
 
-    private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_QueuePush(bbParameter1, param1, bbParameter2, param2);
+    //}
+
+    //private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_QueuePush(bbParameter1, param1, obj);
+    //}
+
+    //private BT_QueuePop qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_QueuePop(bbParameter1, param1, bbParameter2, param2);
+    //}
+
+    //private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, bbParameter2, param2);
+    //}
+
+    //private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
+    //}
+
+    //private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2);
+    //}
+
+    //private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_CopyBBParameter(bbParameter1, param1, obj);
+    //}
+
+    //private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2);
+    //}
+
+    //private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_CheckEqualBBParameter(bbParameter1, param1, obj);
+    //}
+
+    //private BT_AlwayFail fail(BT_Behavior child)
+    //{
+    //    return new BT_AlwayFail(child);
+    //}
+
+    //private BT_Inverter inv(BT_Behavior child)
+    //{
+    //    return new BT_Inverter(child);
+    //}
+
+    private BT_TreeNode sel(params BT_TreeNode[] children)
     {
-        return new BT_QueuePush(bbParameter1, param1, bbParameter2, param2);
+        BT_TreeNode node = new BT_TreeNode(new BT_Selector());
+        node = AddChildren(node, children);
+        return node;
     }
 
-    private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    private BT_TreeNode seq(params BT_TreeNode[] children)
     {
-        return new BT_QueuePush(bbParameter1, param1, obj);
-    }
-
-    private BT_QueuePop qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        return new BT_QueuePop(bbParameter1, param1, bbParameter2, param2);
-    }
-
-    private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        return new BT_QueueCheckSizeEqual(bbParameter1, param1, bbParameter2, param2);
-    }
-
-    private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    {
-        return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
-    }
-
-    private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        return new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2);
-    }
-
-    private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    {
-        return new BT_CopyBBParameter(bbParameter1, param1, obj);
-    }
-
-    private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        return new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2);
-    }
-
-    private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    {
-        return new BT_CheckEqualBBParameter(bbParameter1, param1, obj);
-    }
-
-    private BT_AlwayFail fail(BT_Behavior child)
-    {
-        return new BT_AlwayFail(child);
-    }
-
-    private BT_Inverter inv(BT_Behavior child)
-    {
-        return new BT_Inverter(child);
-    }
-
-    private BT_Selector sel(params BT_Behavior[] behaviors)
-    {
-        return new BT_Selector(behaviors);
-    }
-
-    private BT_Sequencer seq(params BT_Behavior[] behaviors)
-    {
-        return new BT_Sequencer(behaviors);
+        BT_TreeNode node = new BT_TreeNode(new BT_Sequencer());
+        node = AddChildren(node,children);
+        return node;
     }
 
     #endregion
 
     #region Delegator
 
-    private BT_BehaviorDelegator getBeh(BT_BehaviorDelegator.UpdateDelegate del, string name)
+    private BT_TreeNode UDel(BT_BehaviorDelegator.UpdateDelegate del, string name)
     {
         BT_BehaviorDelegator b = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, del);
         b.Description.Name = name;
-        return b;
+        BT_TreeNode node = new BT_TreeNode(b);
+        return node;
     }
 
     
@@ -470,10 +475,10 @@ public class BT_BehaviorTree : MonoBehaviour
         } 
 
         // Set ID
-        node.ID = id;
+        node.ID = IDcounter;
         
         // Add self to the dictionary
-        dic[id] = node;
+        dic[IDcounter] = node;
 
         // Increment the counter after adding
         IDcounter++;
@@ -501,9 +506,16 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region Set Children
 
-    public void SetChildren(BT_TreeNode parent, params BT_TreeNode[] children)
+    public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
     {
+        // Set parents children
+        parent.Children.AddRange(children);
 
+        // Set childrens parent
+        foreach(BT_TreeNode child in children)
+            child.Parent = parent;
+
+        return parent;
     }
 
     #endregion
@@ -515,7 +527,7 @@ public class BT_BehaviorTree : MonoBehaviour
             return DefaultUINodeList();
 
         // Decide how to handle script initilalization of extra tree nodes
-
+        // Decide what to do when there is already ui nodes...
         return UINodes;
     }
 
