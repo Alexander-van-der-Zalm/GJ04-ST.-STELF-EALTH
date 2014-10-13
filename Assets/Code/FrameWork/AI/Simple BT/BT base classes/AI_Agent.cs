@@ -74,7 +74,7 @@ public class AI_Agent : MonoBehaviour
         LocalBlackboard.SetObject("TestBool", true);
         LocalBlackboard.SetObject("TestClass2", GlobalBlackboard);
         LocalBlackboard.SetObject("TestClass23", LocalBlackboard);
-        LocalBlackboard.SetObject("TestAccesParam", new AI_AgentBlackBoardAccessParameter());
+        LocalBlackboard.SetObject("TestAccesParam", new AI_AgentBBAccessParameter());
         Vector3 v3 = LocalBlackboard.GetObject<Vector3>("TestV3");
         object obj = LocalBlackboard.GetObject("TestV3");
         object obj2 = LocalBlackboard.GetObject("blabla");

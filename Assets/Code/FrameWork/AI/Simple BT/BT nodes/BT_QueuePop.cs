@@ -7,6 +7,7 @@ public class BT_QueuePop : BT_BB2Parameters
         : base(queueBBParameter, queueBBAccessType, poppedObjectSaveBBParameter, objectBBAccessType)
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
+        Description["Blabla"] = new AI_AgentBBAccessParameter("Blabla", AI_Agent.BlackBoard.global);
     }
 
     protected override Status update(AI_Agent agent)

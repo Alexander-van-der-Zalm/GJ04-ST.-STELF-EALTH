@@ -53,7 +53,8 @@ public class BT_Behavior:ScriptableObject
     #region fields
 
     public NodeDescription Description = new NodeDescription();
-    protected AI_Agent Agent;
+
+    //protected AI_Agent Agent;
     private Status status = Status.Invalid;
 
     private string debugTree = "DebugTree";
@@ -100,5 +101,9 @@ public class BT_Behavior:ScriptableObject
 
         return status;
     }
+    #endregion
+
+    #region Acces Agent Parameters
+
     #endregion
 }
