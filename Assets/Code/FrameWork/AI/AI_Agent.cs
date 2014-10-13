@@ -112,7 +112,6 @@ public class AI_Agent : MonoBehaviour
 
         // Stop the old version of the tree
         StopTree();
-        //Debug.Log("CheckTreeVersion needs a stop coroutine function");
 
         // Clear local black board
         LocalBlackboard = new AI_Blackboard();

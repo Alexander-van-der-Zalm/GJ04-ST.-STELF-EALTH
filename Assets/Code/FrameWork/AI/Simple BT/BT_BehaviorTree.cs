@@ -571,8 +571,13 @@ public class BT_BehaviorTree : MonoBehaviour
 
     // Disconnect (child & parent)
 
-    internal Dictionary<int, Status> GetNewNodeStatus()
+    public Dictionary<int, Status> GetNewNodeStatus()
     {
-        throw new NotImplementedException();
+        Dictionary<int, Status> dic = new Dictionary<int, Status>();
+        foreach(KeyValuePair<int, BT_TreeNode> node in TreeNodes)
+        {
+            dic[node.Key] = Status.Invalid;
+        }
+        return dic;
     }
 }
