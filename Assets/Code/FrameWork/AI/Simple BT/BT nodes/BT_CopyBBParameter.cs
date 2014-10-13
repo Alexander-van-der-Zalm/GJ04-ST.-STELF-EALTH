@@ -6,15 +6,15 @@ using System.Collections;
 /// </summary>
 public class BT_CopyBBParameter : BT_Action 
 {
-    private const string P1 = "Parameter1";
-    private const string P2 = "Parameter2";
-    private const string Obj = "ObjectToCompare";
+    private const string Override = "OverrideLocation";
+    private const string ObjParam = "CopyParameter";
+    private const string Obj = "ObjectsToCopy";
     private const string IsObject = "SecondParameterIsObject";
  
     public BT_CopyBBParameter(AI_AgentBBAccessParameter accesparam1, object setObject)
     {
         description();
-        this[P1] = accesparam1;
+        this[Override] = accesparam1;
         this[Obj] = setObject;
         this[IsObject] = true;
     }
@@ -26,8 +26,8 @@ public class BT_CopyBBParameter : BT_Action
     public BT_CopyBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
     {
         description();
-        this[P1] = accesparam1;
-        this[P2] = accesparam2;
+        this[Override] = accesparam1;
+        this[ObjParam] = accesparam2;
         this[IsObject] = false;
     }
     public BT_CopyBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
@@ -49,10 +49,10 @@ public class BT_CopyBBParameter : BT_Action
         if ((bool)this[IsObject])
             objectToCopy = this[Obj];
         else
-            objectToCopy = GetAgentObject(Par(P2), agent);
+            objectToCopy = GetAgentObject(Par(ObjParam), agent);
 
         // Set it on slot1
-        SetAgentObject(Par(P1), agent, objectToCopy);
+        SetAgentObject(Par(Override), agent, objectToCopy);
 
         return Status.Succes;
     }
