@@ -3,14 +3,20 @@ using System.Collections;
 using System.Reflection;
 using System.Linq;
 
-public class AI_Agent : MonoBehaviour 
+public class AI_Agent : MonoBehaviour
 {
+    #region Enum
+
     public enum BlackBoard
     {
         local,
         global
     }
-    
+
+    #endregion
+
+    #region Fields
+
     // Blackboards to store shared info
     public AI_Blackboard GlobalBlackboard;
     [HideInInspector]
@@ -18,6 +24,8 @@ public class AI_Agent : MonoBehaviour
     public BT_BehaviorTree BehaviorTree;
     [ReadOnly]
     public string Name;
+
+    #endregion
 
     #region Properties
 
@@ -45,11 +53,11 @@ public class AI_Agent : MonoBehaviour
         LocalBlackboard.SetObject("Depth", 0);
 
 
-        BehaviorTree.SetAgent(this);
+        //BehaviorTree.SetAgent(this);
         
         // Test behaviors
-        BehaviorTree.TestBTBasicCompontents();
-        TestBlackBoard();
+        BehaviorTree.TestBTBasicCompontents(this);
+        //TestBlackBoard();
 
 
         var c = from t in Assembly.GetExecutingAssembly().GetTypes()
