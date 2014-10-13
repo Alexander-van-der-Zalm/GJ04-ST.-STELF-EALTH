@@ -299,14 +299,17 @@ public class BT_BehaviorTree : MonoBehaviour
         BT_BehaviorDelegator r = getBeh(runningUpdate, "Running");
         BT_BehaviorDelegator b = getBeh(pauseUpdate, "Pause");
 
-        BT_Behavior tree = sel(sel(sel(sel(s, s),s),s),s);
+        BT_TreeNode tree = sel(sel(sel(sel(s, s), s), s), s);
+
+        RebuildTree(root);
 
         tree.Tick(agent);
     }
 
-    private void errorCheck(BT_Behavior behavior, Status returnStatus, ref int errors, AI_Agent agent)
+    private void errorCheck(BT_TreeNode root, Status returnStatus, ref int errors, AI_Agent agent)
     {
-        Status beh = behavior.Tick(agent);
+        RebuildTree(root);
+        Status beh = root.Tick(agent);
 
         // Check if it is the correct return type and if its not invalid
         if (beh != returnStatus)
@@ -441,6 +444,49 @@ public class BT_BehaviorTree : MonoBehaviour
     #endregion
 
 
+    #region Rebuild Tree (recursive)
+
+    private int IDcounter;
+
+    private void RebuildTree(BT_TreeNode root)
+    {
+        Root = root;
+        IDcounter = 0; // Provides the unique id's for this tree by increment
+        // Recursive crawl to fill the dictionary
+        TreeNodes = new Dictionary<int, BT_TreeNode>();
+        TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
+    }
+
+    private Dictionary<int, BT_TreeNode> RecursiveTreeNodeCrawl(Dictionary<int, BT_TreeNode> dic, BT_TreeNode node)
+    {
+        // All the nodes have already a valid parent and children
+        // Ids need to be set and unique for this rebuild 
+        // Then they need to be added to the new dictionary
+        
+        // First loop over children recursively
+        for (int i = 0; i < node.Children.Count; i++)
+        {
+            dic = RecursiveTreeNodeCrawl(dic, node.Children[i]);
+        } 
+
+        // Set ID
+        node.ID = id;
+        
+        // Add self to the dictionary
+        dic[id] = node;
+
+        // Increment the counter after adding
+        IDcounter++;
+
+        Debug.Log(IDcounter);
+
+        return dic;
+    }
+
+    #endregion
+
+    #region Get children
+
     public BT_TreeNode GetFirstChild(int index)
     {
         return TreeNodes[index].Children.FirstOrDefault();
@@ -450,6 +496,17 @@ public class BT_BehaviorTree : MonoBehaviour
     {
         return TreeNodes[index].Children;
     }
+
+    #endregion
+
+    #region Set Children
+
+    public void SetChildren(BT_TreeNode parent, params BT_TreeNode[] children)
+    {
+
+    }
+
+    #endregion
 
 
     internal List<BT_UINode> GetUINodes()

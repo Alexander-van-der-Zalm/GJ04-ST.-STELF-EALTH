@@ -28,7 +28,7 @@ public class AI_Agent : MonoBehaviour
     [ReadOnly]
     public string Name;
 
-    private List<Status> NodeStatus;
+    private Dictionary<int,Status> NodeStatus;
 
     #endregion
 
@@ -110,5 +110,10 @@ public class AI_Agent : MonoBehaviour
         Vector3 v3 = LocalBlackboard.GetObject<Vector3>("TestV3");
         object obj = LocalBlackboard.GetObject("TestV3");
         object obj2 = LocalBlackboard.GetObject("blabla");
+    }
+
+    internal void SetTree(BT_TreeNode tree)
+    {
+        throw new System.NotImplementedException();
     }
 }
