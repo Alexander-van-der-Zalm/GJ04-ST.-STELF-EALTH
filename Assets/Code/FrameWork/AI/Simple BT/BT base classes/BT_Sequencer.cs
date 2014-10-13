@@ -43,9 +43,11 @@ public class BT_Sequencer : BT_Composite
     {
         base.update(agent,id);
 
-        for (int i = 0; i < agent.GetChildrenCount(id); i++)
+        List<BT_TreeNode> nodes = agent.Tree.GetChildren(id);
+
+        for (int i = 0; i < nodes.Count; i++)
         {
-            Status s = agent[id, i].Tick(agent, id);
+            Status s = nodes[i].Tick(agent);
 
             // Continue on succes
             // Return failed, invalid and running

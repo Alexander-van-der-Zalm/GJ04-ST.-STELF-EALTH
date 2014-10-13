@@ -17,11 +17,14 @@ public class BT_BehaviorTree : MonoBehaviour
     [Range(0.00000000001f,60)]
     public float UpdateFrequency = 10;
 
-    private BT_Behavior Tree;
+    private BT_TreeNode Root;
     private List<BT_UINode> UINodes;
-    private List<BT_TreeNode> TreeNodes;
+    private Dictionary<int,BT_TreeNode> TreeNodes;
 
-    //private AI_Agent agent;
+    public List<BT_TreeNode> GetChildren(int index)
+    {
+        return TreeNodes[index].Children;
+    }
 
     #endregion
 
@@ -38,14 +41,14 @@ public class BT_BehaviorTree : MonoBehaviour
     // Update loop
     public IEnumerator updateCR(AI_Agent agent)
     {
-        if(Tree == null)
+        if(Root == null)
         {
             Debug.Log("BT_BehaviorTree not populated.");
              yield break;
         }
         while (Application.isPlaying)
         {
-            Tree.Tick(agent);
+            Root.Tick(agent);
 
             yield return new WaitForSeconds(1.0f/UpdateFrequency);
         }
