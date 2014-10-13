@@ -521,12 +521,15 @@ public class BT_BehaviorTree : MonoBehaviour
     {
         // Check if parents type supports children
         Type type = parent.Node.GetType();
-        if (!type.IsAssignableFrom(typeof(BT_HasChild)))
+        if (!typeof(BT_HasChild).IsAssignableFrom(type))
             Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
 
-        if (type.IsAssignableFrom(typeof(BT_Decorator)) && children.Count() > 1)
+        if (typeof(BT_Decorator).IsAssignableFrom(type) && children.Count() > 1)
             Debug.LogError("BT_BehaviorTree.AddChildren adding multiple children is not supported for:" + type.ToString());
-        
+
+        if (children.Count() == 0)
+            return parent;
+
         // Set parents children
         parent.Children.AddRange(children);
 

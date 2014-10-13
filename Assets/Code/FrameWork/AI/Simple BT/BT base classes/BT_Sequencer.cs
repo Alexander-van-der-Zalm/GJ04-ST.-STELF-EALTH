@@ -7,7 +7,7 @@ public class BT_Sequencer : BT_Composite
 {
     #region Constructor
 
-    public BT_Sequencer()
+    public BT_Sequencer(): base()
     {
         SetDescription();
     }

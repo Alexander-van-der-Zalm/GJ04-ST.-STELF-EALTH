@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BT_Composite : BT_HasChild
 {
     //protected List<BT_Behavior> Children;
-    private string depth = "Depth";
+    //private string depth = "Depth";
     
     protected override Status update(AI_Agent agent, int id)
     {

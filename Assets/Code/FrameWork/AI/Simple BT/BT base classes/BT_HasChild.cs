@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BT_HasChild : BT_BBParameters
 {
-    private string depth = "Depth";
+    protected string depth = "Depth";
 
     protected override Status update(AI_Agent agent, int id)
     {
