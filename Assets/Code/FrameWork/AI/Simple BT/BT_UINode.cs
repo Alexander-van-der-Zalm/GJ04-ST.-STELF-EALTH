@@ -10,7 +10,7 @@ public class BT_UINode : MonoBehaviour
     #region Fields
 
     public Vector3 Position;
-    public BT_NodeMemory Node;
+    public BT_TreeNode Node;
 
     //public BT_Behavior Parent;
     //public List<BT_Behavior> Children;
@@ -73,7 +73,7 @@ public class BT_UINode : MonoBehaviour
         //Parent = node.Parent;
         //Children = node.Children;
         Tree = node.Tree;
-        param.objectPool = node.Node.Description.NodeBlackBoard.objectPool;
+        param.objectPool = Node.Node.Description.NodeBlackBoard.objectPool;
         Type = node.Type;
     }
 }

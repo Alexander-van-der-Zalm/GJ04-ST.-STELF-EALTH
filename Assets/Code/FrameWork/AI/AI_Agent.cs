@@ -18,7 +18,6 @@ public class AI_Agent : MonoBehaviour
 
     #endregion
 
-
     #region Fields
 
     // Blackboards to store shared info
@@ -57,14 +56,14 @@ public class AI_Agent : MonoBehaviour
         set { NodeStatus[index] = value; }
     }
 
-    /// <summary>
-    /// Returns the ID of the child
-    /// </summary>
-    public int this[int nodeIndex, int childIndex]
-    {
-        get { return childIndex < TreeMemory[nodeIndex].Children.Count ? TreeMemory[nodeIndex].Children[childIndex] : -1; }
-       // set { TreeMemory[childIndex].Status = value; }
-    }
+    ///// <summary>
+    ///// Returns the ID of the child
+    ///// </summary>
+    //public int this[int nodeIndex, int childIndex]
+    //{
+    //    get { return childIndex < TreeMemory[nodeIndex].Children.Count ? TreeMemory[nodeIndex].Children[childIndex] : -1; }
+    //   // set { TreeMemory[childIndex].Status = value; }
+    //}
 
     #endregion
 

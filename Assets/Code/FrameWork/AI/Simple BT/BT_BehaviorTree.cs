@@ -18,7 +18,9 @@ public class BT_BehaviorTree : MonoBehaviour
     public float UpdateFrequency = 10;
 
     private BT_Behavior Tree;
-    private List<BT_UINode> Nodes;
+    private List<BT_UINode> UINodes;
+    private List<BT_TreeNode> TreeNodes;
+
     //private AI_Agent agent;
 
     #endregion
@@ -442,12 +444,12 @@ public class BT_BehaviorTree : MonoBehaviour
 
     internal List<BT_UINode> GetUINodes()
     {
-        if (Nodes == null)
+        if (UINodes == null)
             return DefaultUINodeList();
 
         // Decide how to handle script initilalization of extra tree nodes
 
-        return Nodes;
+        return UINodes;
     }
 
     private List<BT_UINode> DefaultUINodeList()
