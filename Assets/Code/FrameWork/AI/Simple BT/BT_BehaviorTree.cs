@@ -310,6 +310,7 @@ public class BT_BehaviorTree : MonoBehaviour
         BT_TreeNode tree = sel(sel(sel(sel(s, s), s), s), s);
 
         RebuildTree(tree);
+        agent.CheckTreeVersion();
 
         tree.Tick(agent);
     }
