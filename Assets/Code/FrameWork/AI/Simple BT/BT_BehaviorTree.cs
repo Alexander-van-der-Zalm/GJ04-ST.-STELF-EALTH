@@ -93,7 +93,7 @@ public class BT_BehaviorTree : MonoBehaviour
         #region Depth test
 
         // Generic depth test
-        TestDepth(agent);
+        //TestDepth(agent);
 
         #endregion
 
@@ -283,6 +283,7 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
+        Debug.Log("Depth" + (int)agent["Depth"]);
         if ((int)agent["Depth"] != 0)
             errors++;
 

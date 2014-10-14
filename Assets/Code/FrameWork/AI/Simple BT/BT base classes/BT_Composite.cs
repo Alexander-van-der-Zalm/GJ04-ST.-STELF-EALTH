@@ -6,27 +6,30 @@ public class BT_Composite : BT_HasChild
 {
     //protected List<BT_Behavior> Children;
     //private string depth = "Depth";
-    protected override void onInitialize(AI_Agent agent, int id)
-    {
-        //agent.LocalBlackboard.SetObject<string>
-    }
+    //protected override void onInitialize(AI_Agent agent, int id)
+    //{
+    //    //agent.LocalBlackboard.SetObject<string>
+    //}
 
 
-    protected override Status update(AI_Agent agent, int id)
-    {
-        if (agent != null)
-            agent[depth] = (int)agent.GSD(depth,0) + 1;
+    //protected override Status update(AI_Agent agent, int id)
+    //{
+    //    if (agent != null)
+    //        agent[depth] = (int)agent.GSD(depth,0) + 1;
 
-        //Debug.Log("down: " + agent[depth]);
-        return base.update(agent, id);
-    }
+    //    Debug.Log("down: " + agent[depth]);
+    //    return base.update(agent, id);
+    //}
 
-    protected Status exit(AI_Agent agent, Status status)
-    {
-        if (agent != null)
-            agent[depth] = (int)agent[depth] - 1;
+    //protected Status exit(AI_Agent agent, Status status)
+    //{
+    //    Debug.Log("before up: " + agent[depth]);
+    //    if (agent != null)
+    //        agent[depth] = (int)agent[depth] - 1;
         
-        //Debug.Log("up: " + agent[depth]);
-        return status;
-    }
+    //    // Whats up here?
+
+    //    Debug.Log("up: " + agent[depth]);
+    //    return status;
+    //}
 }
