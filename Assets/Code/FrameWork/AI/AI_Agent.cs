@@ -98,6 +98,7 @@ public class AI_Agent : MonoBehaviour
         
         // Test behaviors
         Tree.TestBTBasicCompontents(this);
+        ClearLocalBlackBoard();
         //TestBlackBoard();
 
         //StartTree();
@@ -129,9 +130,6 @@ public class AI_Agent : MonoBehaviour
         // Stop the old version of the tree
         StopTree();
 
-        // Clear local black board
-        LocalBlackboard = new AI_Blackboard();
-
         // TODO unnasign values from global blackboard set by the old tree
 
         // Get the new status memory structure
@@ -143,6 +141,12 @@ public class AI_Agent : MonoBehaviour
         // Restart the tree
         if(TreeRunning)
             StartTree();
+    }
+
+    public void ClearLocalBlackBoard()
+    {
+        // Clear local black board
+        LocalBlackboard = new AI_Blackboard();
     }
 
     private void StartTree()

@@ -122,100 +122,100 @@ public class BT_BehaviorTree : MonoBehaviour
 
 
 
-        //#region Condition: CheckEqualBBParameter
+        #region Condition: CheckEqualBBParameter
 
-        //// Things to compare
-        //int int1 = 0;
-        //int int2 = 0;
-        //int int3 = 1;
-        //string str1 = "bla";
-        //string str2 = "bla";
-        //string str3 = "notbla";
-        //Vector3 v1 = Vector3.zero;
-        //Vector3 v2 = Vector3.zero;
-        //Vector3 v3 = Vector3.up;
+        // Things to compare
+        int int1 = 0;
+        int int2 = 0;
+        int int3 = 1;
+        string str1 = "bla";
+        string str2 = "bla";
+        string str3 = "notbla";
+        Vector3 v1 = Vector3.zero;
+        Vector3 v2 = Vector3.zero;
+        Vector3 v3 = Vector3.up;
 
-        //// BB params
-        //string p1 = "TestParam1";
-        //string p2 = "TestParam2";
-        //AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
-        //AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+        // BB params
+        string p1 = "TestParam1";
+        string p2 = "TestParam2";
+        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
 
-        //// Simple int check
-        //agent[p1, local] = int1;
-        //agent[p2, local] = int2;
+        // Simple int check
+        agent[p1, local] = int1;
+        agent[p2, local] = int2;
 
-        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
-        //agent[p2, local] = int3;
-        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        //errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors, agent);
+        agent[p2, local] = int3;
+        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors, agent);
 
-        //// cross global and local int check
-        //agent[p1, global] = int1;
-        //agent[p2, global] = int3;
-        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        // cross global and local int check
+        agent[p1, global] = int1;
+        agent[p2, global] = int3;
+        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
-        //// string check
-        //agent[p1, local] = str1;
-        //agent[p2, local] = str2;
+        // string check
+        agent[p1, local] = str1;
+        agent[p2, local] = str2;
 
-        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
-        //agent[p2, local] = int3;
-        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        agent[p2, local] = int3;
+        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
-        //// cross global and local int check
-        //agent[p1, global] = str1;
-        //agent[p2, global] = str3;
-        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        // cross global and local int check
+        agent[p1, global] = str1;
+        agent[p2, global] = str3;
+        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
-        //// Vector3 check
-        //agent[p1, local] = v1;
-        //agent[p2, local] = v2;
+        // Vector3 check
+        agent[p1, local] = v1;
+        agent[p2, local] = v2;
 
-        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
-        //agent[p2, local] = v3;
-        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        agent[p2, local] = v3;
+        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
-        //// cross global and local int check
-        //agent[p1, global] = v1;
-        //agent[p2, global] = v3;
-        //errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        // cross global and local int check
+        agent[p1, global] = v1;
+        agent[p2, global] = v3;
+        errorCheck(eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
 
-        //#endregion
+        #endregion
 
-        //#region Action: Copy BB value
+        #region Action: Copy BB value
 
-        //// int copy
-        //// Check first
-        //agent[p1, local] = int1;
-        //agent[p2, local] = int2;
+        // int copy
+        // Check first
+        agent[p1, local] = int1;
+        agent[p2, local] = int2;
 
-        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
-        //// now copy in 3
-        //errorCheck(copy(p1, local, 3), Status.Succes, ref errors, agent);
-        //// Check if it went allright
-        //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        //errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        // now copy in 3
+        errorCheck(copy(p1, local, 3), Status.Succes, ref errors, agent);
+        // Check if it went allright
+        errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
 
-        //// now copy from p1 to p2
-        //errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors, agent);
+        // now copy from p1 to p2
+        errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors, agent);
 
-        //// Check
-        //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(p2, local, 3), Status.Succes, ref errors, agent);
+        // Check
+        errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(p2, local, 3), Status.Succes, ref errors, agent);
 
-        //#endregion
+        #endregion
 
         //#region Action: Queue push, pop, checkSize
         //string queueP1 = "TestQueue";
@@ -369,27 +369,32 @@ public class BT_BehaviorTree : MonoBehaviour
     //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
     //}
 
-    //private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
+        //return BT_CopyBBParameter.GetTreeNode();
+        return BT_CopyBBParameter.GetTreeNode(bbParameter1, param1, bbParameter2, param2);
+    }
+
+    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return BT_CopyBBParameter.GetTreeNode(bbParameter1,param1, obj);
+    }
+
+    //private BT_TreeNode copy(AI_AgentBBAccessParameter param1, object obj)
     //{
-    //    //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
-    //    //return BT_CopyBBParameter.GetTreeNode();
-    //    return null;
+    //    return BT_CopyBBParameter.GetTreeNode(param1, obj);
     //}
 
-    //private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, obj));
-    //}
+    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+    }
 
-    //private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2));
-    //}
-
-    //private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, obj));
-    //}
+    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+    }
 
     private BT_TreeNode fail(BT_TreeNode child)
     {

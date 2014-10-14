@@ -38,18 +38,24 @@ public class BT_TreeNode
     public BT_TreeNode(BT_Behavior behavior)
     {
         // Set Parameters on behavior
-        SetParameters(behavior);
         Children = new List<BT_TreeNode>();
         ID = -1337;
         Parent = null;
+
+        NodeSpecificParameters = new AI_Blackboard();
+        SetParameters(behavior);
     }
 
     public BT_TreeNode(BT_Behavior behavior, int id, BT_TreeNode parent, params BT_TreeNode[] childrenMem)
     {
-        SetParameters(behavior);
+       
         ID = id;
         Children = Children.ToList();
         Parent = parent;
+
+        NodeSpecificParameters = new AI_Blackboard();
+        SetParameters(behavior);
+        
     }
 
 

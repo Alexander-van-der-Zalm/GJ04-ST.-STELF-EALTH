@@ -13,36 +13,16 @@ public class BT_CheckEqualBBParameter : BT_Action
     public BT_CheckEqualBBParameter()
     {
         description();
-        this[P1] = new AI_AgentBBAccessParameter();
-        this[P2] = new AI_AgentBBAccessParameter();
-        this[Obj] = null;
-        this[IsObject] = false;
     }
 
-    public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, object equalObject)
+    public override void SetNodeParameters(BT_TreeNode node)
     {
-        description();
-        this[P1] = accesparam1;
-        this[Obj] = equalObject;
-        this[IsObject] = true;
+        this[P1, node] = new AI_AgentBBAccessParameter();
+        this[P2, node] = new AI_AgentBBAccessParameter();
+        this[Obj, node] = null;
+        this[IsObject, node] = false;
     }
-
-    public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
-        : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), equalObject)
-    {
-    }
-    public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
-    {
-        description();
-        this[P1] = accesparam1;
-        this[P2] = accesparam2;
-        this[IsObject] = false;
-    }
-    public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-        : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
-    {
-    }
-
+    
     private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
@@ -52,9 +32,68 @@ public class BT_CheckEqualBBParameter : BT_Action
 
     #endregion
 
+    #region Get Set
+
+    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, object equalObject)
+    {
+        BT_TreeNode node = new BT_TreeNode(new BT_CheckEqualBBParameter());
+        return SetParameters(node, accesparam1, equalObject);
+    }
+
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, object equalObject)
+    {
+        node.CheckAndSetClass<BT_CheckEqualBBParameter>();
+        node.Behavior[P1, node] = accesparam1;
+        node.Behavior[Obj, node] = equalObject;
+        node.Behavior[IsObject, node] = true;
+        return node;
+    }
+
+    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    {
+        BT_TreeNode node = new BT_TreeNode(new BT_CheckEqualBBParameter());
+        return SetParameters(node, accesparam1, accesparam2);
+    }
+
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    {
+        node.CheckAndSetClass<BT_CheckEqualBBParameter>();
+        node.Behavior[P1,node] = accesparam1;
+        node.Behavior[P2, node] = accesparam2;
+        node.Behavior[IsObject, node] = false;
+        return node;
+    }
+
+    //public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, object equalObject)
+    //{
+    //    description();
+    //    this[P1] = accesparam1;
+    //    this[Obj] = equalObject;
+    //    this[IsObject] = true;
+    //}
+
+    //public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
+    //    : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), equalObject)
+    //{
+    //}
+    //public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    //{
+    //    description();
+    //    this[P1] = accesparam1;
+    //    this[P2] = accesparam2;
+    //    this[IsObject] = false;
+    //}
+    //public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //    : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
+    //{
+    //}
+
+
+    #endregion
+
 
     protected override Status update(AI_Agent agent, int id)
-    {
+    {      
         // Get the objects
         object obj1 = GetAgentObject(Par(P1),agent);
         object obj2;

@@ -1247,7 +1247,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &387946675
@@ -2065,7 +2064,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &626695374
@@ -3150,7 +3148,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 3
 --- !u!114 &952060585
@@ -3764,7 +3761,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &1217867099
@@ -4005,7 +4001,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &1310495134
@@ -4245,7 +4240,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.75
+  orthographic size: 13.791667
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7318,7 +7313,6 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
     NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &2042500151
