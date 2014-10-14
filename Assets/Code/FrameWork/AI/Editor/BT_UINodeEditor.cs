@@ -46,7 +46,7 @@ public class BT_UINodeEditor : EditorPlus
         
         var l1 = q1.ToList();
         if (GUILayout.Button("Replace node"))
-            node.Node.Behavior = (BT_Behavior)Activator.CreateInstance(l1[selectedClass]);
+            node.Node.Behavior = (BT_BBParameters)Activator.CreateInstance(l1[selectedClass]);
 
         if (node.Node.Behavior == null)
             return;

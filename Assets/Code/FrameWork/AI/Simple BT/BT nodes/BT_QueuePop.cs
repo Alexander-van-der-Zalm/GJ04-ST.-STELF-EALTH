@@ -24,7 +24,7 @@ public class BT_QueuePop : BT_QueueBase
 
     public void SetParameters(BT_TreeNode node, string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
     {
-        SetParameters(node, new AI_AgentBBAccessParameter(queueBBParameter, queueBBAccessType), new AI_AgentBBAccessParameter(poppedObjectSaveBBParameter, objectBBAccessType))
+        SetParameters(node, new AI_AgentBBAccessParameter(queueBBParameter, queueBBAccessType), new AI_AgentBBAccessParameter(poppedObjectSaveBBParameter, objectBBAccessType));
     }
 
     private void description()

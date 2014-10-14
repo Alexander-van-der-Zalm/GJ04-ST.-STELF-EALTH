@@ -369,27 +369,27 @@ public class BT_BehaviorTree : MonoBehaviour
     //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
     //}
 
-    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
-        //return BT_CopyBBParameter.GetTreeNode();
-        return null;
-    }
+    //private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
+    //    //return BT_CopyBBParameter.GetTreeNode();
+    //    return null;
+    //}
 
-    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    {
-        return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, obj));
-    }
+    //private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, obj));
+    //}
 
-    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    {
-        return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2));
-    }
+    //private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    //{
+    //    return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2));
+    //}
 
-    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    {
-        return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, obj));
-    }
+    //private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    //{
+    //    return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, obj));
+    //}
 
     private BT_TreeNode fail(BT_TreeNode child)
     {

@@ -16,13 +16,13 @@ public class BT_TreeNode
     
     public AI_Blackboard NodeSpecificParameters;
 
-    private BT_Behavior behavior;
+    private BT_BBParameters behavior;
 
     #endregion
 
     #region Properties
 
-    public BT_Behavior Behavior
+    public BT_BBParameters Behavior
     {
         get { return behavior; }
         set { SetParameters(value); }
@@ -55,12 +55,18 @@ public class BT_TreeNode
 
     private void SetParameters(BT_Behavior behavior)
     {
-        this.behavior = behavior;
         Type type = behavior.GetType();
         if (!typeof(BT_BBParameters).IsAssignableFrom(type))
+        {
+            Debug.LogError("BT_TreeNode.SetParameters needs an input derived from BT_BBParameters");
             return;
+        }
+        
+        this.behavior = (BT_BBParameters)behavior;
 
         BT_BBParameters beh = (BT_BBParameters)behavior;
+
+        // Call the SetnodeParameters 
         beh.SetNodeParameters(this);
 
         //Debug.Log("has parameters " + type);
@@ -71,7 +77,7 @@ public class BT_TreeNode
     /// <summary>
     /// Returns false if the class already exists and true if it had to be created
     /// </summary>
-    public bool CheckAndSetClass<T>() where T: BT_Behavior
+    public bool CheckAndSetClass<T>() where T: BT_BBParameters
     {
         if (Behavior.GetType() == typeof(T))
             return false;
