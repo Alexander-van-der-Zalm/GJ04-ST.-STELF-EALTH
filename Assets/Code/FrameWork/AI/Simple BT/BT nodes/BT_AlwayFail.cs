@@ -11,6 +11,8 @@ public class BT_AlwayFail : BT_Decorator
 
     protected override BT_Behavior.Status update(AI_Agent agent, int id)
     {
+        base.update(agent, id);
+        // Fire off child
         agent.Tree.GetFirstChild(id).Tick(agent);
         return exit(agent, Status.Failed);
     }

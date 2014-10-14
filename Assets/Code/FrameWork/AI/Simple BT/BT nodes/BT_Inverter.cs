@@ -12,6 +12,8 @@ public class BT_Inverter : BT_Decorator
     
     protected override Status update(AI_Agent agent,int id)
     {
+        base.update(agent, id);
+        
         return exit(agent,invert(agent.Tree.GetFirstChild(id).Tick(agent)));
     }
 

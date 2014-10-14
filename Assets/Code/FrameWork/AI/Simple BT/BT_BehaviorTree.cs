@@ -102,21 +102,23 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
+        #region Decorators: Invert & alwaysFail
+
+        // Check the inverter
+        errorCheck(inv(s), Status.Failed, ref errors, agent);
+        errorCheck(inv(f), Status.Succes, ref errors, agent);
+        errorCheck(inv(r), Status.Running, ref errors, agent);
+
+        // Check the alwaysFailed
+        errorCheck(fail(s), Status.Failed, ref errors, agent);
+        errorCheck(fail(f), Status.Failed, ref errors, agent);
+        errorCheck(fail(r), Status.Failed, ref errors, agent);
+
+        #endregion
+
         #region ReActivate Soon
 
-        //#region Decorators: Invert & alwaysFail
 
-        //// Check the inverter
-        //errorCheck(inv(s), Status.Failed, ref errors, agent);
-        //errorCheck(inv(f), Status.Succes, ref errors, agent);
-        //errorCheck(inv(r), Status.Running, ref errors, agent);
-
-        //// Check the alwaysFailed
-        //errorCheck(fail(s), Status.Failed, ref errors, agent);
-        //errorCheck(fail(f), Status.Failed, ref errors, agent);
-        //errorCheck(fail(r), Status.Failed, ref errors, agent);
-
-        //#endregion
 
         //#region Condition: CheckEqualBBParameter
 
@@ -385,15 +387,19 @@ public class BT_BehaviorTree : MonoBehaviour
     //    return new BT_CheckEqualBBParameter(bbParameter1, param1, obj);
     //}
 
-    //private BT_AlwayFail fail(BT_Behavior child)
-    //{
-    //    return new BT_AlwayFail(child);
-    //}
+    private BT_TreeNode fail(BT_TreeNode child)
+    {
+        BT_TreeNode node = new BT_TreeNode(new BT_AlwayFail());
+        node = AddChildren(node, child);
+        return node;
+    }
 
-    //private BT_Inverter inv(BT_Behavior child)
-    //{
-    //    return new BT_Inverter(child);
-    //}
+    private BT_TreeNode inv(BT_TreeNode child)
+    {
+        BT_TreeNode node = new BT_TreeNode(new BT_Inverter());
+        node = AddChildren(node, child);
+        return node;
+    }
 
     private BT_TreeNode sel(params BT_TreeNode[] children)
     {
@@ -555,7 +561,6 @@ public class BT_BehaviorTree : MonoBehaviour
     #region Disconnect Children
 
     #endregion
-
 
     internal List<BT_UINode> GetUINodes()
     {
