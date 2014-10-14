@@ -44,9 +44,15 @@ public class AI_Agent : MonoBehaviour
         set { LocalBlackboard.SetObject(name, value); }
     }
 
-    public object GSD(string name, object Default)
+    /// <summary>
+    /// Get or Set Default in local blackboard
+    /// </summary>
+    public object GSD(string name, object Default, BlackBoard acces = BlackBoard.local)
     {
-        return LocalBlackboard.GetObjectOrSetDefault(name, Default); 
+        if (acces == BlackBoard.local)
+            return LocalBlackboard.GetObjectOrSetDefault(name, Default); 
+        else
+            return GlobalBlackboard.GetObjectOrSetDefault(name, Default); 
     }
 
     public object this[string name, BlackBoard acces]
