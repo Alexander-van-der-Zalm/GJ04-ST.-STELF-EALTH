@@ -142,6 +142,8 @@ public class AI_Agent : MonoBehaviour
 
     private void StopTree()
     {
+        if (TreeCoroutine == null)
+            return;
         StopCoroutine(TreeCoroutine);
     }
 }

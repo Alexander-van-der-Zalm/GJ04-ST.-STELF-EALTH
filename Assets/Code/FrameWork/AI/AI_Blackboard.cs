@@ -14,7 +14,7 @@ public class AI_Blackboard : MonoBehaviour
         set { SetObject(name, value); }
     }
 
-    public T GetObject<T>(string name, bool createIfNonexistant = false)
+    public T GetObject<T>(string name, bool createIfNonexistant = true)
     {
         // Early exit if non-existant
         if (!objectPool.ContainsKey(name))
@@ -27,18 +27,18 @@ public class AI_Blackboard : MonoBehaviour
         return (T)objectPool[name];
     }
 
-    public object GetObject(string name)
+    public object GetObject(string name, bool createIfNonexistant = true)
     {
-        if (!objectPool.ContainsKey(name))
-            return DoesNotContainKey<object>(name);
-            
+        //if (!objectPool.ContainsKey(name))
+        //    return DoesNotContainKey<object>(name);
 
-        return objectPool[name];
+        //return objectPool[name];
+        return GetObject<object>(name, createIfNonexistant);
     }
 
     private T DoesNotContainKey<T>(string name)
     {
-        Debug.Log("AI_Blackboard.GetObject(" + name + ") does not exist in dictionary");
+        Debug.Log("AI_Blackboard.GetObject(" + name + ") does not exist in dictionary. Creating default.");
         return default(T);
     }
 

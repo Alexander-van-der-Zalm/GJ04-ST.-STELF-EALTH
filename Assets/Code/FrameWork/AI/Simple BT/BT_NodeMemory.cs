@@ -22,6 +22,9 @@ public class BT_TreeNode
     public BT_TreeNode(BT_Behavior behavior)
     {
         Node = behavior;
+        Children = new List<BT_TreeNode>();
+        ID = -1337;
+        Parent = null;
     }
 
     public BT_TreeNode(int id, BT_Behavior behaviour, params BT_TreeNode[] childrenMem)
