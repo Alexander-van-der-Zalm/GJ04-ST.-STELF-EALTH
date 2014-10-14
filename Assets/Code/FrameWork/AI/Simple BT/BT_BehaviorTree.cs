@@ -217,82 +217,82 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
-        //#region Action: Queue push, pop, checkSize
-        //string queueP1 = "TestQueue";
-        //string qCompare = "TestQueueComparer";
+        #region Action: Queue push, pop, checkSize
+        string queueP1 = "TestQueue";
+        string qCompare = "TestQueueComparer";
 
-        //// Create queue and populate
+        // Create queue and populate
+        fc.Queue<int> queue1 = new fc.Queue<int>();
+        queue1.Add(1);
+        queue1.Add(2);
+        queue1.Add(3);
+
+        // Populate the board
+        agent[queueP1, local] = queue1;
+        agent[qCompare, local] = -1;
+
+        // Check size
+        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+
+        // Check push
+        errorCheck(qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
+        errorCheck(qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
+
+        // Check pop
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //Debug.Log(agent[qCompare, local]);
+        errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
+
+        #region Test stuff
+        //Queue<int> q = new Queue<int>();
+        //q.Enqueue(6);
+        //q.Enqueue(4);
+        //q.Enqueue(2);
+
+        //BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
+        ////int testooh = (int)whatev.GetFromGenericQueue(q);
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
+        //Debug.Log((int)whatev.GetFromGenericQueue(q));
+
+        //List<int> test = new List<int>() { 1, 2, 3 };
+        //IList list = (IList)test;
+        //Debug.Log(list[0]);
+
+
+        //fc.Stack<int> stack1 = new fc.Stack<int>();
+        //fc.Stack<string> stack2 = new fc.Stack<string>();
+        //stack1.Add(1);
+        //stack1.Add(2);
+        //stack1.Add(3);
+
+        //Debug.Log(stack1.GetType().GetGenericTypeDefinition() + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
         //fc.Queue<int> queue1 = new fc.Queue<int>();
         //queue1.Add(1);
         //queue1.Add(2);
         //queue1.Add(3);
 
-        //// Populate the board
-        //agent[queueP1, local] = queue1;
-        //agent[qCompare, local] = -1;
-
-        //// Check size
-        //errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-
-        //// Check push
-        //errorCheck(qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
-        //errorCheck(qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
-
-        //// Check pop
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        ////Debug.Log(agent[qCompare, local]);
-        //errorCheck(qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
-
-        //#region Test stuff
-        ////Queue<int> q = new Queue<int>();
-        ////q.Enqueue(6);
-        ////q.Enqueue(4);
-        ////q.Enqueue(2);
-
-        ////BT_QueuePop whatev = new BT_QueuePop("test", local, "test2", local);
-        //////int testooh = (int)whatev.GetFromGenericQueue(q);
-        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
-        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
-        ////Debug.Log((int)whatev.GetFromGenericQueue(q));
-
-        ////List<int> test = new List<int>() { 1, 2, 3 };
-        ////IList list = (IList)test;
-        ////Debug.Log(list[0]);
-
-
-        ////fc.Stack<int> stack1 = new fc.Stack<int>();
-        ////fc.Stack<string> stack2 = new fc.Stack<string>();
-        ////stack1.Add(1);
-        ////stack1.Add(2);
-        ////stack1.Add(3);
-
-        ////Debug.Log(stack1.GetType().GetGenericTypeDefinition() + " - " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get() + " " + stack1.Get());
-        ////fc.Queue<int> queue1 = new fc.Queue<int>();
-        ////queue1.Add(1);
-        ////queue1.Add(2);
-        ////queue1.Add(3);
-
-        ////fc.IQueue queueI = queue1;
-        ////Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
-        ////Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
-        ////Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
-        //#endregion
-
-        //#endregion
+        //fc.IQueue queueI = queue1;
+        //Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
+        //Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
+        //Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
+        #endregion
 
         #endregion
 
-        Debug.Log("Depth" + (int)agent["Depth"]);
+        #endregion
+
+        //Debug.Log("Depth" + (int)agent["Depth"]);
         if ((int)agent["Depth"] != 0)
             errors++;
 
@@ -344,30 +344,30 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region BT Component Syntactic Sugar
 
-    //private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_QueuePush(bbParameter1, param1, bbParameter2, param2);
-    //}
+    private BT_TreeNode qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return BT_QueuePush.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+    }
 
-    //private BT_QueuePush qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_QueuePush(bbParameter1, param1, obj);
-    //}
+    private BT_TreeNode qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return BT_QueuePush.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+    }
 
-    //private BT_QueuePop qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_QueuePop(bbParameter1, param1, bbParameter2, param2);
-    //}
+    private BT_TreeNode qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return BT_QueuePop.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+    }
 
-    //private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, bbParameter2, param2);
-    //}
+    private BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+    }
 
-    //private BT_QueueCheckSizeEqual qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
-    //}
+    private BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+    }
 
     private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
