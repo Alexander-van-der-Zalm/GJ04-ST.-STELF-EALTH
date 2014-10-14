@@ -5,23 +5,26 @@ public class BT_QueuePop : BT_QueueBase
 {
     const string Value = "PopedObjLocation";
 
+    public override void SetNodeParameters(BT_TreeNode node)
+    {
+        this[Queue, node] = new AI_AgentBBAccessParameter();
+        this[Value, node] = new AI_AgentBBAccessParameter();
+    }
+
     public BT_QueuePop()
     {
         description();
-        this[Queue] = new AI_AgentBBAccessParameter();
-        this[Value] = new AI_AgentBBAccessParameter();
     }
 
-    public BT_QueuePop(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
+    public void SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
     {
-        description();
-        this[Queue] = QueueParam;
-        this[Value] = PopParam;
+        this[Queue, node] = QueueParam;
+        this[Value, node] = PopParam;
     }
 
-    public BT_QueuePop(string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
-        : this(new AI_AgentBBAccessParameter(queueBBParameter, queueBBAccessType), new AI_AgentBBAccessParameter(poppedObjectSaveBBParameter, objectBBAccessType))
+    public void SetParameters(BT_TreeNode node, string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
     {
+        SetParameters(node, new AI_AgentBBAccessParameter(queueBBParameter, queueBBAccessType), new AI_AgentBBAccessParameter(poppedObjectSaveBBParameter, objectBBAccessType))
     }
 
     private void description()

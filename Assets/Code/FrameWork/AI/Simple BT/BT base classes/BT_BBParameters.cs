@@ -3,6 +3,11 @@ using System.Collections;
 
 public class BT_BBParameters : BT_Behavior 
 {
+    public virtual void SetNodeParameters(BT_TreeNode node)
+    {
+        
+    }
+
     /// <summary>
     /// Get objects from the node's memory (shared across agents)
     /// </summary>
@@ -12,6 +17,12 @@ public class BT_BBParameters : BT_Behavior
     {
         get { return currentAgent.Tree[CurrentID].NodeSpecificParameters[name]; }
         set { currentAgent.Tree[CurrentID].NodeSpecificParameters[name] = value; }
+    }
+
+    public object this[string name, BT_TreeNode node]
+    {
+        get { return node.NodeSpecificParameters[name]; }
+        set { node.NodeSpecificParameters[name] = value; }
     }
 
     public AI_AgentBBAccessParameter Par(string name)
@@ -34,4 +45,6 @@ public class BT_BBParameters : BT_Behavior
         else
             agent.GlobalBlackboard[a.ParameterName] = obj;
     }
+
+    
 }

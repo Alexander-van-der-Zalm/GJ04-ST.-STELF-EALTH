@@ -116,6 +116,8 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
+        BT_TreeNode node = new BT_TreeNode(new BT_Decorator());
+
         #region ReActivate Soon
 
 
@@ -149,7 +151,7 @@ public class BT_BehaviorTree : MonoBehaviour
         //agent[p2, local] = int3;
         //errorCheck(eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
         //errorCheck(eqBB(p1, local, 1), Status.Failed, ref errors, agent);
-        
+
         //// cross global and local int check
         //agent[p1, global] = int1;
         //agent[p2, global] = int3;
@@ -207,7 +209,7 @@ public class BT_BehaviorTree : MonoBehaviour
 
         //// now copy from p1 to p2
         //errorCheck(copy(p2, local, p1, local), Status.Succes, ref errors, agent);
- 
+
         //// Check
         //errorCheck(eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
         //errorCheck(eqBB(p1, local, 3), Status.Succes, ref errors, agent);
@@ -367,25 +369,27 @@ public class BT_BehaviorTree : MonoBehaviour
     //    return new BT_QueueCheckSizeEqual(bbParameter1, param1, obj);
     //}
 
-    //private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2);
-    //}
+    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
+        //return BT_CopyBBParameter.GetTreeNode();
+        return null;
+    }
 
-    //private BT_CopyBBParameter copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_CopyBBParameter(bbParameter1, param1, obj);
-    //}
+    private BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, obj));
+    }
 
-    //private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //{
-    //    return new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2);
-    //}
+    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, bbParameter2, param2));
+    }
 
-    //private BT_CheckEqualBBParameter eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
-    //{
-    //    return new BT_CheckEqualBBParameter(bbParameter1, param1, obj);
-    //}
+    private BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
+    {
+        return new BT_TreeNode(new BT_CheckEqualBBParameter(bbParameter1, param1, obj));
+    }
 
     private BT_TreeNode fail(BT_TreeNode child)
     {
@@ -536,7 +540,7 @@ public class BT_BehaviorTree : MonoBehaviour
     public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
     {
         // Check if parents type supports children
-        Type type = parent.Node.GetType();
+        Type type = parent.Behavior.GetType();
         if (!typeof(BT_HasChild).IsAssignableFrom(type))
             Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
 

@@ -11,38 +11,51 @@ public class BT_CopyBBParameter : BT_Action
     private const string Obj = "ObjectsToCopy";
     private const string IsObject = "UseObjectToCopy";
 
+    #region Constructor
+
     public BT_CopyBBParameter()
     {
         description();
-        this[Override] = new AI_AgentBBAccessParameter();
-        this[ObjParam] = new AI_AgentBBAccessParameter();
-        this[Obj] = null;
-        this[IsObject] = false;
     }
 
-    public BT_CopyBBParameter(AI_AgentBBAccessParameter accesparam1, object setObject)
+    public override void SetNodeParameters(BT_TreeNode node)
     {
-        description();
-        this[Override] = accesparam1;
-        this[Obj] = setObject;
-        this[IsObject] = true;
+        this[Override, node] = new AI_AgentBBAccessParameter();
+        this[ObjParam, node] = new AI_AgentBBAccessParameter();
+        this[Obj, node] = null;
+        this[IsObject, node] = false;
     }
 
-    public BT_CopyBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
-        : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject)
+    #endregion
+
+    #region Custom Parameter setters
+
+    public void SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, object setObject)
     {
+        node.Behavior = this;
+        this[Override, node] = accesparam1;
+        this[Obj, node] = setObject;
+        this[IsObject, node] = true;
     }
-    public BT_CopyBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+
+    public void SetParameters(BT_TreeNode node, string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
     {
-        description();
-        this[Override] = accesparam1;
-        this[ObjParam] = accesparam2;
-        this[IsObject] = false;
+        SetParameters(node, new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject);
     }
-    public BT_CopyBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-        : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
+    public void SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
     {
+        node.Behavior = this;
+        this[Override, node] = accesparam1;
+        this[ObjParam, node] = accesparam2;
+        this[IsObject, node] = false;
     }
+    public void SetParameters(BT_TreeNode node, string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
+    {
+        SetParameters(node, new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+    }
+
+    #endregion
+
 
     private void description()
     {
