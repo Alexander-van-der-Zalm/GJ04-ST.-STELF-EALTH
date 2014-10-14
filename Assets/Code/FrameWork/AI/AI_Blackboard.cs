@@ -8,6 +8,7 @@ public class AI_Blackboard : MonoBehaviour
     public string Name = "AI BlackBoard";
     public Dictionary<string, object> objectPool = new Dictionary<string,object>();
 
+    // Default getObject (runs in trouble when it doesnt exist)
     public object this[string name]
     {
         get { return GetObject(name); }
@@ -27,13 +28,22 @@ public class AI_Blackboard : MonoBehaviour
         return (T)objectPool[name];
     }
 
-    public object GetObject(string name, bool createIfNonexistant = true)
+    public object GetObject(string name)
     {
-        //if (!objectPool.ContainsKey(name))
-        //    return DoesNotContainKey<object>(name);
+        if (!objectPool.ContainsKey(name))
+            return DoesNotContainKey<object>(name);
 
-        //return objectPool[name];
-        return GetObject<object>(name, createIfNonexistant);
+        return objectPool[name];
+       // return GetObject<object>(name, createIfNonexistant);
+    }
+
+    public object GetObjectOrSetDefault(string name, object newDefault)
+    {
+        if (objectPool.ContainsKey(name))
+            return objectPool[name];
+
+        objectPool[name] = newDefault;
+        return newDefault;
     }
 
     private T DoesNotContainKey<T>(string name)

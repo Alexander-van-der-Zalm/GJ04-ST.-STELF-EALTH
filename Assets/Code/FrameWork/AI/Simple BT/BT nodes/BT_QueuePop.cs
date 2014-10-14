@@ -12,7 +12,6 @@ public class BT_QueuePop : BT_QueueBase
     }
 
     public BT_QueuePop(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
-    // : //base(queueBBParameter, queueBBAccessType, poppedObjectSaveBBParameter, objectBBAccessType)
     {
         setDescription();
         this[Queue] = QueueParam;
