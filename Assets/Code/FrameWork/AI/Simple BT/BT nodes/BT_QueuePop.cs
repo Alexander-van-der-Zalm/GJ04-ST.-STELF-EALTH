@@ -7,13 +7,14 @@ public class BT_QueuePop : BT_QueueBase
 
     public BT_QueuePop()
     {
-        // TODO set base params
-        setDescription();
+        description();
+        this[Queue] = new AI_AgentBBAccessParameter();
+        this[Value] = new AI_AgentBBAccessParameter();
     }
 
     public BT_QueuePop(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
     {
-        setDescription();
+        description();
         this[Queue] = QueueParam;
         this[Value] = PopParam;
     }
@@ -23,10 +24,10 @@ public class BT_QueuePop : BT_QueueBase
     {
     }
 
-    private void setDescription()
+    private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "BT_QueuePop";
+        Description.Name = "QueuePop";
         Description.Description = "Pop one of the queue, into the parameterdestination of choice";
     }
 

@@ -9,29 +9,6 @@ public class BT_Sequencer : BT_Composite
 
     public BT_Sequencer(): base()
     {
-        SetDescription();
-    }
-
-    //public BT_Sequencer(params BT_Behavior[] children) 
-    //{
-    //    Constructor(children.ToList());
-    //}
-
-    //public BT_Sequencer(List<BT_Behavior> children)
-    //{
-    //    Constructor(children);
-    //}
-    
-    //private void Constructor(List<BT_Behavior> children)
-    //{
-        
-    //    SetDescription();
-
-    //    Children = children;
-    //}
-
-    private void SetDescription()
-    {
         Description.Type = NodeDescription.BT_NodeType.Composite;
         Description.Name = "Sequencer";
         Description.Description = "Keeps going if children are succesfull, early exits if: failed, invalid ör running";

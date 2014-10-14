@@ -9,8 +9,17 @@ public class BT_CopyBBParameter : BT_Action
     private const string Override = "OverrideLocation";
     private const string ObjParam = "CopyParameter";
     private const string Obj = "ObjectsToCopy";
-    private const string IsObject = "SecondParameterIsObject";
- 
+    private const string IsObject = "UseObjectToCopy";
+
+    public BT_CopyBBParameter()
+    {
+        description();
+        this[Override] = new AI_AgentBBAccessParameter();
+        this[ObjParam] = new AI_AgentBBAccessParameter();
+        this[Obj] = null;
+        this[IsObject] = false;
+    }
+
     public BT_CopyBBParameter(AI_AgentBBAccessParameter accesparam1, object setObject)
     {
         description();
@@ -38,7 +47,7 @@ public class BT_CopyBBParameter : BT_Action
     private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "BT_CopyBBParameter";
+        Description.Name = "CopyBBParameter";
         Description.Description = "Copies the values from slot2 to slot1 and then succeeds";
     }
 

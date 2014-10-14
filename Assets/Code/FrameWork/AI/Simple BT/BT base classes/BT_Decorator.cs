@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class BT_Decorator : BT_HasChild 
 {
-    //protected BT_Behavior child;
-
     #region Constructor
 
     public BT_Decorator()

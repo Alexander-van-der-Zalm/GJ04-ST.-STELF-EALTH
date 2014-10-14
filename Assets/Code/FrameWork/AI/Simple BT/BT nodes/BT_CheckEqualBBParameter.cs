@@ -3,12 +3,21 @@ using System.Collections;
 
 public class BT_CheckEqualBBParameter : BT_Action 
 {
-    private const string P1 = "Parameter1";
-    private const string P2 = "Parameter2";
+    private const string P1 = "Parameter1ToCompare";
+    private const string P2 = "Parameter2ToCompare";
     private const string Obj = "ObjectToCompare";
-    private const string IsObject = "SecondParameterIsObject";
+    private const string IsObject = "UseObjectToCompare";
 
     #region Constructors
+
+    public BT_CheckEqualBBParameter()
+    {
+        description();
+        this[P1] = new AI_AgentBBAccessParameter();
+        this[P2] = new AI_AgentBBAccessParameter();
+        this[Obj] = null;
+        this[IsObject] = false;
+    }
 
     public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, object equalObject)
     {
@@ -37,7 +46,7 @@ public class BT_CheckEqualBBParameter : BT_Action
     private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "BT_CheckEqualBBParameter";
+        Description.Name = "CheckEqualBBParameter";
         Description.Description = "Succeeds if objects are equal and fails otherwise";
     }
 

@@ -5,7 +5,16 @@ public class BT_QueuePush : BT_QueueBase
 {
     private const string PushObjPar = "ObjectToPushParameter";
     private const string Obj = "ObjectToPush";
-    private const string IsObject = "ToPushIsObject";
+    private const string IsObject = "UseObjectToPush";
+
+    public BT_QueuePush()
+    {
+        description();
+        this[Queue] = new AI_AgentBBAccessParameter();
+        this[PushObjPar] = new AI_AgentBBAccessParameter();
+        this[Obj] = null;
+        this[IsObject] = false;
+    }
 
     public BT_QueuePush(AI_AgentBBAccessParameter QueueParam, object pushObj)
     {
@@ -34,7 +43,7 @@ public class BT_QueuePush : BT_QueueBase
     private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "BT_QueuePush";
+        Description.Name = "QueuePush";
         Description.Description = "Pushes a value to the queue from the agents blackboard";
     }
 

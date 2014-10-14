@@ -478,6 +478,8 @@ public class BT_BehaviorTree : MonoBehaviour
 
         // Set the new tree iteration
         TreeIteration = TreeIteration + 1 % int.MaxValue;
+
+        //Debug.Log("Tree iteration: " + TreeIteration);
     }
 
     private Dictionary<int, BT_TreeNode> RecursiveTreeNodeCrawl(Dictionary<int, BT_TreeNode> dic, BT_TreeNode node)
@@ -491,7 +493,8 @@ public class BT_BehaviorTree : MonoBehaviour
         {
             dic = RecursiveTreeNodeCrawl(dic, node.Children[i]);
         }
-        Debug.Log(IDcounter);
+        //Debug.Log(IDcounter);
+
         // Set ID
         node.ID = IDcounter;
         

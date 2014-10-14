@@ -7,22 +7,12 @@ public class BT_Selector : BT_Composite
 {
     #region Constructor
 
-    //public BT_Selector(params BT_Behavior[] children)
-    //{
-    //    Constructor(children.ToList());
-    //}
-
-    //public BT_Selector(List<BT_Behavior> children)
-    //{
-    //    Constructor(children);
-    //}
-    
-    //private void Constructor(List<BT_Behavior> children)
-    //{
-    //    Description.Type = NodeDescription.BT_NodeType.Selector;
-
-    //    Children = children;
-    //}
+    public BT_Selector()
+    {
+        Description.Type = NodeDescription.BT_NodeType.Composite;
+        Description.Name = "Selector";
+        Description.Description = "Keeps going if children are failing, early exits if: succes, invalid ör running";
+    }
 
     #endregion
 

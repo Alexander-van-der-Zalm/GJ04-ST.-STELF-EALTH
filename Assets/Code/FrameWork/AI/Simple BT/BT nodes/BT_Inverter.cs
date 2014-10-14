@@ -5,8 +5,8 @@ public class BT_Inverter : BT_Decorator
 {
     public BT_Inverter() : base()
     {
-        Description.Name = "BT_Inverter";
-        Description.Description = "Pushes a value to the queue from the agents blackboard";
+        Description.Name = "Inverter";
+        Description.Description = "Fires off child and then returns the inverted status (failed if success etc.)";
     }
 
     

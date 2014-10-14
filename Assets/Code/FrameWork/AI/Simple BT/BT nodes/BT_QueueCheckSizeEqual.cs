@@ -3,9 +3,18 @@ using Framework.Collections;
 
 public class BT_QueueCheckSizeEqual : BT_QueueBase
 {
-    private const string SizeObjPar = "ObjectToPushParameter";
-    private const string Obj = "ObjectToPush";
-    private const string IsObject = "ToPushIsObject";
+    private const string SizeObjPar = "SizeBBParameter";
+    private const string Obj = "SizeObject";
+    private const string IsObject = "UseObjectToCompare";
+
+    public BT_QueueCheckSizeEqual()
+    {
+        description();
+        this[Queue] = new AI_AgentBBAccessParameter();
+        this[SizeObjPar] = new AI_AgentBBAccessParameter();
+        this[Obj] = null;
+        this[IsObject] = false;
+    }
 
     public BT_QueueCheckSizeEqual(AI_AgentBBAccessParameter QueueParam, object sizeObj)
     {
@@ -34,8 +43,8 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
     private void description()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "BT_QueuePush";
-        Description.Description = "Pushes a value to the queue from the agents blackboard";
+        Description.Name = "QueueCheckSizeEqual";
+        Description.Description = "Check if the queue size is equal to the object (use int/a number)";
     }
 
     protected override Status update(AI_Agent agent, int id)
