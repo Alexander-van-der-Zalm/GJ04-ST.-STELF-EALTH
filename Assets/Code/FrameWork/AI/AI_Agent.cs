@@ -32,6 +32,8 @@ public class AI_Agent : MonoBehaviour
     private int TreeVersion = 0;
     private IEnumerator TreeCoroutine;
 
+    public bool TreeRunning { get { return TreeCoroutine != null; } }
+
     #endregion
 
     #region Properties
@@ -123,11 +125,12 @@ public class AI_Agent : MonoBehaviour
         if (TreeVersion == Tree.Version)
             return;
 
+        bool treeWasRunning = TreeRunning;
         // Stop the old version of the tree
         StopTree();
 
         // Clear local black board
-        //LocalBlackboard = new AI_Blackboard();
+        LocalBlackboard = new AI_Blackboard();
 
         // TODO unnasign values from global blackboard set by the old tree
 
@@ -138,7 +141,8 @@ public class AI_Agent : MonoBehaviour
         TreeVersion = Tree.Version;
 
         // Restart the tree
-        //StartTree();
+        if(TreeRunning)
+            StartTree();
     }
 
     private void StartTree()
@@ -158,5 +162,6 @@ public class AI_Agent : MonoBehaviour
         if (TreeCoroutine == null)
             return;
         StopCoroutine(TreeCoroutine);
+        TreeCoroutine = null;
     }
 }
