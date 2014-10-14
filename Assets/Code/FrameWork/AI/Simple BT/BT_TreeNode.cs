@@ -11,6 +11,7 @@ public class BT_TreeNode
     public List<BT_TreeNode> Children;
     public int ID;
     public BT_Behavior Node;
+    public AI_Blackboard NodeSpecificParameters;
 
     #region Properties
 
@@ -32,6 +33,7 @@ public class BT_TreeNode
         Node = behaviour;
         ID = id;
         Children = Children.ToList();
+        Parent = null;
     }
 
     public Status Tick(AI_Agent agent)

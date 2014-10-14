@@ -23,6 +23,11 @@ public class BT_BehaviorTree : MonoBehaviour
 
     private int TreeIteration = 0;
 
+    public BT_TreeNode this[int id]
+    {
+        get { return TreeNodes[id]; }
+    }
+
     public int Version { get { return TreeIteration; } }
 
     #endregion
@@ -485,8 +490,8 @@ public class BT_BehaviorTree : MonoBehaviour
         for (int i = 0; i < node.Children.Count; i++)
         {
             dic = RecursiveTreeNodeCrawl(dic, node.Children[i]);
-        } 
-
+        }
+        Debug.Log(IDcounter);
         // Set ID
         node.ID = IDcounter;
         
@@ -496,7 +501,7 @@ public class BT_BehaviorTree : MonoBehaviour
         // Increment the counter after adding
         IDcounter++;
 
-        Debug.Log(IDcounter);
+        //Debug.Log(IDcounter);
 
         return dic;
     }

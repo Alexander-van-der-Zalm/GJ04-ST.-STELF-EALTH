@@ -22,9 +22,11 @@ public class BT_Behavior:ScriptableObject
         public string Description = "IAM DESCRIPTIONORS";
         public BT_NodeType Type = BT_NodeType.Action;
 
+        
+
         // TODO Public node paramters
         // Seperate out to "Instance" specific - not needed
-        public AI_Blackboard NodeBlackBoard = new AI_Blackboard();
+        //public AI_Blackboard NodeBlackBoard = new AI_Blackboard();
 
         #region Constructor
 
@@ -52,19 +54,16 @@ public class BT_Behavior:ScriptableObject
     #region fields
 
     public NodeDescription Description = new NodeDescription();
-
-    //protected AI_Agent Agent;
-    //private Status status = Status.Invalid;
+    protected int CurrentID;
+    protected AI_Agent currentAgent;
 
     private string debugTree = "DebugTree";
+    
 
     #endregion
 
     #region virtual functions
 
-    //protected virtual Status update(AI_Agent agent) { return Status.Invalid; }
-    //protected virtual void onInitialize(AI_Agent agent) { }
-    //protected virtual void onTerminate(AI_Agent agent, Status status) { }
     protected virtual Status update(AI_Agent agent,int id) { return Status.Invalid; }
     protected virtual void onInitialize(AI_Agent agent, int id) { }
     protected virtual void onTerminate(AI_Agent agent, int id, Status status) { }
@@ -73,35 +72,11 @@ public class BT_Behavior:ScriptableObject
 
     #region Tick function
 
-    #region OlD
-    //public Status Tick(AI_Agent agent) 
-    //{
-    //    // Start if not yet initialized
-    //    if (status == Status.Invalid)
-    //        onInitialize(agent);
-
-    //    // Update the behaviour
-    //    status = update(agent);
-
-    //    // Stop if not still running
-    //    if (status != Status.Running)
-    //        onTerminate(agent, status);
-
-    //    if (agent!=null && agent.LocalBlackboard.GetObject<bool>(debugTree,true))
-    //    {
-    //        Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
-    //    }
-            
-    //    // Save the last state
-    //    // Move to parameterized bb or something similar
-    //    //Description.LastStatus = status;
-
-    //    return status;
-    //}
-    #endregion
-
     public Status Tick(AI_Agent agent, int id)
     {
+        CurrentID = id;
+        currentAgent = agent;
+
         // Start if not yet initialized
         if (agent[id] == Status.Invalid)
             onInitialize(agent,id);
