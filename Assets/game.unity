@@ -898,16 +898,14 @@ MonoBehaviour:
 --- !u!114 &302353518
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400020, guid: ccd7c5377966ef14ab2e7965be03089c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1538792324}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 302353513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 77535b8fc9b88be44ad223610d2a5fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Public Node parameters
 --- !u!114 &302353519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4462,7 +4460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0651ab1ab33d7941930d35ca933de17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickToOrder: 1
+  ClickToOrder: 0
   Dest: {x: 0, y: 0}
   Distance: 0
   StoppingRange: .5
@@ -5226,7 +5224,8 @@ Prefab:
       propertyPath: RectTransformScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400020, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
   m_RootGameObject: {fileID: 302353513}
   m_IsPrefabParent: 0
@@ -6549,6 +6548,10 @@ Prefab:
       propertyPath: Tree
       value: 
       objectReference: {fileID: 1373782135}
+    - target: {fileID: 11400004, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+      propertyPath: ClickToOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
   m_RootGameObject: {fileID: 1373782122}

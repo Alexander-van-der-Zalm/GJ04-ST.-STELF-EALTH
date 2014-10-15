@@ -482,6 +482,7 @@ public class BT_BehaviorTree : MonoBehaviour
     #region Rebuild Tree (recursive)
 
     private int IDcounter;
+    private int treeDepth;
 
     private void RebuildTree(BT_TreeNode root)
     {
@@ -573,17 +574,76 @@ public class BT_BehaviorTree : MonoBehaviour
 
     internal List<BT_UINode> GetUINodes()
     {
-        if (UINodes == null)
-            return DefaultUINodeList();
+        //if (UINodes == null)
+        //    return DefaultUINodeList();
 
         // Decide how to handle script initilalization of extra tree nodes
         // Decide what to do when there is already ui nodes...
-        return UINodes;
+        return DefaultUINodeList();
     }
 
     private List<BT_UINode> DefaultUINodeList()
     {
-        throw new NotImplementedException();
+        // Reset tree info
+        resetTreeInfo();
+
+        // Fill the 2d list
+        List<List<BT_UINode>> list = new List<List<BT_UINode>>();
+        
+        // Recursive fill
+        Fill(list, Root, null);
+
+        // Set grid positions
+
+        // Scale positions?
+
+        List<BT_UINode> flatList = GetFlatList(list);
+
+        return flatList;
+    }
+
+    private List<BT_UINode> GetFlatList(List<List<BT_UINode>> masterlist)
+    {
+        List<BT_UINode> output = new List<BT_UINode>();
+        
+        foreach (List<BT_UINode> list in masterlist)
+            output.AddRange(list);
+        
+        return output;
+    }
+
+    private void Fill(List<List<BT_UINode>> list, BT_TreeNode node, BT_UINode parent)
+    {
+        // Set depth based on the parents depth
+        int depth = parent!= null ? parent.Depth : 0;
+        
+        // Set new treeDepth if now deeper then before
+        // Also create a new list for that depth
+        if (depth > treeDepth)
+        {
+            treeDepth = depth;
+            list[depth] = new List<BT_UINode>();
+        }
+            
+        // index in the row (0 for slot 0, 1 for slot 1, etc.)
+        int index = list[depth].Count; 
+        
+        // Create a new nodeInfo
+        BT_UINode nodeInfo = new BT_UINode(depth,index,node,parent,this);
+
+        // Add to datastructure
+        list[depth].Add(nodeInfo);
+
+        // Add children
+        for (int i = 0; i < node.Children.Count; i++)
+            Fill(list, node.Children[i], nodeInfo);
+    }
+
+   
+
+    private void resetTreeInfo()
+    {
+        treeDepth = 0;
     }
 
     #region Connect

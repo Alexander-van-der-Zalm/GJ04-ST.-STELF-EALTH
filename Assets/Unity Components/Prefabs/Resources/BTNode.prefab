@@ -181,7 +181,7 @@ MonoBehaviour:
   Node:
     Children: []
     ID: 0
-    Node: {fileID: 0}
+    NodeSpecificParameters: {fileID: 0}
   Type: 1
 --- !u!114 &11400012
 MonoBehaviour:

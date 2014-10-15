@@ -2,9 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[ExecuteInEditMode]
 public class BT_VisualizeTree : Singleton<BT_VisualizeTree> 
 {
     public float NodeSize = 1.0f;
+    //public GameObject Root;
+    //public GameObject Node;
+    //private GameObject spawnedRoot;
+
     //public float 
     private List<GameObject> uiNodes;
     private static string visualizer = "BT_Visualizer";
@@ -12,18 +17,28 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
 
     public static void ShowTree(BT_BehaviorTree tree)
     {
-        if(instance == null)
+        
+        if(Instance == null)
         {
-            // Create the instance
-            GameObject obj = Resources.Load<GameObject>(visualizer);
-            instance = obj.GetComponent<BT_VisualizeTree>();
+            //Has no instance of the singleton yet, so create one
+            GameObject go = (GameObject)Instantiate(Resources.Load(visualizer, typeof(GameObject)));
+            //GameObject go = (GameObject)GameObject.Instantiate(instance.Root);
+            //instance = go.AddComponent<BT_VisualizeTree>();
+            //go.name = "BT_Visualizer";
+            //instance.spawnedRoot = go;
         }
-
+        
+        //if (instance.spawnedRoot == null)
+        //{
+        //    instance.spawnedRoot = (GameObject)GameObject.Instantiate(instance.Root);
+        //}
+        
         instance.GenerateNodes(tree);
     }
 
     private void GenerateNodes(BT_BehaviorTree tree)
     {
+        //TODO
         List<BT_UINode> list = tree.GetUINodes();
 
         if (uiNodes == null)
@@ -36,12 +51,12 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
         for (int i = 0; i < nodesNeeded; i++ )
         {
             // Create from prefab
-            GameObject newNode = Resources.Load<GameObject>(node);
-            newNode.transform.parent = instance.transform;
+            GameObject newNode = (GameObject)Instantiate(Resources.Load(node, typeof(GameObject)));
             uiNodes.Add(newNode);
         }
 
         // Copy the BT_UInode in the gameobjects
+        // Set the parenting right
         for(int i = 0; i < list.Count; i++)
         {
             BT_UINode node = list[i];
@@ -55,6 +70,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
             rtr.position = node.Position;
         }
 
+        // TODO
         changeNodesScale(NodeSize);
     }
 

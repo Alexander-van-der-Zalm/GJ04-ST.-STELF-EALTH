@@ -18,6 +18,7 @@ public class CreateManagerMenu
         manager.AddComponent<ControlManager>();
         manager.AddComponent<AudioManager>();
         manager.AddComponent<AudioLibrary>();
+        manager.AddComponent<BT_VisualizeTree>();
     }
 	
 }
