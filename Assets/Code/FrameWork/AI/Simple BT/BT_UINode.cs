@@ -8,13 +8,12 @@ using System.Collections.Generic;
 public class BT_UINode : MonoBehaviour
 {
     public BT_UINodeInfo NodeInfo;
-
-    private AI_Blackboard param;
+    public AI_Blackboard param;
+    
     private RectTransform rtr;
    
     void Start()
     {
-        param = this.GetOrAddComponent<AI_Blackboard>();
         param.Name = "Public Node parameters";
     }
 

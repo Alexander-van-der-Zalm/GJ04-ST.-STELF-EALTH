@@ -5,7 +5,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Status = BT_Behavior.Status;
 
-[RequireComponent(typeof(AI_Blackboard))]
 public class AI_Agent : MonoBehaviour
 {
     #region Enum
@@ -21,12 +20,14 @@ public class AI_Agent : MonoBehaviour
     #region Fields
 
     // Blackboards to store shared info
-    public AI_Blackboard GlobalBlackboard;
-    [HideInInspector]
-    public AI_Blackboard LocalBlackboard;
     public BT_BehaviorTree Tree;
     [ReadOnly]
     public string Name;
+    public AI_SharedBlackboard SharedGlobalBlackboard;
+    
+    public AI_Blackboard GlobalBlackboard { get { return SharedGlobalBlackboard.Blackboard; } }
+    public AI_Blackboard LocalBlackboard;
+    
 
     private Dictionary<int,Status> NodeStatus;
     private int TreeVersion = 0;
@@ -88,7 +89,8 @@ public class AI_Agent : MonoBehaviour
     {
         Name = gameObject.name + " " + gameObject.GetInstanceID();
 
-        LocalBlackboard = this.GetOrAddComponent<AI_Blackboard>();
+        if(LocalBlackboard == null)
+            LocalBlackboard = new AI_Blackboard();
         LocalBlackboard.SetObject("Name", Name);
         LocalBlackboard.SetObject("DebugTree", false);
         LocalBlackboard.SetObject("Depth", 0);
@@ -98,7 +100,7 @@ public class AI_Agent : MonoBehaviour
         //BehaviorTree.SetAgent(this);
         
         // Test behaviors
-        //Tree.TestBTBasicCompontents(this);
+        Tree.TestBTBasicCompontents(this);
         //ClearLocalBlackBoard();
         //TestBlackBoard();
         

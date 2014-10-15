@@ -7,7 +7,7 @@ public class AI_AgentEditor : EditorPlus
 {
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
+        base.OnInspectorGUI();
 
         AI_Agent agent = (AI_Agent)target;
         BT_BehaviorTree tree = agent.Tree;

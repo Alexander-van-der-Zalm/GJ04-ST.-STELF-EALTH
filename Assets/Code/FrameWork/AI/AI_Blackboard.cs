@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AI_Blackboard : MonoBehaviour 
+public class AI_Blackboard 
 {
     public string Name = "AI BlackBoard";
     public Dictionary<string, object> objectPool = new Dictionary<string,object>();
+
+    public AI_Blackboard()
+    {
+
+    }
 
     // Default getObject (runs in trouble when it doesnt exist)
     public object this[string name]
