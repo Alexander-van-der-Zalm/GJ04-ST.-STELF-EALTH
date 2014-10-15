@@ -17,12 +17,12 @@ public class BT_BehaviorTree : MonoBehaviour
 
     [Range(0.00000000001f,60)]
     public float UpdateFrequency = 10;
-
     public BT_TreeNode Root;
-    //private List<BT_UINode> UINodes;
+    
     private Dictionary<int,BT_TreeNode> TreeNodes;
-
     private int TreeIteration = 0;
+
+    //private List<BT_UINode> UINodes;
 
     public BT_TreeNode this[int id]
     {
@@ -604,7 +604,7 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region UI nodes
 
-    internal List<BT_UINode> GetUINodes()
+    internal List<BT_UINodeInfo> GetUINodes()
     {
         //if (UINodes == null)
         //    return DefaultUINodeList();
@@ -614,13 +614,13 @@ public class BT_BehaviorTree : MonoBehaviour
         return DefaultUINodeList();
     }
 
-    private List<BT_UINode> DefaultUINodeList()
+    private List<BT_UINodeInfo> DefaultUINodeList()
     {
         // Reset tree info
         resetTreeInfo();
 
         // Fill the 2d list
-        List<List<BT_UINode>> list = new List<List<BT_UINode>>();
+        List<List<BT_UINodeInfo>> list = new List<List<BT_UINodeInfo>>();
         
         // Recursive fill
         Fill(list, Root, null);
@@ -629,47 +629,47 @@ public class BT_BehaviorTree : MonoBehaviour
 
         // Scale positions?
 
-        List<BT_UINode> flatList = GetFlatList(list);
+        List<BT_UINodeInfo> flatList = GetFlatList(list);
 
         return flatList;
     }
 
-    private List<BT_UINode> GetFlatList(List<List<BT_UINode>> masterlist)
+    private List<BT_UINodeInfo> GetFlatList(List<List<BT_UINodeInfo>> masterlist)
     {
-        List<BT_UINode> output = new List<BT_UINode>();
-        
-        foreach (List<BT_UINode> list in masterlist)
+        List<BT_UINodeInfo> output = new List<BT_UINodeInfo>();
+
+        foreach (List<BT_UINodeInfo> list in masterlist)
             output.AddRange(list);
         
         return output;
     }
 
-    private void Fill(List<List<BT_UINode>> list, BT_TreeNode node, BT_UINode parent)
+    private void Fill(List<List<BT_UINodeInfo>> list, BT_TreeNode node, BT_UINodeInfo parent)
     {
         // Empty tree exit out
         if (node == null)
             return;
         // Set depth based on the parents depth
-        int depth = parent!= null ? parent.Depth : 0;
+        int depth = parent == null ? 0 : parent.Depth + 1;
         
         // Set new treeDepth if now deeper then before
         // Also create a new list for that depth
         if (depth > treeDepth)
         {
             treeDepth = depth;
-            list.Add(new List<BT_UINode>());
+            list.Add(new List<BT_UINodeInfo>());
         }
             
         // index in the row (0 for slot 0, 1 for slot 1, etc.)
         int index = list[depth].Count; 
         
         // Create a new nodeInfo
-        BT_UINode nodeInfo = new BT_UINode(depth,index,node,parent,this);
+        BT_UINodeInfo nodeInfo = new BT_UINodeInfo(depth, index, node, parent, this);
 
         // Add to datastructure
         list[depth].Add(nodeInfo);
 
-        Debug.Log("GenerateNode[" + depth + " : " + index + "] P: " + list[depth][index].Parent);
+        Debug.Log("GenerateNode[d " + depth + " :i " + index + "] NI: " + nodeInfo + " P: " + list[depth][index].Parent);
 
         // Add children
         for (int i = 0; i < node.Children.Count; i++)

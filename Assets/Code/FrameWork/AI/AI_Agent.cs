@@ -148,7 +148,7 @@ public class AI_Agent : MonoBehaviour
     public void ClearLocalBlackBoard()
     {
         // Clear local black board
-        LocalBlackboard = new AI_Blackboard();
+        LocalBlackboard.objectPool.Clear();
     }
 
     private void StartTree()

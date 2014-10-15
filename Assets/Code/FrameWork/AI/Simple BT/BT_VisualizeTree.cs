@@ -17,21 +17,16 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
 
     public static void ShowTree(BT_BehaviorTree tree)
     {
-        
         if(Instance == null)
         {
             //Has no instance of the singleton yet, so create one
             GameObject go = (GameObject)Instantiate(Resources.Load(visualizer, typeof(GameObject)));
-            //GameObject go = (GameObject)GameObject.Instantiate(instance.Root);
-            instance = go.AddComponent<BT_VisualizeTree>();
-            //go.name = "BT_Visualizer";
-            //instance.spawnedRoot = go;
+            
+            instance = go.GetComponent<BT_VisualizeTree>();
+            
+            if(instance == null)
+                instance = go.AddComponent<BT_VisualizeTree>();
         }
-        
-        //if (instance.spawnedRoot == null)
-        //{
-        //    instance.spawnedRoot = (GameObject)GameObject.Instantiate(instance.Root);
-        //}
         
         instance.GenerateNodes(tree);
     }
@@ -39,7 +34,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
     private void GenerateNodes(BT_BehaviorTree tree)
     {
         //TODO
-        List<BT_UINode> list = tree.GetUINodes();
+        List<BT_UINodeInfo> list = tree.GetUINodes();
 
         if (uiNodes == null)
             uiNodes = new List<GameObject>();
@@ -58,25 +53,26 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
         }
 
         // Copy the BT_UInode in the gameobjects
-        // Set the parenting right
         for(int i = 0; i < list.Count; i++)
         {
-            BT_UINode node = list[i];
+            BT_UINodeInfo nodeInfo = list[i];
             GameObject obj = uiNodes[i];
 
             // Change the Node component to the new one from the tree
             BT_UINode objUiNode = obj.GetComponent<BT_UINode>();
-            objUiNode.ChangeNode(node);
-            
-            RectTransform rtr = obj.GetComponent<RectTransform>();
-            // Change position
-            rtr.position = node.Position;
-            
-            // Change the parent
-            rtr.parent = node.gameObject.GetComponent<RectTransform>();
-            
+            objUiNode.ChangeNode(nodeInfo);
         }
 
+        // Set the parenting right
+        for (int i = 0; i < list.Count; i++)
+        {
+            BT_UINodeInfo nodeInfo = list[i];
+            GameObject obj = uiNodes[i];
+
+            // Change the parent
+            RectTransform rtr = obj.GetComponent<RectTransform>();
+            rtr.parent = nodeInfo.Parent.UINode.gameObject.GetComponent<RectTransform>();
+        }
         // TODO
         changeNodesScale(NodeSize);
     }
