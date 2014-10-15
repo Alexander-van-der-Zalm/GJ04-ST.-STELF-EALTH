@@ -23,10 +23,11 @@ public class AI_Agent : MonoBehaviour
     public BT_BehaviorTree Tree;
     [ReadOnly]
     public string Name;
-    public AI_SharedBlackboard SharedGlobalBlackboard;
+    public AI_BlackboardComponent GlobalBlackboardC;
     
-    public AI_Blackboard GlobalBlackboard { get { return SharedGlobalBlackboard.Blackboard; } }
-    public AI_Blackboard LocalBlackboard;
+    public AI_Blackboard GlobalBlackboard { get { return GlobalBlackboardC.Blackboard; } }
+    public AI_BlackboardComponent LocalBlackboardC;
+    public AI_Blackboard LocalBlackboard { get { return LocalBlackboardC.Blackboard; } set { LocalBlackboardC.Blackboard = value;  } }
     
 
     private Dictionary<int,Status> NodeStatus;
@@ -100,9 +101,9 @@ public class AI_Agent : MonoBehaviour
         //BehaviorTree.SetAgent(this);
         
         // Test behaviors
-        Tree.TestBTBasicCompontents(this);
+        //Tree.TestBTBasicCompontents(this);
         //ClearLocalBlackBoard();
-        //TestBlackBoard();
+        TestBlackBoard();
         
         Tree.SetTestTree(this);
         //StartTree();

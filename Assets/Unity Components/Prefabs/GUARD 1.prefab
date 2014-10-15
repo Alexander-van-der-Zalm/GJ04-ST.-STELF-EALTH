@@ -50,7 +50,6 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: GUARD 1
   m_TagString: IHasMoolah
@@ -338,27 +337,36 @@ MonoBehaviour:
         - Children:
           - Children: []
             ID: 7
-            NodeSpecificParameters: {fileID: 0}
+            NodeSpecificParameters:
+              Name: AI BlackBoard
           - Children: []
             ID: 1
-            NodeSpecificParameters: {fileID: 0}
+            NodeSpecificParameters:
+              Name: AI BlackBoard
           ID: 2
-          NodeSpecificParameters: {fileID: 0}
+          NodeSpecificParameters:
+            Name: AI BlackBoard
         - Children: []
           ID: 7
-          NodeSpecificParameters: {fileID: 0}
+          NodeSpecificParameters:
+            Name: AI BlackBoard
         ID: 4
-        NodeSpecificParameters: {fileID: 0}
+        NodeSpecificParameters:
+          Name: AI BlackBoard
       - Children: []
         ID: 7
-        NodeSpecificParameters: {fileID: 0}
+        NodeSpecificParameters:
+          Name: AI BlackBoard
       ID: 6
-      NodeSpecificParameters: {fileID: 0}
+      NodeSpecificParameters:
+        Name: AI BlackBoard
     - Children: []
       ID: 7
-      NodeSpecificParameters: {fileID: 0}
+      NodeSpecificParameters:
+        Name: AI BlackBoard
     ID: 8
-    NodeSpecificParameters: {fileID: 0}
+    NodeSpecificParameters:
+      Name: AI BlackBoard
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,22 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260830214f0f40a499b89e2230a0cd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalBlackboard: {fileID: 0}
-  LocalBlackboard: {fileID: 0}
   Tree: {fileID: 11400002}
   Name: 
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
+  SharedGlobalBlackboard: {fileID: 0}
+  LocalBlackboard:
+    Name: AI BlackBoard
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
