@@ -15,10 +15,11 @@ public class AI_BlackboardComponentEditor : EditorPlus
         GUILayout.BeginHorizontal();
         using (new FixedWidthLabel("Name: "))
             bb.Name = EditorGUILayout.TextField(bb.Name);
-        using (new FixedWidthLabel("Persists: "))
-            bbc.Persist = EditorGUILayout.Toggle(bbc.Persist);
-        
+        //using (new FixedWidthLabel("Persists: "))
+        //    bbc.Persist = EditorGUILayout.Toggle(bbc.Persist);
         GUILayout.EndHorizontal();
+
+        EditorGUILayout.LabelField("[" + bb.objectPool.Count + "] Blackboard items: ");
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;

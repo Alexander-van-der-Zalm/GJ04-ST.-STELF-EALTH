@@ -35,14 +35,16 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
     public static void CustomDraw(string label, AI_AgentBBAccessParameter bb)
     {
         EditorGUILayout.BeginHorizontal();
+        using (new FixedWidthLabel(label))
+        {
+            int enumIndex = EditorGUILayout.Popup(string.Empty, (int)bb.AgentAccesType, Enum.GetNames(typeof(AI_Agent.BlackBoard)).ToArray(), GUILayout.Width(70));
+            var enumValues = (AI_Agent.BlackBoard[])Enum.GetValues(typeof(AI_Agent.BlackBoard));
+            bb.AgentAccesType = enumValues[enumIndex];
+            bb.ParameterName = EditorGUILayout.TextField(bb.ParameterName);
+        }
+        //EditorGUILayout.LabelField(label,GUILayout.Width(130));
 
-        EditorGUILayout.LabelField(label,GUILayout.Width(130));
-
-        int enumIndex = EditorGUILayout.Popup(string.Empty, (int)bb.AgentAccesType, Enum.GetNames(typeof(AI_Agent.BlackBoard)).ToArray(), GUILayout.Width(70));
-        var enumValues = (AI_Agent.BlackBoard[])Enum.GetValues(typeof(AI_Agent.BlackBoard));
-        bb.AgentAccesType = enumValues[enumIndex];
-
-        bb.ParameterName = EditorGUILayout.TextField(bb.ParameterName);
+        
         
         EditorGUILayout.EndHorizontal();
     }
