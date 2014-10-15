@@ -13,7 +13,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
     //public float 
     private List<GameObject> uiNodes;
     private static string visualizer = "BT_Visualizer";
-    private static string node = "BT_UINode";
+    private static string node = "BTNode";
 
     public static void ShowTree(BT_BehaviorTree tree)
     {
@@ -23,7 +23,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
             //Has no instance of the singleton yet, so create one
             GameObject go = (GameObject)Instantiate(Resources.Load(visualizer, typeof(GameObject)));
             //GameObject go = (GameObject)GameObject.Instantiate(instance.Root);
-            //instance = go.AddComponent<BT_VisualizeTree>();
+            instance = go.AddComponent<BT_VisualizeTree>();
             //go.name = "BT_Visualizer";
             //instance.spawnedRoot = go;
         }
@@ -48,6 +48,8 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
         // disabled ones in the private uiNodes list
         int nodesNeeded = list.Count - uiNodes.Count;
 
+        Debug.Log("Need " + nodesNeeded + " nodes");
+
         for (int i = 0; i < nodesNeeded; i++ )
         {
             // Create from prefab
@@ -61,13 +63,18 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
         {
             BT_UINode node = list[i];
             GameObject obj = uiNodes[i];
+
             // Change the Node component to the new one from the tree
             BT_UINode objUiNode = obj.GetComponent<BT_UINode>();
             objUiNode.ChangeNode(node);
             
-            // Change position
             RectTransform rtr = obj.GetComponent<RectTransform>();
+            // Change position
             rtr.position = node.Position;
+            
+            // Change the parent
+            rtr.parent = node.gameObject.GetComponent<RectTransform>();
+            
         }
 
         // TODO

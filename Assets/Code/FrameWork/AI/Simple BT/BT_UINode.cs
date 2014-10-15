@@ -10,8 +10,6 @@ public class BT_UINode : MonoBehaviour
     #region Fields
 
     public Vector3 Position;
-    
-    
     //public List<BT_Behavior> Children;
 
     // TODO remove this

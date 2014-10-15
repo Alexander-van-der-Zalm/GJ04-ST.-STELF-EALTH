@@ -50,7 +50,7 @@ public class BT_TreeNode
     {
        
         ID = id;
-        Children = Children.ToList();
+        Children = childrenMem.ToList();
         Parent = parent;
 
         NodeSpecificParameters = new AI_Blackboard();

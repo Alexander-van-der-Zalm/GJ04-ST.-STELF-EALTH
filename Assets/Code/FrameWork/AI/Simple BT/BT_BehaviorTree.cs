@@ -17,6 +17,7 @@ public class BT_BehaviorTree : MonoBehaviour
     [Range(0.00000000001f,60)]
     public float UpdateFrequency = 10;
 
+    [SerializeField]
     private BT_TreeNode Root;
     private List<BT_UINode> UINodes;
     private Dictionary<int,BT_TreeNode> TreeNodes;
@@ -614,6 +615,9 @@ public class BT_BehaviorTree : MonoBehaviour
 
     private void Fill(List<List<BT_UINode>> list, BT_TreeNode node, BT_UINode parent)
     {
+        // Empty tree exit out
+        if (node == null)
+            return;
         // Set depth based on the parents depth
         int depth = parent!= null ? parent.Depth : 0;
         
@@ -622,7 +626,7 @@ public class BT_BehaviorTree : MonoBehaviour
         if (depth > treeDepth)
         {
             treeDepth = depth;
-            list[depth] = new List<BT_UINode>();
+            list.Add(new List<BT_UINode>());
         }
             
         // index in the row (0 for slot 0, 1 for slot 1, etc.)
@@ -634,16 +638,17 @@ public class BT_BehaviorTree : MonoBehaviour
         // Add to datastructure
         list[depth].Add(nodeInfo);
 
+        Debug.Log("GenerateNode[" + depth + " : " + index + "] P: " + list[depth][index].Parent);
+
         // Add children
         for (int i = 0; i < node.Children.Count; i++)
             Fill(list, node.Children[i], nodeInfo);
+        // Could add children to nodeInfo as well if needed
     }
-
-   
 
     private void resetTreeInfo()
     {
-        treeDepth = 0;
+        treeDepth = -1;
     }
 
     #region Connect
