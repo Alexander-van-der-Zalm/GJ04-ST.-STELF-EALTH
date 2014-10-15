@@ -10,6 +10,7 @@ using fc = Framework.Collections;
 using System;
 using System.Reflection;
 
+[System.Serializable,ExecuteInEditMode]
 public class BT_BehaviorTree : MonoBehaviour
 {
     #region Fields
@@ -17,17 +18,11 @@ public class BT_BehaviorTree : MonoBehaviour
     [Range(0.00000000001f,60)]
     public float UpdateFrequency = 10;
 
-    [SerializeField]
-    private BT_TreeNode Root;
+    public BT_TreeNode Root;
     //private List<BT_UINode> UINodes;
     private Dictionary<int,BT_TreeNode> TreeNodes;
 
     private int TreeIteration = 0;
-
-    //private BT_TreeNode f;
-    //private BT_TreeNode s;
-    //private BT_TreeNode r;
-    //private BT_TreeNode b;
 
     public BT_TreeNode this[int id]
     {
@@ -80,18 +75,16 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #region Test actions
 
-    public BT_BehaviorTree GetTestTree(AI_Agent agent)
+    public void SetTestTree(AI_Agent agent)
     {
-        BT_BehaviorTree tree = new BT_BehaviorTree();
         BT_TreeNode f = UDel(failUpdate, "Fail");
         BT_TreeNode s = UDel(succesUpdate, "Succes");
         BT_TreeNode r = UDel(runningUpdate, "Running");
         BT_TreeNode b = UDel(pauseUpdate, "Pause");
 
-        tree.Root = sel(seq(sel(seq(s,f),s),s),s);
-        tree.RebuildTree();
+        Root = sel(seq(sel(seq(s,f),s),s),s);
+        RebuildTree();
         agent.CheckTreeVersion();
-        return tree;
     }
 
     public void TestBTBasicCompontents(AI_Agent agent)

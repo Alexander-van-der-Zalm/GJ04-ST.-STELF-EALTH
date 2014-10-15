@@ -93,14 +93,16 @@ public class AI_Agent : MonoBehaviour
         LocalBlackboard.SetObject("DebugTree", false);
         LocalBlackboard.SetObject("Depth", 0);
 
-
+        if(Tree == null)
+            Tree = this.GetOrAddComponent<BT_BehaviorTree>();
         //BehaviorTree.SetAgent(this);
         
         // Test behaviors
-        Tree.TestBTBasicCompontents(this);
-        ClearLocalBlackBoard();
+        //Tree.TestBTBasicCompontents(this);
+        //ClearLocalBlackBoard();
         //TestBlackBoard();
-        //Tree = Tree.GetTestTree(this);
+        
+        Tree.SetTestTree(this);
         //StartTree();
 
     }

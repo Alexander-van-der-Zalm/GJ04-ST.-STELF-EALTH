@@ -1231,7 +1231,6 @@ GameObject:
   - 114: {fileID: 572995660}
   - 114: {fileID: 572995659}
   - 114: {fileID: 572995658}
-  - 114: {fileID: 572995657}
   m_Layer: 0
   m_Name: BT_Visualizer(Clone)
   m_TagString: Untagged
@@ -1239,18 +1238,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &572995657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 572995656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed9a5d2bb0e8424294571b0c5bd1d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NodeSize: 1
 --- !u!114 &572995658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2800,13 +2787,10 @@ GameObject:
   - 114: {fileID: 1373782125}
   - 114: {fileID: 1373782124}
   - 114: {fileID: 1373782123}
-  - 114: {fileID: 1373782131}
-  - 114: {fileID: 1373782133}
-  - 114: {fileID: 1373782132}
-  - 114: {fileID: 1373782134}
-  - 114: {fileID: 1373782135}
   - 114: {fileID: 1373782136}
   - 114: {fileID: 1373782137}
+  - 114: {fileID: 1373782131}
+  - 114: {fileID: 1373782132}
   m_Layer: 0
   m_Name: GUARD
   m_TagString: IHasMoolah
@@ -2936,79 +2920,55 @@ Transform:
 --- !u!114 &1373782131
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 2cbe0ad257079454fb7fc0dd110cd346,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772047017}
-  m_GameObject: {fileID: 1373782122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699d4786bca945b44b913671d132c558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UtilityComponents:
-    Controller: {fileID: 1373782124}
-    Los: {fileID: 2141124588}
-    Alert: {fileID: 1373782123}
-  FollowState: {fileID: 1910311580}
-  AlertedPatrol: {fileID: 1373782133}
-  NormalPatrol: {fileID: 1373782132}
-  State: 2
---- !u!114 &1373782132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400014, guid: 2cbe0ad257079454fb7fc0dd110cd346,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772047017}
-  m_GameObject: {fileID: 1373782122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsFinished: 0
---- !u!114 &1373782133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400016, guid: 2cbe0ad257079454fb7fc0dd110cd346,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772047017}
-  m_GameObject: {fileID: 1373782122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acba2b2942617db4f97df82daff0d52a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsFinished: 0
---- !u!114 &1373782134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400032, guid: 2cbe0ad257079454fb7fc0dd110cd346,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772047017}
-  m_GameObject: {fileID: 1373782122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1d571b58ab8644fb65de4de9739010, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Static: 0
---- !u!114 &1373782135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400034, guid: 2cbe0ad257079454fb7fc0dd110cd346,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772047017}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1373782122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 834905afdc45a964a8af4facdebaf1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateFrequency: 60
+  UpdateFrequency: 10
   Root:
-    Children: []
-    ID: 0
+    Children:
+    - Children:
+      - Children:
+        - Children:
+          - Children: []
+            ID: 7
+            NodeSpecificParameters: {fileID: 0}
+          - Children: []
+            ID: 1
+            NodeSpecificParameters: {fileID: 0}
+          ID: 2
+          NodeSpecificParameters: {fileID: 0}
+        - Children: []
+          ID: 7
+          NodeSpecificParameters: {fileID: 0}
+        ID: 4
+        NodeSpecificParameters: {fileID: 0}
+      - Children: []
+        ID: 7
+        NodeSpecificParameters: {fileID: 0}
+      ID: 6
+      NodeSpecificParameters: {fileID: 0}
+    - Children: []
+      ID: 7
+      NodeSpecificParameters: {fileID: 0}
+    ID: 8
     NodeSpecificParameters: {fileID: 0}
+--- !u!114 &1373782132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1373782122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f133dce1ab8c54245ac2a036ed8e731e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Test: 15
 --- !u!114 &1373782136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,7 +2983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalBlackboard: {fileID: 261590616}
   LocalBlackboard: {fileID: 0}
-  Tree: {fileID: 1373782135}
+  Tree: {fileID: 1373782131}
   Name: 
 --- !u!114 &1373782137
 MonoBehaviour:
@@ -4109,12 +4069,17 @@ Prefab:
     - target: {fileID: 11400036, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: Tree
       value: 
-      objectReference: {fileID: 1373782135}
+      objectReference: {fileID: 1373782131}
     - target: {fileID: 11400004, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
       propertyPath: ClickToOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400016, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+    - {fileID: 11400014, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+    - {fileID: 11400032, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+    - {fileID: 11400002, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
+    - {fileID: 11400034, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 2cbe0ad257079454fb7fc0dd110cd346, type: 2}
   m_RootGameObject: {fileID: 1373782122}
   m_IsPrefabParent: 0
