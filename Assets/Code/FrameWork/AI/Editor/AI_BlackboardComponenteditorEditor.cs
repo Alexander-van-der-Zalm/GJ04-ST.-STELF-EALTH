@@ -12,7 +12,13 @@ public class AI_BlackboardComponentEditor : EditorPlus
         AI_BlackboardComponent bbc = (AI_BlackboardComponent)target;
         AI_Blackboard bb = bbc.Blackboard;
 
-        EditorGUILayout.LabelField(bb.Name);
+        GUILayout.BeginHorizontal();
+        using (new FixedWidthLabel("Name: "))
+            bb.Name = EditorGUILayout.TextField(bb.Name);
+        using (new FixedWidthLabel("Persists: "))
+            bbc.Persist = EditorGUILayout.Toggle(bbc.Persist);
+        
+        GUILayout.EndHorizontal();
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
@@ -26,5 +32,10 @@ public class AI_BlackboardComponentEditor : EditorPlus
 
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
+
+        if (GUILayout.Button("Clear BlackBoard"))
+            bb.objectPool.Clear();
+
+
     }
 }
