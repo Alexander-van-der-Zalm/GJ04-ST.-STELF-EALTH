@@ -100,7 +100,7 @@ public class AI_Agent : MonoBehaviour
         Tree.TestBTBasicCompontents(this);
         ClearLocalBlackBoard();
         //TestBlackBoard();
-
+        //Tree = Tree.GetTestTree(this);
         //StartTree();
 
     }

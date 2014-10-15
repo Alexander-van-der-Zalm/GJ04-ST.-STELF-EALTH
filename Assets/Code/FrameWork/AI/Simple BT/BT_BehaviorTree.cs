@@ -19,10 +19,15 @@ public class BT_BehaviorTree : MonoBehaviour
 
     [SerializeField]
     private BT_TreeNode Root;
-    private List<BT_UINode> UINodes;
+    //private List<BT_UINode> UINodes;
     private Dictionary<int,BT_TreeNode> TreeNodes;
 
     private int TreeIteration = 0;
+
+    //private BT_TreeNode f;
+    //private BT_TreeNode s;
+    //private BT_TreeNode r;
+    //private BT_TreeNode b;
 
     public BT_TreeNode this[int id]
     {
@@ -30,6 +35,18 @@ public class BT_BehaviorTree : MonoBehaviour
     }
 
     public int Version { get { return TreeIteration; } }
+
+    #endregion
+
+    #region Constructor
+
+    //public BT_BehaviorTree()
+    //{
+    //    //f = UDel(failUpdate, "Fail");
+    //    //s = UDel(succesUpdate, "Succes");
+    //    //r = UDel(runningUpdate, "Running");
+    //    //b = UDel(pauseUpdate, "Pause");
+    //}
 
     #endregion
 
@@ -62,6 +79,20 @@ public class BT_BehaviorTree : MonoBehaviour
     #endregion
 
     #region Test actions
+
+    public BT_BehaviorTree GetTestTree(AI_Agent agent)
+    {
+        BT_BehaviorTree tree = new BT_BehaviorTree();
+        BT_TreeNode f = UDel(failUpdate, "Fail");
+        BT_TreeNode s = UDel(succesUpdate, "Succes");
+        BT_TreeNode r = UDel(runningUpdate, "Running");
+        BT_TreeNode b = UDel(pauseUpdate, "Pause");
+
+        tree.Root = sel(seq(sel(seq(s,f),s),s),s);
+        tree.RebuildTree();
+        agent.CheckTreeVersion();
+        return tree;
+    }
 
     public void TestBTBasicCompontents(AI_Agent agent)
     {
@@ -485,6 +516,11 @@ public class BT_BehaviorTree : MonoBehaviour
     private int IDcounter;
     private int treeDepth;
 
+    private void RebuildTree()
+    {
+        RebuildTree(Root);
+    }
+
     private void RebuildTree(BT_TreeNode root)
     {
         Root = root;
@@ -573,6 +609,8 @@ public class BT_BehaviorTree : MonoBehaviour
 
     #endregion
 
+    #region UI nodes
+
     internal List<BT_UINode> GetUINodes()
     {
         //if (UINodes == null)
@@ -651,6 +689,8 @@ public class BT_BehaviorTree : MonoBehaviour
         treeDepth = -1;
     }
 
+    #endregion
+
     #region Connect
 
     // Add node
@@ -662,7 +702,6 @@ public class BT_BehaviorTree : MonoBehaviour
     #endregion
 
     // Disconnect (child & parent)
-
     public Dictionary<int, Status> GetNewNodeStatus()
     {
         Dictionary<int, Status> dic = new Dictionary<int, Status>();
