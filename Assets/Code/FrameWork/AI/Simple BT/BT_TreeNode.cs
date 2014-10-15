@@ -14,7 +14,7 @@ public class BT_TreeNode
     public List<BT_TreeNode> Children;
     public int ID;
     
-    public AI_Blackboard NodeSpecificParameters;
+    public AI_Blackboard ParametersBB;
 
     private BT_BBParameters behavior;
 
@@ -42,7 +42,7 @@ public class BT_TreeNode
         ID = -1337;
         Parent = null;
 
-        NodeSpecificParameters = new AI_Blackboard();
+        ParametersBB = new AI_Blackboard();
         SetParameters(behavior);
     }
 
@@ -53,7 +53,7 @@ public class BT_TreeNode
         Children = childrenMem.ToList();
         Parent = parent;
 
-        NodeSpecificParameters = new AI_Blackboard();
+        ParametersBB = new AI_Blackboard();
         SetParameters(behavior);
         
     }

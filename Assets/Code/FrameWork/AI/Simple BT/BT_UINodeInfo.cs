@@ -23,4 +23,9 @@ public class BT_UINodeInfo
         Parent = parent;
         Tree = tree;
     }
+
+    public void SetBehavior(BT_BBParameters behavior)
+    {
+       TreeNode = new BT_TreeNode(behavior);
+    }
 }

@@ -4,17 +4,29 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable,ExecuteInEditMode]
+[System.Serializable,ExecuteInEditMode,RequireComponent(typeof(AI_BlackboardComponent))]
 public class BT_UINode : MonoBehaviour
 {
     public BT_UINodeInfo NodeInfo;
-    public AI_Blackboard param;
-    
+
+    public AI_Blackboard BB { get { return bb.Blackboard; } set { bb.Blackboard = value; } }
+    [HideInInspector]
+    public AI_BlackboardComponent bb;
+
     private RectTransform rtr;
    
     void Start()
     {
-        param.Name = "Public Node parameters";
+        Init();
+    }
+
+    public void Init()
+    {
+        if (bb == null)
+            bb = GetComponent<AI_BlackboardComponent>();
+
+        BB.Name = "Public Node parameters";
+        NodeInfo.UINode = this;
     }
 
     void Update()
@@ -31,6 +43,22 @@ public class BT_UINode : MonoBehaviour
         NodeInfo.UINode = this;
         if(NodeInfo.Position != null)
             rtr.position = NodeInfo.Position;
-        param.objectPool = node.TreeNode.NodeSpecificParameters.objectPool;
+        BB.objectPool = node.TreeNode.ParametersBB.objectPool;
+    }
+
+    public void ChangeBehavior(BT_BBParameters behavior)
+    {
+        NodeInfo.SetBehavior(behavior);
+        BB = NodeInfo.TreeNode.ParametersBB;//BB stuff
+    }
+
+    public void SetParent()
+    {
+
+    }
+
+    public void AddChild()
+    {
+
     }
 }

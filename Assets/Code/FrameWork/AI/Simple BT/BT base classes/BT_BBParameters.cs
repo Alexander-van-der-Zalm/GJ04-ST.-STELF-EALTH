@@ -15,19 +15,19 @@ public class BT_BBParameters : BT_Behavior
     /// <returns>object</returns>
     public object this[string name]
     {
-        get { return currentAgent.Tree[CurrentID].NodeSpecificParameters[name]; }
-        set { currentAgent.Tree[CurrentID].NodeSpecificParameters[name] = value; }
+        get { return currentAgent.Tree[CurrentID].ParametersBB[name]; }
+        set { currentAgent.Tree[CurrentID].ParametersBB[name] = value; }
     }
 
     public object this[string name, BT_TreeNode node]
     {
-        get { return node.NodeSpecificParameters[name]; }
-        set { node.NodeSpecificParameters[name] = value; }
+        get { return node.ParametersBB[name]; }
+        set { node.ParametersBB[name] = value; }
     }
 
     public AI_AgentBBAccessParameter Par(string name)
     {
-        return (AI_AgentBBAccessParameter)currentAgent.Tree[CurrentID].NodeSpecificParameters[name];
+        return (AI_AgentBBAccessParameter)currentAgent.Tree[CurrentID].ParametersBB[name];
     }
 
     public object GetAgentObject(AI_AgentBBAccessParameter a, AI_Agent agent)
