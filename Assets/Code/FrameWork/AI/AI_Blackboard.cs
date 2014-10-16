@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,19 +7,30 @@ using System.Collections.Generic;
 public class AI_Blackboard 
 {
     public string Name = "AI BlackBoard";
+    [System.NonSerialized]
     public Dictionary<string, object> ObjectPool;
+    [System.NonSerialized]
     public Dictionary<string, bool> IsVariableObject;
 
-    //[SerializeField]
-    //private List<string> keys;
-    //[SerializeField]
-    //private List<object> values;
+    [SerializeField]
+    private List<string> keys;
+    [SerializeField]
+    private List<object> objects;
+    [SerializeField]
+    private List<bool> variableObjects;
+
+    #region Constructor
 
     public AI_Blackboard()
     {
         ObjectPool = new Dictionary<string,object>();
         IsVariableObject = new Dictionary<string, bool>();
+        Debug.Log("Constructor Called");
     }
+
+    #endregion
+
+    #region Property
 
     // Default getObject (runs in trouble when it doesnt exist)
     public object this[string name]
@@ -26,6 +38,8 @@ public class AI_Blackboard
         get { return GetObject(name); }
         set { SetObject(name, value); }
     }
+
+    #endregion
 
     #region Get
 
@@ -62,11 +76,17 @@ public class AI_Blackboard
 
     #endregion
 
+    #region Helpers
+
     private T DoesNotContainKey<T>(string name)
     {
         Debug.Log("AI_Blackboard.GetObject(" + name + ") does not exist in dictionary. Creating default.");
         return default(T);
     }
+
+    #endregion
+
+    #region Set
 
     /// <summary>
     /// Null makes it a variable type in the editorInspector
@@ -85,4 +105,42 @@ public class AI_Blackboard
         // Set the object
         ObjectPool[name] = obj;
     }
+
+    #endregion
+
+    #region Serialization Helpers
+
+    public void PrepareSerialization()
+    {
+        keys = ObjectPool.Keys.ToList();
+        objects = ObjectPool.Values.ToList();
+        variableObjects = IsVariableObject.Values.ToList();
+
+        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objects.Count + " bools: " + variableObjects.Count);
+    }
+
+    public void Reconstruct()
+    {
+        ObjectPool = new Dictionary<string, object>();
+        IsVariableObject = new Dictionary<string, bool>();
+
+        if (keys == null || keys.Count == 0)
+        {
+            Debug.Log("No preperation has happened");
+            return;
+        }
+
+        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objects.Count + " bools: " + variableObjects.Count);
+        
+        for (int i = 0; i < keys.Count;i++)
+        {
+            string key = keys[i];
+            object obj = objects[i];
+            bool isVar = variableObjects[i];
+            ObjectPool[key] = obj;
+            IsVariableObject[key] = isVar;
+        }
+    }
+
+    #endregion
 }

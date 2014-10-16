@@ -41,8 +41,8 @@ public class BT_TreeNode
         Children = new List<BT_TreeNode>();
         ID = -1337;
         Parent = null;
-
-        ParametersBB = new AI_Blackboard();
+        if (ParametersBB == null)
+            ParametersBB = new AI_Blackboard();
         SetParameters(behavior);
     }
 
@@ -53,7 +53,8 @@ public class BT_TreeNode
         Children = childrenMem.ToList();
         Parent = parent;
 
-        ParametersBB = new AI_Blackboard();
+        if (ParametersBB == null)
+            ParametersBB = new AI_Blackboard();
         SetParameters(behavior);
         
     }
@@ -63,7 +64,9 @@ public class BT_TreeNode
     {
         // Set behavior
         this.behavior = behavior;
-        
+
+        Debug.Log("SetParameters");
+
         // Reset blackboard
         ParametersBB = new AI_Blackboard();
         // Call the SetnodeParameters virtual method

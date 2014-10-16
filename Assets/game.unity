@@ -466,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blackboard:
     Name: AI BlackBoard
+    keys: []
+    variableObjects: 
 --- !u!1001 &279000185
 Prefab:
   m_ObjectHideFlags: 0
@@ -1005,6 +1007,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blackboard:
     Name: Public Node parameters
+    keys: []
+    variableObjects: 
 --- !u!114 &355800759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2945,7 +2949,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.75
+  orthographic size: 13.833333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3278,34 +3282,52 @@ MonoBehaviour:
             ID: 7
             ParametersBB:
               Name: AI BlackBoard
+              keys: []
+              variableObjects: 
           - Children: []
             ID: 1
             ParametersBB:
               Name: AI BlackBoard
+              keys: []
+              variableObjects: 
           ID: 2
           ParametersBB:
             Name: AI BlackBoard
+            keys: []
+            variableObjects: 
         - Children: []
           ID: 7
           ParametersBB:
             Name: AI BlackBoard
+            keys: []
+            variableObjects: 
         ID: 4
         ParametersBB:
           Name: AI BlackBoard
+          keys: []
+          variableObjects: 
       - Children: []
         ID: 7
         ParametersBB:
           Name: AI BlackBoard
+          keys: []
+          variableObjects: 
       ID: 6
       ParametersBB:
         Name: AI BlackBoard
+        keys: []
+        variableObjects: 
     - Children: []
       ID: 7
       ParametersBB:
         Name: AI BlackBoard
+        keys: []
+        variableObjects: 
     ID: 8
     ParametersBB:
       Name: AI BlackBoard
+      keys: []
+      variableObjects: 
 --- !u!114 &1373782132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3320,6 +3342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blackboard:
     Name: AI BlackBoard
+    keys: []
+    variableObjects: 
 --- !u!114 &1373782136
 MonoBehaviour:
   m_ObjectHideFlags: 0
