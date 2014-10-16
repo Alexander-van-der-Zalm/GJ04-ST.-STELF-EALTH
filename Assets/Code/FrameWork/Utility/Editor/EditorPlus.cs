@@ -96,9 +96,6 @@ public class EditorPlus : Editor
 
         if (isVariableObject)
         {
-            horizontal = true;
-            //EditorGUILayout.BeginHorizontal();
-
             // Get index from playerPrefs
             int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
 
