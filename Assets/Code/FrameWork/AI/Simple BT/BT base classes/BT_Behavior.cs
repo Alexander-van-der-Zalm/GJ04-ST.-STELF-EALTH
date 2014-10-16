@@ -90,7 +90,7 @@ public class BT_Behavior
         if (status != Status.Running)
             onTerminate(agent, id, status);
 
-        if (agent != null && agent.LocalBlackboard.GetObject<bool>(debugTree, true))
+        if (agent != null && (bool)agent.LocalBlackboard.GetObject(debugTree))
         {
             Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
         }

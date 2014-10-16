@@ -12,6 +12,25 @@ public class AI_BlackboardComponentEditor : EditorPlus
         AI_BlackboardComponent bbc = (AI_BlackboardComponent)target;
         AI_Blackboard bb = bbc.Blackboard;
 
+        if (bb == null)
+        {
+            using (new FixedWidthLabel("No blackboard exists. "))
+            {
+                if (GUILayout.Button("Create new BB."))
+                {
+                    bbc.Blackboard = new AI_Blackboard();
+                    bb = bbc.Blackboard;
+                }
+                else
+                    return;
+            }
+        }
+
+        //Debug.Log(bb.ObjectPool.Count);
+
+        //bb.Init();        
+                    
+
         GUILayout.BeginHorizontal();
         using (new FixedWidthLabel("Name: "))
             bb.Name = EditorGUILayout.TextField(bb.Name);

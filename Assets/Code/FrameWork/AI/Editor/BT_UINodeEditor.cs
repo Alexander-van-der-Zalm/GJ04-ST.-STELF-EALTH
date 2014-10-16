@@ -106,9 +106,9 @@ public class BT_UINodeEditor : EditorPlus
         
         EditorGUILayout.EndHorizontal();
 
-        if (nodeInfo.TreeNode != null && nodeInfo.TreeNode.ParametersBB.ObjectPool.Count > 0)
-            if(GUILayout.Button("Reset parameters"))
-                ResetParameters(uiNode, nodeInfo.TreeNode.Behavior);
+        //if (nodeInfo.TreeNode != null && nodeInfo.TreeNode.ParametersBB.ObjectPool.Count > 0)
+        //    if(GUILayout.Button("Reset parameters"))
+        //        ResetParameters(uiNode, nodeInfo.TreeNode.Behavior);
         //// Show all the fields from the selected class
         //var fields = l1[selectedClass].GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 

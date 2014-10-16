@@ -36,28 +36,28 @@ public class BT_TreeNode
     #region Constructor
 
     public BT_TreeNode(BT_BBParameters behavior)
+        :this(behavior,-1337,null,new List<BT_TreeNode>())
     {
-        // Set Parameters on behavior
-        Children = new List<BT_TreeNode>();
-        ID = -1337;
-        Parent = null;
+    }
+
+    public BT_TreeNode(BT_BBParameters behavior, int id, BT_TreeNode parent, List<BT_TreeNode> children)
+    {
+        Debug.Log("TreeNode");
+        ID = id;
+        Children = children.ToList();
+        Parent = parent;
+
         if (ParametersBB == null)
             ParametersBB = new AI_Blackboard();
         SetParameters(behavior);
     }
 
     public BT_TreeNode(BT_BBParameters behavior, int id, BT_TreeNode parent, params BT_TreeNode[] childrenMem)
-    {
-       
-        ID = id;
-        Children = childrenMem.ToList();
-        Parent = parent;
-
-        if (ParametersBB == null)
-            ParametersBB = new AI_Blackboard();
-        SetParameters(behavior);
-        
+        :this(behavior,id,parent,childrenMem.ToList())
+    {       
     }
+
+   
 
 
     private void SetParameters(BT_BBParameters behavior)
@@ -68,7 +68,7 @@ public class BT_TreeNode
         Debug.Log("SetParameters");
 
         // Reset blackboard
-        ParametersBB = new AI_Blackboard();
+        ParametersBB.Clear();// = new AI_Blackboard();
         // Call the SetnodeParameters virtual method
         // Sets the blackboard with default parameters
         behavior.SetNodeParameters(this);

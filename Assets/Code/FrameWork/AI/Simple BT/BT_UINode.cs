@@ -43,7 +43,7 @@ public class BT_UINode : MonoBehaviour
         NodeInfo.UINode = this;
         if(NodeInfo.Position != null)
             rtr.position = NodeInfo.Position;
-        BB.ObjectPool = node.TreeNode.ParametersBB.ObjectPool;
+        BB.ChangeValues(node.TreeNode.ParametersBB);
     }
 
     public void ChangeBehavior(BT_BBParameters behavior)
