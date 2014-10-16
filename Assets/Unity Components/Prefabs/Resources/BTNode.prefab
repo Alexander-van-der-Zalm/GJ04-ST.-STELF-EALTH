@@ -46,8 +46,8 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
-  - 114: {fileID: 11400010}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400010}
   - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: BTNode
@@ -177,9 +177,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeInfo:
-    Position: {x: 0, y: 0, z: 0}
-    UINode: {fileID: 0}
-  bb: {fileID: 0}
+    Position: {x: 5.39970398, y: -7.61380005, z: 0}
+    UINode: {fileID: 11400010}
+    Tree: {fileID: 0}
+    TreeNode:
+      Children: []
+      ID: 0
+      ParametersBB:
+        Name: AI BlackBoard
+        keys: []
+        variableObjects: 
+        instantiated: 0
+        prepared: 0
+    Depth: 0
+    Index: 0
+  bb: {fileID: 11400018}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,7 +256,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blackboard:
-    Name: AI BlackBoard
+    Name: Public Node parameters
+    keys: []
+    variableObjects: 
+    instantiated: 0
+    prepared: 0
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -21,7 +21,7 @@ public class BT_UINodeEditor : EditorPlus
 
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
+        base.OnInspectorGUI();
         
         // Get refs
         BT_UINode uiNode = (BT_UINode)target;

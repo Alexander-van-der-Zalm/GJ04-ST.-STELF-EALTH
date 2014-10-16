@@ -27,7 +27,7 @@ public class AI_Blackboard
     [SerializeField]
     private List<string> keys;
     [SerializeField]
-    private List<object> objects;
+    private List<object> objectsValues;
     [SerializeField]
     private List<bool> variableObjects;
     [SerializeField]
@@ -159,29 +159,29 @@ public class AI_Blackboard
     public void PrepareSerialization()
     {
         keys = ObjectPool.Keys.ToList();
-        objects = ObjectPool.Values.ToList();
+        objectsValues = ObjectPool.Values.ToList();
         variableObjects = IsVariableObject.Values.ToList();
         prepared = true;
 
-        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objects.Count + " bools: " + variableObjects.Count);
+        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
     }
 
     public void Reconstruct()
     {
         Init();
 
-        if (keys == null || objects == null || variableObjects == null)
+        if (keys == null || objectsValues == null || variableObjects == null)
         {
             Debug.Log("No preperation has happened");
             return;
         }
         Debug.Log("Reconstruct keys:" + prepared);
-        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objects.Count + " bools: " + variableObjects.Count);
+        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
         
         for (int i = 0; i < keys.Count;i++)
         {
             string key = keys[i];
-            object obj = objects[i];
+            object obj = objectsValues[i];
             bool isVar = variableObjects[i];
             ObjectPool[key] = obj;
             IsVariableObject[key] = isVar;

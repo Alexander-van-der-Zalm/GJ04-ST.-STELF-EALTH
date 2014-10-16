@@ -15,8 +15,8 @@ public class BT_TreeNode
     public int ID;
     public AI_Blackboard ParametersBB;
 
-    [SerializeField]
-    private BT_BBParameters behavior;
+    //[SerializeField]
+    public BT_BBParameters behaviorDoNotUse;
 
     #endregion
 
@@ -24,7 +24,7 @@ public class BT_TreeNode
 
     public BT_BBParameters Behavior
     {
-        get { return behavior; }
+        get { return behaviorDoNotUse; }
         set { SetParameters(value); }
     }
 
@@ -63,7 +63,7 @@ public class BT_TreeNode
     private void SetParameters(BT_BBParameters behavior)
     {
         // Set behavior
-        this.behavior = behavior;
+        this.behaviorDoNotUse = behavior;
 
         Debug.Log("SetParameters");
 
