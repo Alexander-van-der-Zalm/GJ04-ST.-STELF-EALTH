@@ -28,7 +28,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
 
         foreach (string str in keys)
         {
-            bb.objectPool[str] = EditorField(bb.objectPool[str], str);
+            bb.objectPool[str] = EditorField(bb.objectPool[str], str,false,true);
         }
 
         EditorGUI.indentLevel--;

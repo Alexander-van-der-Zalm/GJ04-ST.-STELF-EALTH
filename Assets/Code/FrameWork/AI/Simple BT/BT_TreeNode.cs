@@ -15,6 +15,7 @@ public class BT_TreeNode
     public int ID;
     public AI_Blackboard ParametersBB;
 
+    [SerializeField]
     private BT_BBParameters behavior;
 
     #endregion

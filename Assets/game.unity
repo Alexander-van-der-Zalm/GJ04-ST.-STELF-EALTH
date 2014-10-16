@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Blackboard:
-    Name: AI BlackBoard
+    Name: Public Node parameters
 --- !u!114 &355800759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,9 +1031,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NodeInfo:
-    Position: {x: 0, y: 0, z: 0}
-    UINode: {fileID: 0}
-  bb: {fileID: 0}
+    Position: {x: 5.39970398, y: -7.61380005, z: 0}
+    UINode: {fileID: 355800760}
+  bb: {fileID: 355800758}
 --- !u!114 &355800761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2744,6 +2744,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 1.25
       objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
+      propertyPath: Blackboard.Name
+      value: Public Node parameters
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
   m_RootGameObject: {fileID: 355800756}
@@ -2941,7 +2945,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.791667
+  orthographic size: 13.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3272,35 +3276,35 @@ MonoBehaviour:
         - Children:
           - Children: []
             ID: 7
-            NodeSpecificParameters:
+            ParametersBB:
               Name: AI BlackBoard
           - Children: []
             ID: 1
-            NodeSpecificParameters:
+            ParametersBB:
               Name: AI BlackBoard
           ID: 2
-          NodeSpecificParameters:
+          ParametersBB:
             Name: AI BlackBoard
         - Children: []
           ID: 7
-          NodeSpecificParameters:
+          ParametersBB:
             Name: AI BlackBoard
         ID: 4
-        NodeSpecificParameters:
+        ParametersBB:
           Name: AI BlackBoard
       - Children: []
         ID: 7
-        NodeSpecificParameters:
+        ParametersBB:
           Name: AI BlackBoard
       ID: 6
-      NodeSpecificParameters:
+      ParametersBB:
         Name: AI BlackBoard
     - Children: []
       ID: 7
-      NodeSpecificParameters:
+      ParametersBB:
         Name: AI BlackBoard
     ID: 8
-    NodeSpecificParameters:
+    ParametersBB:
       Name: AI BlackBoard
 --- !u!114 &1373782132
 MonoBehaviour:

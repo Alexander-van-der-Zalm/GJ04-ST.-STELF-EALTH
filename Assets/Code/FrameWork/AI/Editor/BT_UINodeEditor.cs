@@ -17,6 +17,7 @@ public class BT_UINodeEditor : EditorPlus
     private int selectedField = 0;
     private nodeType lastType = nodeType.Action;
     private nodeType curType = nodeType.Composite;
+    
 
     public override void OnInspectorGUI()
     {
@@ -31,7 +32,7 @@ public class BT_UINodeEditor : EditorPlus
 
         // Check if there is a behavior
        // Debug.Log(nodeInfo + " " + nodeInfo.TreeNode);
-        bool hasNode = nodeInfo.TreeNode.Behavior != null;
+        bool hasNode = nodeInfo.TreeNode == null ? false : nodeInfo.TreeNode.Behavior != null;
 
         // Todo:
         // Node Info properly

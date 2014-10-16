@@ -13,7 +13,7 @@ public class BT_UINodeInfo
     public int Depth { get; private set; }
     public int Index { get; private set; }
     public int ParentIndex { get { return Parent.Index; } }
-    public int ChildrenCount { get { return TreeNode.Children.Count; } }
+    public int ChildrenCount { get { return TreeNode == null ? 0 : TreeNode.Children.Count; } }
 
     public BT_UINodeInfo(int depth, int rank, BT_TreeNode node, BT_UINodeInfo parent, BT_BehaviorTree tree)
     {
