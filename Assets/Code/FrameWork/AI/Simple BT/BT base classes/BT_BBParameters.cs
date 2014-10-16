@@ -5,7 +5,7 @@ public class BT_BBParameters : BT_Behavior
 {
     public virtual void SetNodeParameters(BT_TreeNode node)
     {
-        Debug.Log("BT_BBParameters.SetNodeParameters not overriden??");
+        Debug.Log("BT_BBParameters.SetNodeParameters: No parameters to set");
     }
 
     /// <summary>

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections;
 using Framework.Collections;
 
-public class BT_QueueBase : BT_Action 
+public class BT_QueueBase : BT_Action
 {
     protected const string Queue = "QueueParameter";
 

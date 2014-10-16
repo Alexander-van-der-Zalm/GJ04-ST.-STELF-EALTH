@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using System;
 
 public class EditorPlus : Editor
 {
@@ -70,24 +71,54 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label = "", bool labelField = false, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected object EditorField(object value, string label = "", bool labelField = false, bool isObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
+        
+        bool horizontal = false;
+        string type;
+        object returnvalue = value;
+
         // Early case if empty
         if (value == null)
         {
-            EditorGUILayout.LabelField(label, "null", options);
-            return value;
+            if (!isObject)
+            {
+                EditorGUILayout.LabelField(label, "null", options);
+                return value;
+            }
+
+            horizontal = true;
+            EditorGUILayout.BeginHorizontal();
+
+            int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
+            string[] types = new string[] { "UnityEngine.Vector4", "UnityEngine.Vector3", "UnityEngine.Vector2", "System.Single", "System.Int32", "System.Boolean", "System.String", "AI_AgentBBAccessParameter" };
+            
+            index = EditorGUILayout.Popup(index, types);
+            PlayerPrefs.SetInt(label + GetInstanceID().ToString(), index);
+            
+            type = types[index];
+            Debug.Log(type);
+            Type defaultType = Type.GetType(type);
+            Debug.Log(defaultType.ToString());
+            if(defaultType.IsValueType)
+                value = Activator.CreateInstance(defaultType);
+            else
+            {
+                EditorGUILayout.LabelField(label, "null", options);
+                return value;
+            }
         }
+        else
+            type = value.GetType().ToString();
+
         if(labelField)
         {
             EditorGUILayout.LabelField(label, value.ToString(), options);
             return value;
         }
 
-        object returnvalue = value;
-
         // AutoHandle by type
-        switch(value.GetType().ToString())
+        switch (type)
         {
             case "UnityEngine.Vector4":
                 returnvalue = EditorGUILayout.Vector4Field(label, (Vector4)value, options);
@@ -115,15 +146,17 @@ public class EditorPlus : Editor
                 break;
             default:
                 EditorGUILayout.LabelField(label, value.ToString() + " - undifined", options);
-                //Debug.Log("EditorPlus.EditorField does not contain definition for " + value.GetType().ToString());
+                Debug.Log("EditorPlus.EditorField does not contain definition for " + value.GetType().ToString());
                 break;
 
         }
 
+        if (horizontal)
+            EditorGUILayout.EndHorizontal();
+
         return returnvalue;
     }
 
-
-
+    //string[] types = new string[100](){"UnityEngine.Vector4","UnityEngine.Vector3","UnityEngine.Vector2","System.Single","System.Int32","System.Boolean","System.String","AI_AgentBBAccessParameter"};
     #endregion
 }

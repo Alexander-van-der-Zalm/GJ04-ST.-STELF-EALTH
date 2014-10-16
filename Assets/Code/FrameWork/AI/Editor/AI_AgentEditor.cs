@@ -13,12 +13,13 @@ public class AI_AgentEditor : EditorPlus
         BT_BehaviorTree tree = agent.Tree;
 
         EditorGUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Show Tree"))
             BT_VisualizeTree.ShowTree(tree);
-            //tree.Sho
-            //Debug.Log("Implement BT_VisualizeTree.Show(tree);");
+        
         if (GUILayout.Button("Hide Tree"))
-            Debug.Log("Implement BT_VisualizeTree.Hide();");
+            BT_VisualizeTree.HideTree();
+
         EditorGUILayout.EndHorizontal();
             //target.GenerateBTVisualiser();
     }

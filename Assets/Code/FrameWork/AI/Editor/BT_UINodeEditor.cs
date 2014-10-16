@@ -65,8 +65,6 @@ public class BT_UINodeEditor : EditorPlus
             //EditorGUILayout.LabelField(nodeInfo.TreeNode.Behavior.ToString() + " " + (nodeInfo.TreeNode.Behavior==null).ToString());
         }
         EditorGUI.indentLevel--;
-
-
         
 
         EditorGUILayout.Separator();
@@ -88,7 +86,7 @@ public class BT_UINodeEditor : EditorPlus
 
         // Get all the classes from the assembly that inherent from the selected BT node type
         var q1 = from t in Assembly.GetAssembly(typeof(BT_Behavior)).GetTypes()
-                 where t.IsClass && (t.IsSubclassOf(type) )//|| t == type) // No more equal types
+                 where t.IsClass && (t.IsSubclassOf(type))// && !t.GetInterfaces().Contains(typeof(IReflectionIgnore)))//t == type) // No more equal types
                  select t;
 
         var q2 = from t in q1
