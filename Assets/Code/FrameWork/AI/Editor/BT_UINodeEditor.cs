@@ -54,7 +54,7 @@ public class BT_UINodeEditor : EditorPlus
         EditorGUILayout.Separator();
 
         EditorGUILayout.LabelField("Behavior Info: ");
-        EditorGUI.indentLevel++;
+        EditorGUI.indentLevel++; 
         if (nodeInfo.TreeNode.Behavior != null)
         {
             EditorGUILayout.LabelField("Name:         "+nodeInfo.TreeNode.Behavior.Description.Name);
@@ -106,7 +106,7 @@ public class BT_UINodeEditor : EditorPlus
         
         EditorGUILayout.EndHorizontal();
 
-        if(nodeInfo.TreeNode.ParametersBB.objectPool.Count > 0)
+        if(nodeInfo.TreeNode.ParametersBB.ObjectPool.Count > 0)
             if(GUILayout.Button("Reset parameters"))
                 ResetParameters(uiNode, nodeInfo.TreeNode.Behavior);
         //// Show all the fields from the selected class

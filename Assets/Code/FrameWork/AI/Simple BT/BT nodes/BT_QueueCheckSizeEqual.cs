@@ -20,7 +20,8 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
     {
         this[Queue, node] = new AI_AgentBBAccessParameter();
         this[SizeObjPar, node] = new AI_AgentBBAccessParameter();
-        this[Obj, node] = null;
+        //this[Obj, node] = null;
+        node.ParametersBB[Obj] = null;
         this[IsObject, node] = false;
     }
 

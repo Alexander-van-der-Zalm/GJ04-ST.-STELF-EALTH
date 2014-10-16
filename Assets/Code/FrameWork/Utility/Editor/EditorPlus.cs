@@ -75,9 +75,8 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label = "", bool labelField = false, bool isObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected object EditorField(object value, string label = "", bool labelField = false, bool isVariableObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
-        
         bool horizontal = false;
         string type;
         object returnvalue = value;
@@ -86,35 +85,44 @@ public class EditorPlus : Editor
             PopulateTypeArrays();
 
         // Early case if empty
-        if (value == null)
+        if (value == null && !isVariableObject)
         {
-            if (!isObject)
-            {
-                EditorGUILayout.LabelField(label, "null", options);
-                return value;
-            }
+            EditorGUILayout.LabelField(label, "null", options);
+            return value;
+        }
 
-            //horizontal = true;
-            //EditorGUILayout.BeginHorizontal();
+        if (isVariableObject)
+        {
+            horizontal = true;
+            EditorGUILayout.BeginHorizontal();
 
             int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
-            index = EditorGUILayout.Popup(label,index, ValidTypeStrings);
+            using(new FixedWidthLabel(label))
+                index = EditorGUILayout.Popup("", index, ValidTypeStrings);
             PlayerPrefs.SetInt(label + GetInstanceID().ToString(), index);
+            label = "";
 
             type = ValidTypeStrings[index];
 
             Type selectedType = ValidTypes[index];
-            
-            if (selectedType.IsValueType)
+
+            if(value == null || value.GetType() != selectedType)
             {
-                value = Activator.CreateInstance(selectedType);
-                Debug.Log(value.ToString());
-                return value;
-            }
-            else
-            {
-                EditorGUILayout.LabelField(label, "null", options);
-                return value;
+                if (selectedType.IsValueType)
+                {
+                    value = Activator.CreateInstance(selectedType);
+                    if (selectedType == typeof(string))
+                    {
+                        value = "string";
+                        Debug.Log("Ik kom er wel");
+                    }
+                        
+                }
+                else
+                {
+                    EditorGUILayout.LabelField(label, "null", options);
+                    return value;
+                }
             }
         }
         else
@@ -162,6 +170,9 @@ public class EditorPlus : Editor
 
         if (horizontal)
             EditorGUILayout.EndHorizontal();
+
+        if (isVariableObject && !value.Equals(returnvalue))
+            Debug.Log("EDITORPKLUS: "+type + " " + value + " " + returnvalue);
 
         return returnvalue;
     }
