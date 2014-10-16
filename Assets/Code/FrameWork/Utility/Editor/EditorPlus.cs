@@ -77,9 +77,10 @@ public class EditorPlus : Editor
 
     protected object EditorField(object value, string label = "", bool labelField = false, bool isVariableObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
-        bool horizontal = false;
+        // Possibly make nice with http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
         string type;
         object returnvalue = value;
+        FixedWidthLabel fixedWidth = null;
 
         if (ValidTypeStrings==null)
             PopulateTypeArrays();
@@ -91,32 +92,37 @@ public class EditorPlus : Editor
             return value;
         }
 
+        #region Handle variable object
+
         if (isVariableObject)
         {
             horizontal = true;
-            EditorGUILayout.BeginHorizontal();
+            //EditorGUILayout.BeginHorizontal();
 
+            // Get index from playerPrefs
             int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
-            using(new FixedWidthLabel(label))
-                index = EditorGUILayout.Popup("", index, ValidTypeStrings);
+
+            fixedWidth = new FixedWidthLabel(label);
+            float popUpWidht = GUI.skin.label.CalcSize(new GUIContent(ValidTypeStrings[index])).x + 10;
+            index = EditorGUILayout.Popup("", index, ValidTypeStrings, GUILayout.Width(popUpWidht));
+            
+            // Save index to playerprefs
             PlayerPrefs.SetInt(label + GetInstanceID().ToString(), index);
             label = "";
 
             type = ValidTypeStrings[index];
-
             Type selectedType = ValidTypes[index];
 
-            if(value == null || value.GetType() != selectedType)
+            #region set Default type
+            if (value == null || value.GetType() != selectedType)
             {
                 if (selectedType.IsValueType)
                 {
                     value = Activator.CreateInstance(selectedType);
-                    if (selectedType == typeof(string))
-                    {
-                        value = "string";
-                        Debug.Log("Ik kom er wel");
-                    }
-                        
+                }
+                else if(selectedType == typeof(string))
+                {
+                    value = "";
                 }
                 else
                 {
@@ -124,11 +130,14 @@ public class EditorPlus : Editor
                     return value;
                 }
             }
+            #endregion
         }
         else
             type = value.GetType().ToString();
 
-        if(labelField)
+        #endregion
+
+        if (labelField)
         {
             EditorGUILayout.LabelField(label, value.ToString(), options);
             return value;
@@ -168,18 +177,18 @@ public class EditorPlus : Editor
 
         }
 
-        if (horizontal)
-            EditorGUILayout.EndHorizontal();
-
-        if (isVariableObject && !value.Equals(returnvalue))
-            Debug.Log("EDITORPKLUS: "+type + " " + value + " " + returnvalue);
+        if (fixedWidth != null)
+        {
+            fixedWidth.Dispose();
+        }
+            //EditorGUILayout.EndHorizontal();
 
         return returnvalue;
     }
 
     private void PopulateTypeArrays()
     {
-        ValidTypes =  new Type[]{typeof(UnityEngine.Vector4),typeof(UnityEngine.Vector3),typeof(UnityEngine.Vector2),typeof(float),typeof(int),typeof(bool),typeof(string)};
+        ValidTypes = new Type[] { typeof(int), typeof(float), typeof(bool), typeof(string), typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector4) };
         var strings = from t in ValidTypes
                       select t.ToString();
         ValidTypeStrings = strings.ToArray();

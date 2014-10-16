@@ -12,8 +12,8 @@ public class FixedWidthLabel : IDisposable
     {//						state changes are applied here.
         EditorGUILayout.BeginHorizontal();// create a new horizontal group
         EditorGUILayout.LabelField(label,
-            GUILayout.Width(GUI.skin.label.CalcSize(label).x +// actual label width
-                9 * EditorGUI.indentLevel));//indentation from the left side. It's 9 pixels per indent level
+            GUILayout.Width(GUI.skin.label.CalcSize(label).x + 10 +// actual label width
+                10 * EditorGUI.indentLevel));//indentation from the left side. It's 9 pixels per indent level
 
         indentReset = new ZeroIndent();//helper class to have no indentation after the label
     }

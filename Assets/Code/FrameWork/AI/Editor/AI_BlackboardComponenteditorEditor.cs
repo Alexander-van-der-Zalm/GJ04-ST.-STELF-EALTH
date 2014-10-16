@@ -29,8 +29,8 @@ public class AI_BlackboardComponentEditor : EditorPlus
         foreach (string str in keys)
         {
             bool variableObject = bb.IsVariableObject[str];
-            object original = bb[str];
-            object value = EditorField(original, str, false, variableObject);
+            //object original = bb[str];
+            object value = EditorField(bb[str], str, false, variableObject);
 
             // Set value
             bb.SetObject(str, value);
