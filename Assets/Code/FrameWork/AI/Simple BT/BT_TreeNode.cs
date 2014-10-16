@@ -13,7 +13,6 @@ public class BT_TreeNode
     public BT_TreeNode Parent;
     public List<BT_TreeNode> Children;
     public int ID;
-    
     public AI_Blackboard ParametersBB;
 
     private BT_BBParameters behavior;
@@ -35,7 +34,7 @@ public class BT_TreeNode
 
     #region Constructor
 
-    public BT_TreeNode(BT_Behavior behavior)
+    public BT_TreeNode(BT_BBParameters behavior)
     {
         // Set Parameters on behavior
         Children = new List<BT_TreeNode>();
@@ -46,7 +45,7 @@ public class BT_TreeNode
         SetParameters(behavior);
     }
 
-    public BT_TreeNode(BT_Behavior behavior, int id, BT_TreeNode parent, params BT_TreeNode[] childrenMem)
+    public BT_TreeNode(BT_BBParameters behavior, int id, BT_TreeNode parent, params BT_TreeNode[] childrenMem)
     {
        
         ID = id;
@@ -59,23 +58,16 @@ public class BT_TreeNode
     }
 
 
-    private void SetParameters(BT_Behavior behavior)
+    private void SetParameters(BT_BBParameters behavior)
     {
-        Type type = behavior.GetType();
-        if (!typeof(BT_BBParameters).IsAssignableFrom(type))
-        {
-            Debug.LogError("BT_TreeNode.SetParameters needs an input derived from BT_BBParameters");
-            return;
-        }
+        // Set behavior
+        this.behavior = behavior;
         
-        this.behavior = (BT_BBParameters)behavior;
-
-        BT_BBParameters beh = (BT_BBParameters)behavior;
-
-        // Call the SetnodeParameters 
-        beh.SetNodeParameters(this);
-
-        //Debug.Log("has parameters " + type);
+        // Reset blackboard
+        ParametersBB = new AI_Blackboard();
+        // Call the SetnodeParameters virtual method
+        // Sets the blackboard with default parameters
+        behavior.SetNodeParameters(this);
     }
 
     #endregion

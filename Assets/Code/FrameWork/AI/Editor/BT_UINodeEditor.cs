@@ -67,9 +67,7 @@ public class BT_UINodeEditor : EditorPlus
         EditorGUI.indentLevel--;
 
 
-        if(nodeInfo.TreeNode.ParametersBB.objectPool.Count > 0)
-            if(GUILayout.Button("Show Parameters"))
-                ShowParameters();
+        
 
         EditorGUILayout.Separator();
         EditorGUILayout.LabelField("Temp replace node:");
@@ -78,7 +76,7 @@ public class BT_UINodeEditor : EditorPlus
 
         curType = (nodeType)EditorGUILayout.Popup((int)curType, Enum.GetNames(typeof(nodeType)));
 
-        nodeType ntype = hasNode ? nodeInfo.TreeNode.Behavior.Description.Type : curType;
+        nodeType ntype = curType;//hasNode ? nodeInfo.TreeNode.Behavior.Description.Type : 
         Type type = GetType(ntype);
 
         if (lastType != ntype)
@@ -104,16 +102,14 @@ public class BT_UINodeEditor : EditorPlus
         var l1 = q1.ToList();
         if (GUILayout.Button("Replace node"))
         {
-           // nodeInfo.TreeNode.Behavior =
-            nodeInfo.SetBehavior((BT_BBParameters)Activator.CreateInstance(l1[selectedClass]));
+            ResetParameters(uiNode,(BT_BBParameters)Activator.CreateInstance(l1[selectedClass]));
         }
-            
         
         EditorGUILayout.EndHorizontal();
-        
-        
-        
 
+        if(nodeInfo.TreeNode.ParametersBB.objectPool.Count > 0)
+            if(GUILayout.Button("Reset parameters"))
+                ResetParameters(uiNode, nodeInfo.TreeNode.Behavior);
         //// Show all the fields from the selected class
         //var fields = l1[selectedClass].GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
@@ -127,9 +123,9 @@ public class BT_UINodeEditor : EditorPlus
         //selectedField = EditorGUILayout.Popup(selectedField, fieldList.ToArray());
     }
 
-    private void ShowParameters()
+    private void ResetParameters(BT_UINode uiNode, BT_BBParameters behavior)
     {
-        
+        uiNode.ChangeBehavior(behavior);
     }
 
     private Type GetType(nodeType bT_NodeType)
