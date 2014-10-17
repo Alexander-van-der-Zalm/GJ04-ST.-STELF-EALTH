@@ -163,7 +163,7 @@ public class AI_Blackboard
         variableObjects = IsVariableObject.Values.ToList();
         prepared = true;
 
-        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+       // Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
     }
 
     public void Reconstruct()
@@ -172,11 +172,11 @@ public class AI_Blackboard
 
         if (keys == null || objectsValues == null || variableObjects == null)
         {
-            Debug.Log("No preperation has happened");
+            //Debug.Log("No preperation has happened");
             return;
         }
-        Debug.Log("Reconstruct keys:" + prepared);
-        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+       // Debug.Log("Reconstruct keys:" + prepared);
+        //Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
         
         for (int i = 0; i < keys.Count;i++)
         {

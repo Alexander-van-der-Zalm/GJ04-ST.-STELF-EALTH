@@ -7,9 +7,8 @@ using System.Collections.Generic;
 public class NodeEditorWindow : EditorWindow 
 {
     // Fields
-    // Replace by custom type
-
-    List<NodeWindow> windows;
+    [SerializeField]
+    private List<NodeWindow> windows;
 
     // Constructor
     [MenuItem("CustomTools/Node Editor")]
@@ -23,10 +22,65 @@ public class NodeEditorWindow : EditorWindow
     {
         //if (windows != null)
         //    return;
-
-        windows = new List<NodeWindow>();
+        Debug.Log("INIT");
+        //if(windows == null)
+            windows = new List<NodeWindow>();
         generateTestNodes();
     }
+
+    // OnGui
+    void OnGUI()
+    {
+        // Check if tree is selected
+        //GUILayout.Label("Selected: " + Selection.activeGameObject.name);
+        Debug.Log(Selection.activeGameObject == null ? "empty" : Selection.activeGameObject.name);
+        //if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<)
+        GUILayout.Space(100);
+
+        if (GUILayout.Button("Create new node"))
+            addTestNode();
+
+        // Draw parent to child connections
+        DrawNodeConnections();
+
+        // Draw the windows
+        DrawWindows();
+        
+        // Draw Type Creation Buttons
+        DrawButtons();
+    }
+
+    private void DrawButtons()
+    {
+       // TODO
+    }
+
+    private void DrawNodeConnections()
+    {
+        for (int i = 0; i < windows.Count; i++)
+        {
+            windows[i].DrawConnectionLines();
+        }
+    }
+
+    private void DrawWindows()
+    {
+        BeginWindows();
+        for (int i = 0; i < windows.Count; i++)
+        {
+            windows[i].DrawWindow();
+        }
+        EndWindows();
+    }
+
+    public static void DrawNodeCurve(Vector2 parentPos, Vector2 childPos, Vector2 parentTangent, Vector2 childTangent)
+    {
+        // Todo Shadow
+        Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, Color.black, null, 1);
+    }
+
+
+    #region Test
 
     private void generateTestNodes()
     {
@@ -44,56 +98,21 @@ public class NodeEditorWindow : EditorWindow
             windows[i].Init(i, topLeftPos[i], width, height, "TestNode " + i);
         }
 
-        windows[0].AddChildren(windows[1], windows[2]);
+        //windows[0].AddChildren(windows[1], windows[2]);
     }
 
     private void addTestNode()
     {
         windows.Add(NodeWindow.CreateInstance<NodeWindow>());
-        int id = windows.Count-1;
+        int id = windows.Count - 1;
         windows[id].Init(id, new Vector2(10, 10), 100, 100, "TestNode " + id);
     }
 
-    // OnGui
-    void OnGUI()
+    #endregion
+
+
+    void OnDestroy()
     {
-        // Check if tree is selected
-        GUILayout.Label("Test string");
-        GUILayout.Space(100);
-
-        if (GUILayout.Button("Create new node"))
-            addTestNode();
-
-        // Draw parent to child connections
-        for (int i = 0; i < windows.Count; i++)
-        {
-            windows[i].DrawConnectionLines();
-        }
-
-        // Draw the windows
-        BeginWindows();
-        for(int i = 0; i < windows.Count; i++)
-        {
-            windows[i].DrawWindow();
-        }
-        EndWindows();
-
-        // Draw Type Buttons
+        Debug.Log("Window Destroy");
     }
-
-    public static void DrawNodeCurve(Vector2 parentPos, Vector2 childPos, Vector2 parentTangent, Vector2 childTangent)
-    {
-        // Todo Shadow
-        Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, Color.black, null, 1);
-    }
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class NodeWindow :ScriptableObject
 {
     [SerializeField]
@@ -40,9 +41,9 @@ public class NodeWindow :ScriptableObject
     {
         WindowID = id;
         Rect = startPos;
-        Children = new List<NodeWindow>();
         Header = header;
-        //Children = new List<NodeWindow>();
+        Children = new List<NodeWindow>();
+        hideFlags = HideFlags.HideAndDontSave;
     }
 
     #endregion
@@ -54,7 +55,7 @@ public class NodeWindow :ScriptableObject
 
     public void RemoveChildren(params NodeWindow[] windows)
     {
-        for(int i = 0; i < windows.Length; i++)
+        for (int i = 0; i < windows.Length; i++)
         {
             Children.Remove(windows[i]);
         }
@@ -62,7 +63,7 @@ public class NodeWindow :ScriptableObject
 
     public void DrawWindow()
     {
-        Rect = GUI.Window(WindowID, Rect, DrawWindowContent, header);
+        Rect = GUI.Window(WindowID, Rect, DrawWindowContent, new GUIContent(header.text+" ID " + windowId));
     }
 
     private void DrawWindowContent(int id)
