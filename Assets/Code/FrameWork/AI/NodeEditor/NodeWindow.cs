@@ -6,6 +6,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class NodeWindow :ScriptableObject
 {
+    #region Fields
+
     [SerializeField]
     private Rect rect;
 
@@ -17,6 +19,8 @@ public class NodeWindow :ScriptableObject
 
     [SerializeField]
     private List<NodeWindow> children;
+
+    #endregion
 
     #region Properties
 
@@ -48,6 +52,8 @@ public class NodeWindow :ScriptableObject
 
     #endregion
 
+    #region Children
+
     public void AddChildren(params NodeWindow[] windows)
     {
         Children.AddRange(windows.ToList());
@@ -61,12 +67,14 @@ public class NodeWindow :ScriptableObject
         }
     }
 
+    #endregion
+
     public void DrawWindow()
     {
         Rect = GUI.Window(WindowID, Rect, DrawWindowContent, new GUIContent(header.text+" ID " + windowId));
     }
 
-    private void DrawWindowContent(int id)
+    protected void DrawWindowContent(int id)
     {
         GUI.DragWindow();
         GUILayout.Label("Content goes in here");
@@ -74,10 +82,12 @@ public class NodeWindow :ScriptableObject
 
     public void DrawConnectionLines()
     {
-        float tangentStrength = 10;
+        // Draw a beziercurve for each child
         foreach(NodeWindow child in Children)
         {
-            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos, ParentPos + tangentStrength * Vector2.up * -1, child.ChildPos + tangentStrength * Vector2.up);
+            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos, 
+                                           ParentPos + NodeEditorWindow.TangentStrength * Vector2.up,
+                                           child.ChildPos + NodeEditorWindow.TangentStrength * -1 * Vector2.up);
         }
     }
 }

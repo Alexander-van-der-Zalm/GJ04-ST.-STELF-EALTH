@@ -10,6 +10,9 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     private List<NodeWindow> windows;
 
+    // Settings
+    public static float TangentStrength = 80;
+
     // Constructor
     [MenuItem("CustomTools/Node Editor")]
     public static void ShowWindow()
@@ -28,15 +31,17 @@ public class NodeEditorWindow : EditorWindow
         generateTestNodes();
     }
 
+    #region GUI
     // OnGui
     void OnGUI()
     {
         // Check if tree is selected
         //GUILayout.Label("Selected: " + Selection.activeGameObject.name);
-        Debug.Log(Selection.activeGameObject == null ? "empty" : Selection.activeGameObject.name);
-        //if(Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<)
-        GUILayout.Space(100);
-
+        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_BehaviorTree>() != null)
+        {
+            Debug.Log("Tree selected XS");
+        }
+            
         if (GUILayout.Button("Create new node"))
             addTestNode();
 
@@ -73,12 +78,22 @@ public class NodeEditorWindow : EditorWindow
         EndWindows();
     }
 
+    #endregion
+
+    #region Static helpers
+
     public static void DrawNodeCurve(Vector2 parentPos, Vector2 childPos, Vector2 parentTangent, Vector2 childTangent)
     {
         // Todo Shadow
         Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, Color.black, null, 1);
     }
 
+    #endregion
+
+    public void ConnectChild(int parentIndex, int childIndex)
+    {
+        windows[parentIndex].AddChildren(windows[childIndex]);
+    }
 
     #region Test
 
@@ -98,7 +113,7 @@ public class NodeEditorWindow : EditorWindow
             windows[i].Init(i, topLeftPos[i], width, height, "TestNode " + i);
         }
 
-        //windows[0].AddChildren(windows[1], windows[2]);
+        windows[0].AddChildren(windows[1], windows[2]);
     }
 
     private void addTestNode()
