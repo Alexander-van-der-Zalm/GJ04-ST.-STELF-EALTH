@@ -7,11 +7,14 @@ public class NodeWindow :ScriptableObject
 {
     [SerializeField]
     private Rect rect;
+
     [SerializeField]
     private GUIContent header;
+
     [SerializeField]
     private int windowId;
 
+    [SerializeField]
     private List<NodeWindow> children;
 
     #region Properties
@@ -26,7 +29,8 @@ public class NodeWindow :ScriptableObject
 
     #endregion
 
-    
+    #region Init
+
     public void Init(int id, Vector2 topleft, float width, float height, string header)
     {
         Init(id,new Rect(topleft.x,topleft.y,width,height),new GUIContent(header));
@@ -40,6 +44,8 @@ public class NodeWindow :ScriptableObject
         Header = header;
         //Children = new List<NodeWindow>();
     }
+
+    #endregion
 
     public void AddChildren(params NodeWindow[] windows)
     {

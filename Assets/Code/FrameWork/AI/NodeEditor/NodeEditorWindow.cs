@@ -47,11 +47,22 @@ public class NodeEditorWindow : EditorWindow
         windows[0].AddChildren(windows[1], windows[2]);
     }
 
+    private void addTestNode()
+    {
+        windows.Add(NodeWindow.CreateInstance<NodeWindow>());
+        int id = windows.Count-1;
+        windows[id].Init(id, new Vector2(10, 10), 100, 100, "TestNode " + id);
+    }
+
     // OnGui
     void OnGUI()
     {
         // Check if tree is selected
         GUILayout.Label("Test string");
+        GUILayout.Space(100);
+
+        if (GUILayout.Button("Create new node"))
+            addTestNode();
 
         // Draw parent to child connections
         for (int i = 0; i < windows.Count; i++)
