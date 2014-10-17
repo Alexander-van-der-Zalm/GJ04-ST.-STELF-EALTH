@@ -17,6 +17,7 @@ public class BT_UINodeEditor : EditorPlus
     private int selectedField = 0;
     private nodeType lastType = nodeType.Action;
     private nodeType curType = nodeType.Composite;
+    
 
     public override void OnInspectorGUI()
     {
@@ -31,7 +32,7 @@ public class BT_UINodeEditor : EditorPlus
 
         // Check if there is a behavior
        // Debug.Log(nodeInfo + " " + nodeInfo.TreeNode);
-        bool hasNode = nodeInfo.TreeNode.Behavior != null;
+        bool hasNode = nodeInfo.TreeNode == null ? false : nodeInfo.TreeNode.Behavior != null;
 
         // Todo:
         // Node Info properly
@@ -53,7 +54,7 @@ public class BT_UINodeEditor : EditorPlus
         EditorGUILayout.Separator();
 
         EditorGUILayout.LabelField("Behavior Info: ");
-        EditorGUI.indentLevel++;
+        EditorGUI.indentLevel++; 
         if (nodeInfo.TreeNode.Behavior != null)
         {
             EditorGUILayout.LabelField("Name:         "+nodeInfo.TreeNode.Behavior.Description.Name);
@@ -105,7 +106,7 @@ public class BT_UINodeEditor : EditorPlus
         
         EditorGUILayout.EndHorizontal();
 
-        if(nodeInfo.TreeNode.ParametersBB.objectPool.Count > 0)
+        if(nodeInfo.TreeNode.ParametersBB.ObjectPool.Count > 0)
             if(GUILayout.Button("Reset parameters"))
                 ResetParameters(uiNode, nodeInfo.TreeNode.Behavior);
         //// Show all the fields from the selected class

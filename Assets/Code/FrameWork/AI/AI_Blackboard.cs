@@ -6,11 +6,18 @@ using System.Collections.Generic;
 public class AI_Blackboard 
 {
     public string Name = "AI BlackBoard";
-    public Dictionary<string, object> objectPool = new Dictionary<string,object>();
+    public Dictionary<string, object> ObjectPool;
+    public Dictionary<string, bool> IsVariableObject;
+
+    //[SerializeField]
+    //private List<string> keys;
+    //[SerializeField]
+    //private List<object> values;
 
     public AI_Blackboard()
     {
-
+        ObjectPool = new Dictionary<string,object>();
+        IsVariableObject = new Dictionary<string, bool>();
     }
 
     // Default getObject (runs in trouble when it doesnt exist)
@@ -20,36 +27,40 @@ public class AI_Blackboard
         set { SetObject(name, value); }
     }
 
+    #region Get
+
     public T GetObject<T>(string name, bool createIfNonexistant = true)
     {
         // Early exit if non-existant
-        if (!objectPool.ContainsKey(name))
+        if (!ObjectPool.ContainsKey(name))
         {
             if (createIfNonexistant)
-                objectPool[name] = default(T);
+                ObjectPool[name] = default(T);
             else
                 return DoesNotContainKey<T>(name);
         }
-        return (T)objectPool[name];
+        return (T)ObjectPool[name];
     }
 
     public object GetObject(string name)
     {
-        if (!objectPool.ContainsKey(name))
+        if (!ObjectPool.ContainsKey(name))
             return DoesNotContainKey<object>(name);
 
-        return objectPool[name];
+        return ObjectPool[name];
        // return GetObject<object>(name, createIfNonexistant);
     }
 
     public object GetObjectOrSetDefault(string name, object newDefault)
     {
-        if (objectPool.ContainsKey(name))
-            return objectPool[name];
+        if (ObjectPool.ContainsKey(name))
+            return ObjectPool[name];
 
-        objectPool[name] = newDefault;
+        SetObject(name,newDefault);
         return newDefault;
     }
+
+    #endregion
 
     private T DoesNotContainKey<T>(string name)
     {
@@ -57,8 +68,21 @@ public class AI_Blackboard
         return default(T);
     }
 
+    /// <summary>
+    /// Null makes it a variable type in the editorInspector
+    /// </summary>
     public void SetObject(string name, object obj)
     {
-        objectPool[name] = obj;
+         // Null makes it a variable type in the editorInspector
+        if (!IsVariableObject.ContainsKey(name))
+        {
+            if (obj == null)
+                IsVariableObject[name] = true;
+            else
+                IsVariableObject[name] = false;
+        }
+
+        // Set the object
+        ObjectPool[name] = obj;
     }
 }

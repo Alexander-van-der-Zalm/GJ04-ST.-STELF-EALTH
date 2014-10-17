@@ -2,9 +2,13 @@
 using System.Collections;
 using UnityEditor;
 using System;
+using System.Linq;
 
 public class EditorPlus : Editor
 {
+    private static Type[] ValidTypes;
+    private static string[] ValidTypeStrings;
+
     #region SavedFoldout
 
     /// <summary>
@@ -71,47 +75,66 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label = "", bool labelField = false, bool isObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected object EditorField(object value, string label = "", bool labelField = false, bool isVariableObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
-        
-        bool horizontal = false;
+        // Possibly make nice with http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
         string type;
         object returnvalue = value;
+        FixedWidthLabel fixedWidth = null;
+
+        if (ValidTypeStrings==null)
+            PopulateTypeArrays();
 
         // Early case if empty
-        if (value == null)
+        if (value == null && !isVariableObject)
         {
-            if (!isObject)
-            {
-                EditorGUILayout.LabelField(label, "null", options);
-                return value;
-            }
+            EditorGUILayout.LabelField(label, "null", options);
+            return value;
+        }
 
-            horizontal = true;
-            EditorGUILayout.BeginHorizontal();
+        #region Handle variable object
 
+        if (isVariableObject)
+        {
+            // Get index from playerPrefs
             int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
-            string[] types = new string[] { "UnityEngine.Vector4", "UnityEngine.Vector3", "UnityEngine.Vector2", "System.Single", "System.Int32", "System.Boolean", "System.String", "AI_AgentBBAccessParameter" };
+
+            fixedWidth = new FixedWidthLabel(label);
+            float popUpWidht = GUI.skin.label.CalcSize(new GUIContent(ValidTypeStrings[index])).x + 10;
+            index = EditorGUILayout.Popup("", index, ValidTypeStrings, GUILayout.Width(popUpWidht));
             
-            index = EditorGUILayout.Popup(index, types);
+            // Save index to playerprefs
             PlayerPrefs.SetInt(label + GetInstanceID().ToString(), index);
-            
-            type = types[index];
-            Debug.Log(type);
-            Type defaultType = Type.GetType(type);
-            Debug.Log(defaultType.ToString());
-            if(defaultType.IsValueType)
-                value = Activator.CreateInstance(defaultType);
-            else
+            label = "";
+
+            type = ValidTypeStrings[index];
+            Type selectedType = ValidTypes[index];
+
+            #region set Default type
+            if (value == null || value.GetType() != selectedType)
             {
-                EditorGUILayout.LabelField(label, "null", options);
-                return value;
+                if (selectedType.IsValueType)
+                {
+                    value = Activator.CreateInstance(selectedType);
+                }
+                else if(selectedType == typeof(string))
+                {
+                    value = "";
+                }
+                else
+                {
+                    EditorGUILayout.LabelField(label, "null", options);
+                    return value;
+                }
             }
+            #endregion
         }
         else
             type = value.GetType().ToString();
 
-        if(labelField)
+        #endregion
+
+        if (labelField)
         {
             EditorGUILayout.LabelField(label, value.ToString(), options);
             return value;
@@ -145,16 +168,27 @@ public class EditorPlus : Editor
                 AI_AgentBlackBoardAccessParameterDrawer.CustomDraw(label,(AI_AgentBBAccessParameter)value);
                 break;
             default:
-                EditorGUILayout.LabelField(label, value.ToString() + " - undifined", options);
+                EditorGUILayout.LabelField(label, value.ToString() + " - undefined", options);
                 Debug.Log("EditorPlus.EditorField does not contain definition for " + value.GetType().ToString());
                 break;
 
         }
 
-        if (horizontal)
-            EditorGUILayout.EndHorizontal();
+        if (fixedWidth != null)
+        {
+            fixedWidth.Dispose();
+        }
+            //EditorGUILayout.EndHorizontal();
 
         return returnvalue;
+    }
+
+    private void PopulateTypeArrays()
+    {
+        ValidTypes = new Type[] { typeof(int), typeof(float), typeof(bool), typeof(string), typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector4) };
+        var strings = from t in ValidTypes
+                      select t.ToString();
+        ValidTypeStrings = strings.ToArray();
     }
 
     //string[] types = new string[100](){"UnityEngine.Vector4","UnityEngine.Vector3","UnityEngine.Vector2","System.Single","System.Int32","System.Boolean","System.String","AI_AgentBBAccessParameter"};

@@ -19,23 +19,28 @@ public class AI_BlackboardComponentEditor : EditorPlus
         //    bbc.Persist = EditorGUILayout.Toggle(bbc.Persist);
         GUILayout.EndHorizontal();
 
-        EditorGUILayout.LabelField("[" + bb.objectPool.Count + "] Blackboard items: ");
+        EditorGUILayout.LabelField("[" + bb.ObjectPool.Count + "] Blackboard items: ");
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
 
-        List<string> keys = bb.objectPool.Keys.ToList();
+        List<string> keys = bb.ObjectPool.Keys.ToList();
 
         foreach (string str in keys)
         {
-            bb.objectPool[str] = EditorField(bb.objectPool[str], str);
+            bool variableObject = bb.IsVariableObject[str];
+            //object original = bb[str];
+            object value = EditorField(bb[str], str, false, variableObject);
+
+            // Set value
+            bb.SetObject(str, value);
         }
 
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
 
         if (GUILayout.Button("Clear BlackBoard"))
-            bb.objectPool.Clear();
+            bb.ObjectPool.Clear();
 
 
     }
