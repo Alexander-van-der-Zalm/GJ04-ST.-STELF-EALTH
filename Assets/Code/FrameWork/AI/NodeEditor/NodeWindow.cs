@@ -21,8 +21,8 @@ public class NodeWindow :ScriptableObject
     public GUIContent Header { get { return header; } protected set { header = value; } }
     public List<NodeWindow> Children { get { return children; } protected set { children = value; } }
 
-    protected Vector2 ChildPos { get { return Rect.center + new Vector2(0, Rect.height / 2); } }
-    protected Vector2 ParentPos { get { return Rect.center + new Vector2(0, Rect.height / 2); } }
+    protected Vector2 ChildPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y); } }
+    protected Vector2 ParentPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y + rect.height); } }
 
     #endregion
 
@@ -37,6 +37,7 @@ public class NodeWindow :ScriptableObject
         WindowID = id;
         Rect = startPos;
         Children = new List<NodeWindow>();
+        Header = header;
         //Children = new List<NodeWindow>();
     }
 
@@ -66,9 +67,10 @@ public class NodeWindow :ScriptableObject
 
     public void DrawConnectionLines()
     {
+        float tangentStrength = 10;
         foreach(NodeWindow child in Children)
         {
-            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos, Vector2.up * -1, Vector2.up);
+            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos, ParentPos + tangentStrength * Vector2.up * -1, child.ChildPos + tangentStrength * Vector2.up);
         }
     }
 }

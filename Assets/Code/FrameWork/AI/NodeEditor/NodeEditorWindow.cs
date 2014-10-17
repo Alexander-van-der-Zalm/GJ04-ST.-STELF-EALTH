@@ -73,7 +73,7 @@ public class NodeEditorWindow : EditorWindow
     public static void DrawNodeCurve(Vector2 parentPos, Vector2 childPos, Vector2 parentTangent, Vector2 childTangent)
     {
         // Todo Shadow
-        Handles.DrawBezier(parentPos, childPos, parentTangent, parentTangent, Color.black, null, 1);
+        Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, Color.black, null, 1);
     }
 
 	// Use this for initialization
