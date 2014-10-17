@@ -4,14 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class NodeEditorWindow : EditorWindow 
+public class NodeEditorWindow : EditorWindow
 {
+    #region Fields
     // Fields
     [SerializeField]
     private List<NodeWindow> windows;
 
     // Settings
     public static float TangentStrength = 80;
+
+    #endregion
+
+    #region Init
 
     // Constructor
     [MenuItem("CustomTools/Node Editor")]
@@ -31,6 +36,8 @@ public class NodeEditorWindow : EditorWindow
         generateTestNodes();
     }
 
+    #endregion
+
     #region GUI
     // OnGui
     void OnGUI()
@@ -39,11 +46,18 @@ public class NodeEditorWindow : EditorWindow
         //GUILayout.Label("Selected: " + Selection.activeGameObject.name);
         if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_BehaviorTree>() != null)
         {
-            Debug.Log("Tree selected XS");
+            //Debug.Log("Tree selected XS");
         }
-            
+
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create new node"))
-            addTestNode();
+            addTestNode(); 
+        if (GUILayout.Button("Connect 1 to 0"))
+            ConnectChild(1, 0);
+        if (GUILayout.Button("Connect 0 to 1"))
+            ConnectChild(0, 1);
+
+        EditorGUILayout.EndHorizontal();
 
         // Draw parent to child connections
         DrawNodeConnections();
@@ -54,6 +68,10 @@ public class NodeEditorWindow : EditorWindow
         // Draw Type Creation Buttons
         DrawButtons();
     }
+
+    #endregion
+
+    #region GUI sections
 
     private void DrawButtons()
     {
@@ -124,7 +142,6 @@ public class NodeEditorWindow : EditorWindow
     }
 
     #endregion
-
 
     void OnDestroy()
     {
