@@ -99,6 +99,9 @@ public class NodeWindow :ScriptableObject
     public void DrawWindow()
     {
         Rect = GUI.Window(WindowID, Rect, DrawWindowContent, header);
+
+        if (Rect.Contains(Event.current.mousePosition))
+            NodeEditorWindow.FocusID = WindowID;
     }
 
     protected virtual void DrawWindowContent(int id)

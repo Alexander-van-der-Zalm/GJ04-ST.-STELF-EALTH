@@ -13,6 +13,7 @@ public class NodeEditorWindow : EditorWindow
 
     // Settings
     public static float TangentStrength = 80;
+    public static int FocusID = -1;
 
     #endregion
 
@@ -38,17 +39,19 @@ public class NodeEditorWindow : EditorWindow
 
     #endregion
 
+    void Update()
+    {
+        // Check if tree is selected
+        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_BehaviorTree>() != null)
+        {
+            //Todo tree processing if not done yet
+        }
+    }
+
     #region GUI
     // OnGui
     void OnGUI()
     {
-        // Check if tree is selected
-        //GUILayout.Label("Selected: " + Selection.activeGameObject.name);
-        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_BehaviorTree>() != null)
-        {
-            //Debug.Log("Tree selected XS");
-        }
-
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create new node"))
             addTestNode(); 
@@ -56,7 +59,7 @@ public class NodeEditorWindow : EditorWindow
             ConnectChild(1, 0);
         if (GUILayout.Button("Connect 0 to 1"))
             ConnectChild(0, 1);
-
+        EditorGUILayout.LabelField("Focus on window: " + FocusID);
         EditorGUILayout.EndHorizontal();
 
         // Draw parent to child connections
@@ -73,7 +76,7 @@ public class NodeEditorWindow : EditorWindow
 
     #region GUI sections
 
-    private void DrawButtons()
+    protected virtual void DrawButtons()
     {
        // TODO
     }
