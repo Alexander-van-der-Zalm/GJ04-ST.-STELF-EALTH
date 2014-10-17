@@ -410,19 +410,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
       propertyPath: Blackboard.keys.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
       propertyPath: Blackboard.variableObjects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ParametersBB.keys.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ParametersBB.variableObjects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22400004, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -500,22 +492,6 @@ Prefab:
       propertyPath: NodeInfo.Position.x
       value: 8.50045395
       objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ID
-      value: 1234
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ParametersBB.Name
-      value: Public Node parameters
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ParametersBB.variableObjects.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
-      propertyPath: NodeInfo.TreeNode.ParametersBB.keys.Array.data[0]
-      value: Bla
-      objectReference: {fileID: 0}
     - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
       propertyPath: Blackboard.keys.Array.data[0]
       value: Bla
@@ -523,6 +499,10 @@ Prefab:
     - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
       propertyPath: Blackboard.variableObjects.Array.data[0]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
+      propertyPath: Blackboard.Name
+      value: AI BlackBoard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ccd7c5377966ef14ab2e7965be03089c, type: 2}
@@ -1189,11 +1169,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blackboard:
     Name: Public Node parameters
-    keys:
-    - Bla
-    variableObjects: 01
+    keys: []
+    variableObjects: 
     instantiated: 0
-    prepared: 0
+    prepared: 1
 --- !u!114 &355800759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,12 +1204,11 @@ MonoBehaviour:
     Tree: {fileID: 0}
     TreeNode:
       Children: []
-      ID: 1234
+      ID: 0
       ParametersBB:
-        Name: Public Node parameters
-        keys:
-        - Bla
-        variableObjects: 01
+        Name: AI BlackBoard
+        keys: []
+        variableObjects: 
         instantiated: 0
         prepared: 0
     Depth: 0
@@ -3335,7 +3313,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.833333
+  orthographic size: 13.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3749,7 +3727,7 @@ MonoBehaviour:
     keys: []
     variableObjects: 
     instantiated: 0
-    prepared: 0
+    prepared: 1
 --- !u!114 &1373782136
 MonoBehaviour:
   m_ObjectHideFlags: 0
