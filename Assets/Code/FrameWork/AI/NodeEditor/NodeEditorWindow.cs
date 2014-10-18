@@ -15,6 +15,11 @@ public class NodeEditorWindow : EditorWindow
     private float panY;
     private float GroupSize;
 
+    [SerializeField]
+    private Object[] selection;
+    [SerializeField]
+    private TestScript test;
+
     // Settings
     public static float TangentStrength = 80;
 
@@ -33,6 +38,12 @@ public class NodeEditorWindow : EditorWindow
         window.Init();
     }
 
+    void OnEnable()
+    {
+        if (windows == null)
+            Init();
+    }
+
     public void Init()
     {
         //if (windows != null)
@@ -41,6 +52,13 @@ public class NodeEditorWindow : EditorWindow
         //if(windows == null)
             windows = new List<NodeWindow>();
         generateTestNodes();
+
+        // Test selection
+        test = ScriptableObject.CreateInstance<TestScript>();
+        test.Init();
+
+        selection = new Object[1];
+        selection[0] = test;
 
         panX = 0;
         panY = 0;
@@ -82,6 +100,7 @@ public class NodeEditorWindow : EditorWindow
 
     protected virtual void DrawButtons()
     {
+        // Temp test buttons for functionality
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create new node"))
             addTestNode();
@@ -89,9 +108,15 @@ public class NodeEditorWindow : EditorWindow
             ConnectChild(1, 0);
         if (GUILayout.Button("Connect 0 to 1"))
             ConnectChild(0, 1);
+        if (GUILayout.Button("Select Test Object"))
+            Selection.objects = selection;
+        if (GUILayout.Button("Create Test Object"))
+            test.CreateAsset();
+
         EditorGUILayout.LabelField("Focus on window: " + FocusID);
         EditorGUILayout.EndHorizontal();
 
+        // Temp move buttons
         if (GUI.RepeatButton(new Rect(20, 40, 20, 20), "<"))
         {
             panX++;
