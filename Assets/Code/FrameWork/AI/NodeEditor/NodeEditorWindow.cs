@@ -11,8 +11,14 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     private List<NodeWindow> windows;
 
+    private float panX;
+    private float panY;
+    private float GroupSize;
+
     // Settings
     public static float TangentStrength = 80;
+
+    // Not getting serialized, needs work around
     public static int FocusID = -1;
 
     #endregion
@@ -35,6 +41,10 @@ public class NodeEditorWindow : EditorWindow
         //if(windows == null)
             windows = new List<NodeWindow>();
         generateTestNodes();
+
+        panX = 0;
+        panY = 0;
+        GroupSize = 1000;
     }
 
     #endregion
@@ -52,22 +62,16 @@ public class NodeEditorWindow : EditorWindow
     // OnGui
     void OnGUI()
     {
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Create new node"))
-            addTestNode(); 
-        if (GUILayout.Button("Connect 1 to 0"))
-            ConnectChild(1, 0);
-        if (GUILayout.Button("Connect 0 to 1"))
-            ConnectChild(0, 1);
-        EditorGUILayout.LabelField("Focus on window: " + FocusID);
-        EditorGUILayout.EndHorizontal();
-
+        GUI.BeginGroup(new Rect(panX, panY, GroupSize, GroupSize));
+         
         // Draw parent to child connections
         DrawNodeConnections();
 
         // Draw the windows
         DrawWindows();
-        
+
+        GUI.EndGroup();
+
         // Draw Type Creation Buttons
         DrawButtons();
     }
@@ -78,7 +82,39 @@ public class NodeEditorWindow : EditorWindow
 
     protected virtual void DrawButtons()
     {
-       // TODO
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Create new node"))
+            addTestNode();
+        if (GUILayout.Button("Connect 1 to 0"))
+            ConnectChild(1, 0);
+        if (GUILayout.Button("Connect 0 to 1"))
+            ConnectChild(0, 1);
+        EditorGUILayout.LabelField("Focus on window: " + FocusID);
+        EditorGUILayout.EndHorizontal();
+
+        if (GUI.RepeatButton(new Rect(20, 40, 20, 20), "<"))
+        {
+            panX++;
+            Repaint();
+        }
+
+        if (GUI.RepeatButton(new Rect(40, 40, 20, 20), ">"))
+        {
+            panX--;
+            Repaint();
+        }
+
+        if (GUI.RepeatButton(new Rect(30, 20, 20, 20), "^"))
+        {
+            panY++;
+            Repaint();
+        }
+
+        if (GUI.RepeatButton(new Rect(30, 60, 20, 20), "v"))
+        {
+            panY--;
+            Repaint();
+        }
     }
 
     private void DrawNodeConnections()
