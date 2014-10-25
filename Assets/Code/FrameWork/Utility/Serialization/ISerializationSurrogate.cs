@@ -1,15 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ISerializationSurrogate : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+public interface ISerializationSurrogate
+{
+    //object GetSurrogateObject(object original);
+    object GetOriginalObject();
 }

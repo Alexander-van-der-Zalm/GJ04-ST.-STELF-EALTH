@@ -3700,10 +3700,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1426233564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c14607b58e5dd8478ba0c7c0afdc246, type: 3}
+  m_Script: {fileID: 11500000, guid: bfbe041c3958dc648a8ac173381ec039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Root: {fileID: 0}
+  Obj:
+    byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7233537572726f676174650300000001780179017a0000000b0b0b020000000000803f00000040000040400b
+  FloatValue: 10
+  StringValue: Henk
+  IntValue: 10
+  V3: {x: 1, y: 2, z: 3}
+  UnityObject: {fileID: 0}
+  Type: 3
+  ResetObject: 0
 --- !u!4 &1426233566
 Transform:
   m_ObjectHideFlags: 0
