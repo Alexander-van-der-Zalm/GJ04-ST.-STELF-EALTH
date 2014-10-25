@@ -50,6 +50,10 @@ public class SerializableObject : ISerializationCallbackReceiver
         if (unserializable || unserializedObject == null)
             return;
 
+        // Possible to loop over fields for serialization of (unity) non serializables
+        // This will prevent this method from blowing up when the serializer hits non serializable fields
+        // Possibly store all the fields in a dictionary of some kind? (increased memory usage, but more stable)
+        // For now just check one type
         Type objType = unserializedObject.GetType();
 
         // Check surrogates for non serializable types
@@ -57,12 +61,13 @@ public class SerializableObject : ISerializationCallbackReceiver
         {
             if (!SurrogateHandler.GetSurrogate(ref unserializedObject))
             {
-                Debug.Log("Serialization: object " + objType.ToString() + " is not serializable and has no surrogate");
+                Debug.Log("SerializableObject.Serialization: " + objType.ToString() + " is not a serializable type and has no surrogate");
                 unserializable = true;
                 return;
             }
         }
-        // Possible to loop over fields for serialization of (unity) non serializables
+
+        
 
         // Serialize
         using(var stream = new MemoryStream())
