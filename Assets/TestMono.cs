@@ -5,7 +5,8 @@ using System.Collections;
 public class TestMono : MonoBehaviour//, ISerializationCallbackReceiver
 {
     //public TestDictionary2 Dictionary;
-    public StringFloatUDictionary Dictionary;
+    //public UDictionaryStringFloat Dictionary;
+    public ObjectUDictionaryStringSerializable Dictionary;
 
     //public TestDictionary test;
 
