@@ -4,53 +4,38 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationCallbackReceiver
+public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>//,ISerializationCallbackReceiver
 {
     #region Fields
 
     public string Name = "AI BlackBoard";
 
     // Actual dictionaries dont need serialization
-    private Dictionary<string, object> objectPool;
-    private Dictionary<string, bool> isVariableObject;
-
     [SerializeField]
-    private List<string> keys;
+    private UDictionaryStringSerializableObject objectPool;
     [SerializeField]
-    private List<object> objectsValues;
-    [SerializeField]
-    private List<bool> variableObjects;
-    
-    [SerializeField]
-    private bool instantiated;
-    [SerializeField]
-    private bool prepared;
+    private UDictionaryStringBool isVariableObject;
 
     #endregion
 
     #region Properties
 
-    public Dictionary<string, object> ObjectPool 
+    public UDictionaryStringSerializableObject ObjectPool 
     { 
-        get { return objectPool == null? objectPool = new Dictionary<string, object>() : objectPool; } 
+        get { return objectPool == null? objectPool = new UDictionaryStringSerializableObject() : objectPool; } 
         private set { objectPool = value; } 
     }
-    
 
-    public Dictionary<string, bool> IsVariableObject 
-    { 
-        get { return isVariableObject ==  null ? isVariableObject = new Dictionary<string,bool>() : isVariableObject; } 
+
+    public UDictionaryStringBool IsVariableObject 
+    {
+        get { return isVariableObject == null ? isVariableObject = new UDictionaryStringBool() : isVariableObject; } 
         private set { isVariableObject = value; } 
     }
 
     #endregion
 
     #region Constructor
-
-    //public AI_Blackboard()
-    //{
-
-    //}
 
     public void Clear()
     {
@@ -64,7 +49,9 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         // Exit out if already instantiated
         if (objectPool != null && IsVariableObject != null)
                 return;
-        
+
+        Debug.Log("Init");
+
         base.Init(newHideFlag);
 
         //ObjectPool = new Dictionary<string, object>();
@@ -134,7 +121,7 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         if (!ObjectPool.ContainsKey(name))
             return DoesNotContainKey<object>(name);
 
-        return ObjectPool[name];
+        return ObjectPool[name].Object;
        // return GetObject<object>(name, createIfNonexistant);
     }
 
@@ -143,7 +130,7 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         //Init();
         
         if (ObjectPool.ContainsKey(name))
-            return ObjectPool[name];
+            return ObjectPool[name].Object;
 
         SetObject(name,newDefault);
         return newDefault;
@@ -180,7 +167,7 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         }
 
         // Set the object
-        ObjectPool[name] = obj;
+        ObjectPool[name] = new SerializableObject() { Object = obj };
     }
 
     #endregion
@@ -190,43 +177,4 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         ObjectPool = bb.ObjectPool;
         IsVariableObject = bb.IsVariableObject;
     }
-
-    #region Serialization Helpers
-
-    public void OnBeforeSerialize()
-    {
-        keys = ObjectPool.Keys.ToList();
-        objectsValues = ObjectPool.Values.ToList();
-        variableObjects = IsVariableObject.Values.ToList();
-        //prepared = true;
-        //Debug.Log("OnBeforeSerialize complete");
-        //Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
-    }
-
-    public void OnAfterDeserialize()
-    {
-        //Init();
-        //Debug.Log("OnAfterDeserialize ");
-        
-        if (keys == null || objectsValues == null || variableObjects == null)
-        {
-            //Debug.Log("No preperation has happened");
-            return;
-        }
-       // Debug.Log("Reconstruct keys:" + prepared);
-        //Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
-        
-        for (int i = 0; i < keys.Count;i++)
-        {
-            string key = keys[i];
-            object obj = objectsValues[i];
-            bool isVar = variableObjects[i];
-            ObjectPool[key] = obj;
-            IsVariableObject[key] = isVar;
-        }
-
-        Debug.Log("OnAfterDeserialize complete");
-    }
-
-    #endregion
 }

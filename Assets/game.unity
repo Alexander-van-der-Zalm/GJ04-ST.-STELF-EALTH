@@ -624,6 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackBoard: {fileID: 0}
 --- !u!1001 &279000185
 Prefab:
   m_ObjectHideFlags: 0
@@ -1161,6 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackBoard: {fileID: 0}
 --- !u!114 &355800759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3660,6 +3662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackBoard: {fileID: 0}
 --- !u!114 &1373782136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3685,6 +3688,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1426233566}
   - 114: {fileID: 1426233565}
+  - 114: {fileID: 1426233567}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3704,14 +3708,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Obj:
-    byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7233537572726f676174650300000001780179017a0000000b0b0b020000000000803f00000040000040400b
+    byteArray: 0001000000ffffffff010000000000000006010000000448656e6b0b
   FloatValue: 10
   StringValue: Henk
   IntValue: 10
   V3: {x: 1, y: 2, z: 3}
-  UnityObject: {fileID: 0}
-  Type: 3
+  V4: {x: 1, y: 2, z: 4, w: 1}
+  V2: {x: 2, y: 66}
+  Q: {x: 1, y: 4, z: 2, w: 30}
+  Tr: {fileID: 0}
+  Type: 1
   ResetObject: 0
+  PrintCurrentValue: 0
 --- !u!4 &1426233566
 Transform:
   m_ObjectHideFlags: 0
@@ -3724,6 +3732,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!114 &1426233567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426233564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackBoard: {fileID: 1494984979}
 --- !u!1 &1438533259
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +4015,33 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: .5, y: 2}
   m_Center: {x: 0, y: 1}
+--- !u!114 &1494984979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Test
+  objectPool:
+    keys:
+    - testvalue 1
+    - TestParam
+    - TestVariableObject
+    values:
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c75650008010000000b
+    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000605000000000a0b
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c75650008000000000b
+  isVariableObject:
+    keys:
+    - testvalue 1
+    - TestParam
+    - TestVariableObject
+    values: 000001
 --- !u!1 &1517618513
 GameObject:
   m_ObjectHideFlags: 0

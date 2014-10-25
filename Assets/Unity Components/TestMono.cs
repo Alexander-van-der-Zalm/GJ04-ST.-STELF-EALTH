@@ -6,7 +6,7 @@ public class TestMono : MonoBehaviour//, ISerializationCallbackReceiver
 {
     //public TestDictionary2 Dictionary;
     //public UDictionaryStringFloat Dictionary;
-    public ObjectUDictionaryStringSerializable Dictionary;
+    public UDictionaryStringSerializableObject Dictionary;
 
     //public TestDictionary test;
 

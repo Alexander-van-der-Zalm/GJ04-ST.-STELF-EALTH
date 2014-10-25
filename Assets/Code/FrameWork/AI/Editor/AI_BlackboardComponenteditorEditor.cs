@@ -9,6 +9,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
 {
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         AI_BlackboardComponent bbc = (AI_BlackboardComponent)target;
         AI_Blackboard bb = bbc.Blackboard;
 
@@ -30,12 +31,10 @@ public class AI_BlackboardComponentEditor : EditorPlus
 
         //bb.Init();        
                     
-
+        // Blackboard name
         GUILayout.BeginHorizontal();
         using (new FixedWidthLabel("Name: "))
             bb.Name = EditorGUILayout.TextField(bb.Name);
-        //using (new FixedWidthLabel("Persists: "))
-        //    bbc.Persist = EditorGUILayout.Toggle(bbc.Persist);
         GUILayout.EndHorizontal();
 
         EditorGUILayout.LabelField("[" + bb.ObjectPool.Count + "] Blackboard items: ");
@@ -43,6 +42,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
 
+        
         List<string> keys = bb.ObjectPool.Keys.ToList();
 
         foreach (string str in keys)
