@@ -27,6 +27,8 @@ public class UDictionary<K,V> : IDictionary<K,V>, ISerializationCallbackReceiver
     public UDictionary()
     {
         dictionary = new Dictionary<K, V>();
+        keys = dictionary.Keys.ToList();
+        values = dictionary.Values.ToList();
     }
 
     #endregion
@@ -114,6 +116,8 @@ public class UDictionary<K,V> : IDictionary<K,V>, ISerializationCallbackReceiver
     public void Clear()
     {
         dictionary.Clear();
+        if (keys.Count == 0)
+            return;
         keys.Clear();
         values.Clear();
     }

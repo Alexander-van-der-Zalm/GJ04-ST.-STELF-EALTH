@@ -6,7 +6,7 @@ public class AI_BlackboardComponent : MonoBehaviour
 {
     public AI_Blackboard Blackboard
     {
-        get { return blackBoard; }// blackBoard == null ? blackBoard = AI_Blackboard.Create() : blackBoard; }
+        get { return blackBoard == null ? blackBoard = AI_Blackboard.Create() : blackBoard; }
         set { blackBoard = value; }
     }
 

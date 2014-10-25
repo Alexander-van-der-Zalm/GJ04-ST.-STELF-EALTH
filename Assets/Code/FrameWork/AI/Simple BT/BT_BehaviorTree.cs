@@ -145,8 +145,6 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #region ReActivate Soon
 
-
-
         #region Condition: CheckEqualBBParameter
 
         // Things to compare

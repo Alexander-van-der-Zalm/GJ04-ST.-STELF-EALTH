@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>//,ISerializationCallbackReceiver
+public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>
 {
     #region Fields
 
     public string Name = "AI BlackBoard";
 
-    // Actual dictionaries dont need serialization
+    // Serializable dictionaries
     [SerializeField]
     private UDictionaryStringSerializableObject objectPool;
     [SerializeField]
@@ -39,52 +39,14 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>//,ISerializatio
 
     public void Clear()
     {
-        Debug.Log("Clear Called");
         ObjectPool.Clear();
         IsVariableObject.Clear();
     }
 
     public override void Init(HideFlags newHideFlag = HideFlags.None)
     {
-        // Exit out if already instantiated
-        if (objectPool != null && IsVariableObject != null)
-                return;
-
-        Debug.Log("Init");
-
         base.Init(newHideFlag);
-
-        //ObjectPool = new Dictionary<string, object>();
-        //IsVariableObject = new Dictionary<string, bool>();
-
-        SetObject("testvalue 1", 1);
-        SetObject("TestParam", new AI_AgentBBAccessParameter());
-        SetObject("TestVariableObject", null);
-
-        // Temp
-        //Debug.Log("Init COMPLETE");
     } 
-
-    //public override void Init(HideFlags newHideFlag = HideFlags.None)
-    //{
-    //    //Debug.Log("Init Called");
-    //    //if (instantiated)// || !overrideInit)
-    //    //    return;
-
-    //    Debug.Log("Init called");
-
-    //    if (objectPool != null && IsVariableObject != null)
-    //        return;
-
-    //    base.Init(newHideFlag);
-
-
-    //    ObjectPool = new Dictionary<string, object>();
-    //    IsVariableObject = new Dictionary<string, bool>();
-    //    //instantiated = true;
-    //    //prepared = false;
-    //    Debug.Log("Init Completed");
-    //}
 
     #endregion
 
@@ -101,34 +63,16 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>//,ISerializatio
 
     #region Get
 
-    //public T GetObject<T>(string name, bool createIfNonexistant = true)
-    //{
-    //    // Early exit if non-existant
-    //    if (!ObjectPool.ContainsKey(name))
-    //    {
-    //        if (createIfNonexistant)
-    //            ObjectPool[name] = default(T);
-    //        else
-    //            return DoesNotContainKey<T>(name);
-    //    }
-    //    return (T)ObjectPool[name];
-    //}
-
     public object GetObject(string name)
-    {
-        //Init();
-        
+    {      
         if (!ObjectPool.ContainsKey(name))
             return DoesNotContainKey<object>(name);
 
         return ObjectPool[name].Object;
-       // return GetObject<object>(name, createIfNonexistant);
     }
 
     public object GetObjectOrSetDefault(string name, object newDefault)
-    {
-        //Init();
-        
+    {       
         if (ObjectPool.ContainsKey(name))
             return ObjectPool[name].Object;
 
@@ -155,8 +99,6 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>//,ISerializatio
     /// </summary>
     public void SetObject(string name, object obj)
     {
-        //Init();
-
         // Null makes it a variable type in the editorInspector
         if (!IsVariableObject.ContainsKey(name))
         {

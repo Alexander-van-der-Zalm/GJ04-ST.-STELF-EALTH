@@ -59,7 +59,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
         GUILayout.EndVertical();
 
         if (GUILayout.Button("Clear BlackBoard"))
-            bb.ObjectPool.Clear();
+            bb.Clear();
 
 
     }
