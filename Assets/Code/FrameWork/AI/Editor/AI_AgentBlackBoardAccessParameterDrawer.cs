@@ -32,7 +32,7 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 
-    public static void CustomDraw(string label, AI_AgentBBAccessParameter bb)
+    public static AI_AgentBBAccessParameter CustomDraw(string label, AI_AgentBBAccessParameter bb)
     {
         EditorGUILayout.BeginHorizontal();
         using (new FixedWidthLabel(label))
@@ -44,6 +44,9 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
             
             var enumValues = (AI_Agent.BlackBoard[])Enum.GetValues(typeof(AI_Agent.BlackBoard));
             bb.AgentAccesType = enumValues[enumIndex];
+
+            string oldValue = bb.ParameterName;
+
             bb.ParameterName = EditorGUILayout.TextField(bb.ParameterName);
         }
         //EditorGUILayout.LabelField(label,GUILayout.Width(130));
@@ -51,5 +54,7 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
         
         
         EditorGUILayout.EndHorizontal();
+
+        return bb;
     }
 }

@@ -64,7 +64,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
             bb.Clear();
         if(GUILayout.Button("Decouple"))
         {
-            bbc.Blackboard = AI_Blackboard.CreateCopy(bb);
+            bbc.Blackboard = AI_Blackboard.CreateShallowCopy(bb);
         }
         if (GUILayout.Button("Set test values"))
         {

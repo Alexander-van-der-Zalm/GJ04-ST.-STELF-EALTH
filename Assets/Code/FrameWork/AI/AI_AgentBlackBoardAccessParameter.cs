@@ -2,9 +2,10 @@
 using System.Collections;
 
 [System.Serializable]
-public class AI_AgentBBAccessParameter
+public struct AI_AgentBBAccessParameter
 {
     public AI_Agent.BlackBoard AgentAccesType;
+    
     public string ParameterName;
 
     public GUIContent Content;
@@ -13,7 +14,7 @@ public class AI_AgentBBAccessParameter
     {
         Content = content;
         ParameterName = parametername;
-        content = Content;
+        AgentAccesType = access;
     }
 
     public AI_AgentBBAccessParameter(string parametername = "", AI_Agent.BlackBoard access = AI_Agent.BlackBoard.local)

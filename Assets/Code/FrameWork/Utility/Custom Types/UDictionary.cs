@@ -59,6 +59,17 @@ public class UDictionary<K,V> : IDictionary<K,V>, ISerializationCallbackReceiver
 
     #endregion
 
+    public void ShallowCopyIn(UDictionary<K,V> copyMe)
+    {
+        dictionary = new Dictionary<K,V>();
+
+        values = copyMe.dictionary.Values.ToList();
+        keys = copyMe.dictionary.Keys.ToList();
+
+        for (int i = 0; i < keys.Count; i++)
+            dictionary[keys[i]] = values[i];
+    }
+
     #region Dictionary Implmentation
 
     public void Add(K key, V value)

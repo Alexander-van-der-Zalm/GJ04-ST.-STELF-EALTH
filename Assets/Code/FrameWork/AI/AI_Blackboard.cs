@@ -121,11 +121,11 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>
         IsVariableObject = bb.IsVariableObject;
     }
 
-    public static AI_Blackboard CreateCopy(AI_Blackboard bb)
+    public static AI_Blackboard CreateShallowCopy(AI_Blackboard bb)
     {
         AI_Blackboard newBB = AI_Blackboard.Create();
-        newBB.ObjectPool = bb.ObjectPool;
-        newBB.IsVariableObject = bb.IsVariableObject;
+        newBB.ObjectPool.ShallowCopyIn(bb.ObjectPool);
+        newBB.IsVariableObject.ShallowCopyIn(bb.IsVariableObject);
         newBB.Name = bb.Name;
         return newBB;
     }

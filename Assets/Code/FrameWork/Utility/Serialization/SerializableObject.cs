@@ -39,7 +39,7 @@ public class SerializableObject : ISerializationCallbackReceiver
         if(unserializedObject.GetType().GetInterfaces().Contains(typeof(ISerializationSurrogate)))
             SurrogateHandler.GetOriginal(ref unserializedObject);
 
-        // Debug.Log("Deserialized Type: " + unserializedObject.GetType() + " | Value: " + unserializedObject.ToString());
+        //Debug.Log("Deserialized Type: " + unserializedObject.GetType() + " | Value: " + unserializedObject.ToString());
     }
 
     // Serialize object
@@ -67,8 +67,6 @@ public class SerializableObject : ISerializationCallbackReceiver
             }
         }
 
-        
-
         // Serialize
         using(var stream = new MemoryStream())
         {
@@ -78,6 +76,6 @@ public class SerializableObject : ISerializationCallbackReceiver
             byteArray = stream.ToArray();
         }
 
-        // Debug.Log("Serialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
+        //Debug.Log("Serialized Type: " + unserializedObject.GetType() + " | Value: " + unserializedObject.ToString());
     }
 }
