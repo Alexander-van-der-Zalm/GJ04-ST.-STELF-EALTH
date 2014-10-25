@@ -116,7 +116,17 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>
 
     public void ChangeValues(AI_Blackboard bb)
     {
+        //this = AI_Blackboard.Create();
         ObjectPool = bb.ObjectPool;
         IsVariableObject = bb.IsVariableObject;
+    }
+
+    public static AI_Blackboard CreateCopy(AI_Blackboard bb)
+    {
+        AI_Blackboard newBB = AI_Blackboard.Create();
+        newBB.ObjectPool = bb.ObjectPool;
+        newBB.IsVariableObject = bb.IsVariableObject;
+        newBB.Name = bb.Name;
+        return newBB;
     }
 }

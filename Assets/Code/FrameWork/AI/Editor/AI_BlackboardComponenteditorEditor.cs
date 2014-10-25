@@ -62,6 +62,10 @@ public class AI_BlackboardComponentEditor : EditorPlus
 
         if (GUILayout.Button("Clear BlackBoard"))
             bb.Clear();
+        if(GUILayout.Button("Decouple"))
+        {
+            bbc.Blackboard = AI_Blackboard.CreateCopy(bb);
+        }
         if (GUILayout.Button("Set test values"))
         {
             bb["TestInt"] = 1;
@@ -69,6 +73,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
             bb["TestVariable"] = null;
             bb["TestParamater"] = new AI_AgentBBAccessParameter();
         }
+
         GUILayout.EndHorizontal();
     }
 }
