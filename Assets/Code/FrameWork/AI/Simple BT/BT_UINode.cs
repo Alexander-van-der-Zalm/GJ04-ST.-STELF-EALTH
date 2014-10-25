@@ -10,6 +10,7 @@ public class BT_UINode : MonoBehaviour
     public BT_UINodeInfo NodeInfo;
 
     public AI_Blackboard BB { get { return bb.Blackboard; } set { bb.Blackboard = value; } }
+
     [HideInInspector]
     public AI_BlackboardComponent bb;
 

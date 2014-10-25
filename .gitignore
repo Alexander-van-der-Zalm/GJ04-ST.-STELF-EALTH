@@ -14,9 +14,11 @@
 .DS_Store
 *.swp
 *.Trashes
+Assets/TestStuffs/
 Assets/EditorGUI Style Viewer.meta
 Assets/EditorGUI Style Viewer/Editor.meta
 Assets/EditorGUI Style Viewer/Editor/EditorStyleViewer.js
 Assets/EditorGUI Style Viewer/Editor/EditorStyleViewer.js.meta
 Assets/EditorGUI Style Viewer/Editor/StyleViewerExample.js
 Assets/EditorGUI Style Viewer/Editor/StyleViewerExample.js.meta
+Assets/TestStuffs.meta

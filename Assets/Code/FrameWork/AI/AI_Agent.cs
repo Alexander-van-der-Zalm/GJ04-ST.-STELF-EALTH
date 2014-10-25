@@ -93,7 +93,7 @@ public class AI_Agent : MonoBehaviour
         if(LocalBlackboard == null)
         {
             Debug.Log("AI_Agent");
-            LocalBlackboard = new AI_Blackboard();
+            LocalBlackboard = AI_Blackboard.Create();
         }
             
         LocalBlackboard.SetObject("Name", Name);

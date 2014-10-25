@@ -18,7 +18,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
             {
                 if (GUILayout.Button("Create new BB."))
                 {
-                    bbc.Blackboard = new AI_Blackboard();
+                    bbc.Blackboard = AI_Blackboard.Create();
                     bb = bbc.Blackboard;
                 }
                 else

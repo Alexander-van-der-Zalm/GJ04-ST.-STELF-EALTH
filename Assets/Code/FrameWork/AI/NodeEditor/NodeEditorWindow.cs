@@ -18,7 +18,7 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     private Object[] selection;
     [SerializeField]
-    private TestScript test;
+    private TestListSO test;
 
     // Settings
     public static float TangentStrength = 80;
@@ -54,7 +54,7 @@ public class NodeEditorWindow : EditorWindow
         generateTestNodes();
 
         // Test selection
-        test = ScriptableObject.CreateInstance<TestScript>();
+        test = ScriptableObject.CreateInstance<TestListSO>();
         test.Init();
 
         selection = new Object[1];
@@ -112,6 +112,8 @@ public class NodeEditorWindow : EditorWindow
             Selection.objects = selection;
         if (GUILayout.Button("Create Test Object"))
             test.CreateAsset();
+        if (GUILayout.Button("Print 0 childCount"))
+            Debug.Log(windows[0].Children.Count);
 
         EditorGUILayout.LabelField("Focus on window: " + FocusID);
         EditorGUILayout.EndHorizontal();

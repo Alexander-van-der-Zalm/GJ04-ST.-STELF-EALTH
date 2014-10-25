@@ -4,24 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AI_Blackboard 
+public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationCallbackReceiver
 {
+    #region Fields
+
     public string Name = "AI BlackBoard";
 
-
-
-    public Dictionary<string, object> ObjectPool 
-    { 
-        get { return objectPool == null? objectPool = new Dictionary<string, object>() : objectPool; } 
-        private set { objectPool = value; } 
-    }
+    // Actual dictionaries dont need serialization
     private Dictionary<string, object> objectPool;
-
-    public Dictionary<string, bool> IsVariableObject 
-    { 
-        get { return isVariableObject ==  null ? isVariableObject = new Dictionary<string,bool>() : isVariableObject; } 
-        private set { isVariableObject = value; } 
-    }
     private Dictionary<string, bool> isVariableObject;
 
     [SerializeField]
@@ -30,16 +20,36 @@ public class AI_Blackboard
     private List<object> objectsValues;
     [SerializeField]
     private List<bool> variableObjects;
+    
     [SerializeField]
     private bool instantiated;
     [SerializeField]
     private bool prepared;
+
+    #endregion
+
+    #region Properties
+
+    public Dictionary<string, object> ObjectPool 
+    { 
+        get { return objectPool == null? objectPool = new Dictionary<string, object>() : objectPool; } 
+        private set { objectPool = value; } 
+    }
     
+
+    public Dictionary<string, bool> IsVariableObject 
+    { 
+        get { return isVariableObject ==  null ? isVariableObject = new Dictionary<string,bool>() : isVariableObject; } 
+        private set { isVariableObject = value; } 
+    }
+
+    #endregion
+
     #region Constructor
 
     //public AI_Blackboard()
     //{
-        
+
     //}
 
     public void Clear()
@@ -49,18 +59,45 @@ public class AI_Blackboard
         IsVariableObject.Clear();
     }
 
-    public void Init(bool overrideInit = false)
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
     {
-        //Debug.Log("Init Called");
-        if (instantiated || !overrideInit)
-            return;
+        // Exit out if already instantiated
+        if (objectPool != null && IsVariableObject != null)
+                return;
+        
+        base.Init(newHideFlag);
 
-        ObjectPool = new Dictionary<string, object>();
-        IsVariableObject = new Dictionary<string, bool>();
-        instantiated = true;
-        prepared = false;
-        Debug.Log("Init Completed");
-    }
+        //ObjectPool = new Dictionary<string, object>();
+        //IsVariableObject = new Dictionary<string, bool>();
+
+        SetObject("testvalue 1", 1);
+        SetObject("TestParam", new AI_AgentBBAccessParameter());
+        SetObject("TestVariableObject", null);
+
+        // Temp
+        Debug.Log("Init COMPLETE");
+    } 
+
+    //public override void Init(HideFlags newHideFlag = HideFlags.None)
+    //{
+    //    //Debug.Log("Init Called");
+    //    //if (instantiated)// || !overrideInit)
+    //    //    return;
+
+    //    Debug.Log("Init called");
+
+    //    if (objectPool != null && IsVariableObject != null)
+    //        return;
+
+    //    base.Init(newHideFlag);
+
+
+    //    ObjectPool = new Dictionary<string, object>();
+    //    IsVariableObject = new Dictionary<string, bool>();
+    //    //instantiated = true;
+    //    //prepared = false;
+    //    Debug.Log("Init Completed");
+    //}
 
     #endregion
 
@@ -92,7 +129,7 @@ public class AI_Blackboard
 
     public object GetObject(string name)
     {
-        Init();
+        //Init();
         
         if (!ObjectPool.ContainsKey(name))
             return DoesNotContainKey<object>(name);
@@ -103,7 +140,7 @@ public class AI_Blackboard
 
     public object GetObjectOrSetDefault(string name, object newDefault)
     {
-        Init();
+        //Init();
         
         if (ObjectPool.ContainsKey(name))
             return ObjectPool[name];
@@ -131,7 +168,7 @@ public class AI_Blackboard
     /// </summary>
     public void SetObject(string name, object obj)
     {
-        Init();
+        //Init();
 
         // Null makes it a variable type in the editorInspector
         if (!IsVariableObject.ContainsKey(name))
@@ -156,27 +193,28 @@ public class AI_Blackboard
 
     #region Serialization Helpers
 
-    public void PrepareSerialization()
+    public void OnBeforeSerialize()
     {
         keys = ObjectPool.Keys.ToList();
         objectsValues = ObjectPool.Values.ToList();
         variableObjects = IsVariableObject.Values.ToList();
-        prepared = true;
-
-       // Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+        //prepared = true;
+        //Debug.Log("OnBeforeSerialize complete");
+        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
     }
 
-    public void Reconstruct()
+    public void OnAfterDeserialize()
     {
-        Init();
-
+        //Init();
+        //Debug.Log("OnAfterDeserialize ");
+        
         if (keys == null || objectsValues == null || variableObjects == null)
         {
-            //Debug.Log("No preperation has happened");
+            Debug.Log("No preperation has happened");
             return;
         }
        // Debug.Log("Reconstruct keys:" + prepared);
-        //Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
         
         for (int i = 0; i < keys.Count;i++)
         {
@@ -186,6 +224,8 @@ public class AI_Blackboard
             ObjectPool[key] = obj;
             IsVariableObject[key] = isVar;
         }
+
+        Debug.Log("OnAfterDeserialize complete");
     }
 
     #endregion

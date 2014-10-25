@@ -48,7 +48,7 @@ public class BT_TreeNode
         Parent = parent;
 
         if (ParametersBB == null)
-            ParametersBB = new AI_Blackboard();
+            ParametersBB = AI_Blackboard.Create();
         SetParameters(behavior);
     }
 
