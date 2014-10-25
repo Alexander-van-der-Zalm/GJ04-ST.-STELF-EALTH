@@ -3,10 +3,11 @@ using System.Collections;
 using UnityEditor;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 public class EditorPlus : Editor
 {
-    private static Type[] ValidTypes;
+    private static List<Type> ValidTypes;
     private static string[] ValidTypeStrings;
 
     #region SavedFoldout
@@ -96,8 +97,8 @@ public class EditorPlus : Editor
 
         if (isVariableObject)
         {
-            // Get index from playerPrefs
-            int index = PlayerPrefs.GetInt(label + GetInstanceID().ToString(), 0);
+            // Get index from type
+            int index = ValidTypes.FindIndex(t => t == value.GetType());
 
             fixedWidth = new FixedWidthLabel(label);
             float popUpWidht = GUI.skin.label.CalcSize(new GUIContent(ValidTypeStrings[index])).x + 10;
@@ -185,12 +186,11 @@ public class EditorPlus : Editor
 
     private void PopulateTypeArrays()
     {
-        ValidTypes = new Type[] { typeof(int), typeof(float), typeof(bool), typeof(string), typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector4) };
+        ValidTypes = new List<Type>() { typeof(int), typeof(float), typeof(bool), typeof(string), typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector4) };
         var strings = from t in ValidTypes
                       select t.ToString();
         ValidTypeStrings = strings.ToArray();
     }
 
-    //string[] types = new string[100](){"UnityEngine.Vector4","UnityEngine.Vector3","UnityEngine.Vector2","System.Single","System.Int32","System.Boolean","System.String","AI_AgentBBAccessParameter"};
     #endregion
 }
