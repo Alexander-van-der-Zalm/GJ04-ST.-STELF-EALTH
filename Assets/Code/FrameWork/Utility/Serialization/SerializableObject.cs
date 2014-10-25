@@ -9,71 +9,70 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SerializableObject : ISerializationCallbackReceiver
 {
     [NonSerialized]
-    private object deserializedObject;
+    private object unserializedObject;
 
     [SerializeField]
     private byte[] byteArray;
 
-    //[SerializeField]
-    //private UnityEngine.Object unityObject;
+    // To prevent spam of checks for non serializable objects
+    private bool unserializable = false;
 
     public object Object
     {
-        get { return deserializedObject; }
-        set { deserializedObject = value; }
+        get { return unserializedObject; }
+        set { unserializedObject = value; unserializable = false; }
     }
 
     // Deserialize object
     public void OnAfterDeserialize()
     {
+        // If nothing was serialized into the byte array, exit out
         if(byteArray.Length == 0)
-        {
-            Debug.Log("byteArray is null");
             return;
-        }
 
         // Deserialize
         var serializer = new BinaryFormatter();
         using (var stream = new MemoryStream(byteArray))
-            deserializedObject = serializer.Deserialize(stream);
+            unserializedObject = serializer.Deserialize(stream);
 
         // Check if surrogate and replace
-        if(deserializedObject.GetType().GetInterfaces().Contains(typeof(ISerializationSurrogate)))
-        {
-            SurrogateHandler.GetOriginal(ref deserializedObject);
-        }
-        Debug.Log("DEserialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
+        if(unserializedObject.GetType().GetInterfaces().Contains(typeof(ISerializationSurrogate)))
+            SurrogateHandler.GetOriginal(ref unserializedObject);
+
+        // Debug.Log("Deserialized Type: " + unserializedObject.GetType() + " | Value: " + unserializedObject.ToString());
     }
 
     // Serialize object
     public void OnBeforeSerialize()
     {
-        if (deserializedObject == null)
-        {
-            //Debug.Log("Serialization: deserializedObject is null");
+        // No need to serialize if the object is null
+        // or declared nonserializable
+        if (unserializable || unserializedObject == null)
             return;
-        }
 
-        Type objType = deserializedObject.GetType();
+        Type objType = unserializedObject.GetType();
 
         // Check surrogates for non serializable types
         if (!objType.IsSerializable)
         {
-            if (!SurrogateHandler.GetSurrogate(ref deserializedObject))
+            if (!SurrogateHandler.GetSurrogate(ref unserializedObject))
             {
                 Debug.Log("Serialization: object " + objType.ToString() + " is not serializable and has no surrogate");
+                unserializable = true;
                 return;
             }
         }
+        // Possible to loop over fields for serialization of (unity) non serializables
 
         // Serialize
         using(var stream = new MemoryStream())
         {
             var serializer = new BinaryFormatter();
-            // SteamingContext?
-            serializer.Serialize(stream, deserializedObject);
+
+            serializer.Serialize(stream, unserializedObject);
             byteArray = stream.ToArray();
-            //Debug.Log("Serialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
         }
+
+        // Debug.Log("Serialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
     }
 }

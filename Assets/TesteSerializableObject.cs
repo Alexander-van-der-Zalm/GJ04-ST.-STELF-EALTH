@@ -13,6 +13,7 @@ public class TesteSerializableObject : MonoBehaviour
     public Vector4 V4;
     public Vector2 V2;
     public Quaternion Q;
+    public Transform Tr;
 
     public SetType Type; 
 
@@ -27,7 +28,8 @@ public class TesteSerializableObject : MonoBehaviour
         Quat,
         Null,
         CustomClassNoUnity,
-        CustomClassUnity
+        CustomClassUnity,
+        Transform
     }
 
     public bool ResetObject = false;
@@ -85,6 +87,9 @@ public class TesteSerializableObject : MonoBehaviour
                     break;
                 case SetType.CustomClassUnity:
                     Obj = new SerializableObject() { Object = new CustomClassUnity(V3,V2) };
+                    break;
+                case SetType.Transform:
+                    Obj = new SerializableObject() { Object = Tr };
                     break;
             }
         }

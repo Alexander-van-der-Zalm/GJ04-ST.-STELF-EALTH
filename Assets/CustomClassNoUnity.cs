@@ -5,7 +5,7 @@ using System.Collections;
 public class CustomClassNoUnity
 {
     public string StringValue;
-    public float FloatValue;
+    private float FloatValue;
 
     public CustomClassNoUnity(string StringValue, float FloatValue)
     {
