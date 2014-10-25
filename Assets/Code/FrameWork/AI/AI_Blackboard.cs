@@ -75,7 +75,7 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         SetObject("TestVariableObject", null);
 
         // Temp
-        Debug.Log("Init COMPLETE");
+        //Debug.Log("Init COMPLETE");
     } 
 
     //public override void Init(HideFlags newHideFlag = HideFlags.None)
@@ -200,7 +200,7 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         variableObjects = IsVariableObject.Values.ToList();
         //prepared = true;
         //Debug.Log("OnBeforeSerialize complete");
-        Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+        //Debug.Log("Prepare keys: " + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
     }
 
     public void OnAfterDeserialize()
@@ -210,11 +210,11 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>,ISerializationC
         
         if (keys == null || objectsValues == null || variableObjects == null)
         {
-            Debug.Log("No preperation has happened");
+            //Debug.Log("No preperation has happened");
             return;
         }
        // Debug.Log("Reconstruct keys:" + prepared);
-        Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
+        //Debug.Log("Reconstruct keys:" + keys.Count + " objects: " + objectsValues.Count + " bools: " + variableObjects.Count);
         
         for (int i = 0; i < keys.Count;i++)
         {
