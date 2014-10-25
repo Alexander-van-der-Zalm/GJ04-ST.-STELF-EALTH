@@ -58,9 +58,17 @@ public class AI_BlackboardComponentEditor : EditorPlus
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
 
+        GUILayout.BeginHorizontal();
+
         if (GUILayout.Button("Clear BlackBoard"))
             bb.Clear();
-
-
+        if (GUILayout.Button("Set test values"))
+        {
+            bb["TestInt"] = 1;
+            bb["TestFloat"] = 1.0f;
+            bb["TestVariable"] = null;
+            bb["TestParamater"] = new AI_AgentBBAccessParameter();
+        }
+        GUILayout.EndHorizontal();
     }
 }

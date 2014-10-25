@@ -98,7 +98,7 @@ public class EditorPlus : Editor
         if (isVariableObject)
         {
             // Get index from type
-            int index = ValidTypes.FindIndex(t => t == value.GetType());
+            int index = value == null ? 0 : ValidTypes.FindIndex(t => t == value.GetType());
 
             fixedWidth = new FixedWidthLabel(label);
             float popUpWidht = GUI.skin.label.CalcSize(new GUIContent(ValidTypeStrings[index])).x + 10;
