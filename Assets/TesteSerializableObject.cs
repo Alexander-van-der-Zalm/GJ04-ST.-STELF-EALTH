@@ -31,6 +31,7 @@ public class TesteSerializableObject : MonoBehaviour
     }
 
     public bool ResetObject = false;
+    public bool PrintCurrentValue = false;
 
 	// Use this for initialization
 	void Start () 
@@ -44,6 +45,11 @@ public class TesteSerializableObject : MonoBehaviour
 
     void Update()
     {
+        if (PrintCurrentValue)
+        {
+            PrintCurrentValue = false;
+            Debug.Log("Current value: " + Obj.Object.ToString());
+        }
         if(ResetObject)
         {
             ResetObject = false;
@@ -73,6 +79,12 @@ public class TesteSerializableObject : MonoBehaviour
                     break;
                 case SetType.Null:
                     Obj = new SerializableObject();
+                    break;
+                case SetType.CustomClassNoUnity:
+                    Obj = new SerializableObject() { Object = new CustomClassNoUnity(StringValue,FloatValue) };
+                    break;
+                case SetType.CustomClassUnity:
+                    Obj = new SerializableObject() { Object = new CustomClassUnity(V3,V2) };
                     break;
             }
         }
