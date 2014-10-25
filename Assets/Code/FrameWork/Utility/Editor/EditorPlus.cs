@@ -104,8 +104,6 @@ public class EditorPlus : Editor
             float popUpWidht = GUI.skin.label.CalcSize(new GUIContent(ValidTypeStrings[index])).x + 10;
             index = EditorGUILayout.Popup("", index, ValidTypeStrings, GUILayout.Width(popUpWidht));
             
-            // Save index to playerprefs
-            PlayerPrefs.SetInt(label + GetInstanceID().ToString(), index);
             label = "";
 
             type = ValidTypeStrings[index];
