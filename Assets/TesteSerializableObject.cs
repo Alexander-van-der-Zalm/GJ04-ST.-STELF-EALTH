@@ -10,8 +10,9 @@ public class TesteSerializableObject : MonoBehaviour
     public string StringValue = "";
     public int IntValue = 10;
     public Vector3 V3;
-
-    public UnityEngine.Object UnityObject;
+    public Vector4 V4;
+    public Vector2 V2;
+    public Quaternion Q;
 
     public SetType Type; 
 
@@ -20,7 +21,13 @@ public class TesteSerializableObject : MonoBehaviour
         Float,
         String,
         Int,
-        V3
+        V3,
+        V2,
+        V4,
+        Quat,
+        Null,
+        CustomClassNoUnity,
+        CustomClassUnity
     }
 
     public bool ResetObject = false;
@@ -54,6 +61,18 @@ public class TesteSerializableObject : MonoBehaviour
                     break;
                 case SetType.V3:
                     Obj = new SerializableObject() { Object = V3 };
+                    break;
+                case SetType.V2:
+                    Obj = new SerializableObject() { Object = V2 };
+                    break;
+                case SetType.V4:
+                    Obj = new SerializableObject() { Object = V4 };
+                    break;
+                case SetType.Quat:
+                    Obj = new SerializableObject() { Object = Q };
+                    break;
+                case SetType.Null:
+                    Obj = new SerializableObject();
                     break;
             }
         }

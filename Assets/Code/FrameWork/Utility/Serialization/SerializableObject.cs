@@ -26,7 +26,7 @@ public class SerializableObject : ISerializationCallbackReceiver
     // Deserialize object
     public void OnAfterDeserialize()
     {
-        if(byteArray == null)
+        if(byteArray.Length == 0)
         {
             Debug.Log("byteArray is null");
             return;
@@ -40,7 +40,7 @@ public class SerializableObject : ISerializationCallbackReceiver
         // Check if surrogate and replace
         if(deserializedObject.GetType().GetInterfaces().Contains(typeof(ISerializationSurrogate)))
         {
-            GetOriginal(ref deserializedObject);
+            SurrogateHandler.GetOriginal(ref deserializedObject);
         }
         Debug.Log("DEserialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
     }
@@ -50,16 +50,16 @@ public class SerializableObject : ISerializationCallbackReceiver
     {
         if (deserializedObject == null)
         {
-            Debug.Log("deserializedObject is null");
+            //Debug.Log("Serialization: deserializedObject is null");
             return;
         }
 
         Type objType = deserializedObject.GetType();
 
-        // Check surrogates
+        // Check surrogates for non serializable types
         if (!objType.IsSerializable)
         {
-            if(!GetSurrogate(ref deserializedObject))
+            if (!SurrogateHandler.GetSurrogate(ref deserializedObject))
             {
                 Debug.Log("Serialization: object " + objType.ToString() + " is not serializable and has no surrogate");
                 return;
@@ -75,37 +75,5 @@ public class SerializableObject : ISerializationCallbackReceiver
             byteArray = stream.ToArray();
             //Debug.Log("Serialized Type: " + deserializedObject.GetType() + " | Value: " + deserializedObject.ToString());
         }
-    }
-
-    private bool GetSurrogate(ref object surrogate)
-    {
-        Type objType = surrogate.GetType();
-
-        switch(objType.ToString())
-        {
-            case "UnityEngine.Vector3":
-                surrogate = Vector3Surrogate.GetSurrogateObject(surrogate);
-                break;
-            default:
-                return false;
-        }
-
-        return true;
-    }
-
-    private bool GetOriginal(ref object original)
-    {
-        Type objType = original.GetType();
-
-        switch (objType.ToString())
-        {
-            case "Vector3Surrogate":
-                original = Vector3Surrogate.GetOriginalObject((Vector3Surrogate)original);
-                break;
-            default:
-                return false;
-        }
-
-        return true;
     }
 }
