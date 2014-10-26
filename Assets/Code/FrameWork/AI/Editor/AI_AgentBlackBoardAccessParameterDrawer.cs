@@ -50,8 +50,6 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
             bb.ParameterName = EditorGUILayout.TextField(bb.ParameterName);
         }
         //EditorGUILayout.LabelField(label,GUILayout.Width(130));
-
-        
         
         EditorGUILayout.EndHorizontal();
 

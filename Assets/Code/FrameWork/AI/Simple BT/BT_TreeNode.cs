@@ -6,17 +6,24 @@ using Status = BT_Behavior.Status;
 using System;
 
 [System.Serializable]
-public class BT_TreeNode
+public class BT_TreeNode : EasyScriptableObject<BT_TreeNode>
 {
     #region Fields
 
-    public BT_TreeNode Parent;
-    public List<BT_TreeNode> Children;
+    [SerializeField]
     public int ID;
+
+    [SerializeField]
+    private BT_BBParameters behavior;
+
+    [SerializeField]
     public AI_Blackboard ParametersBB;
 
-    //[SerializeField]
-    public BT_BBParameters behaviorDoNotUse;
+    [SerializeField]
+    public BT_TreeNode Parent;
+
+    [SerializeField]
+    public List<BT_TreeNode> Children;
 
     #endregion
 
@@ -24,57 +31,61 @@ public class BT_TreeNode
 
     public BT_BBParameters Behavior
     {
-        get { return behaviorDoNotUse; }
+        get { return behavior; }
         set { SetParameters(value); }
     }
 
     public bool HasChildren { get { return Children.Count > 0; } }
+
     public bool IsRoot { get { return Parent == null; } }
 
     #endregion
 
     #region Constructor
 
-    public BT_TreeNode(BT_BBParameters behavior)
-        :this(behavior,-1337,null,new List<BT_TreeNode>())
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
     {
-    }
+        base.Init(newHideFlag);
 
-    public BT_TreeNode(BT_BBParameters behavior, int id, BT_TreeNode parent, List<BT_TreeNode> children)
-    {
-        Debug.Log("TreeNode");
-        ID = id;
-        Children = children.ToList();
-        Parent = parent;
-
+        // Default values
+        ID = -1337;
         if (ParametersBB == null)
             ParametersBB = AI_Blackboard.Create();
-        SetParameters(behavior);
+        Parent = null;
+        Children = new List<BT_TreeNode>();
+        behavior = null;
     }
 
-    public BT_TreeNode(BT_BBParameters behavior, int id, BT_TreeNode parent, params BT_TreeNode[] childrenMem)
-        :this(behavior,id,parent,childrenMem.ToList())
-    {       
+    public static BT_TreeNode CreateNode(BT_BBParameters behavior, string filepath = "")
+    {
+        BT_TreeNode node = Create();
+        node.Behavior = behavior;
+
+        if (filepath != string.Empty)
+            node.AddObjectToAsset(filepath);
+
+        return node;
     }
+    #endregion
 
-   
-
+    #region Set Parameters
 
     private void SetParameters(BT_BBParameters behavior)
     {
         // Set behavior
-        this.behaviorDoNotUse = behavior;
+        this.behavior = behavior;
 
         Debug.Log("SetParameters");
 
         // Reset blackboard
-        ParametersBB.Clear();// = new AI_Blackboard();
+        ParametersBB.Clear();
+
         // Call the SetnodeParameters virtual method
         // Sets the blackboard with default parameters
         behavior.SetNodeParameters(this);
     }
 
-    #endregion
+    
 
     /// <summary>
     /// Returns false if the class already exists and true if it had to be created
@@ -89,6 +100,8 @@ public class BT_TreeNode
         Behavior = newBehavior;
         return true;
     }
+
+    #endregion
 
     public Status Tick(AI_Agent agent)
     {

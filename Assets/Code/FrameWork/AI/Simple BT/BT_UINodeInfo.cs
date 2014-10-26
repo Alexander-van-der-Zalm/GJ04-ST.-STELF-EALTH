@@ -28,7 +28,7 @@ public class BT_UINodeInfo
     public void SetBehavior(BT_BBParameters behavior)
     {
         if (TreeNode == null)
-            TreeNode = new BT_TreeNode(behavior);
+            TreeNode = BT_TreeNode.CreateNode(behavior);
         else
             TreeNode.Behavior = behavior;
     }

@@ -31,7 +31,7 @@ public class BT_QueuePop : BT_QueueBase
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_QueuePop());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePop());
         return SetParameters(node, QueueParam, PopParam);
     }
 

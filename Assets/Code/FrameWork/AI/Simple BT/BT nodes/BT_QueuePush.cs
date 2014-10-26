@@ -30,7 +30,7 @@ public class BT_QueuePush : BT_QueueBase
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, object pushObj)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_QueuePush());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
         return SetParameters(node, QueueParam, pushObj);
     }
 
@@ -45,7 +45,7 @@ public class BT_QueuePush : BT_QueueBase
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PushParam)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_QueuePush());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
         return SetParameters(node, QueueParam, PushParam);
     }
 

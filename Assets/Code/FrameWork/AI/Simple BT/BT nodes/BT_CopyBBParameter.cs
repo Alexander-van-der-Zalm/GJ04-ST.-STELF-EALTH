@@ -39,7 +39,7 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, object setObject)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_CopyBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
         return SetParameters(node, accesparam1, setObject);
     }
 
@@ -51,7 +51,7 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_CopyBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
         return SetParameters(node, accesparam1, accesparam2);
     }
 

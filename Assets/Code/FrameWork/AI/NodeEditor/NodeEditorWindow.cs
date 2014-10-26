@@ -98,6 +98,8 @@ public class NodeEditorWindow : EditorWindow
 
     #region GUI sections
 
+    private string path = "Assets/TestNode.asset";
+
     protected virtual void DrawButtons()
     {
         // Temp test buttons for functionality
@@ -142,6 +144,11 @@ public class NodeEditorWindow : EditorWindow
             panY--;
             Repaint();
         }
+        EditorGUILayout.BeginHorizontal();
+        path = EditorGUILayout.TextField("Path", path);
+        if (GUILayout.Button("CreateNode"))
+            BT_TreeNode.CreateObjAndAsset(path);
+        EditorGUILayout.EndHorizontal();
     }
 
     private void DrawNodeConnections()

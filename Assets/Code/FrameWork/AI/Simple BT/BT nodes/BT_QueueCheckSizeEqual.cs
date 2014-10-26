@@ -31,7 +31,7 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, object sizeObject)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_QueueCheckSizeEqual());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
         return SetParameters(node, QueueParam, sizeObject);
     }
 
@@ -46,7 +46,7 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter sizeObjParam)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_QueueCheckSizeEqual());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
         return SetParameters(node, QueueParam, sizeObjParam);
     }
 

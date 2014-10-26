@@ -141,7 +141,7 @@ public class BT_BehaviorTree : MonoBehaviour
 
         #endregion
 
-        BT_TreeNode node = new BT_TreeNode(new BT_Decorator());
+        //BT_TreeNode node = new BT_TreeNode(new BT_Decorator());
 
         #region ReActivate Soon
 
@@ -421,28 +421,28 @@ public class BT_BehaviorTree : MonoBehaviour
 
     private BT_TreeNode fail(BT_TreeNode child)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_AlwayFail());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_AlwayFail());
         node = AddChildren(node, child);
         return node;
     }
 
     private BT_TreeNode inv(BT_TreeNode child)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_Inverter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_Inverter());
         node = AddChildren(node, child);
         return node;
     }
 
     private BT_TreeNode sel(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_Selector());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_Selector());
         node = AddChildren(node, children);
         return node;
     }
 
     private BT_TreeNode seq(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_Sequencer());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_Sequencer());
         node = AddChildren(node,children);
         return node;
     }
@@ -455,7 +455,7 @@ public class BT_BehaviorTree : MonoBehaviour
     {
         BT_BehaviorDelegator b = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, del);
         b.Description.Name = name;
-        BT_TreeNode node = new BT_TreeNode(b);
+        BT_TreeNode node = BT_TreeNode.CreateNode(b);
         return node;
     }
 

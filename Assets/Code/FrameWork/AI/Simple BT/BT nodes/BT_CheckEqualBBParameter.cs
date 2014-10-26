@@ -36,7 +36,7 @@ public class BT_CheckEqualBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, object equalObject)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_CheckEqualBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CheckEqualBBParameter());
         return SetParameters(node, accesparam1, equalObject);
     }
 
@@ -51,7 +51,7 @@ public class BT_CheckEqualBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
     {
-        BT_TreeNode node = new BT_TreeNode(new BT_CheckEqualBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CheckEqualBBParameter());
         return SetParameters(node, accesparam1, accesparam2);
     }
 
