@@ -20,7 +20,7 @@ public class AI_Agent : MonoBehaviour
     #region Fields
 
     // Blackboards to store shared info
-    public BT_BehaviorTree Tree;
+    public BT_Tree Tree;
     [ReadOnly]
     public string Name;
     public AI_BlackboardComponent GlobalBlackboardC;
@@ -28,9 +28,9 @@ public class AI_Agent : MonoBehaviour
     public AI_Blackboard GlobalBlackboard { get { return GlobalBlackboardC.Blackboard; } }
     public AI_BlackboardComponent LocalBlackboardC;
     public AI_Blackboard LocalBlackboard { get { return LocalBlackboardC.Blackboard; } set { LocalBlackboardC.Blackboard = value;  } }
-    
 
-    private Dictionary<int,Status> NodeStatus;
+
+    private UDictionaryIntBT_Status NodeStatus;
     private int TreeVersion = 0;
     private IEnumerator TreeCoroutine;
 
@@ -101,8 +101,8 @@ public class AI_Agent : MonoBehaviour
         LocalBlackboard.SetObject("DebugTree", false);
         LocalBlackboard.SetObject("Depth", 0);
 
-        if(Tree == null)
-            Tree = this.GetOrAddComponent<BT_BehaviorTree>();
+        //if(Tree == null)
+        //    Tree = this.GetOrAddComponent<BT_Tree>();
         //BehaviorTree.SetAgent(this);
         
         // Test behaviors

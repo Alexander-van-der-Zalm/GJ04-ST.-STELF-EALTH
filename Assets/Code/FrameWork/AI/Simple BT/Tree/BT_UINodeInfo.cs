@@ -7,7 +7,7 @@ public class BT_UINodeInfo
     public Vector3 Position;
     public BT_UINode UINode;
 
-    public BT_BehaviorTree Tree;
+    public BT_Tree Tree;
     public BT_UINodeInfo Parent;
     public BT_TreeNode TreeNode;
     public int Depth;
@@ -16,7 +16,7 @@ public class BT_UINodeInfo
     public int ParentIndex { get { return Parent != null ? Parent.Index : -1; } }
     public int ChildrenCount { get { return TreeNode == null ? 0 : TreeNode.Children.Count; } }
 
-    public BT_UINodeInfo(int depth, int rank, BT_TreeNode node, BT_UINodeInfo parent, BT_BehaviorTree tree)
+    public BT_UINodeInfo(int depth, int rank, BT_TreeNode node, BT_UINodeInfo parent, BT_Tree tree)
     {
         Depth = depth;
         Index = rank;

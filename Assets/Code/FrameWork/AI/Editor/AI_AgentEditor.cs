@@ -10,7 +10,7 @@ public class AI_AgentEditor : EditorPlus
         base.OnInspectorGUI();
 
         AI_Agent agent = (AI_Agent)target;
-        BT_BehaviorTree tree = agent.Tree;
+        BT_Tree tree = agent.Tree;
 
         EditorGUILayout.BeginHorizontal();
 

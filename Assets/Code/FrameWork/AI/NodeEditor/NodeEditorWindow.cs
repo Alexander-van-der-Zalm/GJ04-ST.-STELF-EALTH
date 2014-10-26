@@ -69,11 +69,11 @@ public class NodeEditorWindow : EditorWindow
 
     void Update()
     {
-        // Check if tree is selected
-        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_BehaviorTree>() != null)
-        {
-            //Todo tree processing if not done yet
-        }
+        //// Check if tree is selected
+        //if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<BT_Tree>() != null)
+        //{
+        //    //Todo tree processing if not done yet
+        //}
     }
 
     #region GUI

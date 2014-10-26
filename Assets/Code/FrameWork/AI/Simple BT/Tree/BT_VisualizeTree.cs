@@ -15,7 +15,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
     private static string visualizer = "BT_Visualizer";
     private static string node = "BTNode";
 
-    public static void ShowTree(BT_BehaviorTree tree)
+    public static void ShowTree(BT_Tree tree)
     {
         if(Instance == null)
         {
@@ -31,7 +31,7 @@ public class BT_VisualizeTree : Singleton<BT_VisualizeTree>
         instance.GenerateNodes(tree);
     }
 
-    private void GenerateNodes(BT_BehaviorTree tree)
+    private void GenerateNodes(BT_Tree tree)
     {
         //TODO
         List<BT_UINodeInfo> list = tree.GetUINodes();

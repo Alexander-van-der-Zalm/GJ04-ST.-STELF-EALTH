@@ -6,7 +6,7 @@ using Status = BT_Behavior.Status;
 using System;
 
 [System.Serializable]
-public class BT_TreeNode : EasyScriptableObject<BT_TreeNode>
+public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
 {
     #region Fields
 
@@ -19,11 +19,11 @@ public class BT_TreeNode : EasyScriptableObject<BT_TreeNode>
     [SerializeField]
     public AI_Blackboard ParametersBB;
 
-    [SerializeField]
-    public BT_TreeNode Parent;
+    //[SerializeField]
+    //public BT_TreeNode Parent;
 
-    [SerializeField]
-    public List<BT_TreeNode> Children;
+    //[SerializeField]
+    //public List<BT_TreeNode> Children;
 
     #endregion
 
