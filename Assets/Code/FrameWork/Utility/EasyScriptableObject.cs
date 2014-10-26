@@ -11,7 +11,7 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
         return obj;
     }
 
-    public static T CreateObjAndAsset(string path)
+    public static T CreateObjAndAsset(string path, HideFlags newHideFlag = HideFlags.None)
     {
         T obj = Create();
 
@@ -20,14 +20,24 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
         return obj;
     }
 
+    public static T CreateObjAddToAsset(string path, HideFlags newHideFlag = HideFlags.None)
+    {
+        T obj = Create();
+
+        obj.AddObjectToAsset(path);
+        
+        return obj;
+    }
     public void CreateAsset(string path)
     {
         AssetDatabase.CreateAsset(this, path);
+        AssetDatabase.ImportAsset(path);
     }
 
     public void AddObjectToAsset(string path)
     {
         AssetDatabase.AddObjectToAsset(this, path);
+        AssetDatabase.ImportAsset(path);
     }
 
 
