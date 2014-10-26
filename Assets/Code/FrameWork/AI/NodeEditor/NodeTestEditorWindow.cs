@@ -62,6 +62,7 @@ public class NodeTestEditorWindow : NodeEditorWindow
         EditorGUILayout.EndHorizontal();
 
         // Temp move buttons
+        // Move to base
         if (GUI.RepeatButton(new Rect(20, 40, 20, 20), "<"))
         {
             panX++;

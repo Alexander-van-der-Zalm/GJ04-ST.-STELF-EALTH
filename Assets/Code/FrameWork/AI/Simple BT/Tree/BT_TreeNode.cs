@@ -11,24 +11,17 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     #region Fields
 
     [SerializeField]
-    public int ID;
-
-    [SerializeField]
     private BT_BBParameters behavior;
 
     [SerializeField]
     public AI_Blackboard ParametersBB;
 
-    //[SerializeField]
-    //public BT_TreeNode Parent;
-
-    //[SerializeField]
-    //public List<BT_TreeNode> Children;
+    
 
     #endregion
 
     #region Properties
-
+    
     public BT_BBParameters Behavior
     {
         get { return behavior; }
@@ -54,6 +47,20 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         Parent = null;
         Children = new List<BT_TreeNode>();
         behavior = null;
+    }
+
+    public static BT_TreeNode CreateNode(BT_BBParameters behavior, UnityEngine.Object obj, int ID)
+    {
+        // Create node and set values
+        BT_TreeNode node = Create();
+        node.Behavior = behavior;
+        node.ID = ID;
+        node.name = ID + " | " + behavior.Description.Name;
+
+        // Add object to asset
+        node.AddObjectToAsset(obj);
+            
+        return node;
     }
 
     public static BT_TreeNode CreateNode(BT_BBParameters behavior, string filepath = "")

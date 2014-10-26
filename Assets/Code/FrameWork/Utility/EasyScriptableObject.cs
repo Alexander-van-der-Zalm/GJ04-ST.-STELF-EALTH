@@ -34,6 +34,24 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
         AssetDatabase.ImportAsset(path);
     }
 
+    public void AddObjectToAsset(UnityEngine.Object obj)
+    {
+        // Fail if the object is not an asset
+        if (!AssetDatabase.Contains(obj))
+        {
+            Debug.LogError("EasyScriptableObject.AddObjectToAsset(Object) object " + obj.name + " " + obj.GetType() + " is not an asset");
+        }
+
+        //string path = AssetDatabase.GetAssetPath(obj);
+
+        // Add the object
+        AssetDatabase.AddObjectToAsset(this, obj);
+
+        // Refresh/Reimport
+        AssetDatabase.Refresh();
+        //AssetDatabase.ImportAsset(path);
+    }
+
     public void AddObjectToAsset(string path)
     {
         AssetDatabase.AddObjectToAsset(this, path);
@@ -52,5 +70,5 @@ public interface IEasyScriptableObject
     void Init(HideFlags newHideFlag = HideFlags.None);
     void CreateAsset(string path);
     void AddObjectToAsset(string path);
-
+    void AddObjectToAsset(UnityEngine.Object obj);
 }

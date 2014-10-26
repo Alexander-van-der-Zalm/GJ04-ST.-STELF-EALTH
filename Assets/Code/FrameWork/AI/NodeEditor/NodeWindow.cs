@@ -14,15 +14,24 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     [SerializeField]
     private GUIContent header;
 
-    [SerializeField]
-    private int windowId;
-
     #endregion
 
     #region Properties
 
+    public override int ID
+    {
+        get { return base.ID; }
+        set
+        {
+            // Change the focus id if the id is changed
+            if (NodeEditorWindow.FocusID == id)
+                NodeEditorWindow.FocusID = value;
+            base.ID = value;
+        }
+    }
+    
     public Rect Rect { get { return rect; } protected set { rect = value; } }
-    public int WindowID { get { return windowId; } protected set { windowId = value; } }
+    
     public GUIContent Header { get { return header; } protected set { header = value; } }
 
     protected Vector2 ChildPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y); } }
@@ -39,7 +48,7 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
 
     public void Init(int id, Rect startPos, GUIContent header)//, List<NodeWindow> Children)
     {
-        WindowID = id;
+        ID = id;
         Rect = startPos;
         Header = header;
         Children = new List<NodeWindow>();
@@ -52,10 +61,10 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
 
     public void DrawWindow()
     {
-        Rect = GUI.Window(WindowID, Rect, DrawWindowContent, header);
+        Rect = GUI.Window(ID, Rect, DrawWindowContent, header);
 
         if (Rect.Contains(Event.current.mousePosition))
-            NodeEditorWindow.FocusID = WindowID;
+            NodeEditorWindow.FocusID = ID;
     }
 
     protected virtual void DrawWindowContent(int id)

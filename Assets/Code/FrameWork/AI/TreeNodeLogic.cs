@@ -12,6 +12,9 @@ using System.Collections.Generic;
 public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T>
 {
     [SerializeField]
+    protected int id;
+    
+    [SerializeField]
     protected T parent;
 
     [SerializeField]
@@ -22,6 +25,8 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
 
     public T Parent { get { return parent; } protected set { parent = value; } }
     public List<T> Children { get { return children; } protected set { children = value; } }
+
+    public virtual int ID { get { return id; } set { id = value; } }
 
     public TreeNodeLogic<T> This { get { return this; } }
 

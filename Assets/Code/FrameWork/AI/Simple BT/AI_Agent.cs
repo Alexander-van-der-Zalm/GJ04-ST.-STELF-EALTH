@@ -143,7 +143,7 @@ public class AI_Agent : MonoBehaviour
         // TODO unnasign values from global blackboard set by the old tree
 
         // Get the new status memory structure
-        NodeStatus = Tree.GetNewNodeStatus();
+        //NodeStatus = Tree.GetNewNodeStatus();
         
         // Update the version
         TreeVersion = Tree.Version;

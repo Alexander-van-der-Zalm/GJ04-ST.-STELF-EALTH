@@ -37,16 +37,23 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     
     // Collection of functional tree elements
     [SerializeField]
-    private UDictionaryIntBT_TreeNode TreeNodes;
-    
-    // Collection of visual representations of tree elements TODO
-    //private List<BT_UINode> UINodes;
+    private List<BT_TreeNode> TreeNodes;
+
+    // Collection of visual representations of tree elements
+    [SerializeField]
+    private List<BTNodeWindow> nodeWindows;
 
     #endregion
 
     #region Properties
 
     public BT_TreeNode Root;
+
+    public List<BTNodeWindow> NodeWindows
+    {
+        get { return nodeWindows != null ? nodeWindows : nodeWindows = new List<BTNodeWindow>(); }
+        private set { nodeWindows = value; }
+    }
 
     public BT_TreeNode this[int id]
     {
@@ -62,7 +69,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region Update
+    #region Update Co-Routine
 
     //// Use this for initialization
     //void Start () 
@@ -90,15 +97,6 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region Helpers
-
-    private void SetAgentDebug(bool debug, AI_Agent agent)
-    {
-        agent.LocalBlackboard.SetObject("DebugTree", debug);
-    }
-
-    #endregion
-
     #region Rebuild Tree (recursive)
 
     private int IDcounter;
@@ -106,16 +104,27 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     private void RebuildTree()
     {
+        Root = FindRoot(Root);
         RebuildTree(Root);
+    }
+
+    private BT_TreeNode FindRoot(BT_TreeNode root)
+    {
+        while(root.Parent != null)
+        {
+            root = root.Parent;
+        }
+        return root;
     }
 
     private void RebuildTree(BT_TreeNode root)
     {
         Root = root;
         IDcounter = 0; // Provides the unique id's for this tree by increment
-        // Recursive crawl to fill the dictionary
-        TreeNodes = new UDictionaryIntBT_TreeNode();
-        TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
+        
+        //// Recursive crawl to fill the dictionary
+        //TreeNodes = new UDictionaryIntBT_TreeNode();
+        //TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
 
         // Set the new tree iteration
         Info.TreeIteration = Info.TreeIteration + 1 % int.MaxValue;
@@ -156,7 +165,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     public BT_TreeNode GetFirstChild(int index)
     {
-        return TreeNodes[index].Children.FirstOrDefault();
+        return TreeNodes[index].Children.First();
     }
 
     public List<BT_TreeNode> GetChildren(int index)
@@ -193,7 +202,38 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region Disconnect Children
+    #region Tree creation
+
+
+    #endregion
+
+    #region Node management
+
+    // Add node
+    public BT_TreeNode CreateNode(BT_BBParameters behavior)
+    {
+        // Create the asset and connect it to this asset
+        // Functional node part
+        BT_TreeNode newNode = BT_TreeNode.CreateNode(behavior, this, TreeNodes.Count);
+        // Create UI counterpart
+        BTNodeWindow newWindow = BTNodeWindow.CreateWindow(newNode, this, NodeWindows.Count);
+
+        // Add to lists
+        TreeNodes.Add(newNode);
+        NodeWindows.Add(newWindow);
+
+        // Make root if there is none
+        if (Root == null)
+            Root = newNode;
+
+        return newNode;
+    }
+    // Remove node
+
+    // Connect (child & parent)
+
+
+    // Disconnect (child & parent)
 
     #endregion
 
@@ -279,24 +319,16 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region Connect
+    
 
-    // Add node
-
-    // Remove node
-
-    // Connect (child & parent)
-
-    #endregion
-
-    // Disconnect (child & parent)
-    public UDictionaryIntBT_Status GetNewNodeStatus()
-    {
-        UDictionaryIntBT_Status dic = new UDictionaryIntBT_Status();
-        foreach(KeyValuePair<int, BT_TreeNode> node in TreeNodes)
-        {
-            dic[node.Key] = Status.Invalid;
-        }
-        return dic;
-    }
+    //// Disconnect (child & parent)
+    //public UDictionaryIntBT_Status GetNewNodeStatus()
+    //{
+    //    UDictionaryIntBT_Status dic = new UDictionaryIntBT_Status();
+    //    foreach(KeyValuePair<int, BT_TreeNode> node in TreeNodes)
+    //    {
+    //        dic[node.Key] = Status.Invalid;
+    //    }
+    //    return dic;
+    //}
 }
