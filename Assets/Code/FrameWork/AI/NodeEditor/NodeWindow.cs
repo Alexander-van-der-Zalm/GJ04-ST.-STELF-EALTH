@@ -17,12 +17,6 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     [SerializeField]
     private int windowId;
 
-    //[SerializeField]
-    //private NodeWindow parent;
-
-    //[SerializeField]
-    //private List<NodeWindow> children;
-
     #endregion
 
     #region Properties
@@ -30,8 +24,6 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     public Rect Rect { get { return rect; } protected set { rect = value; } }
     public int WindowID { get { return windowId; } protected set { windowId = value; } }
     public GUIContent Header { get { return header; } protected set { header = value; } }
-    //public NodeWindow Parent { get { return parent; } protected set { parent = value; } }
-    //public List<NodeWindow> Children { get { return children; } protected set { children = value; } }
 
     protected Vector2 ChildPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y); } }
     protected Vector2 ParentPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y + rect.height); } }
@@ -53,44 +45,6 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
         Children = new List<NodeWindow>();
         hideFlags = HideFlags.HideAndDontSave;
     }
-
-    #endregion
-
-    #region Children & Parenting
-
-    //public void AddChildren(params NodeWindow[] windows)
-    //{
-    //    foreach (NodeWindow newChild in windows)
-    //    {
-    //        // Check if the child already has a parent
-    //        if(newChild.Parent != null)
-    //        {
-    //            // Remove new child from old parent
-    //            newChild.Parent.RemoveChildren(newChild);
-    //        }
-
-    //        // Check if the parent is this node's parent
-    //        if(Parent == newChild)
-    //        {
-    //            // Remove this window from the ex parent
-    //            Parent.RemoveChildren(this);
-    //        }
-
-    //        // Set new parent
-    //        newChild.Parent = this;
-    //    }
-            
-    //    Children.AddRange(windows.ToList());
-    //}
-
-    //public void RemoveChildren(params NodeWindow[] windows)
-    //{
-    //    for (int i = 0; i < windows.Length; i++)
-    //    {
-    //        windows[i].Parent = null;
-    //        Children.Remove(windows[i]);
-    //    }
-    //}
 
     #endregion
 

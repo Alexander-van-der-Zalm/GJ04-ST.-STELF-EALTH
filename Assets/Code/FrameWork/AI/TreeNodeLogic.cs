@@ -8,10 +8,20 @@ using System.Collections.Generic;
 /// Childrens parent all need to be the parent
 /// </summary>
 /// <typeparam name="T"></typeparam>
+[System.Serializable]
 public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T>
 {
-    public T Parent;
-    public List<T> Children;
+    [SerializeField]
+    protected T parent;
+
+    [SerializeField]
+    protected List<T> children;
+
+    [SerializeField]
+    protected int MaxChildren;
+
+    public T Parent { get { return parent; } protected set { parent = value; } }
+    public List<T> Children { get { return children; } protected set { children = value; } }
 
     public TreeNodeLogic<T> This { get { return this; } }
 

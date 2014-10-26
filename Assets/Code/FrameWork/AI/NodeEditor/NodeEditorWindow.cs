@@ -40,7 +40,7 @@ public class NodeEditorWindow : EditorWindow
 
     void OnEnable()
     {
-        if (windows == null)
+        if (windows.Count == 0)
             Init();
     }
 
@@ -49,8 +49,9 @@ public class NodeEditorWindow : EditorWindow
         //if (windows != null)
         //    return;
         Debug.Log("INIT");
-        //if(windows == null)
-            windows = new List<NodeWindow>();
+
+        windows = new List<NodeWindow>();
+        
         generateTestNodes();
 
         // Test selection

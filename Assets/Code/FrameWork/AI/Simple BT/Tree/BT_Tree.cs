@@ -36,9 +36,10 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     public TreeInfo Info;
     
     // Collection of functional tree elements
-    private Dictionary<int,BT_TreeNode> TreeNodes;
+    [SerializeField]
+    private UDictionaryIntBT_TreeNode TreeNodes;
     
-    // Collection of visual representations of tree elements
+    // Collection of visual representations of tree elements TODO
     //private List<BT_UINode> UINodes;
 
     #endregion
@@ -56,12 +57,12 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region Constructor
+    #region Init
 
 
     #endregion
 
-    #region Init & Update
+    #region Update
 
     //// Use this for initialization
     //void Start () 
@@ -113,7 +114,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         Root = root;
         IDcounter = 0; // Provides the unique id's for this tree by increment
         // Recursive crawl to fill the dictionary
-        TreeNodes = new Dictionary<int, BT_TreeNode>();
+        TreeNodes = new UDictionaryIntBT_TreeNode();
         TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
 
         // Set the new tree iteration
@@ -122,7 +123,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         //Debug.Log("Tree iteration: " + TreeIteration);
     }
 
-    private Dictionary<int, BT_TreeNode> RecursiveTreeNodeCrawl(Dictionary<int, BT_TreeNode> dic, BT_TreeNode node)
+    private UDictionaryIntBT_TreeNode RecursiveTreeNodeCrawl(UDictionaryIntBT_TreeNode dic, BT_TreeNode node)
     {
         // All the nodes have already a valid parent and children
         // Ids need to be set and unique for this rebuild 
@@ -167,28 +168,28 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #region Set Children
 
-    public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
-    {
-        // Check if parents type supports children
-        Type type = parent.Behavior.GetType();
-        if (!typeof(BT_HasChild).IsAssignableFrom(type))
-            Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
+    //public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
+    //{
+    //    // Check if parents type supports children
+    //    Type type = parent.Behavior.GetType();
+    //    if (!typeof(BT_HasChild).IsAssignableFrom(type))
+    //        Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
 
-        if (typeof(BT_Decorator).IsAssignableFrom(type) && children.Count() > 1)
-            Debug.LogError("BT_BehaviorTree.AddChildren adding multiple children is not supported for:" + type.ToString());
+    //    if (typeof(BT_Decorator).IsAssignableFrom(type) && children.Count() > 1)
+    //        Debug.LogError("BT_BehaviorTree.AddChildren adding multiple children is not supported for:" + type.ToString());
 
-        if (children.Count() == 0)
-            return parent;
+    //    if (children.Count() == 0)
+    //        return parent;
 
-        // Set parents children
-        parent.Children.AddRange(children);
+    //    // Set parents children
+    //    parent.Children.AddRange(children);
 
-        // Set childrens parent
-        foreach(BT_TreeNode child in children)
-            child.Parent = parent;
+    //    // Set childrens parent
+    //    foreach(BT_TreeNode child in children)
+    //        child.Parent = parent;
 
-        return parent;
-    }
+    //    return parent;
+    //}
 
     #endregion
 
