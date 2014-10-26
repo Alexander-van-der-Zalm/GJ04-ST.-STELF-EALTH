@@ -30,6 +30,13 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
 
     public TreeNodeLogic<T> This { get { return this; } }
 
+    public virtual void Init()
+    {
+        Children = new List<T>();
+        id = -1337;
+    }
+
+
     public void AddChildren(params T[] children)
     {
         foreach (T newChild in children)

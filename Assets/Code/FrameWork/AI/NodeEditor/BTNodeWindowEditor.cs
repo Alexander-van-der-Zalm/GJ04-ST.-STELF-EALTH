@@ -30,8 +30,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
         window.Init();
     }
 
-    void Update()
+    void OnSelectionChange()
     {
+        BT_Tree oldTree = SelectedTree;
+
         if (Selection.activeObject == null)
         {
             SelectedTree = null;
@@ -39,29 +41,57 @@ public class BTNodeWindowEditor : NodeEditorWindow
         // Check if tree is selected via an agent
         else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_Agent>() != null)
         {
-            Debug.Log("Update 1");
             //Todo tree processing if not done yet
             AI_Agent agent = Selection.activeGameObject.GetComponent<AI_Agent>();
             SelectedTree = agent.Tree;
         }
-        else if(AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_Tree)))
+        else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_Tree)))
         {
-            Debug.Log("Update 2");
             SelectedTree = (BT_Tree)Selection.activeObject;
         }
         else
             SelectedTree = null;
+
+        if (SelectedTree != oldTree)
+        {
+            Repaint();
+        }
+
+        drawWindow = SelectedTree != null;
     }
+
+    //void Update()
+    //{
+        
+        
+            
+    //}
 
     protected override void DrawButtons()
     {
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Create new Tree"))
+        {
+            selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
+            Selection.objects = new Object[] { selectedTree };
+        }
+            
         if (SelectedTree == null)
+        {
             GUILayout.Label("Select a tree");
+            EditorGUILayout.EndHorizontal();
+            return;
+        }
+            
         
         // Temp test buttons for functionality
-        EditorGUILayout.BeginHorizontal();
+        //EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create new Selector"))
-            selectedTree.CreateNode(new BT_Selector());
+        {
+            BT_TreeNode node = selectedTree.CreateNode(new BT_Selector());
+            Selection.objects = new Object[] { node };
+        }
+            
         if (GUILayout.Button("Connect 1 to 0"))
             ConnectChild(1, 0);
         if (GUILayout.Button("Connect 0 to 1"))

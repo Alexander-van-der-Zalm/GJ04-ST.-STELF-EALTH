@@ -20,14 +20,37 @@ public class BTNodeWindow : NodeWindow
 
     public BT_TreeNode TreeNode { get { return treeNode; } private set { treeNode = value; } }
 
+    public override int ID
+    {
+        get { return base.ID; }
+        set
+        {
+            base.ID = value;
+            SetName();
+        }
+    }
+
+    private void SetName()
+    {
+
+        name = id + " | WINDOW | ";
+        name+= TreeNode != null ? TreeNode.Behavior.Description.Name : "";
+        Header = new GUIContent(TreeNode != null ? TreeNode.Behavior.Description.Name : "" + " " + id);
+    }
 
     internal static BTNodeWindow CreateWindow(BT_TreeNode node, UnityEngine.Object asset, int id)
     {
-        BTNodeWindow window = (BTNodeWindow)Create();
-        window.ID = id;
+        BTNodeWindow window = ScriptableObject.CreateInstance<BTNodeWindow>();
+        window.Init();
         window.TreeNode = node;
-        window.name = id + " | WINDOW | " + node.Behavior.Description.Name;
+        window.ID = id;
+        window.SetName();
 
+        Debug.Log(window.name); 
+
+        window.Rect = new Rect(100, 100, 100, 100);
+        
+        // Add object to asset
         window.AddObjectToAsset(asset);
 
         return window;

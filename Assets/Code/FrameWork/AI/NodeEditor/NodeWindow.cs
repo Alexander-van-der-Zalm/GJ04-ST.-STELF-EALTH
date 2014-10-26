@@ -14,6 +14,8 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     [SerializeField]
     private GUIContent header;
 
+   
+
     #endregion
 
     #region Properties
@@ -29,13 +31,17 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
             base.ID = value;
         }
     }
-    
+
     public Rect Rect { get { return rect; } protected set { rect = value; } }
-    
+
     public GUIContent Header { get { return header; } protected set { header = value; } }
 
+    public Vector2 Position { get { return new Vector2(Rect.x, Rect.y); } set { rect.x = value.x; rect.y = value.y; } }
+    public float Width { get { return Rect.width; } set { rect.width = value; } }
+    public float Height { get { return Rect.height; } set { rect.height = value; } }
+    
     protected Vector2 ChildPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y); } }
-    protected Vector2 ParentPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y + rect.height); } }
+    protected Vector2 ParentPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y + Rect.height); } }
 
     #endregion
 

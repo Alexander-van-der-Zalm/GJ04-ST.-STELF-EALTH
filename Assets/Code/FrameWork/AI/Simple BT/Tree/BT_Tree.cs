@@ -37,7 +37,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     
     // Collection of functional tree elements
     [SerializeField]
-    private List<BT_TreeNode> TreeNodes;
+    private List<BT_TreeNode> treeNodes;
 
     // Collection of visual representations of tree elements
     [SerializeField]
@@ -48,6 +48,12 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     #region Properties
 
     public BT_TreeNode Root;
+
+    public List<BT_TreeNode> TreeNodes
+    {
+        get { return treeNodes != null ? treeNodes : treeNodes = new List<BT_TreeNode>(); }
+        private set { treeNodes = value; }
+    }
 
     public List<BTNodeWindow> NodeWindows
     {
@@ -217,6 +223,8 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         BT_TreeNode newNode = BT_TreeNode.CreateNode(behavior, this, TreeNodes.Count);
         // Create UI counterpart
         BTNodeWindow newWindow = BTNodeWindow.CreateWindow(newNode, this, NodeWindows.Count);
+
+        Debug.Log("CreateNode" + name);
 
         // Add to lists
         TreeNodes.Add(newNode);

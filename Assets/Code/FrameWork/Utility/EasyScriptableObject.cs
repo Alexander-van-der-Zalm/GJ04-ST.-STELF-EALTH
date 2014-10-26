@@ -42,14 +42,14 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
             Debug.LogError("EasyScriptableObject.AddObjectToAsset(Object) object " + obj.name + " " + obj.GetType() + " is not an asset");
         }
 
-        //string path = AssetDatabase.GetAssetPath(obj);
+        string path = AssetDatabase.GetAssetPath(obj);
 
         // Add the object
         AssetDatabase.AddObjectToAsset(this, obj);
 
         // Refresh/Reimport
         AssetDatabase.Refresh();
-        //AssetDatabase.ImportAsset(path);
+        AssetDatabase.ImportAsset(path);
     }
 
     public void AddObjectToAsset(string path)
