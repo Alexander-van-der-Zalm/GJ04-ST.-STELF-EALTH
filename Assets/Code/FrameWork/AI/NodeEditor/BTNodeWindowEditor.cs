@@ -49,6 +49,16 @@ public class BTNodeWindowEditor : NodeEditorWindow
         {
             SelectedTree = (BT_Tree)Selection.activeObject;
         }
+        else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BTNodeWindow)))
+        {
+            BTNodeWindow window = (BTNodeWindow)Selection.activeObject;
+            SelectedTree = window.TreeNode.Tree;
+        }
+        else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_TreeNode)))
+        {
+            BT_TreeNode treeNode = (BT_TreeNode)Selection.activeObject;
+            SelectedTree = treeNode.Tree;
+        }
         else
             SelectedTree = null;
 

@@ -32,10 +32,8 @@ public class BTNodeWindow : NodeWindow
 
     private void SetName()
     {
-
-        name = id + " | WINDOW | ";
-        name+= TreeNode != null ? TreeNode.Behavior.Description.Name : "";
-        Header = new GUIContent(TreeNode != null ? TreeNode.Behavior.Description.Name : "" + " " + id);
+        name = id + " | WINDOW | " + (TreeNode != null ? TreeNode.Behavior.Description.Name : "");
+        Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Name : "") + " [" + id+"]");
     }
 
     internal static BTNodeWindow CreateWindow(BT_TreeNode node, UnityEngine.Object asset, int id)
@@ -45,8 +43,6 @@ public class BTNodeWindow : NodeWindow
         window.TreeNode = node;
         window.ID = id;
         window.SetName();
-
-        Debug.Log(window.name); 
 
         window.Rect = new Rect(100, 100, 100, 100);
         

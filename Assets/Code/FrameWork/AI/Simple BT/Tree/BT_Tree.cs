@@ -224,8 +224,6 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Create UI counterpart
         BTNodeWindow newWindow = BTNodeWindow.CreateWindow(newNode, this, NodeWindows.Count);
 
-        Debug.Log("CreateNode" + name);
-
         // Add to lists
         TreeNodes.Add(newNode);
         NodeWindows.Add(newWindow);

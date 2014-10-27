@@ -18,6 +18,9 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     protected Object[] selection;
 
+    [SerializeField]
+    protected bool drawWindow = true;
+
     // Settings
     public static float TangentStrength = 80;
 
@@ -72,6 +75,8 @@ public class NodeEditorWindow : EditorWindow
 
     private void DrawNodeConnections()
     {
+        if (!drawWindow)
+            return;
         for (int i = 0; i < windows.Count; i++)
         {
             windows[i].DrawConnectionLines();
@@ -80,6 +85,8 @@ public class NodeEditorWindow : EditorWindow
 
     private void DrawWindows()
     {
+        if (!drawWindow)
+            return;
         BeginWindows();
         for (int i = 0; i < windows.Count; i++)
         {
