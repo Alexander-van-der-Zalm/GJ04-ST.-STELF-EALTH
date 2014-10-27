@@ -16,6 +16,7 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     [SerializeField]
     public AI_Blackboard ParametersBB;
 
+    [SerializeField]
     private BT_Tree tree;
 
     #endregion

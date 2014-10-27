@@ -74,7 +74,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     protected override void ChangedFocus()
     {
-        Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
+        if (FocusID > 0 && FocusID < selectedTree.TreeNodes.Count)
+            Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
     }
 
     //void Update()
