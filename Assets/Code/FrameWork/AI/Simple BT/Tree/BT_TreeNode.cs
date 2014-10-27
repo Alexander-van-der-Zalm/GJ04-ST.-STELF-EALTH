@@ -34,6 +34,20 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
 
     public bool IsRoot { get { return Parent == null; } }
 
+    public override int ID
+    {
+        get
+        {
+            return base.ID;
+        }
+        set
+        {
+            base.ID = value;
+            SetNames();
+        }
+    }
+
+    
     #endregion
 
     #region Constructor
@@ -57,7 +71,6 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         BT_TreeNode node = Create();
         node.Behavior = behavior;
         node.ID = ID;
-        node.name = ID + " | " + behavior.Description.Name;
         node.Tree = treeObj;
 
         // Add object to asset
@@ -65,6 +78,12 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
             
         return node;
     }
+
+    private void SetNames()
+    {
+        name = ID + " | " + (behavior!=null?behavior.Description.Name:"");
+    }
+
 
     public static BT_TreeNode CreateNode(BT_BBParameters behavior, string filepath = "")
     {

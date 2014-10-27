@@ -61,7 +61,16 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
     public void RefreshAsset()
     {
         // TODO checks
-        AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
+        //string path = AssetDatabase.GetAssetPath(this);
+        Debug.Log(AssetDatabase.Contains(this) + " " + AssetDatabase.IsSubAsset(this));
+        
+        if (AssetDatabase.Contains(this) && AssetDatabase.IsMainAsset(this))
+            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
+        else
+        {
+            AssetDatabase.Refresh();
+            Debug.Log("RefreshAsset: Figure out how to refresh sub asset");
+        }
     }
 
     //public void DestroyAsset()
