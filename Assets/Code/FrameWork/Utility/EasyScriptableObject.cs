@@ -58,6 +58,22 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
         AssetDatabase.ImportAsset(path);
     }
 
+    public void RefreshAsset()
+    {
+        // TODO checks
+        AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
+    }
+
+    //public void DestroyAsset()
+    //{
+    //    string path = AssetDatabase.GetAssetPath(this);
+    //    Debug.Log(path);
+    //    if()
+
+    //    if (!AssetDatabase.DeleteAsset(path))
+    //        Debug.Log("EasyScriptableObject.DestroyAsset was unable to destroy " + name + " " + GetType());
+    //    AssetDatabase.Refresh();
+    //}
 
     public virtual void Init(HideFlags newHideFlag = HideFlags.None)
     {

@@ -34,6 +34,7 @@ public class BTNodeWindow : NodeWindow
     {
         name = id + " | WINDOW | " + (TreeNode != null ? TreeNode.Behavior.Description.Name : "");
         Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Name : "") + " [" + id+"]");
+        //RefreshAsset();
     }
 
     internal static BTNodeWindow CreateWindow(BT_TreeNode node, UnityEngine.Object asset, int id)

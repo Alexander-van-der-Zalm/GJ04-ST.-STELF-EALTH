@@ -21,7 +21,14 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     protected bool drawWindow = true;
 
-    public static NodeEditorWindow Instance;
+    private static NodeEditorWindow instance;
+
+    public static NodeEditorWindow Instance 
+    {
+        get { return instance != null ? instance : instance = EditorWindow.GetWindow<NodeEditorWindow>(); }
+        protected set { instance = value; }
+    }
+
 
     // Settings
     public static float TangentStrength = 80;

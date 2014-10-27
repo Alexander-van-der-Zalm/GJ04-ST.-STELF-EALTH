@@ -232,9 +232,47 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         if (Root == null)
             Root = newNode;
 
+        // Tree has changed
+        Info.TreeIteration++;
+
         return newNode;
     }
+
     // Remove node
+    public void DestroyNode(int index)
+    {
+        // Exit out if index out of bounds
+        if (index >= TreeNodes.Count || index < 0)
+            return;
+
+        // Tree has changed
+        Info.TreeIteration++;
+
+        // Remove assets
+        UnityEngine.Object.DestroyImmediate(TreeNodes[index], true);
+        UnityEngine.Object.DestroyImmediate(NodeWindows[index], true);
+
+        RefreshAsset();
+        UnityEditor.Selection.objects = new UnityEngine.Object[] { this };
+
+        // Remove at index
+        TreeNodes.RemoveAt(index);
+        NodeWindows.RemoveAt(index);
+
+        // Reorder indices
+        SimpleReOrderIndices();
+        
+    }
+
+    private void SimpleReOrderIndices()
+    {
+        // Super simple
+        for(int i = 0; i < TreeNodes.Count; i++)
+        {
+            TreeNodes[i].ID = i;
+            NodeWindows[i].ID = i;
+        }
+    }
 
     // Connect (child & parent)
 

@@ -113,8 +113,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
             ConnectChild(1, 0);
         if (GUILayout.Button("Connect 0 to 1"))
             ConnectChild(0, 1);
-        if (GUILayout.Button("Select Test Object"))
-            Selection.objects = selection;
+        if (GUILayout.Button("Delete Node"))
+            selectedTree.DestroyNode(FocusID);
         if (GUILayout.Button("Print 0 childCount"))
             Debug.Log(windows[0].Children.Count);
 
