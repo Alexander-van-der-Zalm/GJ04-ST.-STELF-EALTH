@@ -26,13 +26,15 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [MenuItem("CustomTools/BehaviorTree viewer")]
     public static void ShowWindow()
     {
-        BTNodeWindowEditor window = EditorWindow.GetWindow<BTNodeWindowEditor>();
-        window.Init();
+        Instance = EditorWindow.GetWindow<BTNodeWindowEditor>();
+        Instance.Init();
     }
 
     void OnSelectionChange()
     {
         BT_Tree oldTree = SelectedTree;
+
+        //Debug.Log(Selection.activeObject.GetType());
 
         if (Selection.activeObject == null)
         {
@@ -70,6 +72,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
         drawWindow = SelectedTree != null;
     }
 
+    protected override void ChangedFocus()
+    {
+        Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
+    }
+
     //void Update()
     //{
         
@@ -85,7 +92,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
             Selection.objects = new Object[] { selectedTree };
         }
-            
+        
         if (SelectedTree == null)
         {
             GUILayout.Label("Select a tree");
@@ -108,12 +115,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
             ConnectChild(0, 1);
         if (GUILayout.Button("Select Test Object"))
             Selection.objects = selection;
-        //if (GUILayout.Button("Create Test Object"))
-        //    test.CreateAsset();
         if (GUILayout.Button("Print 0 childCount"))
             Debug.Log(windows[0].Children.Count);
 
-        EditorGUILayout.LabelField("Focus on window: " + FocusID);
+        GUILayout.Label("FocusID:" + FocusID);
         EditorGUILayout.EndHorizontal();
 
         // Temp move buttons

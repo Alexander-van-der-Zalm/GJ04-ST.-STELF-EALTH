@@ -17,8 +17,8 @@ public class NodeTestEditorWindow : NodeEditorWindow
     [MenuItem("CustomTools/Node Test Editor")]
     public static void ShowWindow()
     {
-        NodeTestEditorWindow window = EditorWindow.GetWindow<NodeTestEditorWindow>();
-        window.Init();
+        Instance = EditorWindow.GetWindow<NodeTestEditorWindow>();
+        Instance.Init();
     }
 
     public override void Init()

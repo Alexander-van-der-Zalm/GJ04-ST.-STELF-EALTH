@@ -26,8 +26,8 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
         set
         {
             // Change the focus id if the id is changed
-            if (NodeEditorWindow.FocusID == id)
-                NodeEditorWindow.FocusID = value;
+            if (NodeEditorWindow.Instance.FocusID == id)
+                NodeEditorWindow.Instance.FocusID = value;
             base.ID = value;
         }
     }
@@ -70,7 +70,7 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
         Rect = GUI.Window(ID, Rect, DrawWindowContent, header);
 
         if (Rect.Contains(Event.current.mousePosition))
-            NodeEditorWindow.FocusID = ID;
+            NodeEditorWindow.Instance.FocusID = ID;
     }
 
     protected virtual void DrawWindowContent(int id)

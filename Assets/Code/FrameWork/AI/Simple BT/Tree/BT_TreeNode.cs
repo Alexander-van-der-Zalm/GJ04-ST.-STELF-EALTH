@@ -85,7 +85,7 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         // Set behavior
         this.behavior = behavior;
 
-        Debug.Log("SetParameters");
+        //Debug.Log("SetParameters");
 
         // Reset blackboard
         ParametersBB.Clear();

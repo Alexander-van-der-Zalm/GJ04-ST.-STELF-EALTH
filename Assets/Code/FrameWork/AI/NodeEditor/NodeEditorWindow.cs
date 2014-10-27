@@ -21,11 +21,20 @@ public class NodeEditorWindow : EditorWindow
     [SerializeField]
     protected bool drawWindow = true;
 
+    public static NodeEditorWindow Instance;
+
     // Settings
     public static float TangentStrength = 80;
 
-    // Not getting serialized, needs work around
-    public static int FocusID = -1;
+    [System.NonSerialized]
+    private int focusID = -1;
+
+    public int FocusID { get { return focusID; } set { focusID = value; ChangedFocus(); } }
+
+    protected virtual void ChangedFocus()
+    {
+        
+    }
 
     #endregion
 
