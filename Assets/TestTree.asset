@@ -14,16 +14,18 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 7
+    TreeIteration: 10
     NodeSide: 1
   treeNodes:
   - {fileID: 11400002}
   - {fileID: 11400006}
   - {fileID: 11400010}
+  - {fileID: 11400014}
   nodeWindows:
   - {fileID: 11400004}
   - {fileID: 11400008}
   - {fileID: 11400012}
+  - {fileID: 11400016}
   Root: {fileID: 11400002}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -34,11 +36,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 0 | Selector
+  m_Name: '0 | '
   m_EditorClassIdentifier: 
   id: 0
   parent: {fileID: 0}
-  children: []
+  children:
+  - {fileID: 11400006}
   MaxChildren: 0
   behavior: {fileID: 0}
   ParametersBB: {fileID: 0}
@@ -56,12 +59,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   parent: {fileID: 0}
-  children: []
+  children:
+  - {fileID: 11400008}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 127
-    y: 170
+    x: 134
+    y: 146
     width: 100
     height: 100
   header:
@@ -81,7 +85,7 @@ MonoBehaviour:
   m_Name: 1 | Sequencer
   m_EditorClassIdentifier: 
   id: 1
-  parent: {fileID: 0}
+  parent: {fileID: 11400002}
   children: []
   MaxChildren: 0
   behavior: {fileID: 0}
@@ -99,13 +103,13 @@ MonoBehaviour:
   m_Name: 1 | WINDOW | Sequencer
   m_EditorClassIdentifier: 
   id: 1
-  parent: {fileID: 0}
+  parent: {fileID: 11400004}
   children: []
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 285
-    y: 302
+    x: 270
+    y: 320
     width: 100
     height: 100
   header:
@@ -126,7 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   parent: {fileID: 0}
-  children: []
+  children:
+  - {fileID: 11400014}
   MaxChildren: 0
   behavior: {fileID: 0}
   ParametersBB: {fileID: 0}
@@ -144,12 +149,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   parent: {fileID: 0}
-  children: []
+  children:
+  - {fileID: 11400016}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 446
-    y: 178
+    x: 358
+    y: 139
     width: 100
     height: 100
   header:
@@ -157,3 +163,47 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     m_Tooltip: 
   treeNode: {fileID: 11400010}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
+  m_Name: 3 | Selector
+  m_EditorClassIdentifier: 
+  id: 3
+  parent: {fileID: 11400010}
+  children: []
+  MaxChildren: 0
+  behavior: {fileID: 0}
+  ParametersBB: {fileID: 0}
+  tree: {fileID: 11400000}
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
+  m_Name: 3 | WINDOW | Selector
+  m_EditorClassIdentifier: 
+  id: 3
+  parent: {fileID: 11400012}
+  children: []
+  MaxChildren: 0
+  rect:
+    serializedVersion: 2
+    x: 514
+    y: 315
+    width: 100
+    height: 100
+  header:
+    m_Text: Selector [3]
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  treeNode: {fileID: 11400014}
