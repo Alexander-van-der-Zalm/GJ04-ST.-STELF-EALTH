@@ -8,8 +8,10 @@ using System.Collections;
 public class BT_Behavior
 {
     #region Class and enum
+    [System.Serializable]
     public class NodeDescription
     {
+
         public enum BT_NodeType
         {
             Action,
@@ -20,6 +22,7 @@ public class BT_Behavior
 
         public string Name = "NotSet";
         public string Description = "IAM DESCRIPTIONORS";
+
         public BT_NodeType Type = BT_NodeType.Action;
 
         
@@ -54,7 +57,9 @@ public class BT_Behavior
     #region fields
 
     public NodeDescription Description = new NodeDescription();
+    [SerializeField,ReadOnly]
     protected int CurrentID;
+    [SerializeField]
     protected AI_Agent currentAgent;
 
     private string debugTree = "DebugTree";

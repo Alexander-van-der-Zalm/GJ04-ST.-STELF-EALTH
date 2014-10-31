@@ -124,8 +124,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
             selectedTree.Connect(parentIndex, childIndex);
 
         int min = windows.Count>0 ? 0 : -1;
-        parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count-1);
-        childIndex = EditorGUILayout.IntSlider(childIndex, min, windows.Count - 1);
+        using(new FixedWidthLabel("Parent:"))
+            parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count-1);
+        using (new FixedWidthLabel("Child:"))
+            childIndex = EditorGUILayout.IntSlider(childIndex, min, windows.Count - 1);
 
         //if(childIndex == parentIndex)
 
@@ -137,7 +139,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
         if (GUILayout.Button("Delete Node"))
             selectedTree.DestroyNode(FocusID);
         if (GUILayout.Button("Print childCount"))
-            Debug.Log(windows[0].Children.Count);
+            Debug.Log(windows[FocusID].Children.Count);
+        if (GUILayout.Button("Print behaviorType"))
+            Debug.Log(selectedTree[FocusID].Behavior.GetType());
+
 
         EditorGUILayout.EndHorizontal();
 

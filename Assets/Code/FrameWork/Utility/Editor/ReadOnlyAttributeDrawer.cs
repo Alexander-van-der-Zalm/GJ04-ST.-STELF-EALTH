@@ -7,12 +7,13 @@ public class ReadOnlyAttributeDrawer:PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        EditorGUI.LabelField(position, label.text, getValue(property));
+        EditorGUI.LabelField(position, label.text,  getValue(property));
     }
 
     private string getValue(SerializedProperty property)
     {
         string value = "";
+        
         switch (property.type)
         {
             case "string":

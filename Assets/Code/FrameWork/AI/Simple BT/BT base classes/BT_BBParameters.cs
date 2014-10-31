@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class BT_BBParameters : BT_Behavior 
 {
     public virtual void SetNodeParameters(BT_TreeNode node)
