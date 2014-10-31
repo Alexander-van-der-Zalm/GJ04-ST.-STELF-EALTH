@@ -242,7 +242,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     public void DestroyNode(int index)
     {
         // Exit out if index out of bounds
-        if (index >= TreeNodes.Count || index < 0)
+        if (illegalTreeNodeIndex(index))
             return;
 
         // Tree has changed
@@ -265,20 +265,57 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         RefreshAsset();
     }
 
+    // Connect (child & parent)
+    public void Connect(int parentIndex, int childIndex)
+    {
+        if(parentIndex == childIndex)
+        {
+            Debug.LogError("BT_Tree.Connect child and parent index are the same");
+            return;
+        }
+        // Check indices
+        if (illegalTreeNodeIndex(parentIndex) || illegalTreeNodeIndex(childIndex))
+            return;
+
+        // Connect TreeNode and BTNodeWindow
+        TreeNodes[parentIndex].AddChildren(TreeNodes[childIndex]);
+        NodeWindows[parentIndex].AddChildren(NodeWindows[childIndex]);
+
+        // Tree has changed
+        Info.TreeIteration++;
+
+        // Reorder indices
+        SimpleReOrderIndices();
+    }
+
+    
+
+    
+
+    // Disconnect (child & parent)
+
+    #region Helpers
+
     private void SimpleReOrderIndices()
     {
         // Super simple
-        for(int i = 0; i < TreeNodes.Count; i++)
+        for (int i = 0; i < TreeNodes.Count; i++)
         {
             TreeNodes[i].ID = i;
             NodeWindows[i].ID = i;
         }
     }
 
-    // Connect (child & parent)
 
+    private bool illegalTreeNodeIndex(int index)
+    {
+        bool illegal = index >= TreeNodes.Count || index < 0;
+        if (illegal)
+            Debug.LogError("BT_Tree.illegalTreeNodeIndex found an illegal index!!");
+        return illegal;
 
-    // Disconnect (child & parent)
+    }
+    #endregion
 
     #endregion
 

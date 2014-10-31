@@ -64,6 +64,7 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
 
     public void RemoveChildren(params T[] children)
     {
+        // Remove children
         for (int i = 0; i < children.Length; i++)
         {
             children[i].Parent = null;
