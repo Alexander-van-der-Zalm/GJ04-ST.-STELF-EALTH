@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class BT_Selector : BT_Composite
 {
     #region Constructor

@@ -5,7 +5,7 @@ using System.Collections;
 /// Base class where Actions, Conditions, Composits: Sequencers and Selectors and Decorators are based on
 /// </summary>
 [System.Serializable]
-public class BT_Behavior
+public class BT_Behavior:EasyScriptableObject<BT_Behavior>
 {
     #region Class and enum
     [System.Serializable]

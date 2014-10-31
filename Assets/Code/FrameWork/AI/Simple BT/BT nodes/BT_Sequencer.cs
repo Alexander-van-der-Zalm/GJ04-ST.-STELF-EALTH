@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class BT_Sequencer : BT_Composite
 {
     #region Constructor

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
-public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject where T : ScriptableObject, IEasyScriptableObject
+public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, IInitSO where T : ScriptableObject, IEasyScriptableObject, IInitSO
 {
     public static T Create()
     {
@@ -84,6 +84,13 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
     //    AssetDatabase.Refresh();
     //}
 
+    public static V Create<V>() where V : ScriptableObject, IInitSO
+    {
+        V so = ScriptableObject.CreateInstance<V>();
+        so.Init();
+        return so;
+    }
+
     public virtual void Init(HideFlags newHideFlag = HideFlags.None)
     {
         hideFlags = newHideFlag;
@@ -92,8 +99,12 @@ public class EasyScriptableObject<T> : ScriptableObject,IEasyScriptableObject wh
 
 public interface IEasyScriptableObject
 {
-    void Init(HideFlags newHideFlag = HideFlags.None);
     void CreateAsset(string path);
     void AddObjectToAsset(string path);
     void AddObjectToAsset(UnityEngine.Object obj);
+}
+
+public interface IInitSO
+{
+    void Init(HideFlags newHideFlag = HideFlags.None);
 }

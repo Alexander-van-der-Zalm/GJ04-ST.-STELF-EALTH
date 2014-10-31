@@ -99,7 +99,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
             Selection.objects = new Object[] { selectedTree };
         }
-        
+
         if (SelectedTree == null)
         {
             GUILayout.Label("Select a tree");
@@ -107,32 +107,45 @@ public class BTNodeWindowEditor : NodeEditorWindow
             return;
         }
 
-        if (GUILayout.Button("Create new Selector"))
-        {
-            BT_TreeNode node = selectedTree.CreateNode(new BT_Selector());
-            Selection.objects = new Object[] { node };
-        }
+
 
         GUILayout.Label("FocusID:" + FocusID);
 
         EditorGUILayout.EndHorizontal();
-        
+
         // Temp test buttons for functionality
         EditorGUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Connect Parent to Child"))
             selectedTree.Connect(parentIndex, childIndex);
 
-        int min = windows.Count>0 ? 0 : -1;
-        using(new FixedWidthLabel("Parent:"))
-            parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count-1);
+        int min = windows.Count > 0 ? 0 : -1;
+        using (new FixedWidthLabel("Parent:"))
+            parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count - 1);
         using (new FixedWidthLabel("Child:"))
             childIndex = EditorGUILayout.IntSlider(childIndex, min, windows.Count - 1);
 
         //if(childIndex == parentIndex)
+        EditorGUILayout.EndHorizontal();
 
-        
-
+        EditorGUILayout.BeginHorizontal();
+        {
+            if (GUILayout.Button("Create Selector"))
+            {
+                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Selector>(HideFlags.DontSave));
+                Selection.objects = new Object[] { node };
+            }
+            if (GUILayout.Button("Create Sequencer"))
+            {
+                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Sequencer>(HideFlags.NotEditable));
+                Selection.objects = new Object[] { node };
+            }
+            if (GUILayout.Button("Create Inverter"))
+            {
+                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
+                Selection.objects = new Object[] { node };
+            }
+        }
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -155,19 +168,19 @@ public class BTNodeWindowEditor : NodeEditorWindow
             Repaint();
         }
 
-        if (GUI.RepeatButton(new Rect(40, top+ 40, 20, 20), ">"))
+        if (GUI.RepeatButton(new Rect(40, top + 40, 20, 20), ">"))
         {
             panX--;
             Repaint();
         }
 
-        if (GUI.RepeatButton(new Rect(30, top+20, 20, 20), "^"))
+        if (GUI.RepeatButton(new Rect(30, top + 20, 20, 20), "^"))
         {
             panY++;
             Repaint();
         }
 
-        if (GUI.RepeatButton(new Rect(30, top+60, 20, 20), "v"))
+        if (GUI.RepeatButton(new Rect(30, top + 60, 20, 20), "v"))
         {
             panY--;
             Repaint();
@@ -180,13 +193,13 @@ public class BTNodeWindowEditor : NodeEditorWindow
         //    SelectedTree = BT_Tree.CreateObjAndAsset(path);
         //    Selection.activeObject = selectedTree;
         //}
-            
+
         //path = EditorGUILayout.TextField("Path", path);
         //if (GUILayout.Button("CreateNewNode"))
         //{
         //    //selectedTree.
         //}
-        
+
         //EditorGUILayout.EndHorizontal();
     }
 }

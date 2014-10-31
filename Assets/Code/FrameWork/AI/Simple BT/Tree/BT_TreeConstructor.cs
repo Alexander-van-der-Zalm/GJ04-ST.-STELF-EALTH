@@ -74,7 +74,7 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode sel(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_Selector());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Selector.Create<BT_Selector>());
         node.AddChildren(children);
         return node;
     }
@@ -87,6 +87,13 @@ public class BT_TreeConstructor
     }
 
     #endregion
+
+    public static V Create<V>(HideFlags flags = HideFlags.None) where V : ScriptableObject, IInitSO
+    {
+        V so = ScriptableObject.CreateInstance<V>();
+        so.Init(flags);
+        return so;
+    }
 
     #region Delegator
 
