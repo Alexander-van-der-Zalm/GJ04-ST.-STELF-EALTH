@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Linq;
 using System.Collections;
 
-using nodeType = BT_Behavior.NodeDescription.BT_NodeType;
+using nodeType = BTNodeWindowEditor.nodeType;
 using NodeDescription = BT_Behavior.NodeDescription;
 using System.Collections.Generic;
 

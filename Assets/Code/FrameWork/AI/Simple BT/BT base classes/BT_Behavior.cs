@@ -15,7 +15,8 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
         public enum BT_NodeType
         {
             Action,
-            Composite,
+            Selector,
+            Sequencer,
             Decorator,
             Condition
         }

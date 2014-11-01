@@ -10,7 +10,7 @@ public class BT_Selector : BT_Composite
 
     public BT_Selector()
     {
-        Description.Type = NodeDescription.BT_NodeType.Composite;
+        Description.Type = NodeDescription.BT_NodeType.Selector;
         Description.Name = "Selector";
         Description.Description = "Keeps going if children are failing, early exits if: succes, invalid ör running";
     }
