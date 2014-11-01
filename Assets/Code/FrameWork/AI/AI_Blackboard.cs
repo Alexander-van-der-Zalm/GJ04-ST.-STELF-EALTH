@@ -129,4 +129,9 @@ public class AI_Blackboard : EasyScriptableObject<AI_Blackboard>
         newBB.Name = bb.Name;
         return newBB;
     }
+
+    //internal static AI_Blackboard CreateBlackboard()
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

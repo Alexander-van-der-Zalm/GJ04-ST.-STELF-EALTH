@@ -218,11 +218,18 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     // Add node
     public BT_TreeNode CreateNode(BT_BBParameters behavior)
     {
+        int id = TreeNodes.Count;
         // Create the asset and connect it to this asset
+        // Node Parameters
+        AI_Blackboard newBB = AI_Blackboard.Create();
+        newBB.name = id + " | PARAMATERS | " + behavior.Description.Name;
+        newBB.AddObjectToAsset(this);
+
         // Functional node part
-        BT_TreeNode newNode = BT_TreeNode.CreateNode(behavior, this, TreeNodes.Count);
+        BT_TreeNode newNode = BT_TreeNode.CreateNode(behavior, id, newBB, this);
+        
         // Create UI counterpart
-        BTNodeWindow newWindow = BTNodeWindow.CreateWindow(newNode, this, NodeWindows.Count);
+        BTNodeWindow newWindow = BTNodeWindow.CreateWindow(newNode, this, id);
 
         // Add to lists
         TreeNodes.Add(newNode);
@@ -249,6 +256,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         Info.TreeIteration++;
 
         // Remove assets
+        UnityEngine.Object.DestroyImmediate(TreeNodes[index].ParametersBB, true);
         UnityEngine.Object.DestroyImmediate(TreeNodes[index], true);
         UnityEngine.Object.DestroyImmediate(NodeWindows[index], true);
 
