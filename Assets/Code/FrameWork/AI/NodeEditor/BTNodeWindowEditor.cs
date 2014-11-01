@@ -82,7 +82,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     protected override void ChangedFocus()
     {
-        if (FocusID > 0 && FocusID < selectedTree.TreeNodes.Count)
+        if (FocusID >= 0 && FocusID < selectedTree.TreeNodes.Count)
             Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
     }
 
@@ -103,6 +103,14 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
                 if (e.keyCode == KeyCode.Escape)
                     connectPress = false; // Cancel parent child connecting
+
+                if(e.keyCode == KeyCode.Delete)
+                {
+                    selectedTree.DestroyNode(FocusID);
+                    Repaint();
+                }
+                    
+
                 break;
             case EventType.KeyDown:
                 //Debug.Log(e);

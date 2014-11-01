@@ -255,6 +255,10 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Tree has changed
         Info.TreeIteration++;
 
+        // Remove parent children connections
+        TreeNodes[index].Parent.RemoveChildren(TreeNodes[index]);
+        NodeWindows[index].Parent.RemoveChildren(NodeWindows[index]);
+
         // Remove assets
         UnityEngine.Object.DestroyImmediate(TreeNodes[index].ParametersBB, true);
         UnityEngine.Object.DestroyImmediate(TreeNodes[index], true);
@@ -310,6 +314,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         for (int i = 0; i < TreeNodes.Count; i++)
         {
             TreeNodes[i].ID = i;
+            TreeNodes[i].ParametersBB.name = i + " | PARAMATERS | " + TreeNodes[i].Behavior.Description.Name;
             NodeWindows[i].ID = i;
         }
     }
