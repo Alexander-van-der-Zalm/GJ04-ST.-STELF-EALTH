@@ -42,7 +42,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
     private nodeType lastType;
 
 
-
     public BT_Tree SelectedTree
     {
         get { return selectedTree; }
@@ -122,12 +121,16 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Event e = Event.current;
         switch(e.rawType)
         {
-            case EventType.KeyUp:
+            case EventType.KeyDown:
                 if (e.keyCode == KeyCode.C)
                     ConnectKeyPress(); // Connect parent child
 
                 if (e.keyCode == KeyCode.Escape)
+                {
                     connectPress = false; // Cancel parent child connecting
+                    Repaint();
+                }
+                    
 
                 if(e.keyCode == KeyCode.Delete)
                 {
@@ -137,9 +140,9 @@ public class BTNodeWindowEditor : NodeEditorWindow
                     
 
                 break;
-            case EventType.KeyDown:
-                //Debug.Log(e);
-                break;
+            //case EventType.KeyDown:
+            //    //Debug.Log(e);
+            //    break;
         }
     }
 
@@ -320,5 +323,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 return typeof(BT_Composite);
         }
         return typeof(BT_Behavior);
+    }
+
+    internal bool IsPressedParent(int ID)
+    {
+        return connectPress && parentIndex == ID;
     }
 }
