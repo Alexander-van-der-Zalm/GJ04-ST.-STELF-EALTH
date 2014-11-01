@@ -10,14 +10,14 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
 {
     #region Fields
 
-    [SerializeField]
+    [SerializeField,HideInInspector]
     private BT_BBParameters behavior;
 
-    [SerializeField]
-    private string typeString;
+    [SerializeField,ReadOnly]
+    private string behaviorType;
 
     [SerializeField]
-    public AI_Blackboard ParametersBB;
+    private AI_Blackboard parametersBB;
 
     [SerializeField]
     private BT_Tree tree;
@@ -32,18 +32,19 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         {
             if (behavior == null)
             {
-                if (typeString == string.Empty)
+                if (behaviorType == string.Empty)
                 {
                     Debug.LogError("Behavior is null and cannot reacreate from type");
                     return null;
                 }
-                SetParameters((BT_BBParameters)Activator.CreateInstance(Type.GetType(typeString)));
+                behavior = (BT_BBParameters)Activator.CreateInstance(Type.GetType(behaviorType));
             }
-                
             return behavior; 
         }
-        set { typeString = value.GetType().ToString(); SetParameters(value); }
+        set { behaviorType = value.GetType().ToString(); SetParameters(value); }
     }
+
+    public AI_Blackboard ParametersBB { get { return parametersBB; } private set { parametersBB = value; } }
 
     public BT_Tree Tree { get { return tree; } private set { tree = value; } }
 
@@ -82,7 +83,7 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         behavior = null;
     }
 
-    public static BT_TreeNode CreateNode(BT_BBParameters behavior, BT_Tree treeObj, int ID)
+    public static BT_TreeNode CreateNode(BT_BBParameters behavior,int ID, AI_Blackboard bb = null, BT_Tree treeObj = null )
     {
         // Create node and set values
         BT_TreeNode node = Create();
@@ -90,15 +91,19 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         node.ID = ID;
         node.Tree = treeObj;
 
+        if (bb != null)
+            node.ParametersBB = bb;
+
         // Add object to asset
-        node.AddObjectToAsset(treeObj);
+        if(treeObj != null)
+            node.AddObjectToAsset(treeObj);
             
         return node;
     }
 
     private void SetNames()
     {
-        name = ID + " | " + (behavior!=null?behavior.Description.Name:"");
+        name = ID + " | TREENODE | " + (behavior!=null?behavior.Description.Name:"");
     }
 
 
