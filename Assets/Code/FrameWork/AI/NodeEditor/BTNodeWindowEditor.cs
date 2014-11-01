@@ -122,20 +122,28 @@ public class BTNodeWindowEditor : NodeEditorWindow
         switch(e.rawType)
         {
             case EventType.KeyDown:
+                // Connect parent child
                 if (e.keyCode == KeyCode.C)
-                    ConnectKeyPress(); // Connect parent child
+                    ConnectKeyPress(); 
 
+                // Cancel action
                 if (e.keyCode == KeyCode.Escape)
                 {
                     connectPress = false; // Cancel parent child connecting
                     Repaint();
                 }
                     
-
+                // Delete Node
                 if(e.keyCode == KeyCode.Delete)
                 {
                     selectedTree.DestroyNode(FocusID);
                     Repaint();
+                }
+
+                // Disconnect Node
+                if(e.keyCode == KeyCode.D)
+                {
+                    DisconnectFocus();
                 }
                     
 
@@ -144,6 +152,19 @@ public class BTNodeWindowEditor : NodeEditorWindow
             //    //Debug.Log(e);
             //    break;
         }
+    }
+
+    private void DisconnectFocus()
+    {
+        if (selectedTree == null || FocusID == -1)
+        {
+            Debug.Log("Cant disconnect when there is no node/tree selected");
+            return;
+        }
+
+        selectedTree.TreeNodes[FocusID].DisconnectAll();
+        selectedTree.NodeWindows[FocusID].DisconnectAll();
+        Repaint();
     }
 
     private void ConnectKeyPress()
@@ -234,12 +255,20 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
         EditorGUILayout.BeginHorizontal();
         {
-            if (GUILayout.Button("Delete Node"))
+            string buttonText = "Connect - Select parent (C)";
+            if (connectPress)
+                buttonText = "Connect - Select child (C)";
+
+            if (GUILayout.Button(buttonText))
+                ConnectKeyPress();
+            if (GUILayout.Button("Disconnect Node (D)"))
+                DisconnectFocus();
+            if (GUILayout.Button("Delete Node (Del)"))
                 selectedTree.DestroyNode(FocusID);
-            if (GUILayout.Button("Print childCount"))
-                Debug.Log(windows[FocusID].Children.Count);
-            if (GUILayout.Button("Print behaviorType"))
-                Debug.Log(selectedTree[FocusID].Behavior.GetType());
+            //if (GUILayout.Button("Print childCount"))
+            //    Debug.Log(windows[FocusID].Children.Count);
+            //if (GUILayout.Button("Print behaviorType"))
+            //    Debug.Log(selectedTree[FocusID].Behavior.GetType());
         }
         EditorGUILayout.EndHorizontal();
 

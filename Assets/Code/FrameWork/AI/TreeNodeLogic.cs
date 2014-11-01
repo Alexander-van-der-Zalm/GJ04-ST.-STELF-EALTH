@@ -83,5 +83,8 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
         {
             Children[i].Parent = null;
         }
+
+        // Remove children
+        RemoveChildren(Children.ToArray());
     }
 }
