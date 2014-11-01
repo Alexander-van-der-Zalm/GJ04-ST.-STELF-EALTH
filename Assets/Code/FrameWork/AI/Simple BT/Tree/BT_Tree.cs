@@ -264,7 +264,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         UnityEngine.Object.DestroyImmediate(TreeNodes[index], true);
         UnityEngine.Object.DestroyImmediate(NodeWindows[index], true);
 
-        
+        // Select the tree
         UnityEditor.Selection.objects = new UnityEngine.Object[] { this };
 
         // Remove at index
@@ -274,6 +274,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Reorder indices
         SimpleReOrderIndices();
 
+        // Y U NO WORK :##
         RefreshAsset();
     }
 

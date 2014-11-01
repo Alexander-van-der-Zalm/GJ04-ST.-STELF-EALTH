@@ -37,12 +37,36 @@ public class AI_BlackboardComponentEditor : EditorPlus
             bb.Name = EditorGUILayout.TextField(bb.Name);
         GUILayout.EndHorizontal();
 
-        EditorGUILayout.LabelField("[" + bb.ObjectPool.Count + "] Blackboard items: ");
+        //Blackboard function
+        bbc.Blackboard = BlackBoardGUI(bb);
+
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Clear BlackBoard"))
+            bb.Clear();
+        if (GUILayout.Button("Decouple"))
+        {
+            bbc.Blackboard = AI_Blackboard.CreateShallowCopy(bb);
+        }
+        if (GUILayout.Button("Set test values"))
+        {
+            bb["TestInt"] = 1;
+            bb["TestFloat"] = 1.0f;
+            bb["TestVariable"] = null;
+            bb["TestParamater"] = new AI_AgentBBAccessParameter();
+        }
+
+        GUILayout.EndHorizontal();
+    }
+
+    public static AI_Blackboard BlackBoardGUI(AI_Blackboard bb)
+    {
+        EditorGUILayout.LabelField("[" + bb.ObjectPool.Count + "] Parameter items: ");
 
         GUILayout.BeginVertical();
         EditorGUI.indentLevel++;
 
-        
+
         List<string> keys = bb.ObjectPool.Keys.ToList();
 
         foreach (string str in keys)
@@ -58,22 +82,6 @@ public class AI_BlackboardComponentEditor : EditorPlus
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
 
-        GUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Clear BlackBoard"))
-            bb.Clear();
-        if(GUILayout.Button("Decouple"))
-        {
-            bbc.Blackboard = AI_Blackboard.CreateShallowCopy(bb);
-        }
-        if (GUILayout.Button("Set test values"))
-        {
-            bb["TestInt"] = 1;
-            bb["TestFloat"] = 1.0f;
-            bb["TestVariable"] = null;
-            bb["TestParamater"] = new AI_AgentBBAccessParameter();
-        }
-
-        GUILayout.EndHorizontal();
+        return bb;
     }
 }

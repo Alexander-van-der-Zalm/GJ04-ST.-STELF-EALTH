@@ -10,7 +10,7 @@ public class BT_Sequencer : BT_Composite
 
     public BT_Sequencer(): base()
     {
-        Description.Type = NodeDescription.BT_NodeType.Composite;
+        Description.Type = NodeDescription.BT_NodeType.Sequencer;
         Description.Name = "Sequencer";
         Description.Description = "Keeps going if children are succesfull, early exits if: failed, invalid ör running";
     }

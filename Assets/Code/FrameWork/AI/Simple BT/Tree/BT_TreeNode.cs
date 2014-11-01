@@ -22,6 +22,12 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     [SerializeField]
     private BT_Tree tree;
 
+    [SerializeField]
+    public string Name;
+
+    [SerializeField]
+    public string Description;
+
     #endregion
 
     #region Properties
@@ -131,11 +137,15 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         // Reset blackboard
         ParametersBB.Clear();
 
+        SetBehaviorParameters();
+    }
+
+    public void SetBehaviorParameters()
+    {
         // Call the SetnodeParameters virtual method
         // Sets the blackboard with default parameters
         behavior.SetNodeParameters(this);
     }
-
     
 
     /// <summary>

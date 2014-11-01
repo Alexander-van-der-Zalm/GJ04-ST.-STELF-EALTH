@@ -2,10 +2,26 @@
 using System.Linq;
 using System.Collections;
 using UnityEditor;
+using System.Reflection;
+using System.Collections.Generic;
+
+using Type = System.Type;
+using Enum = System.Enum;
+using NodeDescription = BT_Behavior.NodeDescription;
+
+
 
 [System.Serializable]
 public class BTNodeWindowEditor : NodeEditorWindow
 {
+    public enum nodeType
+    {
+        Action,
+        Composite,
+        Decorator,
+        Condition
+    }
+    
     private BT_Tree selectedTree;
 
     [SerializeField]
@@ -17,7 +33,15 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [SerializeField]
     private int parentIndex = 0;
 
+    [SerializeField]
+    private nodeType curType = nodeType.Action;
+
+
     private bool connectPress = false;
+    private int selectedClass;
+    private nodeType lastType;
+
+
 
     public BT_Tree SelectedTree
     {
@@ -86,6 +110,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
     }
 
+    #region Input handling
     //void Update()
     //{
     //    //Debug.Log("Update: " + Event.current.button);
@@ -147,40 +172,29 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
     }
 
+    #endregion
 
     protected override void DrawButtons()
     {
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Create new Tree"))
         {
-            selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
-            Selection.objects = new Object[] { selectedTree };
+            if (GUILayout.Button("Create new Tree"))
+            {
+                selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
+                Selection.objects = new Object[] { selectedTree };
+            }
+
+            if (SelectedTree == null)
+            {
+                GUILayout.Label("Select a tree");
+                // Enum Popup
+                EditorGUILayout.EndHorizontal();
+                return;
+            }
+
+            GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString() 
+                            + " Child:" + childIndex.ToString());
         }
-
-        if (SelectedTree == null)
-        {
-            GUILayout.Label("Select a tree");
-            EditorGUILayout.EndHorizontal();
-            return;
-        }
-
-        GUILayout.Label("FocusID:" + FocusID);
-
-        EditorGUILayout.EndHorizontal();
-
-        // Temp test buttons for functionality
-        EditorGUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Connect Parent to Child"))
-            selectedTree.Connect(parentIndex, childIndex);
-
-        int min = windows.Count > 0 ? 0 : -1;
-        using (new FixedWidthLabel("Parent:"))
-            parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count - 1);
-        using (new FixedWidthLabel("Child:"))
-            childIndex = EditorGUILayout.IntSlider(childIndex, min, windows.Count - 1);
-
-        //if(childIndex == parentIndex)
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -200,23 +214,39 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
                 Selection.objects = new Object[] { node };
             }
+            if (GUILayout.Button("Create Negator"))
+            {
+                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_AlwayFail>());
+                Selection.objects = new Object[] { node };
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+
+        EditorGUILayout.BeginHorizontal();
+        {
+            CreateNodeOfChoice();
         }
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Delete Node"))
-            selectedTree.DestroyNode(FocusID);
-        if (GUILayout.Button("Print childCount"))
-            Debug.Log(windows[FocusID].Children.Count);
-        if (GUILayout.Button("Print behaviorType"))
-            Debug.Log(selectedTree[FocusID].Behavior.GetType());
-
-
+        {
+            if (GUILayout.Button("Delete Node"))
+                selectedTree.DestroyNode(FocusID);
+            if (GUILayout.Button("Print childCount"))
+                Debug.Log(windows[FocusID].Children.Count);
+            if (GUILayout.Button("Print behaviorType"))
+                Debug.Log(selectedTree[FocusID].Behavior.GetType());
+        }
         EditorGUILayout.EndHorizontal();
 
         // Temp move buttons
         // Move to base
-        float top = 90;
+        NavigationArrows(90.0f);
+    }
+
+    private void NavigationArrows(float top)
+    {
         if (GUI.RepeatButton(new Rect(20, top + 40, 20, 20), "<"))
         {
             panX++;
@@ -240,21 +270,56 @@ public class BTNodeWindowEditor : NodeEditorWindow
             panY--;
             Repaint();
         }
-        //EditorGUILayout.BeginHorizontal();
+    }
 
+    private void CreateNodeOfChoice()
+    {
+        // Enum popup of selectable types
+        curType = (nodeType)EditorGUILayout.Popup((int)curType, Enum.GetNames(typeof(nodeType)));
 
-        //if (GUILayout.Button("CreateTree"))
-        //{
-        //    SelectedTree = BT_Tree.CreateObjAndAsset(path);
-        //    Selection.activeObject = selectedTree;
-        //}
+        Type type = GetType(curType);
 
-        //path = EditorGUILayout.TextField("Path", path);
-        //if (GUILayout.Button("CreateNewNode"))
-        //{
-        //    //selectedTree.
-        //}
+        // Reset if changed
+        if (lastType != curType)
+            selectedClass = 0;
 
-        //EditorGUILayout.EndHorizontal();
+        lastType = curType;
+
+        // Get all the classes from the assembly that inherent from the selected BT node type
+        var q1 = from t in Assembly.GetAssembly(typeof(BT_Behavior)).GetTypes()
+                 where t.IsClass && (t.IsSubclassOf(type))// && !t.GetInterfaces().Contains(typeof(IReflectionIgnore)))//t == type) // No more equal types
+                 select t;
+
+        var q2 = from t in q1
+                 select t.Name.ToString();
+
+        List<string> classList = q2.ToList<string>();
+
+        selectedClass = EditorGUILayout.Popup(selectedClass, classList.ToArray());
+
+        // Create the node
+        var l1 = q1.ToList();
+        if (GUILayout.Button("Create node"))
+        {
+            selectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
+            Repaint();
+        }
+            
+    }
+
+    private Type GetType(nodeType bT_NodeType)
+    {
+        switch (bT_NodeType)
+        {
+            case nodeType.Action:
+                return typeof(BT_Action);
+            case nodeType.Condition:
+                return typeof(BT_Condition);
+            case nodeType.Decorator:
+                return typeof(BT_Decorator);
+            case nodeType.Composite:
+                return typeof(BT_Composite);
+        }
+        return typeof(BT_Behavior);
     }
 }
