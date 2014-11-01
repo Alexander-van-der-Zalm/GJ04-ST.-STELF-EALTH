@@ -99,11 +99,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
         {
             case EventType.KeyUp:
                 if (e.keyCode == KeyCode.C)
-                    ConnectKeyPress();
+                    ConnectKeyPress(); // Connect parent child
 
                 if (e.keyCode == KeyCode.Escape)
-                    connectPress = false;
-                
+                    connectPress = false; // Cancel parent child connecting
                 break;
             case EventType.KeyDown:
                 //Debug.Log(e);
@@ -128,6 +127,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
         else
         {
+            if(FocusID == parentIndex)
+            {
+                Debug.Log("Select a child first");
+                return;
+            }
             connectPress = false;
             childIndex = FocusID;
             selectedTree.Connect(parentIndex, childIndex);
@@ -151,8 +155,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
             EditorGUILayout.EndHorizontal();
             return;
         }
-
-
 
         GUILayout.Label("FocusID:" + FocusID);
 

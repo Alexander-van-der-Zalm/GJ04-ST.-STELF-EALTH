@@ -73,6 +73,16 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         }
     }
 
+    public void Destroy()
+    {
+        UnityEngine.Object.Destroy(this);
+    }
+
+    public void DestroyImmediate()
+    {
+        UnityEngine.Object.DestroyImmediate(this, true);
+    }
+
     //public void DestroyAsset()
     //{
     //    string path = AssetDatabase.GetAssetPath(this);
@@ -102,6 +112,8 @@ public interface IEasyScriptableObject
     void CreateAsset(string path);
     void AddObjectToAsset(string path);
     void AddObjectToAsset(UnityEngine.Object obj);
+    void Destroy();
+    void DestroyImmediate();
 }
 
 public interface IInitSO

@@ -2,11 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Abandoned, untested and not finished!!!
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [System.Serializable]
 public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObjectCollection<T>>, IList<T> where T : IInitSO, IEasyScriptableObject
 {
     [SerializeField]
     private List<T> soCollection;
+
+    public bool AddObjectToAsset = false;
+    public bool DestroyAsset = false;
 
     public List<T> Collection
     {
@@ -26,6 +33,8 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
     {
         // Add to list
         Collection.Add(newSO);
+        if (AddObjectToAsset)
+            newSO.AddObjectToAsset(this);
     }
 
     public int IndexOf(T item)
@@ -36,10 +45,15 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
     public void Insert(int index, T item)
     {
         Collection.Insert(index, item);
+        if (AddObjectToAsset)
+            item.AddObjectToAsset(this);
     }
 
     public void RemoveAt(int index)
     {
+        if (DestroyAsset)
+            Collection[index].Destroy();
+        
         Collection.RemoveAt(index);
     }
 
@@ -53,6 +67,9 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
         }
         set
         {
+            // Remove old?
+            if (DestroyAsset)
+                Collection[index].Destroy();
             Collection[index] = value;
         }
     }
@@ -90,6 +107,9 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
 
     public bool Remove(T item)
     {
+        if (DestroyAsset)
+            UnityEngine.Object.DestroyImmediate(this, true);
+
         return Collection.Remove(item);
     }
 

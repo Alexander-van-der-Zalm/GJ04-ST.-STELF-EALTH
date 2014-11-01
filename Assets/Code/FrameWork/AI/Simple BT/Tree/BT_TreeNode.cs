@@ -14,6 +14,9 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     private BT_BBParameters behavior;
 
     [SerializeField]
+    private string typeString;
+
+    [SerializeField]
     public AI_Blackboard ParametersBB;
 
     [SerializeField]
@@ -25,8 +28,21 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     
     public BT_BBParameters Behavior
     {
-        get { return behavior; }
-        set { SetParameters(value); }
+        get 
+        {
+            if (behavior == null)
+            {
+                if (typeString == string.Empty)
+                {
+                    Debug.LogError("Behavior is null and cannot reacreate from type");
+                    return null;
+                }
+                SetParameters((BT_BBParameters)Activator.CreateInstance(Type.GetType(typeString)));
+            }
+                
+            return behavior; 
+        }
+        set { typeString = value.GetType().ToString(); SetParameters(value); }
     }
 
     public BT_Tree Tree { get { return tree; } private set { tree = value; } }

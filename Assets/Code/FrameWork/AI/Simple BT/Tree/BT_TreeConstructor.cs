@@ -2,6 +2,7 @@
 using System.Collections;
 using Status = BT_Behavior.Status;
 using fc = Framework.Collections;
+using System;
 public class BT_TreeConstructor 
 {
     #region BT Component Syntactic Sugar
@@ -94,6 +95,11 @@ public class BT_TreeConstructor
         so.Init(flags);
         return so;
     }
+
+    //public static BT_BBParameters Create(Type type, HideFlags flags = HideFlags.None)
+    //{
+
+    //}
 
     #region Delegator
 
