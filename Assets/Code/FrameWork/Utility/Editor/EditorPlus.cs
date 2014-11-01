@@ -76,7 +76,7 @@ public class EditorPlus : Editor
 
     #region Draw Every/Alot of Types
 
-    protected object EditorField(object value, string label = "", bool labelField = false, bool isVariableObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
+    protected static object EditorField(object value, string label = "", bool labelField = false, bool isVariableObject = false, params GUILayoutOption[] options)//, GUIContent glabel)
     {
         // Possibly make nice with http://docs.unity3d.com/ScriptReference/GUILayout.FlexibleSpace.html
         string type;
@@ -182,7 +182,7 @@ public class EditorPlus : Editor
         return returnvalue;
     }
 
-    private void PopulateTypeArrays()
+    private static void PopulateTypeArrays()
     {
         ValidTypes = new List<Type>() { typeof(int), typeof(float), typeof(bool), typeof(string), typeof(UnityEngine.Vector2), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector4) };
         var strings = from t in ValidTypes

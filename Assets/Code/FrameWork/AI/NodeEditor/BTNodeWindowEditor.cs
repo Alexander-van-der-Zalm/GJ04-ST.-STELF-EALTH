@@ -86,6 +86,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
     }
 
+    #region Input handling
     //void Update()
     //{
     //    //Debug.Log("Update: " + Event.current.button);
@@ -147,40 +148,36 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
     }
 
+    #endregion
 
     protected override void DrawButtons()
     {
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Create new Tree"))
         {
-            selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
-            Selection.objects = new Object[] { selectedTree };
+            if (GUILayout.Button("Create new Tree"))
+            {
+                selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
+                Selection.objects = new Object[] { selectedTree };
+            }
+
+            if (SelectedTree == null)
+            {
+                GUILayout.Label("Select a tree");
+                // Enum Popup
+                EditorGUILayout.EndHorizontal();
+                return;
+            }
+
+            GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString() + " Child:" + childIndex.ToString());
+
+            //using (new FixedWidthLabel(" | Connect nodes info | Parent:" + parentIndex.ToString() + "Child:" + childIndex.ToString()))
+            //{
+
+            //}
+            //    EditorGUILayout.LabelField(parentIndex.ToString());
+            //using (new FixedWidthLabel("Child:"))
+            //    EditorGUILayout.LabelField(childIndex.ToString());
         }
-
-        if (SelectedTree == null)
-        {
-            GUILayout.Label("Select a tree");
-            EditorGUILayout.EndHorizontal();
-            return;
-        }
-
-        GUILayout.Label("FocusID:" + FocusID);
-
-        EditorGUILayout.EndHorizontal();
-
-        // Temp test buttons for functionality
-        EditorGUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Connect Parent to Child"))
-            selectedTree.Connect(parentIndex, childIndex);
-
-        int min = windows.Count > 0 ? 0 : -1;
-        using (new FixedWidthLabel("Parent:"))
-            parentIndex = EditorGUILayout.IntSlider(parentIndex, min, windows.Count - 1);
-        using (new FixedWidthLabel("Child:"))
-            childIndex = EditorGUILayout.IntSlider(childIndex, min, windows.Count - 1);
-
-        //if(childIndex == parentIndex)
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -200,18 +197,23 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
                 Selection.objects = new Object[] { node };
             }
+            if (GUILayout.Button("Create AlwaysFail"))
+            {
+                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_AlwayFail>());
+                Selection.objects = new Object[] { node };
+            }
         }
         EditorGUILayout.EndHorizontal();
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Delete Node"))
+                selectedTree.DestroyNode(FocusID);
+            if (GUILayout.Button("Print childCount"))
+                Debug.Log(windows[FocusID].Children.Count);
+            if (GUILayout.Button("Print behaviorType"))
+                Debug.Log(selectedTree[FocusID].Behavior.GetType());
 
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Delete Node"))
-            selectedTree.DestroyNode(FocusID);
-        if (GUILayout.Button("Print childCount"))
-            Debug.Log(windows[FocusID].Children.Count);
-        if (GUILayout.Button("Print behaviorType"))
-            Debug.Log(selectedTree[FocusID].Behavior.GetType());
-
-
+        }
         EditorGUILayout.EndHorizontal();
 
         // Temp move buttons
