@@ -255,9 +255,9 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Tree has changed
         Info.TreeIteration++;
 
-        // Remove parent children connections
-        TreeNodes[index].Parent.RemoveChildren(TreeNodes[index]);
-        NodeWindows[index].Parent.RemoveChildren(NodeWindows[index]);
+        // Remove parent children connections & Parent connection from children
+        TreeNodes[index].DisconnectAll();
+        NodeWindows[index].DisconnectAll();
 
         // Remove assets
         UnityEngine.Object.DestroyImmediate(TreeNodes[index].ParametersBB, true);

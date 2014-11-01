@@ -71,4 +71,17 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
             Children.Remove(children[i]);
         }
     }
+
+    public void DisconnectAll()
+    {
+        // Remove self from parent as child
+        if(Parent != null)
+            Parent.RemoveChildren((T)this);
+
+        // Remove self as parent from children
+        for(int i = 0; i < Children.Count; i++)
+        {
+            Children[i].Parent = null;
+        }
+    }
 }
