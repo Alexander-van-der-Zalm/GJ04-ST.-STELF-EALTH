@@ -10,10 +10,12 @@ public class BT_TreeNodeEditor : EditorPlus
         BT_TreeNode node = (BT_TreeNode)target;
 
         int maxChars = Mathf.Min(7, node.Name.Length);
-        node.Tree.NodeWindows[node.ID].Header.text = node.Behavior.Description.Type.ToString().Substring(0, 3) + "-" + node.Name.Substring(0, maxChars) + "[" + node.ID + "]";
+        // Redo this
+        //node.Tree.NodeWindows[node.ID].Header.text = node.Behavior.Description.Type.ToString().Substring(0, 3) + "-" + node.Name.Substring(0, maxChars) + "[" + node.ID + "]";
 
-        EditorGUILayout.LabelField("NodeName: ", node.name);
+        //EditorGUILayout.LabelField("NodeName: ", node.name);
         EditorGUILayout.LabelField("BehaviorType: ", node.Behavior.Description.Type.ToString());
+        EditorGUILayout.LabelField("Parent: " + (node.Parent != null ? "Y" : "N") + " | Children: " + node.Children.Count);
         //EditorGUILayout.LabelField("Description: " + node.Behavior.Description.Description);
 
         node.Name = EditorGUILayout.TextField("Identifying name:",node.Name);

@@ -105,7 +105,7 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
 
         if(behavior != null)
         {
-            node.Name = node.behavior.Description.Name;
+            //node.Name = node.behavior.Description.Name;
             node.Description = node.Behavior.Description.Description;
         }
             

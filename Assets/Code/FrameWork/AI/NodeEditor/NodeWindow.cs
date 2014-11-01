@@ -14,11 +14,14 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     [SerializeField]
     private GUIContent header;
 
-   
+    [SerializeField]
+    private Color bgColor;
 
     #endregion
 
     #region Properties
+
+    public Color BGColor { get { return bgColor; } set { bgColor = value; } }
 
     public override int ID
     {
@@ -67,7 +70,15 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
 
     public void DrawWindow()
     {
+        Color oldColor = GUI.color;
+        
+        if(bgColor!=null)
+            GUI.color = bgColor;
+
         Rect = GUI.Window(ID, Rect, DrawWindowContent, header);
+
+       // if (bgColor.a > 0)
+        GUI.color = oldColor;
 
         if (Rect.Contains(Event.current.mousePosition))
             NodeEditorWindow.Instance.FocusID = ID;

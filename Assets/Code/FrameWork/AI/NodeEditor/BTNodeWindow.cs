@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class BTNodeWindow : NodeWindow
 {
@@ -33,7 +34,7 @@ public class BTNodeWindow : NodeWindow
     private void SetName()
     {
         name = id + " | WINDOW | " + (TreeNode != null ? TreeNode.Behavior.Description.Name : "");
-        Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Name : "") + " [" + id+"]");
+        Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Type.ToString() : "") + " [" + id + "]");
         //RefreshAsset();
     }
 
@@ -44,6 +45,7 @@ public class BTNodeWindow : NodeWindow
         window.TreeNode = node;
         window.ID = id;
         window.SetName();
+        window.BGColor = GUI.color;
 
         window.Rect = new Rect(100, 100, 100, 100);
         
@@ -59,6 +61,13 @@ public class BTNodeWindow : NodeWindow
         base.DrawWindowContent(id);
 
         //TODO render this window
+        EditorGUILayout.LabelField(treeNode.Behavior.Description.Name);
+        EditorGUILayout.LabelField(treeNode.Name);
+
+        if (((BTNodeWindowEditor)BTNodeWindowEditor.Instance).IsPressedParent(ID))
+            BGColor = Color.green;
+        else
+            BGColor = new Color(.8f,0.9f,0.9f,1.0f);
     }
 
     
