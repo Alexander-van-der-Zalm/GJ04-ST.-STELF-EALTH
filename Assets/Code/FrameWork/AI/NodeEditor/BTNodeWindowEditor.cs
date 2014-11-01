@@ -304,7 +304,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
             selectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
             Repaint();
         }
-            
     }
 
     private Type GetType(nodeType bT_NodeType)

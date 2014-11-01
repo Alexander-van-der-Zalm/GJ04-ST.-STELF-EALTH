@@ -8,9 +8,18 @@ public class BT_TreeNodeEditor : EditorPlus
     public override void OnInspectorGUI()
     {
         BT_TreeNode node = (BT_TreeNode)target;
-        //node.name = node.Behavior.Description.Name.Substring(0,3) + " " + node.Name.Substring(0,6) + " ["+node.ID+"]";
+
+        int maxChars = Mathf.Min(7, node.Name.Length);
+        node.Tree.NodeWindows[node.ID].Header.text = node.Behavior.Description.Type.ToString().Substring(0, 3) + "-" + node.Name.Substring(0, maxChars) + "[" + node.ID + "]";
+
         EditorGUILayout.LabelField("NodeName: ", node.name);
+        EditorGUILayout.LabelField("BehaviorType: ", node.Behavior.Description.Type.ToString());
+        //EditorGUILayout.LabelField("Description: " + node.Behavior.Description.Description);
+
         node.Name = EditorGUILayout.TextField("Identifying name:",node.Name);
+        EditorGUILayout.LabelField("Description: ");
+        node.Description = EditorGUILayout.TextArea(node.Description);
+        
 
         EditorGUILayout.Space();
 
@@ -27,6 +36,7 @@ public class BT_TreeNodeEditor : EditorPlus
         //    node.ParametersBB = AI_Blackboard.CreateShallowCopy(node.ParametersBB);
         //}
 
-
+        if (GUI.changed)
+            BTNodeWindowEditor.Instance.Repaint();
     }
 }

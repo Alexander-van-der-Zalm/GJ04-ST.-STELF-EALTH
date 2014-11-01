@@ -87,19 +87,29 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         Parent = null;
         Children = new List<BT_TreeNode>();
         behavior = null;
+        Name = string.Empty;
+        Description = string.Empty;
     }
 
     public static BT_TreeNode CreateNode(BT_BBParameters behavior,int ID, AI_Blackboard bb = null, BT_Tree treeObj = null )
     {
         // Create node and set values
         BT_TreeNode node = Create();
-        node.Behavior = behavior;
-        node.ID = ID;
-        node.Tree = treeObj;
 
         if (bb != null)
             node.ParametersBB = bb;
 
+        node.Behavior = behavior;
+        node.ID = ID;
+        node.Tree = treeObj;
+
+        if(behavior != null)
+        {
+            node.Name = node.behavior.Description.Name;
+            node.Description = node.Behavior.Description.Description;
+        }
+            
+        
         // Add object to asset
         if(treeObj != null)
             node.AddObjectToAsset(treeObj);
