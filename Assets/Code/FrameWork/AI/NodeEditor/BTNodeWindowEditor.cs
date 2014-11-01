@@ -17,6 +17,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [SerializeField]
     private int parentIndex = 0;
 
+    private bool connectPress = false;
+
     public BT_Tree SelectedTree
     {
         get { return selectedTree; }
@@ -86,10 +88,53 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     //void Update()
     //{
-        
-        
-            
+    //    //Debug.Log("Update: " + Event.current.button);
+
+
     //}
+    protected override void HandleInput()
+    {
+        Event e = Event.current;
+        switch(e.rawType)
+        {
+            case EventType.KeyUp:
+                if (e.keyCode == KeyCode.C)
+                    ConnectKeyPress();
+
+                if (e.keyCode == KeyCode.Escape)
+                    connectPress = false;
+                
+                break;
+            case EventType.KeyDown:
+                //Debug.Log(e);
+                break;
+        }
+    }
+
+    private void ConnectKeyPress()
+    {
+        if(selectedTree == null || FocusID == -1)
+        {
+            Debug.Log("Cant connect when there is no node/tree selected");
+            connectPress = false;
+            return;
+        }
+                        
+        if(!connectPress)
+        {
+            connectPress = true;
+            parentIndex = FocusID;
+            Repaint();
+        }
+        else
+        {
+            connectPress = false;
+            childIndex = FocusID;
+            selectedTree.Connect(parentIndex, childIndex);
+            Repaint();
+        }
+    }
+
 
     protected override void DrawButtons()
     {

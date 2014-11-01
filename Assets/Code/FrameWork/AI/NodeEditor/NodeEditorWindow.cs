@@ -71,8 +71,12 @@ public class NodeEditorWindow : EditorWindow
     // OnGui
     void OnGUI()
     {
+        // Handle Input
+        HandleInput();
+
+        // Begin Moveable group
         GUI.BeginGroup(new Rect(panX, panY, GroupSize, GroupSize));
-         
+
         // Draw parent to child connections
         DrawNodeConnections();
 
@@ -86,6 +90,11 @@ public class NodeEditorWindow : EditorWindow
     }
 
     #endregion
+
+    protected virtual void HandleInput()
+    {
+        
+    }
 
     #region GUI sections
 
