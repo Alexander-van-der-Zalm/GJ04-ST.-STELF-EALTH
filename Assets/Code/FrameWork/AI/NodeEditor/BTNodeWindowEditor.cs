@@ -227,14 +227,24 @@ public class BTNodeWindowEditor : NodeEditorWindow
     {
         EditorGUILayout.BeginHorizontal();
         {
-            if (GUILayout.Button("Create new Tree"))
+            string createButtonText = "Create Tree @";
+            if (AssetDatabase.LoadMainAssetAtPath(path) != null)
+                createButtonText = "Replace Tree @";
+            if (GUILayout.Button(createButtonText))
             {
-                SelectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
+                SelectedTree = BT_Tree.CreateObjAndAsset(path);
                 Selection.objects = new Object[] { SelectedTree };
             }
+            EditorGUILayout.LabelField(path);
+            if (GUILayout.Button("Select filepath"))
+            {
+                path = EditorUtility.SaveFilePanelInProject("Tree location", "Tree", "asset", "IAR MESSAGE00");//("Tree location", "/Assets", "Tree", "asset");
+            }
 
-            TreeAssetSelector();
+            SelectedTree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
             
+            
+
             if (SelectedTree == null)
             {
                 EditorGUILayout.EndHorizontal();
@@ -244,8 +254,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 return;
             }
 
-            GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString() 
-                            + " Child:" + childIndex.ToString());
+            
         }
         EditorGUILayout.EndHorizontal();
 
@@ -292,6 +301,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 
         }
         EditorGUILayout.EndHorizontal();
+
+        // DebugInfo
+        GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString()
+                            + " Child:" + childIndex.ToString());
 
         // Temp move buttons
         // Move to base
@@ -362,7 +375,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     private void TreeAssetSelector()
     {
-        SelectedTree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
+        
     }
 
     private void CreateNodeOfChoice()
