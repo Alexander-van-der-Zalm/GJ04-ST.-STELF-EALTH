@@ -34,7 +34,7 @@ public class BTNodeWindow : NodeWindow
     private void SetName()
     {
         name = id + " | WINDOW | " + (TreeNode != null ? TreeNode.Behavior.Description.Name : "");
-        Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Type.ToString() : "") + " [" + id + "]");
+        Header = new GUIContent((TreeNode != null ? TreeNode.Behavior.Description.Type.ToString() : "")+" [" + id + "]");
         //RefreshAsset();
     }
 
@@ -59,10 +59,16 @@ public class BTNodeWindow : NodeWindow
     {
         // Makes it draggable
         base.DrawWindowContent(id);
-
         //TODO render this window
-        EditorGUILayout.LabelField(treeNode.Behavior.Description.Name);
-        EditorGUILayout.LabelField(treeNode.Name);
+
+        int childIndex = TreeNode.ChildIndex;
+        EditorGUILayout.LabelField("("+TreeNode.Behavior.Description.Name + ")" + (childIndex == -1 ? "" : "[" + childIndex + "]"));
+        if (!TreeNode.Name.Equals(string.Empty))
+        {
+            EditorGUILayout.LabelField(TreeNode.Name);
+        }
+        if (TreeNode.IsRoot)
+            EditorGUILayout.LabelField("Root");
 
         if (((BTNodeWindowEditor)BTNodeWindowEditor.Instance).IsPressedParent(ID))
             BGColor = Color.green;

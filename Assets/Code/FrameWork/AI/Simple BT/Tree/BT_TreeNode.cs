@@ -56,7 +56,9 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
 
     public bool HasChildren { get { return Children.Count > 0; } }
 
-    public bool IsRoot { get { return Parent == null; } }
+    public bool IsRoot { get { return Parent == null && Tree.Root == this; } }
+
+    public int ChildIndex { get { return Parent == null ? -1 : Parent.Children.IndexOf(this); } }
 
     public override int ID
     {

@@ -15,7 +15,7 @@ public class BT_TreeNodeEditor : EditorPlus
 
         //EditorGUILayout.LabelField("NodeName: ", node.name);
         EditorGUILayout.LabelField("BehaviorType: ", node.Behavior.Description.Type.ToString());
-        EditorGUILayout.LabelField("Parent: " + (node.Parent != null ? "Y" : "N") + " | Children: " + node.Children.Count);
+        EditorGUILayout.LabelField("Parent: " + (node.Parent != null ? "Y" : "N") + "| ChildIndex: "+ node.ChildIndex + " | Root: " + (node.IsRoot ? "Y" : "N") + " | Children: " + node.Children.Count);
         //EditorGUILayout.LabelField("Description: " + node.Behavior.Description.Description);
 
         node.Name = EditorGUILayout.TextField("Identifying name:",node.Name);
