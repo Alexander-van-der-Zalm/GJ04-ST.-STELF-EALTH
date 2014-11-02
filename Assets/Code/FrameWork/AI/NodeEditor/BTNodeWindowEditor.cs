@@ -60,11 +60,23 @@ public class BTNodeWindowEditor : NodeEditorWindow
         get { return selectedTree; }
         private set
         {
+            // Cancel connect child parent action
+            if (value != selectedTree && connectPress)
+                connectPress = false;
+
+            // Set value
             selectedTree = value;
             drawWindow = selectedTree != null;
+            
             Repaint();
+
+            // Set windows
             if (value != null)
                 windows = selectedTree.NodeWindows.Cast<NodeWindow>().ToList();
+
+            // Make sure focusID will not go out of range after a tree change
+            if (FocusID >= windows.Count)
+                FocusID = windows.Count - 1;
         }
     }
 
