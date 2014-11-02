@@ -58,7 +58,7 @@ public class NodeEditorWindow : EditorWindow
         Debug.Log("Base Init");
 
         windows = new List<NodeWindow>();
-        
+
         panX = 0;
         panY = 0;
         GroupSize = 1000;

@@ -22,8 +22,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Condition
     }
     
-    private BT_Tree selectedTree;
-
     [SerializeField]
     private string path = "Assets/TestNode.asset";
 
@@ -36,11 +34,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [SerializeField]
     private nodeType curType = nodeType.Action;
 
-
+    private BT_Tree selectedTree;
     private bool connectPress = false;
     private int selectedClass;
     private nodeType lastType;
-
 
     public BT_Tree SelectedTree
     {
@@ -48,7 +45,9 @@ public class BTNodeWindowEditor : NodeEditorWindow
         private set
         {
             selectedTree = value;
-            if(value != null)
+            drawWindow = selectedTree != null;
+            Repaint();
+            if (value != null)
                 windows = selectedTree.NodeWindows.Cast<NodeWindow>().ToList();
         }
     }
@@ -61,12 +60,14 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Instance.Init();
     }
 
+    #region Selection related
+
     void OnSelectionChange()
     {
-        BT_Tree oldTree = SelectedTree;
+        //BT_Tree oldTree = SelectedTree;
 
         //Debug.Log(Selection.activeObject.GetType());
-
+        
         if (Selection.activeObject == null)
         {
             SelectedTree = null;
@@ -95,19 +96,21 @@ public class BTNodeWindowEditor : NodeEditorWindow
         else
             SelectedTree = null;
 
-        if (SelectedTree != oldTree)
-        {
-            Repaint();
-        }
+        //if (SelectedTree != oldTree)
+        //{
+        //    Repaint();
+        //}
 
-        drawWindow = SelectedTree != null;
+       
     }
 
     protected override void ChangedFocus()
     {
-        if (FocusID >= 0 && FocusID < selectedTree.TreeNodes.Count)
-            Selection.objects = new Object[] { selectedTree.TreeNodes[FocusID] };
+        if (FocusID >= 0 && FocusID < SelectedTree.TreeNodes.Count)
+            Selection.objects = new Object[] { SelectedTree.TreeNodes[FocusID] };
     }
+
+    #endregion
 
     #region Input handling
     //void Update()
@@ -136,7 +139,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 // Delete Node
                 if(e.keyCode == KeyCode.Delete)
                 {
-                    selectedTree.DestroyNode(FocusID);
+                    SelectedTree.DestroyNode(FocusID);
                     Repaint();
                 }
 
@@ -156,20 +159,20 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     private void DisconnectFocus()
     {
-        if (selectedTree == null || FocusID == -1)
+        if (SelectedTree == null || FocusID == -1)
         {
             Debug.Log("Cant disconnect when there is no node/tree selected");
             return;
         }
 
-        selectedTree.TreeNodes[FocusID].DisconnectAll();
-        selectedTree.NodeWindows[FocusID].DisconnectAll();
+        SelectedTree.TreeNodes[FocusID].DisconnectAll();
+        SelectedTree.NodeWindows[FocusID].DisconnectAll();
         Repaint();
     }
 
     private void ConnectKeyPress()
     {
-        if(selectedTree == null || FocusID == -1)
+        if(SelectedTree == null || FocusID == -1)
         {
             Debug.Log("Cant connect when there is no node/tree selected");
             connectPress = false;
@@ -191,12 +194,14 @@ public class BTNodeWindowEditor : NodeEditorWindow
             }
             connectPress = false;
             childIndex = FocusID;
-            selectedTree.Connect(parentIndex, childIndex);
+            SelectedTree.Connect(parentIndex, childIndex);
             Repaint();
         }
     }
 
     #endregion
+
+    #region GUI Related
 
     protected override void DrawButtons()
     {
@@ -204,15 +209,18 @@ public class BTNodeWindowEditor : NodeEditorWindow
         {
             if (GUILayout.Button("Create new Tree"))
             {
-                selectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
-                Selection.objects = new Object[] { selectedTree };
+                SelectedTree = BT_Tree.CreateObjAndAsset("Assets/TestTree.asset");
+                Selection.objects = new Object[] { SelectedTree };
             }
 
+            TreeAssetSelector();
+            
             if (SelectedTree == null)
             {
-                GUILayout.Label("Select a tree");
-                // Enum Popup
                 EditorGUILayout.EndHorizontal();
+                GUILayout.Label("Select a tree in hierarchy or from the menu");
+                // Enum Popup
+                
                 return;
             }
 
@@ -225,22 +233,22 @@ public class BTNodeWindowEditor : NodeEditorWindow
         {
             if (GUILayout.Button("Create Selector"))
             {
-                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Selector>(HideFlags.DontSave));
+                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Selector>(HideFlags.DontSave));
                 Selection.objects = new Object[] { node };
             }
             if (GUILayout.Button("Create Sequencer"))
             {
-                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Sequencer>(HideFlags.NotEditable));
+                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Sequencer>(HideFlags.NotEditable));
                 Selection.objects = new Object[] { node };
             }
             if (GUILayout.Button("Create Inverter"))
             {
-                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
+                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
                 Selection.objects = new Object[] { node };
             }
             if (GUILayout.Button("Create Negator"))
             {
-                BT_TreeNode node = selectedTree.CreateNode(BT_TreeConstructor.Create<BT_AlwayFail>());
+                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_AlwayFail>());
                 Selection.objects = new Object[] { node };
             }
         }
@@ -264,11 +272,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             if (GUILayout.Button("Disconnect Node (D)"))
                 DisconnectFocus();
             if (GUILayout.Button("Delete Node (Del)"))
-                selectedTree.DestroyNode(FocusID);
-            //if (GUILayout.Button("Print childCount"))
-            //    Debug.Log(windows[FocusID].Children.Count);
-            //if (GUILayout.Button("Print behaviorType"))
-            //    Debug.Log(selectedTree[FocusID].Behavior.GetType());
+                SelectedTree.DestroyNode(FocusID);
         }
         EditorGUILayout.EndHorizontal();
 
@@ -304,6 +308,15 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
     }
 
+    #endregion
+
+    #region Cool GUI stuff (select tree/node creation)
+
+    private void TreeAssetSelector()
+    {
+        SelectedTree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
+    }
+
     private void CreateNodeOfChoice()
     {
         // Enum popup of selectable types
@@ -333,7 +346,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         var l1 = q1.ToList();
         if (GUILayout.Button("Create node"))
         {
-            selectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
+            SelectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
             Repaint();
         }
     }
@@ -353,6 +366,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
         return typeof(BT_Behavior);
     }
+
+    #endregion
 
     internal bool IsPressedParent(int ID)
     {
