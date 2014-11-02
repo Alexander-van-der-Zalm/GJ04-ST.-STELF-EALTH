@@ -43,11 +43,14 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     [SerializeField]
     private List<BTNodeWindow> nodeWindows;
 
+    [SerializeField]
+    private BT_TreeNode root;
+
     #endregion
 
     #region Properties
 
-    public BT_TreeNode Root;
+    public BT_TreeNode Root { get { return root; } private set { root = value; } }
 
     public List<BT_TreeNode> TreeNodes
     {
@@ -415,16 +418,16 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    
+    internal void SetRoot(int id)
+    {
+        // Loop till you got the most upper parent
+        BT_TreeNode node = TreeNodes[id];
 
-    //// Disconnect (child & parent)
-    //public UDictionaryIntBT_Status GetNewNodeStatus()
-    //{
-    //    UDictionaryIntBT_Status dic = new UDictionaryIntBT_Status();
-    //    foreach(KeyValuePair<int, BT_TreeNode> node in TreeNodes)
-    //    {
-    //        dic[node.Key] = Status.Invalid;
-    //    }
-    //    return dic;
-    //}
+        while(node.Parent != null)
+        {
+            node = node.Parent;
+        }
+
+        Root = node;
+    }
 }

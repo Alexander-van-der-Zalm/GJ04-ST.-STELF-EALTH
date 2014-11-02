@@ -226,7 +226,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
-    #region GUI Related
+    #region GUI Related (Buttons)
 
     protected override void DrawButtons()
     {
@@ -303,7 +303,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 DisconnectFocus();
             if (GUILayout.Button("Delete Node (Del)"))
                 DeleteFocus();
-            if (GUILayout.Button("Make Root (O)"))
+            if (GUILayout.Button("Find Root (O)"))
                 MakeFocusRoot();  
         }
         EditorGUILayout.EndHorizontal();
@@ -315,50 +315,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
         // Temp move buttons
         // Move to base
         NavigationArrows(90.0f);
-    }
-
-    private void MakeFocusRoot()
-    {
-        if (illegalSelection())
-        {
-            Debug.LogError("MakeFocusRoot illegal selection");
-            return;
-        }
-
-        SelectedTree.Root = SelectedTree.TreeNodes[FocusID];
-    }
-
-    private void DeleteFocus()
-    {
-        if (illegalSelection())
-        {
-            Debug.LogError("DeleteFocus illegal selection");
-            return;
-        }
-
-        SelectedTree.DestroyNode(FocusID);
-
-        if (FocusID >= SelectedTree.TreeNodes.Count)
-        {
-            FocusID = SelectedTree.NodeWindows.Count - 1;
-            Debug.Log("DeleteFocus focusID: " + FocusID + " Count: " + (SelectedTree.NodeWindows.Count - 1).ToString());
-        }
-
-        Repaint();
-    }
-
-    private BT_TreeNode createNode<T>(Vector2 pos) where T : BT_BBParameters
-    {
-        BT_TreeNode node = createNode<T>();
-        selectedTree.NodeWindows[node.ID].Position = pos - selectedTree.NodeWindows[node.ID].Mid*0.5f;
-        return node;
-    }
-
-    private BT_TreeNode createNode<T>()where T:BT_BBParameters
-    {
-        BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<T>(HideFlags.DontSave));
-        Selection.objects = new Object[] { node };
-        return node;
     }
 
     private void NavigationArrows(float top)
@@ -390,7 +346,51 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
-    #region Cool GUI stuff (select tree/node creation)
+    #region Cool GUI functionality
+
+    private BT_TreeNode createNode<T>(Vector2 pos) where T : BT_BBParameters
+    {
+        BT_TreeNode node = createNode<T>();
+        selectedTree.NodeWindows[node.ID].Position = pos - selectedTree.NodeWindows[node.ID].Mid * 0.5f;
+        return node;
+    }
+
+    private BT_TreeNode createNode<T>() where T : BT_BBParameters
+    {
+        BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<T>(HideFlags.DontSave));
+        Selection.objects = new Object[] { node };
+        return node;
+    }
+
+    private void MakeFocusRoot()
+    {
+        if (illegalSelection())
+        {
+            Debug.LogError("MakeFocusRoot illegal selection");
+            return;
+        }
+        SelectedTree.SetRoot(FocusID);
+        //SelectedTree.Root = SelectedTree.TreeNodes[FocusID];
+    }
+
+    private void DeleteFocus()
+    {
+        if (illegalSelection())
+        {
+            Debug.LogError("DeleteFocus illegal selection");
+            return;
+        }
+
+        SelectedTree.DestroyNode(FocusID);
+
+        if (FocusID >= SelectedTree.TreeNodes.Count)
+        {
+            FocusID = SelectedTree.NodeWindows.Count - 1;
+            Debug.Log("DeleteFocus focusID: " + FocusID + " Count: " + (SelectedTree.NodeWindows.Count - 1).ToString());
+        }
+
+        Repaint();
+    }
 
     private void CreateNodeOfChoice()
     {
