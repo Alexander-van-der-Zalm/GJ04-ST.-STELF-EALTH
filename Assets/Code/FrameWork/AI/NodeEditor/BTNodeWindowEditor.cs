@@ -142,17 +142,17 @@ public class BTNodeWindowEditor : NodeEditorWindow
                     
                 // Delete Node
                 if(e.keyCode == KeyCode.Delete)
-                {
                     DeleteFocus();
-                    
-                }
-
+      
                 // Disconnect Node
                 if(e.keyCode == KeyCode.D)
-                {
                     DisconnectFocus();
-                }
                 
+                // Make Root
+                if (e.keyCode == KeyCode.Alpha0 || e.keyCode == KeyCode.O)
+                    MakeFocusRoot();
+
+                // Creation hotkeys
                 if(e.keyCode == KeyCode.Alpha1)
                 {
                     createNode<BT_Selector>(e.mousePosition);
@@ -179,7 +179,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     private void DisconnectFocus()
     {
-        if (SelectedTree == null || FocusID == -1)
+        if (illegalSelection())
         {
             Debug.Log("Cant disconnect when there is no node/tree selected");
             return;
@@ -188,6 +188,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
         SelectedTree.TreeNodes[FocusID].DisconnectAll();
         SelectedTree.NodeWindows[FocusID].DisconnectAll();
         Repaint();
+    }
+
+    private bool illegalSelection()
+    {
+        return SelectedTree == null || FocusID == -1 || FocusID >= SelectedTree.TreeNodes.Count;
     }
 
     private void ConnectKeyPress()
@@ -298,7 +303,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 DisconnectFocus();
             if (GUILayout.Button("Delete Node (Del)"))
                 DeleteFocus();
-                
+            if (GUILayout.Button("Make Root (O)"))
+                MakeFocusRoot();  
         }
         EditorGUILayout.EndHorizontal();
 
@@ -311,8 +317,25 @@ public class BTNodeWindowEditor : NodeEditorWindow
         NavigationArrows(90.0f);
     }
 
+    private void MakeFocusRoot()
+    {
+        if (illegalSelection())
+        {
+            Debug.LogError("MakeFocusRoot illegal selection");
+            return;
+        }
+
+        SelectedTree.Root = SelectedTree.TreeNodes[FocusID];
+    }
+
     private void DeleteFocus()
     {
+        if (illegalSelection())
+        {
+            Debug.LogError("DeleteFocus illegal selection");
+            return;
+        }
+
         SelectedTree.DestroyNode(FocusID);
 
         if (FocusID >= SelectedTree.TreeNodes.Count)
@@ -337,10 +360,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Selection.objects = new Object[] { node };
         return node;
     }
-
-   
-
- 
 
     private void NavigationArrows(float top)
     {
@@ -372,11 +391,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
     #endregion
 
     #region Cool GUI stuff (select tree/node creation)
-
-    private void TreeAssetSelector()
-    {
-        
-    }
 
     private void CreateNodeOfChoice()
     {

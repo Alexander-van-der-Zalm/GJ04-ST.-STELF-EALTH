@@ -14,8 +14,147 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 0
+    TreeIteration: 14
     NodeSide: 1
-  treeNodes: []
-  nodeWindows: []
-  Root: {fileID: 0}
+  treeNodes:
+  - {fileID: 11400004}
+  - {fileID: 11400010}
+  nodeWindows:
+  - {fileID: 11400006}
+  - {fileID: 11400012}
+  Root: {fileID: 11400004}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 0 | PARAMATERS | Inverter
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
+  m_Name: 0 | TREENODE | Inverter
+  m_EditorClassIdentifier: 
+  id: 0
+  parent: {fileID: 0}
+  children:
+  - {fileID: 11400010}
+  MaxChildren: 0
+  behavior: {fileID: 0}
+  behaviorType: BT_Inverter
+  parametersBB: {fileID: 11400002}
+  tree: {fileID: 11400000}
+  Name: Pepijn
+  Description: Fires off child and then returns the inverted status (failed if success
+    etc.)
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
+  m_Name: 0 | WINDOW | Inverter
+  m_EditorClassIdentifier: 
+  id: 0
+  parent: {fileID: 0}
+  children:
+  - {fileID: 11400012}
+  MaxChildren: 0
+  rect:
+    serializedVersion: 2
+    x: 132
+    y: 120
+    width: 100
+    height: 100
+  header:
+    m_Text: Decorator [0]
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
+  treeNode: {fileID: 11400004}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 1 | PARAMATERS | AlwayFail
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
+  m_Name: 1 | TREENODE | AlwayFail
+  m_EditorClassIdentifier: 
+  id: 1
+  parent: {fileID: 11400004}
+  children: []
+  MaxChildren: 0
+  behavior: {fileID: 0}
+  behaviorType: BT_AlwayFail
+  parametersBB: {fileID: 11400008}
+  tree: {fileID: 11400000}
+  Name: Wiewoe
+  Description: Fires up child and then always returns failed
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
+  m_Name: 1 | WINDOW | AlwayFail
+  m_EditorClassIdentifier: 
+  id: 1
+  parent: {fileID: 11400006}
+  children: []
+  MaxChildren: 0
+  rect:
+    serializedVersion: 2
+    x: 172
+    y: 301
+    width: 100
+    height: 100
+  header:
+    m_Text: Decorator [1]
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
+  treeNode: {fileID: 11400010}
