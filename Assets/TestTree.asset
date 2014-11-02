@@ -14,7 +14,7 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 68
+    TreeIteration: 75
     NodeSide: 1
   treeNodes:
   - {fileID: 11400010}
@@ -155,8 +155,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 18
-    y: 478
+    x: 9
+    y: 476
     width: 100
     height: 100
   header:
@@ -197,8 +197,8 @@ MonoBehaviour:
   id: 1
   parent: {fileID: 0}
   children:
-  - {fileID: 11400034}
   - {fileID: 11400022}
+  - {fileID: 11400034}
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_AlwayFail
@@ -220,13 +220,13 @@ MonoBehaviour:
   id: 1
   parent: {fileID: 0}
   children:
-  - {fileID: 11400036}
   - {fileID: 11400024}
+  - {fileID: 11400036}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 197
-    y: 144
+    x: 193
+    y: 143
     width: 100
     height: 100
   header:
@@ -294,8 +294,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 299
-    y: 327
+    x: 294
+    y: 308
     width: 100
     height: 100
   header:
@@ -361,8 +361,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 357
-    y: 487
+    x: 382
+    y: 479
     width: 100
     height: 100
   header:
@@ -403,8 +403,8 @@ MonoBehaviour:
   id: 4
   parent: {fileID: 11400016}
   children:
-  - {fileID: 11400010}
   - {fileID: 11400004}
+  - {fileID: 11400010}
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_Sequencer
@@ -427,8 +427,8 @@ MonoBehaviour:
   id: 4
   parent: {fileID: 11400018}
   children:
-  - {fileID: 11400012}
   - {fileID: 11400006}
+  - {fileID: 11400012}
   MaxChildren: 0
   rect:
     serializedVersion: 2

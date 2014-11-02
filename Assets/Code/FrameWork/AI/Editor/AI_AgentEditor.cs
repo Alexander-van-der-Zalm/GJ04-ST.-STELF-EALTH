@@ -13,18 +13,22 @@ public class AI_AgentEditor : EditorPlus
         BT_Tree tree = agent.Tree;
 
         if (GUI.changed)
-        {
+        { // Force a selection change
             BTNodeWindowEditor.Instance.SelectionChange();
         }
-            
 
         EditorGUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Show Tree"))
+        {
             BTNodeWindowEditor.ShowWindow();
-
+            BTNodeWindowEditor.Instance.SelectionChange();
+        }
+            
         if (GUILayout.Button("Hide Tree"))
+        {
             BTNodeWindowEditor.HideWindow();
+        }
 
         EditorGUILayout.EndHorizontal();
             //target.GenerateBTVisualiser();
