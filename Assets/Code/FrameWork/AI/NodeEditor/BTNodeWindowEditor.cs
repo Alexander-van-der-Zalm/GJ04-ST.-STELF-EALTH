@@ -235,7 +235,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 SelectedTree = BT_Tree.CreateObjAndAsset(path);
                 Selection.objects = new Object[] { SelectedTree };
             }
-            EditorGUILayout.LabelField(path);
+            using(new FixedWidthLabel(path))
             if (GUILayout.Button("Select filepath"))
             {
                 path = EditorUtility.SaveFilePanelInProject("Tree location", "Tree", "asset", "IAR MESSAGE00");//("Tree location", "/Assets", "Tree", "asset");
