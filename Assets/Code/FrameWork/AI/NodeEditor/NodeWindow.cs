@@ -81,7 +81,7 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
        // if (bgColor.a > 0)
         GUI.color = oldColor;
 
-        if (Rect.Contains(Event.current.mousePosition))
+        if (Rect.Contains(Event.current.mousePosition)&&Event.current.clickCount>0)
             NodeEditorWindow.Instance.FocusID = ID;
     }
 
