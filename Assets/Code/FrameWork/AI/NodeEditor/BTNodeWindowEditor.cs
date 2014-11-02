@@ -9,11 +9,10 @@ using Type = System.Type;
 using Enum = System.Enum;
 using NodeDescription = BT_Behavior.NodeDescription;
 
-
-
 [System.Serializable]
 public class BTNodeWindowEditor : NodeEditorWindow
 {
+    #region Enums
     public enum nodeType
     {
         Action,
@@ -21,7 +20,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Decorator,
         Condition
     }
-    
+
+    #endregion
+
+    #region Fields
+
     [SerializeField]
     private string path = "Assets/TestNode.asset";
 
@@ -34,10 +37,16 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [SerializeField]
     private nodeType curType = nodeType.Action;
 
+    [SerializeField]
     private BT_Tree selectedTree;
+
     private bool connectPress = false;
     private int selectedClass;
     private nodeType lastType;
+
+    #endregion
+
+    #region Properties
 
     public BT_Tree SelectedTree
     {
@@ -52,6 +61,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
     }
 
+    #endregion
+
+    #region Create
+
     // Constructor
     [MenuItem("CustomTools/BehaviorTree viewer")]
     public static void ShowWindow()
@@ -60,14 +73,12 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Instance.Init();
     }
 
+    #endregion
+
     #region Selection related
 
     void OnSelectionChange()
     {
-        //BT_Tree oldTree = SelectedTree;
-
-        //Debug.Log(Selection.activeObject.GetType());
-        
         if (Selection.activeObject == null)
         {
             SelectedTree = null;
@@ -95,13 +106,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
         else
             SelectedTree = null;
-
-        //if (SelectedTree != oldTree)
-        //{
-        //    Repaint();
-        //}
-
-       
     }
 
     protected override void ChangedFocus()
@@ -139,8 +143,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 // Delete Node
                 if(e.keyCode == KeyCode.Delete)
                 {
-                    SelectedTree.DestroyNode(FocusID);
-                    Repaint();
+                    DeleteFocus();
+                    
                 }
 
                 // Disconnect Node
@@ -148,7 +152,23 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 {
                     DisconnectFocus();
                 }
-                    
+                
+                if(e.keyCode == KeyCode.Alpha1)
+                {
+                    createNode<BT_Selector>(e.mousePosition);
+                }
+                if (e.keyCode == KeyCode.Alpha2)
+                {
+                    createNode<BT_Sequencer>(e.mousePosition);
+                }
+                if (e.keyCode == KeyCode.Alpha3)
+                {
+                    createNode<BT_Inverter>(e.mousePosition);
+                }
+                if (e.keyCode == KeyCode.Alpha4)
+                {
+                    createNode<BT_AlwayFail>(e.mousePosition);
+                }
 
                 break;
             //case EventType.KeyDown:
@@ -231,25 +251,21 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
         EditorGUILayout.BeginHorizontal();
         {
-            if (GUILayout.Button("Create Selector"))
+            if (GUILayout.Button("Create Selector (1)"))
             {
-                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Selector>(HideFlags.DontSave));
-                Selection.objects = new Object[] { node };
+                createNode<BT_Selector>();
             }
-            if (GUILayout.Button("Create Sequencer"))
+            if (GUILayout.Button("Create Sequencer (2)"))
             {
-                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Sequencer>(HideFlags.NotEditable));
-                Selection.objects = new Object[] { node };
+                createNode<BT_Sequencer>();
             }
-            if (GUILayout.Button("Create Inverter"))
+            if (GUILayout.Button("Create Inverter (3)"))
             {
-                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_Inverter>());
-                Selection.objects = new Object[] { node };
+                createNode<BT_Inverter>();
             }
-            if (GUILayout.Button("Create Negator"))
+            if (GUILayout.Button("Create Negator (4)"))
             {
-                BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<BT_AlwayFail>());
-                Selection.objects = new Object[] { node };
+                createNode<BT_AlwayFail>();
             }
         }
         EditorGUILayout.EndHorizontal();
@@ -272,7 +288,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
             if (GUILayout.Button("Disconnect Node (D)"))
                 DisconnectFocus();
             if (GUILayout.Button("Delete Node (Del)"))
-                SelectedTree.DestroyNode(FocusID);
+                DeleteFocus();
+                
         }
         EditorGUILayout.EndHorizontal();
 
@@ -280,6 +297,37 @@ public class BTNodeWindowEditor : NodeEditorWindow
         // Move to base
         NavigationArrows(90.0f);
     }
+
+    private void DeleteFocus()
+    {
+        SelectedTree.DestroyNode(FocusID);
+
+        if (FocusID >= SelectedTree.TreeNodes.Count)
+        {
+            FocusID = SelectedTree.NodeWindows.Count - 1;
+            Debug.Log("DeleteFocus focusID: " + FocusID + " Count: " + (SelectedTree.NodeWindows.Count - 1).ToString());
+        }
+
+        Repaint();
+    }
+
+    private BT_TreeNode createNode<T>(Vector2 pos) where T : BT_BBParameters
+    {
+        BT_TreeNode node = createNode<T>();
+        selectedTree.NodeWindows[node.ID].Position = pos - selectedTree.NodeWindows[node.ID].Mid*0.5f;
+        return node;
+    }
+
+    private BT_TreeNode createNode<T>()where T:BT_BBParameters
+    {
+        BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<T>(HideFlags.DontSave));
+        Selection.objects = new Object[] { node };
+        return node;
+    }
+
+   
+
+ 
 
     private void NavigationArrows(float top)
     {
@@ -369,8 +417,12 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
+    #region NodeWindow helper
+
     internal bool IsPressedParent(int ID)
     {
         return connectPress && parentIndex == ID;
     }
+
+    #endregion
 }

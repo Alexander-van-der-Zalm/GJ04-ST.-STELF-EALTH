@@ -42,7 +42,8 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     public Vector2 Position { get { return new Vector2(Rect.x, Rect.y); } set { rect.x = value.x; rect.y = value.y; } }
     public float Width { get { return Rect.width; } set { rect.width = value; } }
     public float Height { get { return Rect.height; } set { rect.height = value; } }
-    
+    public Vector2 Mid { get { return new Vector2(Rect.width, Rect.height); } }
+
     protected Vector2 ChildPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y); } }
     protected Vector2 ParentPos { get { return new Vector2(Rect.x + Rect.width * 0.5f, Rect.y + Rect.height); } }
 
