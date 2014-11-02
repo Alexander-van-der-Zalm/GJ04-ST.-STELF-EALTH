@@ -14,7 +14,7 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 66
+    TreeIteration: 68
     NodeSide: 1
   treeNodes:
   - {fileID: 11400010}
@@ -22,13 +22,82 @@ MonoBehaviour:
   - {fileID: 11400022}
   - {fileID: 11400028}
   - {fileID: 11400034}
+  - {fileID: 11400004}
   nodeWindows:
   - {fileID: 11400012}
   - {fileID: 11400018}
   - {fileID: 11400024}
   - {fileID: 11400030}
   - {fileID: 11400036}
-  Root: {fileID: 0}
+  - {fileID: 11400006}
+  root: {fileID: 11400016}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 5 | PARAMATERS | Selector
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
+  m_Name: 5 | TREENODE | Selector
+  m_EditorClassIdentifier: 
+  id: 5
+  parent: {fileID: 11400034}
+  children: []
+  MaxChildren: 0
+  behavior: {fileID: 0}
+  behaviorType: BT_Selector
+  parametersBB: {fileID: 11400002}
+  tree: {fileID: 11400000}
+  Name: 
+  Description: "Keeps going if children are failing, early exits if: succes, invalid
+    \xF6r running"
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
+  m_Name: 5 | WINDOW | Selector
+  m_EditorClassIdentifier: 
+  id: 5
+  parent: {fileID: 11400036}
+  children: []
+  MaxChildren: 0
+  rect:
+    serializedVersion: 2
+    x: 156
+    y: 478
+    width: 100
+    height: 100
+  header:
+    m_Text: Selector [5]
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
+  treeNode: {fileID: 11400004}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,8 +155,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 155
-    y: 485
+    x: 18
+    y: 478
     width: 100
     height: 100
   header:
@@ -156,8 +225,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 196
-    y: 145
+    x: 197
+    y: 144
     width: 100
     height: 100
   header:
@@ -225,8 +294,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 284
-    y: 336
+    x: 299
+    y: 327
     width: 100
     height: 100
   header:
@@ -292,8 +361,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 372
-    y: 490
+    x: 357
+    y: 487
     width: 100
     height: 100
   header:
@@ -335,6 +404,7 @@ MonoBehaviour:
   parent: {fileID: 11400016}
   children:
   - {fileID: 11400010}
+  - {fileID: 11400004}
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_Sequencer
@@ -358,11 +428,12 @@ MonoBehaviour:
   parent: {fileID: 11400018}
   children:
   - {fileID: 11400012}
+  - {fileID: 11400006}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 56
-    y: 336
+    x: 55
+    y: 326
     width: 100
     height: 100
   header:

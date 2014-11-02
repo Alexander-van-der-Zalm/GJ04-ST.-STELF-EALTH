@@ -22,7 +22,7 @@ public class AI_Agent : MonoBehaviour
     // Blackboards to store shared info
     public BT_Tree Tree;
     [ReadOnly]
-    public string Name;
+    public string Name ="Default Agent";
     public AI_BlackboardComponent GlobalBlackboardC;
     
     public AI_Blackboard GlobalBlackboard { get { return GlobalBlackboardC.Blackboard; } }

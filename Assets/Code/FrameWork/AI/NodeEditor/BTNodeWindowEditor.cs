@@ -43,10 +43,17 @@ public class BTNodeWindowEditor : NodeEditorWindow
     private bool connectPress = false;
     private int selectedClass;
     private nodeType lastType;
+    private static BTNodeWindowEditor btinstance;
 
     #endregion
 
     #region Properties
+
+    public static BTNodeWindowEditor Instance
+    {
+        get { return btinstance != null ? btinstance : btinstance = EditorWindow.GetWindow<BTNodeWindowEditor>(); }
+        protected set { btinstance = value; }
+    }
 
     public BT_Tree SelectedTree
     {
@@ -63,7 +70,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
-    #region Create
+    #region Show & Hide
 
     // Constructor
     [MenuItem("CustomTools/BehaviorTree viewer")]
@@ -73,11 +80,22 @@ public class BTNodeWindowEditor : NodeEditorWindow
         Instance.Init();
     }
 
+    public static void HideWindow()
+    {
+        Instance.Close();
+    }
+
     #endregion
 
     #region Selection related
 
     void OnSelectionChange()
+    {
+        SelectionChange();
+        
+    }
+
+    public void SelectionChange()
     {
         if (Selection.activeObject == null)
         {
