@@ -256,6 +256,15 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
+    #region OnWindowsMoved
+
+    protected override void OnWindowMoved()
+    {
+        selectedTree.SortChildrenBasedOnPosition();
+    }
+
+    #endregion
+
     #region GUI Related (Buttons)
 
     protected override void DrawButtons()

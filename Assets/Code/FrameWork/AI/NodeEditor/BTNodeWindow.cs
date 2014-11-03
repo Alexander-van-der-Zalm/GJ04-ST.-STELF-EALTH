@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEditor;
+using System.Linq;
+using System.Collections;
+
 
 public class BTNodeWindow : NodeWindow
 {
@@ -76,7 +78,8 @@ public class BTNodeWindow : NodeWindow
             BGColor = new Color(.8f,0.9f,0.9f,1.0f);
     }
 
-
-
-   
+    public void SortChildrenByXMin()
+    {
+        Children = Children.OrderBy(c => c.Rect.xMin).ToList();
+    }
 }

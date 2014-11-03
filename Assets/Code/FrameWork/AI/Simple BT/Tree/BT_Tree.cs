@@ -225,7 +225,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Create the asset and connect it to this asset
         // Node Parameters
         AI_Blackboard newBB = AI_Blackboard.Create();
-        newBB.name = id + " | PARAMATERS | " + behavior.Description.Name;
+        //newBB.name = id + " | PARAMATERS | " + behavior.Description.Name;
         newBB.AddObjectToAsset(this);
 
         // Functional node part
@@ -304,10 +304,6 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         SimpleReOrderIndices();
     }
 
-    
-
-    
-
     // Disconnect (child & parent)
 
     #region Helpers
@@ -333,6 +329,30 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     }
     #endregion
+
+    #endregion
+
+    #region ReOrderChildrenBasedOnX
+
+    public void SortChildrenBasedOnPosition()
+    {
+        for(int i = 0; i < TreeNodes.Count; i++)
+        {
+            if(TreeNodes[i].HasChildren && TreeNodes[i].Children.Count > 1)
+            {
+                // Terribly inefficient
+                // Needs a redesign of the double children in treenodes and windows to
+                // ID, Parent and Children being only present in TreeNode
+
+                // Sort by rect xMin
+                NodeWindows[i].SortChildrenByXMin();
+                // Create an id list for sorting of treenode childrens
+                List<int> ids = NodeWindows[i].Children.Select(c => c.ID).ToList();
+                TreeNodes[i].SortChildrenByIDS(ids);
+
+            }
+        }
+    }
 
     #endregion
 

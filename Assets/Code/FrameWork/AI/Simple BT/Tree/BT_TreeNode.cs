@@ -83,9 +83,9 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         base.Init(newHideFlag);
 
         // Default values
-        ID = -1337;
         if (ParametersBB == null)
             ParametersBB = AI_Blackboard.Create();
+        ID = -1337;
         Parent = null;
         Children = new List<BT_TreeNode>();
         behavior = null;
@@ -122,6 +122,10 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     private void SetNames()
     {
         name = ID + " | TREENODE | " + (behavior!=null?behavior.Description.Name:"");
+        
+        if (ParametersBB != null)
+            ParametersBB.name = ID + " | PARAMETERS | " + (behavior != null ? behavior.Description.Name : "");
+            
     }
 
 
@@ -175,6 +179,17 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     }
 
     #endregion
+
+    public void SortChildrenByIDS(List<int> id)
+    {
+        List<BT_TreeNode> newChildren = new List<BT_TreeNode>();
+        for(int i = 0; i < Children.Count; i++)
+        {
+            newChildren.Add(Children.Where(c => c.ID == id[i]).First());
+
+        }
+        Children = newChildren;
+    }
 
     public Status Tick(AI_Agent agent)
     {

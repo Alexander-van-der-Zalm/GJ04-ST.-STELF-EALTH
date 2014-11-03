@@ -81,7 +81,8 @@ public class NodeEditorWindow : EditorWindow
         DrawNodeConnections();
 
         // Draw the windows
-        DrawWindows();
+        if (DrawWindows())
+            OnWindowMoved();
 
         GUI.EndGroup();
 
@@ -89,12 +90,23 @@ public class NodeEditorWindow : EditorWindow
         DrawButtons();
     }
 
+    
+
     #endregion
+
+    #region Virtual empty methods
 
     protected virtual void HandleInput()
     {
         
     }
+
+    protected virtual void OnWindowMoved()
+    {
+
+    }
+
+    #endregion
 
     #region GUI sections
 
@@ -108,16 +120,30 @@ public class NodeEditorWindow : EditorWindow
         }
     }
 
-    private void DrawWindows()
+    private bool DrawWindows()
     {
+        // Exit out if it does not need to be drawn
         if (!drawWindow)
-            return;
+            return false;
+
+        // Bool to check if the windows have moved
+        bool moved = false;
+
         BeginWindows();
         for (int i = 0; i < windows.Count; i++)
         {
+            Rect oldRect = windows[i].Rect;
+            
+            // Draw the window
             windows[i].DrawWindow();
+
+            // Check if the window has moved
+            if (!oldRect.Equals(windows[i].Rect))
+                moved = true;
         }
         EndWindows();
+
+        return moved;
     }
 
     
