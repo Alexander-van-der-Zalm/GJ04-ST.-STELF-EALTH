@@ -214,6 +214,9 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         BT_Tree tree = Create();
         tree.Root = newRoot;
 
+        if (newRoot == null)
+            return tree;
+
         // Set right root and set ids
         tree.RebuildTreeFromRoot();
 

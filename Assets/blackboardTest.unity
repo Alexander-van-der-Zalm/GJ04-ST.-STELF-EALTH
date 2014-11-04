@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 0}
+  blackBoard: {fileID: 300348378}
 --- !u!4 &281301685
 Transform:
   m_ObjectHideFlags: 0
@@ -252,6 +252,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &300348378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
 --- !u!1 &458991653
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,10 +499,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agent:
-    Tree: {fileID: 11400000, guid: 9f46fa19ebc8082458f87882dea6b55f, type: 2}
     Name: Default Agent
-    GlobalBlackboardC: {fileID: 281301684}
-    LocalBlackboardC: {fileID: 1172392640}
+    tree: {fileID: 0}
+    localBlackboard: {fileID: 849627624}
+    globalBlackboard: {fileID: 300348378}
+    nodeStatus: 
+  GlobalBlackboardC: {fileID: 281301684}
+  LocalBlackboardC: {fileID: 1172392640}
 --- !u!4 &1172392642
 Transform:
   m_ObjectHideFlags: 0

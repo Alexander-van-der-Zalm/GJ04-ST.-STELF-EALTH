@@ -6,14 +6,14 @@ using T = BT_TreeConstructor;
 using NUnit.Framework;
 
 [TestFixture]
-public class BT_TreeTester
+public class BT_TreeTesterBasicComponents
 {
     #region Basic
     [Test]
     public void BasicFail()
     {
         AI_Agent agent = AI_Agent.CreateAgent(T.F);
- 
+
         Status result = agent.TreeTick();
 
         Assert.That(result == Status.Failed);
@@ -47,7 +47,7 @@ public class BT_TreeTester
     public void SelectorRunning()
     {
         AI_Agent agent = AI_Agent.CreateAgent(T.sel(T.F, T.F, T.R, T.S));
-        
+
         Status result = agent.TreeTick();
 
         Assert.That(result == Status.Running);
@@ -67,7 +67,7 @@ public class BT_TreeTester
     public void SelectorSucces()
     {
         AI_Agent agent = AI_Agent.CreateAgent(T.sel(T.F, T.F, T.S, T.F));
- 
+
         Status result = agent.TreeTick();
 
         Assert.That(result == Status.Succes);
@@ -79,7 +79,7 @@ public class BT_TreeTester
         AI_Agent agent = AI_Agent.CreateAgent(T.seq(T.S, T.S, T.R, T.F));
 
         Status result = agent.TreeTick();
-    
+
         Assert.That(result == Status.Running);
     }
 
@@ -176,6 +176,126 @@ public class BT_TreeTester
 
         Assert.That(result == Status.Failed);
     }
+    #endregion
+}
+    
+
+[TestFixture]
+public class BT_TreeTesterActions
+{
+    #region Comparer
+
+    [Test]
+    public void CheckEqualBBStructs()
+    {
+        // Create empty agent
+        AI_Agent agent = AI_Agent.CreateAgent();
+
+        // BB params
+        string p1 = "TestParam1";
+        string p2 = "TestParam2";
+        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+
+
+        // Simple int check
+        int int1 = 0;
+        int int2 = 0;
+        int int3 = 1;
+
+        agent[p1, local] = int1;
+        agent[p2, local] = int2;
+
+        // Succes Test
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, 0)) == Status.Succes);
+
+        // Fail test
+        agent[p2, local] = int3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Failed);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, 1)) == Status.Failed);
+
+        // cross global and local int check
+        agent[p1, global] = int1;
+        agent[p2, global] = int3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p1, global)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, global)) == Status.Failed);
+
+        // string check
+        string str1 = "bla";
+        string str2 = "bla";
+        string str3 = "notbla";
+
+        agent[p1, local] = str1;
+        agent[p2, local] = str2;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Succes);
+
+        agent[p2, local] = int3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Failed);
+
+        // cross global and local string check
+        agent[p1, global] = str1;
+        agent[p2, global] = str3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p1, global)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, global)) == Status.Failed);
+
+        // Vector3 check
+        Vector3 v1 = Vector3.zero;
+        Vector3 v2 = Vector3.zero;
+        Vector3 v3 = Vector3.up;
+
+        agent[p1, local] = v1;
+        agent[p2, local] = v2;
+
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Succes);
+        
+        agent[p2, local] = v3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Failed);
+
+        // cross global and local vector check
+        agent[p1, global] = v1;
+        agent[p2, global] = v3;
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p1, global)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, global)) == Status.Failed);
+    }
+
+    #endregion
+
+    #region Copy
+
+    [Test]
+    public void CopyStructs()
+    {
+        // Create empty agent
+        AI_Agent agent = AI_Agent.CreateAgent();
+        
+        // BB params
+        string p1 = "TestParam1";
+        string p2 = "TestParam2";
+        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+
+        agent[p1, local] = 0;
+        agent[p2, local] = 0;
+
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, 0)) == Status.Succes);
+
+        // now TC.copy in a new value (3)
+        Assert.That(agent.NewTreeTick(T.copy(p1, local, 3)) == Status.Succes);
+
+        // Check if it went allright
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Failed);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, 3)) == Status.Succes);
+
+        // now TC.copy from p1 to p2
+        Assert.That(agent.NewTreeTick(T.copy(p2, local, p1, local)) == Status.Succes);
+
+        // Check
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, p2, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p1, local, 3)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(p2, local, 3)) == Status.Succes);
+    }
 
     #endregion
 
@@ -248,8 +368,6 @@ public class BT_TreeTester
         #endregion
 
         //BT_TreeNode node = new BT_TreeNode(new BT_Decorator());
-
-        #region ReActivate Soon
 
         #region Condition: CheckEqualBBParameter
 
@@ -415,8 +533,6 @@ public class BT_TreeTester
         //Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
         //Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
         //Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
-        #endregion
-
         #endregion
 
         #endregion

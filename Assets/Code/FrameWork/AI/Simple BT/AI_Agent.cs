@@ -37,19 +37,23 @@ public class AI_Agent
     [SerializeField]
     private List<Status> nodeStatus;
 
-    public BT_Tree Tree { get { return tree; } set { tree = value; nodeStatus = tree.GetNodeStatus(); } }
-    public AI_Blackboard GlobalBlackboard { get { return globalBlackboard; } set { globalBlackboard = value; } }
-    public AI_Blackboard LocalBlackboard { get { return localBlackboard; } set { localBlackboard = value; } }
-    public List<Status> NodeStatus { get { return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); } set { nodeStatus = value; } }
-        
     private int TreeVersion = 0;
-    private IEnumerator TreeCoroutine;
 
-    public bool TreeRunning { get { return TreeCoroutine != null; } }
+    private IEnumerator TreeCoroutine;
 
     #endregion
 
     #region Properties
+
+    public BT_Tree Tree { get { return tree; } set { tree = value; nodeStatus = tree.GetNodeStatus(); } }
+    
+    public AI_Blackboard GlobalBlackboard { get { return globalBlackboard; } set { globalBlackboard = value; } }
+    
+    public AI_Blackboard LocalBlackboard { get { return localBlackboard; } set { localBlackboard = value; } }
+
+    public List<Status> NodeStatus { get { return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); } set { nodeStatus = value; } }
+
+    public bool TreeRunning { get { return TreeCoroutine != null; } }
 
     #region Blackboard accessors
 
@@ -160,6 +164,12 @@ public class AI_Agent
         // Restart the tree
         //if(TreeRunning)
         //    StartTree();
+    }
+
+    public Status NewTreeTick(BT_TreeNode root)
+    {
+        Tree = BT_Tree.CreateTree(root);
+        return TreeTick();
     }
 
     public void ClearLocalBlackBoard()

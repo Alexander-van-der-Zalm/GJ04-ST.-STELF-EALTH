@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BT_CheckEqualBBParameter : BT_Action 
+public class BT_CheckEqualBBParameter : BT_Condition
 {
     private const string P1 = "Parameter1ToCompare";
     private const string P2 = "Parameter2ToCompare";
