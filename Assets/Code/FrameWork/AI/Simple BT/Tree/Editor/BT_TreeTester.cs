@@ -299,6 +299,140 @@ public class BT_TreeTesterActions
 
     #endregion
 
+    #region Queue
+
+    [Test]
+    public void QueuePush()
+    {
+        // Create empty agent
+        AI_Agent agent = AI_Agent.CreateAgent();
+
+        // BB params
+        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+
+        string queueP1 = "TestQueue";
+        string qCompare = "TestQueueComparer";
+
+        // Create queue and populate
+        fc.Queue<int> queue1 = new fc.Queue<int>();
+        queue1.Add(1);
+        queue1.Add(2);
+        queue1.Add(3);
+
+        // Populate the board
+        agent[queueP1, local] = queue1;
+        agent[qCompare, local] = -1;
+
+        // Check size
+        Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 3)) == Status.Succes);
+        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+
+        // Check push
+        Assert.That(agent.NewTreeTick(T.qPush(queueP1, local, 4)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 4)) == Status.Succes);
+        //errorCheck(T.qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
+
+        //// Check pop
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        ////Debug.Log(agent[qCompare, local]);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
+    }
+
+    [Test]
+    public void IQueueTest()
+    {
+        fc.Queue<int> queue = new fc.Queue<int>();
+        for (int i = 0; i < 5; i++)
+        {
+            queue.Add(i);
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            Assert.That(((int)queue.Get()) == i);
+        }
+        Assert.That(((int)queue.Get()) == 0);
+    }
+
+    [Test]
+    public void QueuePop()
+    {
+        // Create empty agent
+        AI_Agent agent = AI_Agent.CreateAgent();
+
+        // BB params
+        AI_Agent.BlackBoard local = AI_Agent.BlackBoard.local;
+        AI_Agent.BlackBoard global = AI_Agent.BlackBoard.global;
+
+        string queueP1 = "TestQueue";
+        string qCompare = "TestQueueComparer";
+
+        // Create queue and populate
+        fc.Queue<int> queue1 = new fc.Queue<int>();
+        queue1.Add(1);
+        queue1.Add(2);
+        queue1.Add(3);
+
+        // Populate the board
+        agent[queueP1, local] = queue1;
+        agent[qCompare, local] = -1;
+
+        // Check size
+        Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 3)) == Status.Succes);
+        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+
+        // Check push
+        Assert.That(agent.NewTreeTick(T.qPush(queueP1, local, 4)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 4)) == Status.Succes);
+        //errorCheck(T.qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
+
+        //// Check pop
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 3)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(qCompare, local, 1)) == Status.Succes);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
+
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(qCompare, local, 2)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(qCompare, local, 3)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(qCompare, local, 4)) == Status.Succes);
+
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.qPop(queueP1, local, qCompare, local)) == Status.Succes);
+        Assert.That(agent.NewTreeTick(T.eqBB(qCompare, local, 0)) == Status.Succes);
+
+        
+
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        //errorCheck(T.qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
+    }
+
+
+    #endregion
+
     #region Test actions
 
     public void SetTestTree(AI_Agent agent)
@@ -465,6 +599,7 @@ public class BT_TreeTesterActions
         #endregion
 
         #region Action: Queue push, pop, checkSize
+
         string queueP1 = "TestQueue";
         string qCompare = "TestQueueComparer";
 
@@ -533,6 +668,7 @@ public class BT_TreeTesterActions
         //Debug.Log(queue1.GetType().GetGenericTypeDefinition() == typeof(fc.Queue<>));
         //Debug.Log(queue1.GetType().GetGenericTypeDefinition());// + " - " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get() + " " + queue1.Get());
         //Debug.Log(queueI.GetType().GetGenericTypeDefinition() + " - " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get() + " " + queueI.Get());
+        
         #endregion
 
         #endregion

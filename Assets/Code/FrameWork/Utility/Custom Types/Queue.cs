@@ -20,17 +20,25 @@ namespace Framework.Collections
 
         public object Get()
         {
+            return (object)getGeneric();
+        }
+
+        private T getGeneric()
+        {
             if (list.Count == 0)
-                return null;
-            object ret = list[0];
+                return default(T);
+            T ret = list[0];
             list.RemoveAt(0);
             return ret;
         }
+
+        
 
         public void Add(object obj)
         {
             list.Add((T)obj);
         }
+
         public void Add(T obj)
         {
             list.Add(obj);

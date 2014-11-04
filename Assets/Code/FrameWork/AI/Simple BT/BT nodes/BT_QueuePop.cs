@@ -65,7 +65,7 @@ public class BT_QueuePop : BT_QueueBase
         // Cast
         IQueue q = (IQueue)obj;
         // Save popped item to blackboard
-        SetAgentObject(Par(Value), agent, q.Get());
+        SetAgentObject(Par(Value), agent, (object)q.Get());
 
         return Status.Succes;
     }
