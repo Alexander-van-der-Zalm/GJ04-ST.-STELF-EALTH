@@ -3,9 +3,41 @@ using System.Collections;
 using Status = BT_Behavior.Status;
 using fc = Framework.Collections;
 using TC = BT_TreeConstructor;
+using NUnit.Framework;
 
+[TestFixture]
 public class BT_TreeTester 
 {
+    [Test]
+    public void Fail()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(TC.F);
+ 
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void Running()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(TC.R);
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Running);
+    }
+
+    [Test]
+    public void Succes()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(TC.S);
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Succes);
+    }
+    
     #region Test actions
 
     public void SetTestTree(AI_Agent agent)

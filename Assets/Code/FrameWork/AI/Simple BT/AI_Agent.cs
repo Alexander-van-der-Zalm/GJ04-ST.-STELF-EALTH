@@ -5,7 +5,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Status = BT_Behavior.Status;
 
-public class AI_Agent : MonoBehaviour
+[System.Serializable]
+public class AI_Agent 
 {
     #region Enum
 
@@ -20,17 +21,27 @@ public class AI_Agent : MonoBehaviour
     #region Fields
 
     // Blackboards to store shared info
-    public BT_Tree Tree;
     [ReadOnly]
-    public string Name ="Default Agent";
-    public AI_BlackboardComponent GlobalBlackboardC;
-    
-    public AI_Blackboard GlobalBlackboard { get { return GlobalBlackboardC.Blackboard; } }
-    public AI_BlackboardComponent LocalBlackboardC;
-    public AI_Blackboard LocalBlackboard { get { return LocalBlackboardC.Blackboard; } set { LocalBlackboardC.Blackboard = value;  } }
+    public string Name = "Default Agent";
 
+    [SerializeField]
+    private BT_Tree tree;
 
-    private UDictionaryIntBT_Status NodeStatus;
+    [SerializeField,HideInInspector]
+    private AI_Blackboard localBlackboard;
+
+    [SerializeField, HideInInspector]
+    private AI_Blackboard globalBlackboard;
+
+    // Stores the status of the tree
+    [SerializeField]
+    private List<Status> nodeStatus;
+
+    public BT_Tree Tree { get { return tree; } set { tree = value; nodeStatus = tree.GetNodeStatus(); } }
+    public AI_Blackboard GlobalBlackboard { get { return globalBlackboard; } set { globalBlackboard = value; } }
+    public AI_Blackboard LocalBlackboard { get { return localBlackboard; } set { localBlackboard = value; } }
+    public List<Status> NodeStatus { get { return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); } set { nodeStatus = value; } }
+        
     private int TreeVersion = 0;
     private IEnumerator TreeCoroutine;
 
@@ -88,7 +99,7 @@ public class AI_Agent : MonoBehaviour
 
     void Start()
     {
-        Name = gameObject.name + " " + gameObject.GetInstanceID();
+        //Name = gameObject.name + " " + gameObject.GetInstanceID();
 
         if(LocalBlackboard == null)
         {
@@ -114,42 +125,41 @@ public class AI_Agent : MonoBehaviour
 
     }
 
-    private void TestBlackBoard()
+    public static AI_Agent CreateAgent(BT_TreeNode Root = null)
     {
-        LocalBlackboard.SetObject("TestV3", new Vector3(12, 1, 2));
-        LocalBlackboard.SetObject("TestString", "StringValue");
-        LocalBlackboard.SetObject("TestFloat", 0.05f);
-        LocalBlackboard.SetObject("TestInt", 1);
-        LocalBlackboard.SetObject("TestV2", new Vector2(1, 2));
-        LocalBlackboard.SetObject("TestBool", true);
-        LocalBlackboard.SetObject("TestClass2", GlobalBlackboard);
-        LocalBlackboard.SetObject("TestClass23", LocalBlackboard);
-        LocalBlackboard.SetObject("TestAccesParam", new AI_AgentBBAccessParameter());
-        Vector3 v3 = (Vector3)LocalBlackboard.GetObject("TestV3");
-        object obj = LocalBlackboard.GetObject("TestV3");
-        object obj2 = LocalBlackboard.GetObject("blabla");
+        AI_Agent agent = new AI_Agent();
+        agent.LocalBlackboard = AI_Blackboard.Create();
+        agent.GlobalBlackboard = AI_Blackboard.Create();
+        agent.Tree = BT_Tree.CreateTree(Root);
+        
+        return agent;
     }
 
-    internal void CheckTreeVersion()
+    public Status TreeTick()
+    {
+        return Tree.Root.Tick(this);
+    }
+
+    public void CheckTreeVersion()
     {
         if (TreeVersion == Tree.Version)
             return;
 
         bool treeWasRunning = TreeRunning;
         // Stop the old version of the tree
-        StopTree();
+        //StopTree();
 
         // TODO unnasign values from global blackboard set by the old tree
 
         // Get the new status memory structure
-        //NodeStatus = Tree.GetNewNodeStatus();
+        NodeStatus = Tree.GetNodeStatus();
         
         // Update the version
         TreeVersion = Tree.Version;
 
         // Restart the tree
-        if(TreeRunning)
-            StartTree();
+        //if(TreeRunning)
+        //    StartTree();
     }
 
     public void ClearLocalBlackBoard()
@@ -158,23 +168,23 @@ public class AI_Agent : MonoBehaviour
         LocalBlackboard.Clear();
     }
 
-    private void StartTree()
-    {
-        if (Tree == null)
-        {
-            Debug.LogError("AI_Agent cant start tree when null");
-            return;
-        }
+    //private void StartTree()
+    //{
+    //    if (Tree == null)
+    //    {
+    //        Debug.LogError("AI_Agent cant start tree when null");
+    //        return;
+    //    }
         
-        TreeCoroutine = Tree.updateCR(this);
-        StartCoroutine(TreeCoroutine);
-    }
+    //    TreeCoroutine = Tree.updateCR(this);
+    //    StartCoroutine(TreeCoroutine);
+    //}
 
-    private void StopTree()
-    {
-        if (TreeCoroutine == null)
-            return;
-        StopCoroutine(TreeCoroutine);
-        TreeCoroutine = null;
-    }
+    //private void StopTree()
+    //{
+    //    if (TreeCoroutine == null)
+    //        return;
+    //    StopCoroutine(TreeCoroutine);
+    //    TreeCoroutine = null;
+    //}
 }

@@ -58,6 +58,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         private set { treeNodes = value; }
     }
 
+    // If uneven- return rebuild
     public List<BTNodeWindow> NodeWindows
     {
         get { return nodeWindows != null ? nodeWindows : nodeWindows = new List<BTNodeWindow>(); }
@@ -75,6 +76,11 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #region Init
 
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
+    {
+        base.Init(newHideFlag);
+        Info = new TreeInfo();
+    }
 
     #endregion
 
@@ -111,10 +117,10 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     private int IDcounter;
     private int treeDepth;
 
-    private void RebuildTree()
+    private void RebuildTreeFromRoot()
     {
         Root = FindRoot(Root);
-        RebuildTree(Root);
+        RebuildTreeFromRoot(Root);
     }
 
     private BT_TreeNode FindRoot(BT_TreeNode root)
@@ -126,46 +132,36 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         return root;
     }
 
-    private void RebuildTree(BT_TreeNode root)
+    private void RebuildTreeFromRoot(BT_TreeNode root)
     {
-        Root = root;
-        IDcounter = 0; // Provides the unique id's for this tree by increment
+        Root = FindRoot(root);
+        TreeNodes = new List<BT_TreeNode>();
         
-        //// Recursive crawl to fill the dictionary
-        //TreeNodes = new UDictionaryIntBT_TreeNode();
-        //TreeNodes = RecursiveTreeNodeCrawl(TreeNodes, root);
-
+        TreeNodes  = RecursiveTreeNodeCrawl(TreeNodes, root);
+        
         // Set the new tree iteration
         Info.TreeIteration = Info.TreeIteration + 1 % int.MaxValue;
-
-        //Debug.Log("Tree iteration: " + TreeIteration);
     }
 
-    private UDictionaryIntBT_TreeNode RecursiveTreeNodeCrawl(UDictionaryIntBT_TreeNode dic, BT_TreeNode node)
+    private List<BT_TreeNode> RecursiveTreeNodeCrawl(List<BT_TreeNode> list, BT_TreeNode node)
     {
         // All the nodes have already a valid parent and children
         // Ids need to be set and unique for this rebuild 
-        // Then they need to be added to the new dictionary
+        // Then they need to be added to the list
         
         // First loop over children recursively
         for (int i = 0; i < node.Children.Count; i++)
         {
-            dic = RecursiveTreeNodeCrawl(dic, node.Children[i]);
+            list = RecursiveTreeNodeCrawl(list, node.Children[i]);
         }
-        //Debug.Log(IDcounter);
 
         // Set ID
-        node.ID = IDcounter;
+        node.ID = list.Count;
         
-        // Add self to the dictionary
-        dic[IDcounter] = node;
+        // Add self to list
+        list.Add(node);
 
-        // Increment the counter after adding
-        IDcounter++;
-
-        //Debug.Log(IDcounter);
-
-        return dic;
+        return list;
     }
 
     #endregion
@@ -213,6 +209,16 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #region Tree creation
 
+    public static BT_Tree CreateTree(BT_TreeNode newRoot)
+    {
+        BT_Tree tree = Create();
+        tree.Root = newRoot;
+
+        // Set right root and set ids
+        tree.RebuildTreeFromRoot();
+
+        return tree;
+    }
 
     #endregion
 
@@ -449,5 +455,15 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         }
 
         Root = node;
+    }
+
+    internal List<Status> GetNodeStatus()
+    {
+        List<Status> agentMemory = new List<Status>();
+
+        for (int i = 0; i < TreeNodes.Count; i++)
+            agentMemory.Add(Status.Invalid);
+
+        return agentMemory;
     }
 }

@@ -2,19 +2,20 @@
 using UnityEditor;
 using System.Collections;
 
-[CustomEditor(typeof(AI_Agent))]
+[CustomEditor(typeof(AI_AgentComponent))]
 public class AI_AgentEditor : EditorPlus 
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        AI_Agent agent = (AI_Agent)target;
+        AI_Agent agent = ((AI_AgentComponent)target).Agent;
         BT_Tree tree = agent.Tree;
 
         if (GUI.changed)
         { // Force a selection change
-            BTNodeWindowEditor.Instance.SelectionChange();
+            if(BTNodeWindowEditor.IsOpen)
+                BTNodeWindowEditor.Instance.SelectionChange();
         }
 
         EditorGUILayout.BeginHorizontal();

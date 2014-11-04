@@ -103,6 +103,11 @@ public class BT_TreeConstructor
 
     #region Delegator
 
+    public static BT_TreeNode F { get { return UDel(failUpdate, "fail"); } }
+    public static BT_TreeNode S { get { return UDel(succesUpdate, "succes"); } }
+    public static BT_TreeNode R { get { return UDel(runningUpdate, "running"); } }
+    public static BT_TreeNode P { get { return UDel(pauseUpdate, "pause"); } }
+
     public static BT_TreeNode UDel(BT_BehaviorDelegator.UpdateDelegate del, string name)
     {
         BT_BehaviorDelegator b = new BT_BehaviorDelegator(BT_Behavior.NodeDescription.BT_NodeType.Action, del);

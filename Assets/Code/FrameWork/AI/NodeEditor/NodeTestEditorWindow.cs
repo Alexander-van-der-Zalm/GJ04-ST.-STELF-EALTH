@@ -31,14 +31,14 @@ public class NodeTestEditorWindow : NodeEditorWindow
     void Update()
     {
         
-        // Check if tree is selected
-        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_Agent>() != null)
-        {
-            //Todo tree processing if not done yet
-            AI_Agent agent = Selection.activeGameObject.GetComponent<AI_Agent>();
-            if(agent.Tree != null)
-                Selection.objects = new UnityEngine.Object[1]{ (UnityEngine.Object)agent.Tree};
-        }
+        //// Check if tree is selected
+        //if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_Agent>() != null)
+        //{
+        //    //Todo tree processing if not done yet
+        //    AI_Agent agent = Selection.activeGameObject.GetComponent<AI_Agent>();
+        //    if(agent.Tree != null)
+        //        Selection.objects = new UnityEngine.Object[1]{ (UnityEngine.Object)agent.Tree};
+        //}
     }
 
     protected override void DrawButtons()

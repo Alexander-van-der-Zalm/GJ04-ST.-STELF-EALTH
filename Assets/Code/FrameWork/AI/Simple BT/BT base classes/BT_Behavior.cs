@@ -96,10 +96,10 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
         if (status != Status.Running)
             onTerminate(agent, id, status);
 
-        if (agent != null && (bool)agent.LocalBlackboard.GetObject(debugTree))
-        {
-            Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
-        }
+        //if (agent != null && (bool)agent.LocalBlackboard.GetObject(debugTree))
+        //{
+        //    Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
+        //}
 
         // Save the last state
         // Move to parameterized bb or something similar

@@ -114,10 +114,10 @@ public class BTNodeWindowEditor : NodeEditorWindow
             SelectedTree = null;
         }
         // Check if tree is selected via an agent
-        else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_Agent>() != null)
+        else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_AgentComponent>() != null)
         {
             //Todo tree processing if not done yet
-            AI_Agent agent = Selection.activeGameObject.GetComponent<AI_Agent>();
+            AI_Agent agent = Selection.activeGameObject.GetComponent<AI_AgentComponent>().Agent;
             SelectedTree = agent.Tree;
         }
         else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_Tree)))
@@ -491,4 +491,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
     }
 
     #endregion
+
+    public static bool IsOpen { get { return btinstance != null; } }
 }

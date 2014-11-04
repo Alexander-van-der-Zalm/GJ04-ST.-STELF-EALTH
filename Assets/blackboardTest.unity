@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 936424964}
+  blackBoard: {fileID: 0}
 --- !u!4 &14444776
 Transform:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 2094935088}
+  blackBoard: {fileID: 0}
 --- !u!4 &281301685
 Transform:
   m_ObjectHideFlags: 0
@@ -252,27 +252,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
---- !u!114 &350244408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Testo
-  objectPool:
-    keys:
-    - TestParamater
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000010000000605000000036666640a0b
-  isVariableObject:
-    keys:
-    - TestParamater
-    values: 00
 --- !u!1 &458991653
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +382,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &681974631
+--- !u!114 &849627624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -414,37 +393,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Testo
+  Name: AI BlackBoard
   objectPool:
-    keys:
-    - TestParamater
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f00080200000001000000060500000004617364660a0b
+    keys: []
+    values: []
   isVariableObject:
-    keys:
-    - TestParamater
-    values: 00
---- !u!114 &936424964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Testo
-  objectPool:
-    keys:
-    - TestParamater
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f0008020000000100000006050000000866616466617364660a0b
-  isVariableObject:
-    keys:
-    - TestParamater
-    values: 00
+    keys: []
+    values: 
 --- !u!1 &1046358143
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 1200302589}
+  blackBoard: {fileID: 0}
 --- !u!4 &1046358145
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 2094935088}
+  blackBoard: {fileID: 849627624}
 --- !u!114 &1172392641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,13 +477,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172392639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260830214f0f40a499b89e2230a0cd15, type: 3}
+  m_Script: {fileID: 11500000, guid: 8704d43d8c30e134ca8c68d5d05d5ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tree: {fileID: 11400000, guid: 9f46fa19ebc8082458f87882dea6b55f, type: 2}
-  Name: 
-  GlobalBlackboardC: {fileID: 281301684}
-  LocalBlackboardC: {fileID: 1172392640}
+  Agent:
+    Tree: {fileID: 11400000, guid: 9f46fa19ebc8082458f87882dea6b55f, type: 2}
+    Name: Default Agent
+    GlobalBlackboardC: {fileID: 281301684}
+    LocalBlackboardC: {fileID: 1172392640}
 --- !u!4 &1172392642
 Transform:
   m_ObjectHideFlags: 0
@@ -541,27 +497,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!114 &1200302589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Testo
-  objectPool:
-    keys:
-    - TestParamater
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f0008020000000100000006050000000273730a0b
-  isVariableObject:
-    keys:
-    - TestParamater
-    values: 00
 --- !u!1 &1442531717
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 350244408}
+  blackBoard: {fileID: 0}
 --- !u!4 &1442531719
 Transform:
   m_ObjectHideFlags: 0
@@ -629,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 681974631}
+  blackBoard: {fileID: 0}
 --- !u!4 &2036272235
 Transform:
   m_ObjectHideFlags: 0
@@ -642,21 +577,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!114 &2094935088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
-  objectPool:
-    keys: []
-    values: []
-  isVariableObject:
-    keys: []
-    values: 
