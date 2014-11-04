@@ -37,8 +37,10 @@ public class AI_Agent
     [SerializeField]
     private List<Status> nodeStatus;
 
+    [SerializeField]
     private int TreeVersion = 0;
 
+    //Redo
     private IEnumerator TreeCoroutine;
 
     #endregion
@@ -101,33 +103,7 @@ public class AI_Agent
 
     #endregion
 
-    void Start()
-    {
-        //Name = gameObject.name + " " + gameObject.GetInstanceID();
-
-        if(LocalBlackboard == null)
-        {
-            Debug.Log("AI_Agent instantiate blackboard");
-            LocalBlackboard = AI_Blackboard.Create();
-        }
-            
-        LocalBlackboard.SetObject("Name", Name);
-        LocalBlackboard.SetObject("DebugTree", false);
-        LocalBlackboard.SetObject("Depth", 0);
-
-        //if(Tree == null)
-        //    Tree = this.GetOrAddComponent<BT_Tree>();
-        //BehaviorTree.SetAgent(this);
-        
-        // Test behaviors
-        //Tree.TestBTBasicCompontents(this);
-        //ClearLocalBlackBoard();
-        //TestBlackBoard();
-        
-        //Tree.SetTestTree(this);
-        //StartTree();
-
-    }
+    #region CreateAgent
 
     public static AI_Agent CreateAgent(BT_TreeNode Root = null)
     {
@@ -135,14 +111,44 @@ public class AI_Agent
         agent.LocalBlackboard = AI_Blackboard.Create();
         agent.GlobalBlackboard = AI_Blackboard.Create();
         agent.Tree = BT_Tree.CreateTree(Root);
-        
+
+        agent.LocalBlackboard.SetObject("Name", agent.Name);
+        agent.LocalBlackboard.SetObject("DebugTree", false);
+        agent.LocalBlackboard.SetObject("Depth", 0);
+
         return agent;
     }
+    //// Prep BB
+
+    //// Clear BB
+    //public void ClearLocalBlackBoard()
+    //{
+    //    // Clear local black board
+    //    LocalBlackboard.Clear();
+    //}
+
+    #endregion
+
+    #region Tick
 
     public Status TreeTick()
     {
+        // Reset Tree (get new nodestatus list)
+        nodeStatus = Tree.GetNodeStatus();
+        
+        // Tick the tree
         return Tree.Root.Tick(this);
     }
+
+    public Status NewTreeTick(BT_TreeNode root)
+    {
+        Tree = BT_Tree.CreateTree(root);
+        return TreeTick();
+    }
+
+    #endregion
+
+    #region Tree Start and Pause
 
     public void CheckTreeVersion()
     {
@@ -166,17 +172,7 @@ public class AI_Agent
         //    StartTree();
     }
 
-    public Status NewTreeTick(BT_TreeNode root)
-    {
-        Tree = BT_Tree.CreateTree(root);
-        return TreeTick();
-    }
 
-    public void ClearLocalBlackBoard()
-    {
-        // Clear local black board
-        LocalBlackboard.Clear();
-    }
 
     //private void StartTree()
     //{
@@ -197,4 +193,6 @@ public class AI_Agent
     //    StopCoroutine(TreeCoroutine);
     //    TreeCoroutine = null;
     //}
+
+    #endregion
 }

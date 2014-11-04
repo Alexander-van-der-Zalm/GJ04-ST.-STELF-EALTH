@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Linq;
 using System.Collections;
-
+using Status = BT_Behavior.Status;
 
 public class BTNodeWindow : NodeWindow
 {
@@ -11,9 +11,11 @@ public class BTNodeWindow : NodeWindow
 
     #endregion
 
+    #region Fields
+
     // TreeInfo
-    int currentTreeRevision;
-    BT_Tree Tree;
+    //int currentTreeRevision;
+    //BT_Tree Tree;
 
     // Pos Info
 
@@ -21,7 +23,19 @@ public class BTNodeWindow : NodeWindow
     [SerializeField]
     private BT_TreeNode treeNode;
 
+    [SerializeField]
+    private Status status;
+
+    [SerializeField]
+    private bool agentRunning;
+
+    #endregion
+
+    #region Properties
+
     public BT_TreeNode TreeNode { get { return treeNode; } private set { treeNode = value; } }
+
+    //public Status Status { get { return status; } private set { status = value; } }
 
     public override int ID
     {
@@ -40,6 +54,10 @@ public class BTNodeWindow : NodeWindow
         //RefreshAsset();
     }
 
+    #endregion
+
+    #region Ctor
+
     internal static BTNodeWindow CreateWindow(BT_TreeNode node, UnityEngine.Object asset, int id)
     {
         BTNodeWindow window = ScriptableObject.CreateInstance<BTNodeWindow>();
@@ -50,12 +68,18 @@ public class BTNodeWindow : NodeWindow
         window.BGColor = GUI.color;
 
         window.Rect = new Rect(100, 100, 100, 100);
-        
+
+        window.status = Status.Invalid;
+
         // Add object to asset
         window.AddObjectToAsset(asset);
 
         return window;
     }
+
+    #endregion
+
+    #region Draw Window
 
     protected override void DrawWindowContent(int id)
     {
@@ -72,14 +96,55 @@ public class BTNodeWindow : NodeWindow
         if (TreeNode.IsRoot)
             EditorGUILayout.LabelField("Root");
 
+        // If active agent draw a color and text
+
+
+        // Handle being pressed
         if (((BTNodeWindowEditor)BTNodeWindowEditor.Instance).IsPressedParent(ID))
-            BGColor = Color.green;
+            BGColor = BTNodeWindowSettings.SelectedNodeColor;
+        else if(agentRunning)
+        {
+            switch(status)
+            {
+                case Status.Failed:
+                    BGColor = BTNodeWindowSettings.FailedNodeColor;
+                    break;
+                case Status.Invalid:
+                    BGColor = BTNodeWindowSettings.InvalidNodeColor;
+                    break;
+                case Status.Running:
+                    BGColor = BTNodeWindowSettings.RunningNodeColor;
+                    break;
+                case Status.Succes:
+                    BGColor = BTNodeWindowSettings.SuccesNodeColor;
+                    break;
+            }
+            EditorGUILayout.LabelField(status.ToString());
+        }
         else
-            BGColor = new Color(.8f,0.9f,0.9f,1.0f);
+            BGColor = BTNodeWindowSettings.StandardNodeColor;
+
+
     }
+
+    #endregion
+
+    #region SetAgentStatus
+
+    public void SetAgentStatus(bool activeAgent, Status newStatus = Status.Invalid)
+    {
+        agentRunning = activeAgent;
+        status = newStatus;
+    }
+
+    #endregion
+
+    #region Sort
 
     public void SortChildrenByXMin()
     {
         Children = Children.OrderBy(c => c.Rect.xMin).ToList();
     }
+
+    #endregion
 }

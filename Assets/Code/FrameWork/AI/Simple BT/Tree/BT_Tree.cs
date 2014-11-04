@@ -94,27 +94,26 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     //        StartCoroutine(updateCR());
     //}
 
-    // Update loop
-    public IEnumerator updateCR(AI_Agent agent)
-    {
-        if(Root == null)
-        {
-            Debug.Log("BT_BehaviorTree not populated.");
-             yield break;
-        }
-        while (Application.isPlaying)
-        {
-            Root.Tick(agent);
+    //// Update loop
+    //public IEnumerator updateCR(AI_Agent agent)
+    //{
+    //    if(Root == null)
+    //    {
+    //        Debug.Log("BT_BehaviorTree not populated.");
+    //         yield break;
+    //    }
+    //    while (Application.isPlaying)
+    //    {
+    //        Root.Tick(agent);
 
-            yield return new WaitForSeconds(1.0f / Info.UpdateFrequency);
-        }
-    }
+    //        yield return new WaitForSeconds(1.0f / Info.UpdateFrequency);
+    //    }
+    //}
 
     #endregion
 
     #region Rebuild Tree (recursive)
 
-    private int IDcounter;
     private int treeDepth;
 
     private void RebuildTreeFromRoot()
@@ -177,33 +176,6 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     {
         return TreeNodes[index].Children;
     }
-
-    #endregion
-
-    #region Set Children
-
-    //public BT_TreeNode AddChildren(BT_TreeNode parent, params BT_TreeNode[] children)
-    //{
-    //    // Check if parents type supports children
-    //    Type type = parent.Behavior.GetType();
-    //    if (!typeof(BT_HasChild).IsAssignableFrom(type))
-    //        Debug.LogError("BT_BehaviorTree.AddChildren adding children is not supported for:" + type.ToString());
-
-    //    if (typeof(BT_Decorator).IsAssignableFrom(type) && children.Count() > 1)
-    //        Debug.LogError("BT_BehaviorTree.AddChildren adding multiple children is not supported for:" + type.ToString());
-
-    //    if (children.Count() == 0)
-    //        return parent;
-
-    //    // Set parents children
-    //    parent.Children.AddRange(children);
-
-    //    // Set childrens parent
-    //    foreach(BT_TreeNode child in children)
-    //        child.Parent = parent;
-
-    //    return parent;
-    //}
 
     #endregion
 
@@ -365,7 +337,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
     #endregion
 
-    #region UI nodes
+    #region UI nodes (LEGACY)
 
     internal List<BT_UINodeInfo> GetUINodes()
     {
@@ -460,6 +432,8 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         Root = node;
     }
 
+    #region AgentTreeStatusReset
+
     internal List<Status> GetNodeStatus()
     {
         List<Status> agentMemory = new List<Status>();
@@ -469,4 +443,6 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
         return agentMemory;
     }
+
+    #endregion
 }

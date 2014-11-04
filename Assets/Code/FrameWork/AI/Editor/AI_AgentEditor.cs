@@ -19,7 +19,7 @@ public class AI_AgentEditor : EditorPlus
         }
 
         EditorGUILayout.BeginHorizontal();
-
+        
         if (GUILayout.Button("Show Tree"))
         {
             BTNodeWindowEditor.ShowWindow();
@@ -32,6 +32,11 @@ public class AI_AgentEditor : EditorPlus
         }
 
         EditorGUILayout.EndHorizontal();
-            //target.GenerateBTVisualiser();
+
+        if (GUILayout.Button("Tick Tree"))
+        {
+            agent.TreeTick();
+            BTNodeWindowEditor.Instance.Repaint();
+        }
     }
 }
