@@ -2,16 +2,16 @@
 using System.Collections;
 using Status = BT_Behavior.Status;
 using fc = Framework.Collections;
-using TC = BT_TreeConstructor;
+using T = BT_TreeConstructor;
 using NUnit.Framework;
 
 [TestFixture]
 public class BT_TreeTester 
 {
     [Test]
-    public void Fail()
+    public void BasicFail()
     {
-        AI_Agent agent = AI_Agent.CreateAgent(TC.F);
+        AI_Agent agent = AI_Agent.CreateAgent(T.F);
  
         Status result = agent.TreeTick();
 
@@ -19,9 +19,9 @@ public class BT_TreeTester
     }
 
     [Test]
-    public void Running()
+    public void BasicRunning()
     {
-        AI_Agent agent = AI_Agent.CreateAgent(TC.R);
+        AI_Agent agent = AI_Agent.CreateAgent(T.R);
 
         Status result = agent.TreeTick();
 
@@ -29,9 +29,79 @@ public class BT_TreeTester
     }
 
     [Test]
-    public void Succes()
+    public void BasicSucces()
     {
-        AI_Agent agent = AI_Agent.CreateAgent(TC.S);
+        AI_Agent agent = AI_Agent.CreateAgent(T.S);
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Succes);
+    }
+
+    [Test]
+    public void SelectorRunning()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.sel(T.F, T.F, T.R, T.S));
+        
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Running);
+    }
+
+    [Test]
+    public void SelectorFailed()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.sel(T.F, T.F, T.F, T.F));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void SelectorSucces()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.sel(T.F, T.F, T.S, T.F));
+ 
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Succes);
+    }
+
+    [Test]
+    public void SequencerRunning1()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.seq(T.S, T.S, T.R, T.F));
+
+        Status result = agent.TreeTick();
+    
+        Assert.That(result == Status.Running);
+    }
+
+    [Test]
+    public void SequencerRunning2()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.seq(T.S, T.S, T.R, T.S));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Running);
+    }
+
+    [Test]
+    public void SequencerFailed()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.seq(T.F, T.F, T.F, T.F));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void SequencerSucces()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.seq(T.S, T.S, T.S, T.S));
 
         Status result = agent.TreeTick();
 
@@ -42,10 +112,10 @@ public class BT_TreeTester
 
     public void SetTestTree(AI_Agent agent)
     {
-        BT_TreeNode f = TC.UDel(TC.failUpdate, "Fail");
-        BT_TreeNode s = TC.UDel(TC.succesUpdate, "Succes");
-        BT_TreeNode r = TC.UDel(TC.runningUpdate, "Running");
-        BT_TreeNode b = TC.UDel(TC.pauseUpdate, "Pause");
+        BT_TreeNode f = T.UDel(T.failUpdate, "Fail");
+        BT_TreeNode s = T.UDel(T.succesUpdate, "Succes");
+        BT_TreeNode r = T.UDel(T.runningUpdate, "Running");
+        BT_TreeNode b = T.UDel(T.pauseUpdate, "Pause");
 
         //Root = TC.sel(TC.seq(TC.sel(TC.seq(s, f), s), s), s);
         //RebuildTree();
@@ -58,10 +128,10 @@ public class BT_TreeTester
 
         #region Standard nodes
 
-        BT_TreeNode f = TC.UDel(TC.failUpdate, "Fail");
-        BT_TreeNode s = TC.UDel(TC.succesUpdate, "Succes");
-        BT_TreeNode r = TC.UDel(TC.runningUpdate, "Running");
-        BT_TreeNode b = TC.UDel(TC.pauseUpdate, "Pause");
+        BT_TreeNode f = T.UDel(T.failUpdate, "Fail");
+        BT_TreeNode s = T.UDel(T.succesUpdate, "Succes");
+        BT_TreeNode r = T.UDel(T.runningUpdate, "Running");
+        BT_TreeNode b = T.UDel(T.pauseUpdate, "Pause");
 
         #endregion
 
@@ -73,15 +143,15 @@ public class BT_TreeTester
         #region Composits: TC.selector, Sequencer
 
         // Check the TC.selector
-        errorCheck(TC.sel(f, f, r, s), Status.Running, ref errors, agent);
-        errorCheck(TC.sel(f, f, f, f), Status.Failed, ref errors, agent);
-        errorCheck(TC.sel(f, f, s, f), Status.Succes, ref errors, agent);
+        errorCheck(T.sel(f, f, r, s), Status.Running, ref errors, agent);
+        errorCheck(T.sel(f, f, f, f), Status.Failed, ref errors, agent);
+        errorCheck(T.sel(f, f, s, f), Status.Succes, ref errors, agent);
 
         // Check the sequencer
-        errorCheck(TC.seq(s, s, r, f), Status.Running, ref errors, agent);
-        errorCheck(TC.seq(s, s, r, s), Status.Running, ref errors, agent);
-        errorCheck(TC.seq(f, f, f, f), Status.Failed, ref errors, agent);
-        errorCheck(TC.seq(s, s, s, s), Status.Succes, ref errors, agent);
+        errorCheck(T.seq(s, s, r, f), Status.Running, ref errors, agent);
+        errorCheck(T.seq(s, s, r, s), Status.Running, ref errors, agent);
+        errorCheck(T.seq(f, f, f, f), Status.Failed, ref errors, agent);
+        errorCheck(T.seq(s, s, s, s), Status.Succes, ref errors, agent);
 
         #endregion
 
@@ -95,14 +165,14 @@ public class BT_TreeTester
         #region Decorators: TC.invert & alwaysFail
 
         // Check the TC.inverter
-        errorCheck(TC.inv(s), Status.Failed, ref errors, agent);
-        errorCheck(TC.inv(f), Status.Succes, ref errors, agent);
-        errorCheck(TC.inv(r), Status.Running, ref errors, agent);
+        errorCheck(T.inv(s), Status.Failed, ref errors, agent);
+        errorCheck(T.inv(f), Status.Succes, ref errors, agent);
+        errorCheck(T.inv(r), Status.Running, ref errors, agent);
 
         // Check the alwaysFailed
-        errorCheck(TC.fail(s), Status.Failed, ref errors, agent);
-        errorCheck(TC.fail(f), Status.Failed, ref errors, agent);
-        errorCheck(TC.fail(r), Status.Failed, ref errors, agent);
+        errorCheck(T.fail(s), Status.Failed, ref errors, agent);
+        errorCheck(T.fail(f), Status.Failed, ref errors, agent);
+        errorCheck(T.fail(r), Status.Failed, ref errors, agent);
 
         #endregion
 
@@ -133,48 +203,48 @@ public class BT_TreeTester
         agent[p1, local] = int1;
         agent[p2, local] = int2;
 
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
         agent[p2, local] = int3;
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, 1), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, 1), Status.Failed, ref errors, agent);
 
         // cross global and local int check
         agent[p1, global] = int1;
         agent[p2, global] = int3;
-        errorCheck(TC.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
         // string check
         agent[p1, local] = str1;
         agent[p2, local] = str2;
 
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
         agent[p2, local] = int3;
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
         // cross global and local int check
         agent[p1, global] = str1;
         agent[p2, global] = str3;
-        errorCheck(TC.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
         // Vector3 check
         agent[p1, local] = v1;
         agent[p2, local] = v2;
 
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
 
         agent[p2, local] = v3;
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
 
         // cross global and local int check
         agent[p1, global] = v1;
         agent[p2, global] = v3;
-        errorCheck(TC.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p1, global), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, global), Status.Failed, ref errors, agent);
 
 
         #endregion
@@ -186,22 +256,22 @@ public class BT_TreeTester
         agent[p1, local] = int1;
         agent[p2, local] = int2;
 
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, 0), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, 0), Status.Succes, ref errors, agent);
 
         // now TC.copy in 3
-        errorCheck(TC.copy(p1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.copy(p1, local, 3), Status.Succes, ref errors, agent);
         // Check if it went allright
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Failed, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, 3), Status.Succes, ref errors, agent);
 
         // now TC.copy from p1 to p2
-        errorCheck(TC.copy(p2, local, p1, local), Status.Succes, ref errors, agent);
+        errorCheck(T.copy(p2, local, p1, local), Status.Succes, ref errors, agent);
 
         // Check
-        errorCheck(TC.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p1, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(p2, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, p2, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(p2, local, 3), Status.Succes, ref errors, agent);
 
         #endregion
 
@@ -220,26 +290,26 @@ public class BT_TreeTester
         agent[qCompare, local] = -1;
 
         // Check size
-        errorCheck(TC.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
 
         // Check push
-        errorCheck(TC.qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
-        errorCheck(TC.qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
+        errorCheck(T.qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
+        errorCheck(T.qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
 
         // Check pop
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
         //Debug.Log(agent[qCompare, local]);
-        errorCheck(TC.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        errorCheck(TC.qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
+        errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
+        errorCheck(T.qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
 
         #region Test stuff
         //Queue<int> q = new Queue<int>();
@@ -300,12 +370,12 @@ public class BT_TreeTester
 
     public void TestDepth(AI_Agent agent)
     {
-        BT_TreeNode f = TC.UDel(TC.failUpdate, "Fail");
-        BT_TreeNode s = TC.UDel(TC.succesUpdate, "Succes");
-        BT_TreeNode r = TC.UDel(TC.runningUpdate, "Running");
-        BT_TreeNode b = TC.UDel(TC.pauseUpdate, "Pause");
+        BT_TreeNode f = T.UDel(T.failUpdate, "Fail");
+        BT_TreeNode s = T.UDel(T.succesUpdate, "Succes");
+        BT_TreeNode r = T.UDel(T.runningUpdate, "Running");
+        BT_TreeNode b = T.UDel(T.pauseUpdate, "Pause");
 
-        BT_TreeNode tree = TC.sel(TC.sel(TC.sel(TC.sel(s, s), s), s), s);
+        BT_TreeNode tree = T.sel(T.sel(T.sel(T.sel(s, s), s), s), s);
 
         //RebuildTree(tree);
         agent.CheckTreeVersion();
