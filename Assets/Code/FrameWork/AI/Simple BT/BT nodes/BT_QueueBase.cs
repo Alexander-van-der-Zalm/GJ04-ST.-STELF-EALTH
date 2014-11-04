@@ -3,11 +3,9 @@ using System.Linq;
 using System.Collections;
 using Framework.Collections;
 
-public class BT_QueueBase : BT_Action
+public class BT_QueueHelper
 {
-    protected const string Queue = "QueueParameter";
-
-    protected bool HasIQueue(object obj)
+    public static bool HasIQueue(object obj)
     {
         bool has = obj.GetType().GetInterfaces().Contains(typeof(IQueue));
         if(!has)

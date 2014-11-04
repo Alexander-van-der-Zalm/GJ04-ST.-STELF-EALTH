@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using Framework.Collections;
 
-public class BT_QueuePush : BT_QueueBase  
+public class BT_QueuePush : BT_Action  
 {
     private const string PushObjPar = "ObjectToPushParameter";
     private const string Obj = "ObjectToPush";
     private const string IsObject = "UseObjectToPush";
+    protected const string Queue = "QueueParameter";
 
     #region Constructor
 
@@ -92,7 +93,7 @@ public class BT_QueuePush : BT_QueueBase
         object obj = GetAgentObject(Par(Queue), agent);
 
         // Check if it is actually the right type of queue
-        if (!HasIQueue(obj))
+        if (!BT_QueueHelper.HasIQueue(obj))
             return Status.Invalid;
        
         // Cast

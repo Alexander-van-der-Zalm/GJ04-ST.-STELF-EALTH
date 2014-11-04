@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using System.Linq;
 using Framework.Collections;
 
-public class BT_QueueCheckSizeEqual : BT_QueueBase
+public class BT_QueueCheckSizeEqual : BT_Condition
 {
     private const string SizeObjPar = "SizeBBParameter";
     private const string Obj = "SizeObject";
     private const string IsObject = "UseObjectToCompare";
+    protected const string Queue = "QueueParameter";
 
     #region Constructor
 
@@ -98,7 +100,7 @@ public class BT_QueueCheckSizeEqual : BT_QueueBase
         else
             SizeObj = GetAgentObject(Par(SizeObjPar), agent);
         // Check if it is actually the right type of queue
-        if (!HasIQueue(obj))
+        if (!BT_QueueHelper.HasIQueue(obj))
             return Status.Invalid;
 
         // Cast
