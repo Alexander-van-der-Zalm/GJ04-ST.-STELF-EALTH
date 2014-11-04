@@ -6,8 +6,9 @@ using T = BT_TreeConstructor;
 using NUnit.Framework;
 
 [TestFixture]
-public class BT_TreeTester 
+public class BT_TreeTester
 {
+    #region Basic
     [Test]
     public void BasicFail()
     {
@@ -37,6 +38,10 @@ public class BT_TreeTester
 
         Assert.That(result == Status.Succes);
     }
+
+    #endregion
+
+    #region Composits: Selector & Sequencer
 
     [Test]
     public void SelectorRunning()
@@ -107,7 +112,73 @@ public class BT_TreeTester
 
         Assert.That(result == Status.Succes);
     }
-    
+
+    #endregion
+
+    #region Decorators: Inverter & AlwaysFail aka negator
+
+    [Test]
+    public void InverterRunning()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.inv(T.R));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Running);
+    }
+
+    [Test]
+    public void InverterFailed()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.inv(T.S));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void InverterSucces()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.inv(T.F));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Succes);
+    }
+
+    [Test]
+    public void AlwaysFailRunning()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.fail(T.R));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void AlwaysFailFailed()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.fail(T.S));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    [Test]
+    public void AlwaysFailSucces()
+    {
+        AI_Agent agent = AI_Agent.CreateAgent(T.fail(T.F));
+
+        Status result = agent.TreeTick();
+
+        Assert.That(result == Status.Failed);
+    }
+
+    #endregion
+
     #region Test actions
 
     public void SetTestTree(AI_Agent agent)
