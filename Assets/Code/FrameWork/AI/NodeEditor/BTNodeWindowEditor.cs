@@ -40,6 +40,12 @@ public class BTNodeWindowEditor : NodeEditorWindow
     [SerializeField]
     private BT_Tree selectedTree;
 
+    [SerializeField]
+    private AI_Agent selectedAgent;
+
+    [SerializeField]
+    private int lastAgentTreeTick;
+
     private bool connectPress = false;
     private int selectedClass;
     private nodeType lastType;
@@ -60,6 +66,13 @@ public class BTNodeWindowEditor : NodeEditorWindow
         get { return selectedTree; }
         private set
         {
+            if (value == selectedTree)
+                return;
+
+            // Check if new tree is still valid with an agent if there is an agent
+            if (SelectedAgent != null && SelectedAgent.Tree != value)
+                SelectedAgent = null;
+
             // Cancel connect child parent action
             if (value != selectedTree && connectPress)
                 connectPress = false;
@@ -68,21 +81,71 @@ public class BTNodeWindowEditor : NodeEditorWindow
             selectedTree = value;
             drawWindow = selectedTree != null;
             
-            Repaint();
-
             // Set windows
             if (value != null)
-                windows = selectedTree.NodeWindows.Cast<NodeWindow>().ToList();
+                refreshWindows();
+                
 
             // Make sure focusID will not go out of range after a tree change
             if (FocusID >= windows.Count)
                 FocusID = windows.Count - 1;
+
+            Repaint();
+        }
+    }
+
+    private void refreshWindows()
+    {
+        windows = selectedTree.NodeWindows.Cast<NodeWindow>().ToList();
+    }
+
+    public AI_Agent SelectedAgent
+    {
+        get { return selectedAgent; }
+        private set
+        {
+            // Set value
+            selectedAgent = value;
+
+            if (selectedAgent != null)
+            {
+                SelectedTree = selectedAgent.Tree;
+                //lastAgentTreeTick = SelectedAgent.TreeMem.CurrentTick;
+            }
+
+            // Set all the status to the windows
+            SetAgentStatus();
+
+            Repaint();
+        }
+    }
+
+    private void SetAgentStatus()
+    {
+        // Check if the window amount match the btbehavior status memory in the agent
+        if(SelectedAgent != null && SelectedAgent.NodeStatus.Count != windows.Count)
+        {
+            Debug.LogError("Nodestatus not equal to treewindows");
+            SelectedAgent.NodeStatus = SelectedAgent.Tree.GetNodeStatus();
+        }
+
+        if (selectedAgent != null)
+            lastAgentTreeTick = SelectedAgent.TreeMem.CurrentTick;
+
+        for(int i = 0; i < windows.Count; i++)
+        {
+            if(SelectedAgent != null)
+                ((BTNodeWindow)windows[i]).SetAgentStatus(true, SelectedAgent.NodeStatus[i]);
+            else
+                ((BTNodeWindow)windows[i]).SetAgentStatus(false);
         }
     }
 
     #endregion
 
     #region Show & Hide
+
+    public static bool IsOpen { get { return btinstance != null; } }
 
     // Constructor
     [MenuItem("CustomTools/BehaviorTree viewer")]
@@ -95,6 +158,18 @@ public class BTNodeWindowEditor : NodeEditorWindow
     public static void HideWindow()
     {
         Instance.Close();
+    }
+
+    #endregion
+
+    #region Update
+
+    void Update()
+    {
+        if(SelectedAgent != null && SelectedAgent.TreeMem.CurrentTick > lastAgentTreeTick)
+        {
+            SetAgentStatus();
+        }
     }
 
     #endregion
@@ -117,18 +192,19 @@ public class BTNodeWindowEditor : NodeEditorWindow
         else if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<AI_AgentComponent>() != null)
         {
             //Todo tree processing if not done yet
-            AI_Agent agent = Selection.activeGameObject.GetComponent<AI_AgentComponent>().Agent;
-            SelectedTree = agent.Tree;
-        }
+            SelectedAgent = Selection.activeGameObject.GetComponent<AI_AgentComponent>().Agent; 
+            // AI_Agent agent = Selection.activeGameObject.GetComponent<AI_AgentComponent>().Agent;
+            // SelectedTree = agent.Tree;
+        } // BT_Tree asset
         else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_Tree)))
         {
             SelectedTree = (BT_Tree)Selection.activeObject;
-        }
+        } // BTNodeWindow asset
         else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BTNodeWindow)))
         {
             BTNodeWindow window = (BTNodeWindow)Selection.activeObject;
             SelectedTree = window.TreeNode.Tree;
-        }
+        } // BT_TreeNode asset
         else if (AssetDatabase.Contains(Selection.activeObject) && Selection.activeObject.GetType().Equals(typeof(BT_TreeNode)))
         {
             BT_TreeNode treeNode = (BT_TreeNode)Selection.activeObject;
@@ -214,7 +290,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             Debug.Log("Cant disconnect when there is no node/tree selected");
             return;
         }
-
+        
         SelectedTree.TreeNodes[FocusID].DisconnectAll();
         SelectedTree.NodeWindows[FocusID].DisconnectAll();
         Repaint();
@@ -250,6 +326,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             connectPress = false;
             childIndex = FocusID;
             SelectedTree.Connect(parentIndex, childIndex);
+
             Repaint();
         }
     }
@@ -349,7 +426,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
         // DebugInfo
         GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString()
-                            + " Child:" + childIndex.ToString());
+                            + " Child:" + childIndex.ToString()
+                            + " | Agent Selected: " + (SelectedAgent == null ? "N" : "Y - CurrentTick: " + SelectedAgent.TreeMem.CurrentTick));
 
         // Temp move buttons
         // Move to base
@@ -391,6 +469,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
     {
         BT_TreeNode node = createNode<T>();
         selectedTree.NodeWindows[node.ID].Position = pos - selectedTree.NodeWindows[node.ID].Mid * 0.5f;
+        Repaint();
         return node;
     }
 
@@ -398,6 +477,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
     {
         BT_TreeNode node = SelectedTree.CreateNode(BT_TreeConstructor.Create<T>(HideFlags.DontSave));
         Selection.objects = new Object[] { node };
+        Repaint();
+        refreshWindows();
         return node;
     }
 
@@ -428,6 +509,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
             Debug.Log("DeleteFocus focusID: " + FocusID + " Count: " + (SelectedTree.NodeWindows.Count - 1).ToString());
         }
 
+        refreshWindows();
         Repaint();
     }
 
@@ -461,6 +543,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
         if (GUILayout.Button("Create node"))
         {
             SelectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
+            //createNode<l1[selectedClass]>();//(BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass])
+            refreshWindows();
             Repaint();
         }
     }
@@ -492,5 +576,5 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     #endregion
 
-    public static bool IsOpen { get { return btinstance != null; } }
+    
 }

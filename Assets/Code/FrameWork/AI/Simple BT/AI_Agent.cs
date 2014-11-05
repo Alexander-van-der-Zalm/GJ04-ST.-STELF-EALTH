@@ -6,8 +6,28 @@ using System.Collections.Generic;
 using Status = BT_Behavior.Status;
 
 [System.Serializable]
-public class AI_Agent 
+public class AI_Agent
 {
+    #region TreeMemoryClass
+
+    //Possibly make it into a log or asset
+    [System.Serializable]
+    public class TreeMemory
+    {
+        public int MaxTick { get { return TickStateMemory.Count; } }
+        [ReadOnly]
+        public int CurrentTick;
+        public List<List<Status>> TickStateMemory;
+
+        public TreeMemory()
+        {
+            CurrentTick = -1;
+            TickStateMemory = new List<List<Status>>();
+        }
+    }
+
+    #endregion
+
     #region Enum
 
     public enum BlackBoard
@@ -23,6 +43,12 @@ public class AI_Agent
     // Blackboards to store shared info
     [ReadOnly]
     public string Name = "Default Agent";
+
+    [SerializeField]
+    public TreeMemory TreeMem = new TreeMemory();
+
+    [SerializeField]
+    private bool saveTreeMemory = false;
 
     [SerializeField]
     private BT_Tree tree;
@@ -53,7 +79,31 @@ public class AI_Agent
     
     public AI_Blackboard LocalBlackboard { get { return localBlackboard; } set { localBlackboard = value; } }
 
-    public List<Status> NodeStatus { get { return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); } set { nodeStatus = value; } }
+    public List<Status> NodeStatus 
+    { 
+        get 
+        {
+            if (saveTreeMemory)
+            {
+                if(Tree == null)
+                {
+                    Debug.LogError("NodeStatus Property: No Tree has been set");
+                    return null;
+                }
+
+                // Return default nodeStatus if the treeMemory has not been ticked yet
+                if (TreeMem.CurrentTick == -1)
+                    return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); 
+                
+                return TreeMem.TickStateMemory[TreeMem.CurrentTick];
+            }
+            else
+                return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); 
+        } 
+        set { nodeStatus = value; } 
+    }
+
+    public bool SaveTreeMemory { get { return saveTreeMemory; } set { saveTreeMemory = value; } }
 
     public bool TreeRunning { get { return TreeCoroutine != null; } }
 
@@ -133,8 +183,36 @@ public class AI_Agent
 
     public Status TreeTick()
     {
-        // Reset Tree (get new nodestatus list)
-        nodeStatus = Tree.GetNodeStatus();
+        // TODO not save in multilists via bool
+        TreeMem.CurrentTick++;
+       
+        if (SaveTreeMemory)
+        {
+            if (TreeMem.CurrentTick == TreeMem.MaxTick)
+            { 
+                // New tick
+                TreeMem.TickStateMemory.Add(Tree.GetNodeStatus());
+                //TreeMem.MaxTick = TreeMem.CurrentTick;
+            }
+            else if(TreeMem.CurrentTick > TreeMem.MaxTick)
+            {
+                // Exception just reset and start over the process
+                Debug.Log("TreeTick: Exception (TreeMem.CurrentTick > TreeMem.MaxTick) reset and restarting treeTick");
+                TreeMem = new TreeMemory();
+                return TreeTick();
+            }
+            { 
+                // Reset Tree (get new nodestatus list)
+                TreeMem.TickStateMemory[TreeMem.CurrentTick] = Tree.GetNodeStatus();
+
+                // TODO Override/delete old ticks after this ?? 
+            }
+            
+        }
+        else
+            nodeStatus = Tree.GetNodeStatus();
+            
+            
         
         // Tick the tree
         return Tree.Root.Tick(this);

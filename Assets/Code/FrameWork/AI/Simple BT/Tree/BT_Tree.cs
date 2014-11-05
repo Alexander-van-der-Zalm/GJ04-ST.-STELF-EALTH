@@ -283,6 +283,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
 
         // Reorder indices
         SimpleReOrderIndices();
+        SortChildrenBasedOnPosition();
     }
 
     // Disconnect (child & parent)
