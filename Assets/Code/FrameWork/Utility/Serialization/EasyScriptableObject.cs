@@ -40,6 +40,7 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         
         AssetDatabase.CreateAsset(this, path);
         AssetDatabase.ImportAsset(path);
+        AssetDatabase.SaveAssets();
     }
 
     private void correctHideFlagsForSaving()
@@ -74,6 +75,7 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         // Refresh/Reimport
         AssetDatabase.Refresh();
         AssetDatabase.ImportAsset(path);
+        AssetDatabase.SaveAssets();
     }
 
     public void AddObjectToAsset(string path)
