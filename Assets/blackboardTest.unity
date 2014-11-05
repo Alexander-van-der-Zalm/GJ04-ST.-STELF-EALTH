@@ -270,6 +270,24 @@ MonoBehaviour:
   isVariableObject:
     keys: []
     values: 
+--- !u!114 &377366397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
 --- !u!1 &458991653
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +431,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
+    keys:
+    - Depth
+    - Test
+    - Henk
+    values:
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c756500081f0000000b
+    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7232537572726f67617465020000000178017900000b0b0200000000004041000040410b
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c75650008000000000b
+  isVariableObject:
+    keys:
+    - Depth
+    - Test
+    - Henk
+    values: 000000
+--- !u!114 &920075511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
     keys: []
     values: []
   isVariableObject:
@@ -500,10 +545,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Agent:
     Name: Default Agent
-    tree: {fileID: 0}
+    TreeMem:
+      CurrentTick: 23
+    saveTreeMemory: 0
+    tree: {fileID: 11400000, guid: dcda6807cce7e0645b048ce95b59a992, type: 2}
     localBlackboard: {fileID: 849627624}
     globalBlackboard: {fileID: 300348378}
-    nodeStatus: 
+    nodeStatus: 010000000200000001000000020000000100000001000000020000000200000001000000
+    TreeVersion: 0
   GlobalBlackboardC: {fileID: 281301684}
   LocalBlackboardC: {fileID: 1172392640}
 --- !u!4 &1172392642
@@ -545,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 0}
+  blackBoard: {fileID: 377366397}
 --- !u!4 &1442531719
 Transform:
   m_ObjectHideFlags: 0
@@ -585,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBoard: {fileID: 0}
+  blackBoard: {fileID: 920075511}
 --- !u!4 &2036272235
 Transform:
   m_ObjectHideFlags: 0

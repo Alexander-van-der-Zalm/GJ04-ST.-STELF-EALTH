@@ -95,9 +95,10 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
         // Draw a beziercurve for each child
         foreach(NodeWindow child in Children)
         {
-            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos, 
-                                           ParentPos + NodeEditorWindow.TangentStrength * Vector2.up,
-                                           child.ChildPos + NodeEditorWindow.TangentStrength * -1 * Vector2.up);
+            float tangent = Mathf.Abs(ParentPos.y - child.ChildPos.y)/2; //NodeEditorWindow.TangentStrength
+            NodeEditorWindow.DrawNodeCurve(ParentPos, child.ChildPos,
+                                           ParentPos + tangent * Vector2.up,
+                                           child.ChildPos + tangent * -1 * Vector2.up);
         }
     }
 

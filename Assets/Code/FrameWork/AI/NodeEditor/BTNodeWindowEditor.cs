@@ -57,7 +57,16 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     public static BTNodeWindowEditor Instance
     {
-        get { return btinstance != null ? btinstance : btinstance = EditorWindow.GetWindow<BTNodeWindowEditor>(); }
+        get 
+        { 
+            if(btinstance == null)
+            {
+                btinstance = EditorWindow.GetWindow<BTNodeWindowEditor>(); 
+                btinstance.Init();
+                btinstance.SelectionChange();
+            }
+            return btinstance;
+        }
         protected set { btinstance = value; }
     }
 
@@ -126,7 +135,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     private void SetAgentStatus()
     {
-        Debug.Log("SetAgentStatus");
+        //Debug.Log("SetAgentStatus");
         // Check if the window amount match the btbehavior status memory in the agent
         if(SelectedAgent != null && SelectedAgent.NodeStatus.Count != windows.Count)
         {

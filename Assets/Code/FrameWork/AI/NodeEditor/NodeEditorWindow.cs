@@ -31,7 +31,7 @@ public class NodeEditorWindow : EditorWindow
 
 
     // Settings
-    public static float TangentStrength = 80;
+    public static float TangentStrength = 30;
 
     [System.NonSerialized]
     private int focusID = -1;
@@ -161,6 +161,9 @@ public class NodeEditorWindow : EditorWindow
     public static void DrawNodeCurve(Vector2 parentPos, Vector2 childPos, Vector2 parentTangent, Vector2 childTangent)
     {
         // Todo Shadow
+        for (int i = 0; i < 3; i++ )
+            Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, new Color(0,0,0,0.3f), null, 1.5f*(4-i));
+
         Handles.DrawBezier(parentPos, childPos, parentTangent, childTangent, Color.black, null, 1);
     }
 
