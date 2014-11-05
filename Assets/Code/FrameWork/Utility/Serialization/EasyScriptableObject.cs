@@ -7,11 +7,11 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
     public static T Create()
     {
         T obj = ScriptableObject.CreateInstance<T>();
-        obj.Init();
+        obj.Init(HideFlags.DontSave);
         return obj;
     }
 
-    public static T CreateObjAndAsset(string path, HideFlags newHideFlag = HideFlags.None)
+    public static T CreateObjAndAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
     {
         T obj = Create();
 
@@ -20,7 +20,7 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         return obj;
     }
 
-    public static T CreateObjAddToAsset(string path, HideFlags newHideFlag = HideFlags.None)
+    public static T CreateObjAddToAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
     {
         T obj = Create();
 

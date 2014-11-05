@@ -123,8 +123,12 @@ public class BTNodeWindow : NodeWindow
         }
         else
             BGColor = BTNodeWindowSettings.StandardNodeColor;
+    }
 
-
+    protected override void OnMoved()
+    {
+        base.OnMoved();
+        EditorUtility.SetDirty(TreeNode);
     }
 
     #endregion

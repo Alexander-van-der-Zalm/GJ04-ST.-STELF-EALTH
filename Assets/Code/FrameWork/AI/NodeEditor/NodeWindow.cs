@@ -43,7 +43,19 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
 
     public bool WindowMoved { get { return windowMoved; } }
 
-    public Vector2 Position { get { return new Vector2(Rect.x, Rect.y); } set { rect.x = value.x; rect.y = value.y; } }
+    public Vector2 Position { get { return new Vector2(Rect.x, Rect.y); } 
+        set
+        {
+            Vector2 oldPos = Position;
+
+            rect.x = value.x; 
+            rect.y = value.y;
+
+            Vector2 offset = Position - oldPos;
+            offSetChildren(Children, offset);
+            
+        } 
+    }
     public float Width { get { return Rect.width; } set { rect.width = value; } }
     public float Height { get { return Rect.height; } set { rect.height = value; } }
     public Vector2 Mid { get { return new Vector2(Rect.width, Rect.height); } }
@@ -92,15 +104,24 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
         if (!oldRect.Equals(Rect))
         {
             windowMoved = true;
-            Vector2 offset = Rect.position - oldRect.position;
-            offSetChildren(Children,offset);
             
+            // Offset children
+            Vector2 offset = Rect.position - oldRect.position;
+            offSetChildren(Children, offset);
+
+            OnMoved();
         }
             
 
         if (Rect.Contains(Event.current.mousePosition)&&Event.current.clickCount>0)
             NodeEditorWindow.Instance.FocusID = ID;
     }
+
+    protected virtual void OnMoved()
+    {
+        
+    }
+
 
     private void offSetChildren(List<NodeWindow> Children, Vector2 offset)
     {

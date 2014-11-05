@@ -14,28 +14,26 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 58
+    TreeIteration: 65
     NodeSide: 1
   treeNodes:
   - {fileID: 11400004}
   - {fileID: 11400016}
-  - {fileID: 11400010}
-  - {fileID: 11400022}
   - {fileID: 11400028}
-  - {fileID: 11400034}
   - {fileID: 11400040}
   - {fileID: 11400046}
   - {fileID: 11400052}
+  - {fileID: 11400034}
+  - {fileID: 11400010}
   nodeWindows:
   - {fileID: 11400006}
   - {fileID: 11400018}
-  - {fileID: 11400012}
-  - {fileID: 11400024}
   - {fileID: 11400030}
-  - {fileID: 11400036}
   - {fileID: 11400042}
   - {fileID: 11400048}
   - {fileID: 11400054}
+  - {fileID: 11400036}
+  - {fileID: 11400012}
   root: {fileID: 11400004}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -100,8 +98,8 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 324
-    y: 132
+    x: 349
+    y: 99
     width: 100
     height: 100
   header:
@@ -114,55 +112,55 @@ MonoBehaviour:
   agentRunning: 1
 --- !u!114 &11400008
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 4
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 2 | PARAMATERS | CopyBBParameter
+  m_Name: 7 | PARAMATERS | CheckEqualBBParameter
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
     keys:
-    - OverrideLocation
-    - CopyParameter
-    - ObjectsToCopy
-    - UseObjectToCopy
+    - Parameter1ToCompare
+    - Parameter2ToCompare
+    - ObjectToCompare
+    - UseObjectToCompare
     values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f00080200000000000000060500000004546573740a0b
+    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f0008020000000000000006050000000448656e6b0a0b
     - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7232537572726f67617465020000000178017900000b0b0200000000004041000040410b
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c756500087b0000000b
     - byteArray: 0001000000ffffffff010000000000000004010000000e53797374656d2e426f6f6c65616e01000000076d5f76616c75650001010b
   isVariableObject:
     keys:
-    - OverrideLocation
-    - CopyParameter
-    - ObjectsToCopy
-    - UseObjectToCopy
+    - Parameter1ToCompare
+    - Parameter2ToCompare
+    - ObjectToCompare
+    - UseObjectToCompare
     values: 00000100
 --- !u!114 &11400010
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 4
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 2 | TREENODE | CopyBBParameter
+  m_Name: 7 | TREENODE | CheckEqualBBParameter
   m_EditorClassIdentifier: 
-  id: 2
+  id: 7
   parent: {fileID: 11400016}
   children: []
   MaxChildren: 0
   behavior: {fileID: 0}
-  behaviorType: BT_CopyBBParameter
+  behaviorType: BT_CheckEqualBBParameter
   parametersBB: {fileID: 11400008}
   tree: {fileID: 11400000}
-  Name: VectorSet
-  Description: Copies the values from slot2 to slot1 and then succeeds
+  Name: 
+  Description: Succeeds if objects are equal and fails otherwise
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,25 +170,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 2 | WINDOW | CopyBBParameter
+  m_Name: 7 | WINDOW | CheckEqualBBParameter
   m_EditorClassIdentifier: 
-  id: 2
+  id: 7
   parent: {fileID: 11400018}
   children: []
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: -10
-    y: 406
+    x: 127
+    y: 308
     width: 100
     height: 100
   header:
-    m_Text: Action [2]
+    m_Text: Action [7]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: .300000012, g: .899999976, b: .5, a: 1}
+  bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
   treeNode: {fileID: 11400010}
-  status: 1
+  status: 2
   agentRunning: 1
 --- !u!114 &11400014
 MonoBehaviour:
@@ -225,7 +223,6 @@ MonoBehaviour:
   parent: {fileID: 11400004}
   children:
   - {fileID: 11400010}
-  - {fileID: 11400022}
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_Sequencer
@@ -249,12 +246,11 @@ MonoBehaviour:
   parent: {fileID: 11400006}
   children:
   - {fileID: 11400012}
-  - {fileID: 11400024}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 76
-    y: 267
+    x: 129.899994
+    y: 205
     width: 100
     height: 100
   header:
@@ -263,86 +259,6 @@ MonoBehaviour:
     m_Tooltip: 
   bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
   treeNode: {fileID: 11400016}
-  status: 2
-  agentRunning: 1
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 3 | PARAMATERS | CheckEqualBBParameter
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
-  objectPool:
-    keys:
-    - Parameter1ToCompare
-    - Parameter2ToCompare
-    - ObjectToCompare
-    - UseObjectToCompare
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f00080200000000000000060500000004546573740a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7232537572726f67617465020000000178017900000b0b0200000000000000000000000b
-    - byteArray: 0001000000ffffffff010000000000000004010000000e53797374656d2e426f6f6c65616e01000000076d5f76616c75650001010b
-  isVariableObject:
-    keys:
-    - Parameter1ToCompare
-    - Parameter2ToCompare
-    - ObjectToCompare
-    - UseObjectToCompare
-    values: 00000100
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 3 | TREENODE | CheckEqualBBParameter
-  m_EditorClassIdentifier: 
-  id: 3
-  parent: {fileID: 11400016}
-  children: []
-  MaxChildren: 0
-  behavior: {fileID: 0}
-  behaviorType: BT_CheckEqualBBParameter
-  parametersBB: {fileID: 11400020}
-  tree: {fileID: 11400000}
-  Name: VectorFail
-  Description: Succeeds if objects are equal and fails otherwise
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 3 | WINDOW | CheckEqualBBParameter
-  m_EditorClassIdentifier: 
-  id: 3
-  parent: {fileID: 11400018}
-  children: []
-  MaxChildren: 0
-  rect:
-    serializedVersion: 2
-    x: 131
-    y: 408
-    width: 100
-    height: 100
-  header:
-    m_Text: Action [3]
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
-  treeNode: {fileID: 11400022}
   status: 2
   agentRunning: 1
 --- !u!114 &11400026
@@ -354,7 +270,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 4 | PARAMATERS | Sequencer
+  m_Name: 2 | PARAMATERS | Sequencer
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -372,9 +288,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 4 | TREENODE | Sequencer
+  m_Name: 2 | TREENODE | Sequencer
   m_EditorClassIdentifier: 
-  id: 4
+  id: 2
   parent: {fileID: 11400004}
   children:
   - {fileID: 11400034}
@@ -395,21 +311,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 4 | WINDOW | Sequencer
+  m_Name: 2 | WINDOW | Sequencer
   m_EditorClassIdentifier: 
-  id: 4
+  id: 2
   parent: {fileID: 11400006}
   children:
   - {fileID: 11400036}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 713
-    y: 275
+    x: 581
+    y: 200.199997
     width: 100
     height: 100
   header:
-    m_Text: Sequencer [4]
+    m_Text: Sequencer [2]
     m_Image: {fileID: 0}
     m_Tooltip: 
   bgColor: {r: .300000012, g: .899999976, b: .5, a: 1}
@@ -418,14 +334,14 @@ MonoBehaviour:
   agentRunning: 1
 --- !u!114 &11400032
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 4
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 5 | PARAMATERS | CheckEqualBBParameter
+  m_Name: 6 | PARAMATERS | CheckEqualBBParameter
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -435,9 +351,9 @@ MonoBehaviour:
     - ObjectToCompare
     - UseObjectToCompare
     values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f00080200000000000000060500000004546573740a0b
+    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f0008020000000000000006050000000448656e6b0a0b
     - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d435368617270050100000010566563746f7232537572726f67617465020000000178017900000b0b0200000000004041000040410b
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c75650008000000000b
     - byteArray: 0001000000ffffffff010000000000000004010000000e53797374656d2e426f6f6c65616e01000000076d5f76616c75650001010b
   isVariableObject:
     keys:
@@ -448,16 +364,16 @@ MonoBehaviour:
     values: 00000100
 --- !u!114 &11400034
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 4
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 5 | TREENODE | CheckEqualBBParameter
+  m_Name: 6 | TREENODE | CheckEqualBBParameter
   m_EditorClassIdentifier: 
-  id: 5
+  id: 6
   parent: {fileID: 11400028}
   children: []
   MaxChildren: 0
@@ -465,7 +381,7 @@ MonoBehaviour:
   behaviorType: BT_CheckEqualBBParameter
   parametersBB: {fileID: 11400032}
   tree: {fileID: 11400000}
-  Name: VectorSucceed
+  Name: 
   Description: Succeeds if objects are equal and fails otherwise
 --- !u!114 &11400036
 MonoBehaviour:
@@ -476,20 +392,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 5 | WINDOW | CheckEqualBBParameter
+  m_Name: 6 | WINDOW | CheckEqualBBParameter
   m_EditorClassIdentifier: 
-  id: 5
+  id: 6
   parent: {fileID: 11400030}
   children: []
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 642
-    y: 402
+    x: 583
+    y: 311
     width: 100
     height: 100
   header:
-    m_Text: Action [5]
+    m_Text: Action [6]
     m_Image: {fileID: 0}
     m_Tooltip: 
   bgColor: {r: .300000012, g: .899999976, b: .5, a: 1}
@@ -505,7 +421,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 6 | PARAMATERS | Sequencer
+  m_Name: 3 | PARAMATERS | Sequencer
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -523,9 +439,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 6 | TREENODE | Sequencer
+  m_Name: 3 | TREENODE | Sequencer
   m_EditorClassIdentifier: 
-  id: 6
+  id: 3
   parent: {fileID: 11400004}
   children:
   - {fileID: 11400046}
@@ -546,21 +462,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 6 | WINDOW | Sequencer
+  m_Name: 3 | WINDOW | Sequencer
   m_EditorClassIdentifier: 
-  id: 6
+  id: 3
   parent: {fileID: 11400006}
   children:
   - {fileID: 11400048}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 339
-    y: 282
+    x: 350
+    y: 211
     width: 100
     height: 100
   header:
-    m_Text: Sequencer [6]
+    m_Text: Sequencer [3]
     m_Image: {fileID: 0}
     m_Tooltip: 
   bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
@@ -576,7 +492,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 7 | PARAMATERS | AlwayFail
+  m_Name: 4 | PARAMATERS | AlwayFail
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -594,9 +510,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 7 | TREENODE | AlwayFail
+  m_Name: 4 | TREENODE | AlwayFail
   m_EditorClassIdentifier: 
-  id: 7
+  id: 4
   parent: {fileID: 11400040}
   children:
   - {fileID: 11400052}
@@ -616,21 +532,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 7 | WINDOW | AlwayFail
+  m_Name: 4 | WINDOW | AlwayFail
   m_EditorClassIdentifier: 
-  id: 7
+  id: 4
   parent: {fileID: 11400042}
   children:
   - {fileID: 11400054}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 331
-    y: 408
+    x: 352
+    y: 314
     width: 100
     height: 100
   header:
-    m_Text: Decorator [7]
+    m_Text: Decorator [4]
     m_Image: {fileID: 0}
     m_Tooltip: 
   bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
@@ -646,7 +562,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 8 | PARAMATERS | CopyBBParameter
+  m_Name: 5 | PARAMATERS | CopyBBParameter
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -676,9 +592,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 8 | TREENODE | CopyBBParameter
+  m_Name: 5 | TREENODE | CopyBBParameter
   m_EditorClassIdentifier: 
-  id: 8
+  id: 5
   parent: {fileID: 11400046}
   children: []
   MaxChildren: 0
@@ -697,20 +613,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 8 | WINDOW | CopyBBParameter
+  m_Name: 5 | WINDOW | CopyBBParameter
   m_EditorClassIdentifier: 
-  id: 8
+  id: 5
   parent: {fileID: 11400048}
   children: []
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 309
-    y: 526
+    x: 352
+    y: 418
     width: 100
     height: 100
   header:
-    m_Text: Action [8]
+    m_Text: Action [5]
     m_Image: {fileID: 0}
     m_Tooltip: 
   bgColor: {r: .300000012, g: .899999976, b: .5, a: 1}
