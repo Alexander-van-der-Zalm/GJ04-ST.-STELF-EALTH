@@ -66,9 +66,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
         get { return selectedTree; }
         private set
         {
-            if (value == selectedTree)
-                return;
-
             // Check if new tree is still valid with an agent if there is an agent
             if (SelectedAgent != null && SelectedAgent.Tree != value)
                 SelectedAgent = null;
@@ -93,6 +90,9 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 FocusID = windows.Count - 1;
 
             Repaint();
+
+            //if (value == selectedTree)
+            //    return;
         }
     }
 
@@ -373,8 +373,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 path = EditorUtility.SaveFilePanelInProject("Tree location", "Tree", "asset", "IAR MESSAGE00");//("Tree location", "/Assets", "Tree", "asset");
             }
 
-            SelectedTree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
-            
+            BT_Tree tree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
+
+            if (tree != SelectedTree)
+                SelectedTree = tree;
+
             if (SelectedTree == null)
             {
                 EditorGUILayout.EndHorizontal();
