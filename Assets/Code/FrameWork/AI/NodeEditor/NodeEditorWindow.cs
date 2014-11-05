@@ -132,13 +132,13 @@ public class NodeEditorWindow : EditorWindow
         BeginWindows();
         for (int i = 0; i < windows.Count; i++)
         {
-            Rect oldRect = windows[i].Rect;
+            
             
             // Draw the window
             windows[i].DrawWindow();
 
             // Check if the window has moved
-            if (!oldRect.Equals(windows[i].Rect))
+            if (windows[i].WindowMoved)
                 moved = true;
         }
         EndWindows();

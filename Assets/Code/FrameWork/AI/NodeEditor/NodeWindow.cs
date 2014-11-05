@@ -17,6 +17,8 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     [SerializeField]
     private Color bgColor;
 
+    private bool windowMoved;
+
     #endregion
 
     #region Properties
@@ -38,6 +40,8 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
     public Rect Rect { get { return rect; } protected set { rect = value; } }
 
     public GUIContent Header { get { return header; } protected set { header = value; } }
+
+    public bool WindowMoved { get { return windowMoved; } }
 
     public Vector2 Position { get { return new Vector2(Rect.x, Rect.y); } set { rect.x = value.x; rect.y = value.y; } }
     public float Width { get { return Rect.width; } set { rect.width = value; } }
@@ -71,18 +75,40 @@ public class NodeWindow : TreeNodeLogic<NodeWindow>
 
     public void DrawWindow()
     {
+        // Save old
         Color oldColor = GUI.color;
-        
+        Rect oldRect = Rect;
+        windowMoved = false;
+
         if(bgColor!=null)
             GUI.color = bgColor;
 
         Rect = GUI.Window(ID, Rect, DrawWindowContent, header);
 
-       // if (bgColor.a > 0)
+        //Reset color
         GUI.color = oldColor;
+
+        // Check if the window has moved
+        if (!oldRect.Equals(Rect))
+        {
+            windowMoved = true;
+            Vector2 offset = Rect.position - oldRect.position;
+            offSetChildren(Children,offset);
+            
+        }
+            
 
         if (Rect.Contains(Event.current.mousePosition)&&Event.current.clickCount>0)
             NodeEditorWindow.Instance.FocusID = ID;
+    }
+
+    private void offSetChildren(List<NodeWindow> Children, Vector2 offset)
+    {
+        for (int i = 0; i < Children.Count; i++)
+        {
+            Children[i].rect.position += offset;
+            offSetChildren(Children[i].Children, offset);
+        }
     }
 
     protected virtual void DrawWindowContent(int id)
