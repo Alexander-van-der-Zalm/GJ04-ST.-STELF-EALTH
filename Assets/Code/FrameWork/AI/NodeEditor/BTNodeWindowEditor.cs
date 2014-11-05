@@ -137,9 +137,9 @@ public class BTNodeWindowEditor : NodeEditorWindow
     {
         //Debug.Log("SetAgentStatus");
         // Check if the window amount match the btbehavior status memory in the agent
-        if(SelectedAgent != null && SelectedAgent.NodeStatus.Count != windows.Count)
+        if (SelectedAgent != null && SelectedAgent.NodeStatus != null && SelectedAgent.NodeStatus.Count != windows.Count)
         {
-            Debug.LogError("Nodestatus not equal to treewindows");
+            //Debug.LogError("Nodestatus not equal to treewindows");
             SelectedAgent.NodeStatus = SelectedAgent.Tree.GetNodeStatus();
         }
 

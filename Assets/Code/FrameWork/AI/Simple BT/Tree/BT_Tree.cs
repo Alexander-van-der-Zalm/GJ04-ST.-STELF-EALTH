@@ -265,6 +265,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
     // Connect (child & parent)
     public void Connect(int parentIndex, int childIndex)
     {
+        // Cannot connect to itself
         if(parentIndex == childIndex)
         {
             Debug.LogError("BT_Tree.Connect child and parent index are the same");
@@ -273,6 +274,14 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Check indices
         if (illegalTreeNodeIndex(parentIndex) || illegalTreeNodeIndex(childIndex))
             return;
+
+        // Check if it is trying to child one of its ancestors
+        if (TreeNodes[parentIndex].IsDescendantOf(TreeNodes[childIndex]))
+        {
+            // Then disconnect parent and carry one
+            TreeNodes[parentIndex].DisconnectFromParent();
+            NodeWindows[parentIndex].DisconnectFromParent();
+        }
 
         // Connect TreeNode and BTNodeWindow
         TreeNodes[parentIndex].AddChildren(TreeNodes[childIndex]);

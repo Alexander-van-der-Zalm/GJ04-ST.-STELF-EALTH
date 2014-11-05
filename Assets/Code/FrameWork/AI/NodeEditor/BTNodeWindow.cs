@@ -128,6 +128,7 @@ public class BTNodeWindow : NodeWindow
     protected override void OnMoved()
     {
         base.OnMoved();
+        //BT_TreeNode
         EditorUtility.SetDirty(TreeNode);
     }
 

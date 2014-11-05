@@ -87,4 +87,23 @@ public class TreeNodeLogic<T>: EasyScriptableObject<T> where T : TreeNodeLogic<T
         // Remove children
         RemoveChildren(Children.ToArray());
     }
+
+    public void DisconnectFromParent()
+    {
+        if (Parent != null)
+            Parent.RemoveChildren((T)this);
+        Parent = null;
+    }
+    public bool IsDescendantOf(T Ancestor)
+    {
+        T curAncestor = Parent;
+        while (curAncestor != null)
+        {
+            if (curAncestor == Ancestor)
+                return true;
+            curAncestor = curAncestor.Parent;
+        }
+        return false;
+    }
+
 }

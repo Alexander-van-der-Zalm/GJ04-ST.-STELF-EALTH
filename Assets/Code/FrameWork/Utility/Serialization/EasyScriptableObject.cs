@@ -44,6 +44,8 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
 
         string path = AssetDatabase.GetAssetPath(obj);
 
+        hideFlags = HideFlags.None;
+
         // Add the object
         AssetDatabase.AddObjectToAsset(this, obj);
 

@@ -13,8 +13,10 @@ public class AI_AgentComponent : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        Agent.LocalBlackboard = LocalBlackboardC.Blackboard;
-        Agent.GlobalBlackboard = GlobalBlackboardC.Blackboard;
+        if (LocalBlackboardC != null)
+            Agent.LocalBlackboard = LocalBlackboardC.Blackboard;
+        if (GlobalBlackboardC != null)
+            Agent.GlobalBlackboard = GlobalBlackboardC.Blackboard;
 	}
 	
 	// Update is called once per frame
