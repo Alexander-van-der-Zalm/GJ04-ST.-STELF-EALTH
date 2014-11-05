@@ -60,8 +60,12 @@ public class BT_QueuePop : BT_Action
         object obj = GetAgentObject(Par(Queue),agent);
         
         // Check if it is actually the right type of queue
-        if (!BT_QueueHelper.HasIQueue(obj)) 
+        if (!BT_QueueHelper.HasIQueue(obj))
+        {
+            Debug.LogError("BT_QueueCheckSizeEqual: No queue exists in the blackboard");
             return Status.Invalid;
+        }
+            
 
         // Cast
         IQueue q = (IQueue)obj;

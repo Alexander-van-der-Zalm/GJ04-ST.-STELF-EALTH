@@ -92,9 +92,17 @@ public class BT_QueuePush : BT_Action
         // Get queue from the blackboard
         object obj = GetAgentObject(Par(Queue), agent);
 
+        //if(obj == null)
+        //{
+        //    obj = new Queue<
+        //}
+
         // Check if it is actually the right type of queue
         if (!BT_QueueHelper.HasIQueue(obj))
+        {
+            Debug.LogError("BT_QueuePush: No queue exists in the blackboard");
             return Status.Invalid;
+        }
        
         // Cast
         IQueue q = (IQueue)obj;

@@ -93,19 +93,25 @@ public class BT_QueueCheckSizeEqual : BT_Condition
     {
         // Get queue from the blackboard
         object obj = GetAgentObject(Par(Queue), agent);
- 
+        
+        // If there is no Queue return invalid
+        if (obj == null || !BT_QueueHelper.HasIQueue(obj))
+        {
+            Debug.LogError("BT_QueueCheckSizeEqual: No queue exists in the blackboard");
+            return Status.Invalid;
+        }
+            
+        
+        // Cast
+        IQueue q = (IQueue)obj;
+
         object SizeObj;
         if ((bool)this[IsObject])
             SizeObj = this[Obj];
         else
             SizeObj = GetAgentObject(Par(SizeObjPar), agent);
         // Check if it is actually the right type of queue
-        if (!BT_QueueHelper.HasIQueue(obj))
-            return Status.Invalid;
-
-        // Cast
-        IQueue q = (IQueue)obj;
-
+    
         int size = (int)SizeObj;
         
         return q.Count == size ? Status.Succes : Status.Failed;
