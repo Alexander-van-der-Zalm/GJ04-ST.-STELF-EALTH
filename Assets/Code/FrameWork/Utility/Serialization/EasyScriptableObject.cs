@@ -28,10 +28,27 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         
         return obj;
     }
+
     public void CreateAsset(string path)
     {
+        //correctHideFlagsForSaving();
+        if (hideFlags == HideFlags.DontSave)
+            hideFlags = HideFlags.None;
+
+        if (hideFlags == HideFlags.HideAndDontSave)
+            hideFlags = HideFlags.HideInHierarchy;
+        
         AssetDatabase.CreateAsset(this, path);
         AssetDatabase.ImportAsset(path);
+    }
+
+    private void correctHideFlagsForSaving()
+    {
+        if (hideFlags == HideFlags.DontSave)
+            hideFlags = HideFlags.None;
+
+        if (hideFlags == HideFlags.HideAndDontSave)
+            hideFlags = HideFlags.HideInHierarchy;
     }
 
     public void AddObjectToAsset(UnityEngine.Object obj)
@@ -44,7 +61,12 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
 
         string path = AssetDatabase.GetAssetPath(obj);
 
-        hideFlags = HideFlags.None;
+        //correctHideFlagsForSaving();
+        if (hideFlags == HideFlags.DontSave)
+            hideFlags = HideFlags.None;
+
+        if (hideFlags == HideFlags.HideAndDontSave)
+            hideFlags = HideFlags.HideInHierarchy;
 
         // Add the object
         AssetDatabase.AddObjectToAsset(this, obj);
@@ -64,15 +86,23 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
     {
         // TODO checks
         //string path = AssetDatabase.GetAssetPath(this);
-        Debug.Log(AssetDatabase.Contains(this) + " " + AssetDatabase.IsSubAsset(this));
+        //Debug.Log(AssetDatabase.Contains(this) + " " + AssetDatabase.IsSubAsset(this));
+
+        string path = AssetDatabase.GetAssetPath(this);
+        if (AssetDatabase.IsSubAsset(this))
+           path = AssetDatabase.GetAssetPath(AssetDatabase.LoadMainAssetAtPath(path));
+
+        AssetDatabase.ImportAsset(path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        //if (AssetDatabase.Contains(this) && AssetDatabase.IsMainAsset(this))
+        //    AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
+        //else
+        //{
+            
+        //    Debug.Log("RefreshAsset: Figure out how to refresh sub asset");
+        //}
         
-        if (AssetDatabase.Contains(this) && AssetDatabase.IsMainAsset(this))
-            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
-        else
-        {
-            AssetDatabase.Refresh();
-            Debug.Log("RefreshAsset: Figure out how to refresh sub asset");
-        }
     }
 
     public void Destroy()
@@ -84,17 +114,6 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
     {
         UnityEngine.Object.DestroyImmediate(this, true);
     }
-
-    //public void DestroyAsset()
-    //{
-    //    string path = AssetDatabase.GetAssetPath(this);
-    //    Debug.Log(path);
-    //    if()
-
-    //    if (!AssetDatabase.DeleteAsset(path))
-    //        Debug.Log("EasyScriptableObject.DestroyAsset was unable to destroy " + name + " " + GetType());
-    //    AssetDatabase.Refresh();
-    //}
 
     public static V Create<V>() where V : ScriptableObject, IInitSO
     {
