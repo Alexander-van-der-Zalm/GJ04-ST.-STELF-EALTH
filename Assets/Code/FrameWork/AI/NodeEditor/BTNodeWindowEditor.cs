@@ -84,7 +84,9 @@ public class BTNodeWindowEditor : NodeEditorWindow
             // Set windows
             if (value != null)
                 refreshWindows();
-                
+
+            // Force a refresh on the agentstatus
+            SetAgentStatus();
 
             // Make sure focusID will not go out of range after a tree change
             if (FocusID >= windows.Count)
@@ -112,16 +114,19 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 SelectedTree = selectedAgent.Tree;
                 //lastAgentTreeTick = SelectedAgent.TreeMem.CurrentTick;
             }
+            else
+            {
+                // Set all the status to the windows
+                SetAgentStatus();
 
-            // Set all the status to the windows
-            SetAgentStatus();
-
-            Repaint();
+                Repaint();
+            }
         }
     }
 
     private void SetAgentStatus()
     {
+        Debug.Log("SetAgentStatus");
         // Check if the window amount match the btbehavior status memory in the agent
         if(SelectedAgent != null && SelectedAgent.NodeStatus.Count != windows.Count)
         {
@@ -131,6 +136,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
         if (selectedAgent != null)
             lastAgentTreeTick = SelectedAgent.TreeMem.CurrentTick;
+        else
+            lastAgentTreeTick = -2;
 
         for(int i = 0; i < windows.Count; i++)
         {
@@ -166,7 +173,11 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
     void Update()
     {
-        if(SelectedAgent != null && SelectedAgent.TreeMem.CurrentTick > lastAgentTreeTick)
+        // Eject if the Agent Status has already been updated
+        if (lastAgentTreeTick == -2)
+            return;
+
+        if (lastAgentTreeTick == -1 || SelectedAgent.TreeMem.CurrentTick > lastAgentTreeTick)
         {
             SetAgentStatus();
         }
@@ -364,8 +375,6 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
             SelectedTree = (BT_Tree)EditorGUILayout.ObjectField(SelectedTree, typeof(BT_Tree), false);
             
-            
-
             if (SelectedTree == null)
             {
                 EditorGUILayout.EndHorizontal();
@@ -427,7 +436,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         // DebugInfo
         GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString()
                             + " Child:" + childIndex.ToString()
-                            + " | Agent Selected: " + (SelectedAgent == null ? "N" : "Y - CurrentTick: " + SelectedAgent.TreeMem.CurrentTick));
+                            + " | Agent Selected: " + (SelectedAgent == null ? "N" : "Y | AgentTick: " + SelectedAgent.TreeMem.CurrentTick) + " - LastTick: " + lastAgentTreeTick);
 
         // Temp move buttons
         // Move to base
