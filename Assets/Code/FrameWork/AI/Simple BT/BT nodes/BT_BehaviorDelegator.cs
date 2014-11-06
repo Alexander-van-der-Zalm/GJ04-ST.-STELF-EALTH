@@ -3,36 +3,56 @@ using System.Collections;
 
 public class BT_BehaviorDelegator : BT_BBParameters 
 {
-    public delegate Status UpdateDelegate(AI_Agent agent, NodeDescription description);
-    public delegate void InitDelegate(AI_Agent agent, NodeDescription description);
-    public delegate void TerminateDelegate(AI_Agent agent, NodeDescription description, Status status);
+    public delegate Status UpdateDelegate(AI_Agent agent, BT_TreeNode node);
+    public delegate void InitDelegate(AI_Agent agent, BT_TreeNode node);
+    public delegate void EnterDelegate(AI_Agent agent, BT_TreeNode node);
+    public delegate void ExitDelegate(AI_Agent agent, BT_TreeNode node, Status status);
+    public delegate void TerminateDelegate(AI_Agent agent, BT_TreeNode node, Status status);
 
-    private InitDelegate init;
-    private TerminateDelegate terminate;
-    private UpdateDelegate updatedel;
+    
+    private InitDelegate initDel;
+    private EnterDelegate enterDel;
+    private UpdateDelegate updateDel;
+    private ExitDelegate exitDel;
+    private TerminateDelegate terminateDel;
+    
 
-    public BT_BehaviorDelegator(NodeDescription.BT_NodeType type, UpdateDelegate update, InitDelegate onInit = null, TerminateDelegate onTerm = null)
+    public BT_BehaviorDelegator(NodeDescription.BT_NodeType type, UpdateDelegate onUpdate, InitDelegate onInit = null, EnterDelegate onEnter = null, ExitDelegate onExit = null, TerminateDelegate onTerm = null)
     {
         Description.Type = type;
-        init = onInit;
-        this.updatedel = update;
-        terminate = onTerm;
+        
+        initDel = onInit;
+        enterDel = onEnter;
+        updateDel = onUpdate;
+        exitDel = onExit;
+        terminateDel = onTerm;
     }
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
-        return updatedel(agent, Description);
+        return updateDel(Agent, Node);
     }
 
-    protected override void onInitialize(AI_Agent agent, int id)
+    protected override void onInitialize()
     {
-        if(init!=null)
-            init(agent, Description);
+        if(initDel!=null)
+            initDel(Agent, Node);
     }
 
-    protected override void onTerminate(AI_Agent agent, int id, Status status)
+    protected override void onEnter()
     {
-        if(terminate!=null)
-            terminate(agent, Description, status);
+        if (enterDel != null)
+            enterDel(Agent, Node);
+    }
+
+    protected override void onExit(BT_Behavior.Status status)
+    {
+        if (exitDel != null)
+            exitDel(Agent, Node, status);
+    }
+    protected override void onTerminate(Status status)
+    {
+        if(terminateDel!=null)
+            terminateDel(Agent, Node, status);
     }
 }

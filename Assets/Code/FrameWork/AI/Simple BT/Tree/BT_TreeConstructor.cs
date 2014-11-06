@@ -116,22 +116,22 @@ public class BT_TreeConstructor
         return node;
     }
 
-    public static BT_Behavior.Status failUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
+    public static BT_Behavior.Status failUpdate(AI_Agent agent, BT_TreeNode node)
     {
         return BT_Behavior.Status.Failed;
     }
 
-    public static BT_Behavior.Status succesUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
+    public static BT_Behavior.Status succesUpdate(AI_Agent agent, BT_TreeNode node)
     {
         return BT_Behavior.Status.Succes;
     }
 
-    public static BT_Behavior.Status runningUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
+    public static BT_Behavior.Status runningUpdate(AI_Agent agent, BT_TreeNode node)
     {
         return BT_Behavior.Status.Running;
     }
 
-    public static BT_Behavior.Status pauseUpdate(AI_Agent agent, BT_Behavior.NodeDescription node)
+    public static BT_Behavior.Status pauseUpdate(AI_Agent agent, BT_TreeNode node)
     {
         int Depth = (int)agent["Depth"];
         Debug.Break();

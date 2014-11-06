@@ -54,10 +54,10 @@ public class BT_QueuePop : BT_Action
    
 
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
         // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue),agent);
+        object obj = GetAgentObject(Par(Queue),Agent);
         
         // Check if it is actually the right type of queue
         if (!BT_QueueHelper.HasIQueue(obj))
@@ -70,7 +70,7 @@ public class BT_QueuePop : BT_Action
         // Cast
         IQueue q = (IQueue)obj;
         // Save popped item to blackboard
-        SetAgentObject(Par(Value), agent, (object)q.Get());
+        SetAgentObject(Par(Value), Agent, (object)q.Get());
 
         return Status.Succes;
     }

@@ -14,6 +14,7 @@ public class TesteSerializableObject : MonoBehaviour
     public Vector2 V2;
     public Quaternion Q;
     public Transform Tr;
+    public Framework.Collections.IQueue<int> Queue;
 
     public SetType Type; 
 
@@ -29,7 +30,8 @@ public class TesteSerializableObject : MonoBehaviour
         Null,
         CustomClassNoUnity,
         CustomClassUnity,
-        Transform
+        Transform,
+        Queue
     }
 
     public bool ResetObject = false;
@@ -90,6 +92,9 @@ public class TesteSerializableObject : MonoBehaviour
                     break;
                 case SetType.Transform:
                     Obj = new SerializableObject() { Object = Tr };
+                    break;
+                case SetType.Queue:
+                    Obj = new SerializableObject() { Object = Queue };
                     break;
             }
         }

@@ -92,15 +92,15 @@ public class BT_CheckEqualBBParameter : BT_Condition
     #endregion
 
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {      
         // Get the objects
-        object obj1 = GetAgentObject(Par(P1),agent);
+        object obj1 = GetAgentObject(Par(P1),Agent);
         object obj2;
         if ((bool)this[IsObject])
             obj2 = this[Obj];
         else
-            obj2 = GetAgentObject(Par(P2), agent);
+            obj2 = GetAgentObject(Par(P2), Agent);
 
         // If equals, then succes, else failed
         return obj1.Equals(obj2) ? Status.Succes : Status.Failed;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 
 public class BT_AlwayFail : BT_Decorator 
@@ -9,11 +10,12 @@ public class BT_AlwayFail : BT_Decorator
         Description.Description = "Fires up child and then always returns failed";
     }
 
-    protected override BT_Behavior.Status update(AI_Agent agent, int id)
+    protected override BT_Behavior.Status update()
     {
-        base.update(agent, id);
         // Fire off child
-        agent.Tree.GetFirstChild(id).Tick(agent);
-        return exit(agent, Status.Failed);
+        if(Node.HasChildren)
+            Node.Children.First().Tick(Agent);
+
+        return Status.Failed;//exit(agent, Status.Failed);
     }
 }

@@ -87,10 +87,10 @@ public class BT_QueuePush : BT_Action
     //}
 
     
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
         // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue), agent);
+        object obj = GetAgentObject(Par(Queue), Agent);
 
         //if(obj == null)
         //{
@@ -112,7 +112,7 @@ public class BT_QueuePush : BT_Action
         if ((bool)this[IsObject])
             objectToPush = this[Obj];
         else
-            objectToPush = GetAgentObject(Par(PushObjPar), agent);
+            objectToPush = GetAgentObject(Par(PushObjPar), Agent);
 
         // Push item to the blackboard
         q.Add(objectToPush);

@@ -144,7 +144,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         }
 
         if (selectedAgent != null)
-            lastAgentTreeTick = SelectedAgent.TreeMem.CurrentTick;
+            lastAgentTreeTick = SelectedAgent.TreeInfo.CurrentTick;
         else
             lastAgentTreeTick = -2;
 
@@ -186,7 +186,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         if (lastAgentTreeTick == -2)
             return;
 
-        if (lastAgentTreeTick == -1 || SelectedAgent.TreeMem.CurrentTick > lastAgentTreeTick)
+        if (lastAgentTreeTick == -1 || SelectedAgent.TreeInfo.CurrentTick > lastAgentTreeTick)
         {
             SetAgentStatus();
         }
@@ -448,7 +448,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         // DebugInfo
         GUILayout.Label("FocusID:" + FocusID + " | Connect nodes info Parent: " + parentIndex.ToString()
                             + " Child:" + childIndex.ToString()
-                            + " | Agent Selected: " + (SelectedAgent == null ? "N" : "Y | AgentTick: " + SelectedAgent.TreeMem.CurrentTick) + " - LastTick: " + lastAgentTreeTick);
+                            + " | Agent Selected: " + (SelectedAgent == null ? "N" : "Y | AgentTick: " + SelectedAgent.TreeInfo.CurrentTick) + " - LastTick: " + lastAgentTreeTick);
 
         // Temp move buttons
         // Move to base

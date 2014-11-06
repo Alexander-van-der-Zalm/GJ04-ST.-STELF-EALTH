@@ -58,21 +58,41 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
     #region fields
 
     public NodeDescription Description = new NodeDescription();
-    [SerializeField,ReadOnly]
-    protected int CurrentID;
-    [SerializeField]
-    protected AI_Agent currentAgent;
-
-    private string debugTree = "DebugTree";
     
+    /// <summary>
+    /// Current ID (in this tick) Refers to agents list index
+    /// </summary>
+    [SerializeField,ReadOnly]
+    protected int ID;
+    
+    /// <summary>
+    /// Current Agent (in this tick)
+    /// </summary>
+    [SerializeField]
+    protected AI_Agent Agent;
+
+    //private string debugTree = "DebugTree";
 
     #endregion
 
-    #region virtual functions
+    #region virtual inTick functions
 
-    protected virtual Status update(AI_Agent agent,int id) { return Status.Invalid; }
-    protected virtual void onInitialize(AI_Agent agent, int id) { }
-    protected virtual void onTerminate(AI_Agent agent, int id, Status status) { }
+    protected virtual Status update() { return Status.Invalid; }
+    protected virtual void onInitialize() { }
+    protected virtual void onTerminate(Status status) { }
+
+    protected virtual void onEnter() { }
+
+    protected virtual void onExit(Status status) { }
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// Current active node
+    /// </summary>
+    protected BT_TreeNode Node { get { return Agent.Tree.TreeNodes[ID]; } }
 
     #endregion
 
@@ -80,29 +100,27 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
 
     public Status Tick(AI_Agent agent, int id)
     {
-        CurrentID = id;
-        currentAgent = agent;
+        ID = id;
+        Agent = agent;
 
         // Start if not yet initialized
         if (agent[id] == Status.Invalid)
-            onInitialize(agent,id);
+            onInitialize();
+
+        onEnter();
 
         // Update the behaviour
         // Save the state to the agent
-        Status status = update(agent, id);
+        Status status = update();
         agent[id] = status;
+
+        onExit(status);
 
         // Stop if not still running
         if (status != Status.Running)
-            onTerminate(agent, id, status);
+            onTerminate(status);
 
-        //if (agent != null && (bool)agent.LocalBlackboard.GetObject(debugTree))
-        //{
-        //    Debug.Log(Description.Type + " - " + Description.Name + " - " + status + " - " + agent["Depth"]);
-        //}
 
-        // Save the last state
-        // Move to parameterized bb or something similar
         return status;
     }
     #endregion

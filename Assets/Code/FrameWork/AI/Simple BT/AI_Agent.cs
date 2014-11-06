@@ -12,17 +12,20 @@ public class AI_Agent
 
     //Possibly make it into a log or asset
     [System.Serializable]
-    public class TreeMemory
+    public class TreeInformation
     {
         public int MaxTick { get { return TickStateMemory.Count; } }
         [ReadOnly]
         public int CurrentTick;
         public List<List<Status>> TickStateMemory;
 
-        public TreeMemory()
+        public int Depth;
+
+        public TreeInformation()
         {
             CurrentTick = -1;
             TickStateMemory = new List<List<Status>>();
+            Depth = 0;
         }
     }
 
@@ -45,7 +48,7 @@ public class AI_Agent
     public string Name = "Default Agent";
 
     [SerializeField]
-    public TreeMemory TreeMem = new TreeMemory();
+    public TreeInformation TreeInfo = new TreeInformation();
 
     [SerializeField]
     private bool saveTreeMemory = false;
@@ -92,10 +95,10 @@ public class AI_Agent
                 }
 
                 // Return default nodeStatus if the treeMemory has not been ticked yet
-                if (TreeMem.CurrentTick == -1)
+                if (TreeInfo.CurrentTick == -1)
                     return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); 
                 
-                return TreeMem.TickStateMemory[TreeMem.CurrentTick];
+                return TreeInfo.TickStateMemory[TreeInfo.CurrentTick];
             }
             else
                 return (nodeStatus == null ? nodeStatus = Tree.GetNodeStatus() : nodeStatus); 
@@ -184,26 +187,28 @@ public class AI_Agent
     public Status TreeTick()
     {
         // TODO not save in multilists via bool
-        TreeMem.CurrentTick++;
-       
+        TreeInfo.CurrentTick++;
+
+        
+
         if (SaveTreeMemory)
         {
-            if (TreeMem.CurrentTick == TreeMem.MaxTick)
+            if (TreeInfo.CurrentTick == TreeInfo.MaxTick)
             { 
                 // New tick
-                TreeMem.TickStateMemory.Add(Tree.GetNodeStatus());
+                TreeInfo.TickStateMemory.Add(Tree.GetNodeStatus());
                 //TreeMem.MaxTick = TreeMem.CurrentTick;
             }
-            else if(TreeMem.CurrentTick > TreeMem.MaxTick)
+            else if(TreeInfo.CurrentTick > TreeInfo.MaxTick)
             {
                 // Exception just reset and start over the process
                 Debug.Log("TreeTick: Exception (TreeMem.CurrentTick > TreeMem.MaxTick) reset and restarting treeTick");
-                TreeMem = new TreeMemory();
+                TreeInfo = new TreeInformation();
                 return TreeTick();
             }
             { 
                 // Reset Tree (get new nodestatus list)
-                TreeMem.TickStateMemory[TreeMem.CurrentTick] = Tree.GetNodeStatus();
+                TreeInfo.TickStateMemory[TreeInfo.CurrentTick] = Tree.GetNodeStatus();
 
                 // TODO Override/delete old ticks after this ?? 
             }
@@ -211,11 +216,15 @@ public class AI_Agent
         }
         else
             nodeStatus = Tree.GetNodeStatus();
-            
-            
-        
+
+
+        Status result = Tree.Root.Tick(this);
+
+        if (TreeInfo.Depth != 0)
+            Debug.LogError("Depth error in TreeTick | Depth: " + TreeInfo.Depth);
+
         // Tick the tree
-        return Tree.Root.Tick(this);
+        return result;
     }
 
     public Status NewTreeTick(BT_TreeNode root)

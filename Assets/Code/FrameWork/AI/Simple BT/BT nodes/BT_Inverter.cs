@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 
 public class BT_Inverter : BT_Decorator 
@@ -10,11 +11,15 @@ public class BT_Inverter : BT_Decorator
     }
 
     
-    protected override Status update(AI_Agent agent,int id)
+    protected override Status update()
     {
-        base.update(agent, id);
-        
-        return exit(agent,invert(agent.Tree.GetFirstChild(id).Tick(agent)));
+        //base.update(Agent, id);
+
+        if (!Node.HasChildren)
+            return Status.Invalid;
+
+        return invert(Node.Children.First().Tick(Agent));//
+        //exit(agent,invert(agent.Tree.GetFirstChild(id).Tick(agent)));
     }
 
     private Status invert(Status status)

@@ -89,10 +89,10 @@ public class BT_QueueCheckSizeEqual : BT_Condition
 
     
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
         // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue), agent);
+        object obj = GetAgentObject(Par(Queue), Agent);
         
         // If there is no Queue return invalid
         if (obj == null || !BT_QueueHelper.HasIQueue(obj))
@@ -109,7 +109,7 @@ public class BT_QueueCheckSizeEqual : BT_Condition
         if ((bool)this[IsObject])
             SizeObj = this[Obj];
         else
-            SizeObj = GetAgentObject(Par(SizeObjPar), agent);
+            SizeObj = GetAgentObject(Par(SizeObjPar), Agent);
         // Check if it is actually the right type of queue
     
         int size = (int)SizeObj;

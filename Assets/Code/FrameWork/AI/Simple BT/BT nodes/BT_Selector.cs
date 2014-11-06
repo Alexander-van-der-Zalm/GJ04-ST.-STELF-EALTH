@@ -19,24 +19,24 @@ public class BT_Selector : BT_Composite
 
     #region Update
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
-        base.update(agent,id);
+       // base.update(agent,id);
 
-        List<BT_TreeNode> nodes = agent.Tree.GetChildren(id);
+        List<BT_TreeNode> nodes = Node.Children;//agent.Tree.GetChildren(id);
 
         for (int i = 0; i < nodes.Count; i++)
         {
-            Status s = nodes[i].Tick(agent);
+            Status s = nodes[i].Tick(Agent);
 
             // Continue on failed
             // Return succes, invalid and running
             if (s != Status.Failed)
-                return exit(agent,s);
+                return s;// exit(agent, s);
         }
 
         // Return failed if all the nodes are hit
-        return exit(agent,Status.Failed);
+        return Status.Failed;//exit(agent,Status.Failed);
     }
 
     #endregion

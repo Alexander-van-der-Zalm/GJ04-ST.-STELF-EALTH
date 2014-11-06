@@ -17,23 +17,23 @@ public class BT_Sequencer : BT_Composite
 
     #endregion 
 
-    protected override Status update(AI_Agent agent,int id)
+    protected override Status update()
     {
-        base.update(agent,id);
+        //base.update(agent,id);
 
-        List<BT_TreeNode> nodes = agent.Tree.GetChildren(id);
+        List<BT_TreeNode> nodes = Node.Children;//agent.Tree.GetChildren(id);
 
         for (int i = 0; i < nodes.Count; i++)
         {
-            Status s = nodes[i].Tick(agent);
+            Status s = nodes[i].Tick(Agent);
 
             // Continue on succes
             // Return failed, invalid and running
             if (s != Status.Succes)
-                return exit(agent,s);
+                return s;// exit(agent, s);
         }
 
         // Return succes if all the nodes are hit
-        return exit(agent,Status.Succes);
+        return Status.Succes;// exit(agent, Status.Succes);
     }
 }

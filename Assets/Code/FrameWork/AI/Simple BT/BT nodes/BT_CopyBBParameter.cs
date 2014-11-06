@@ -93,17 +93,17 @@ public class BT_CopyBBParameter : BT_Action
 
     #endregion
 
-    protected override Status update(AI_Agent agent, int id)
+    protected override Status update()
     {
         // Get the object from slot 2
         object objectToCopy;
         if ((bool)this[IsObject])
             objectToCopy = this[Obj];
         else
-            objectToCopy = GetAgentObject(Par(ObjParam), agent);
+            objectToCopy = GetAgentObject(Par(ObjParam), Agent);
 
         // Set it on slot1
-        SetAgentObject(Par(Override), agent, objectToCopy);
+        SetAgentObject(Par(Override), Agent, objectToCopy);
 
         return Status.Succes;
     }
