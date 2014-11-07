@@ -127,4 +127,21 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
         return status;
     }
     #endregion
+
+    #region Description and Init (Scriptable object)
+
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
+    {
+        base.Init(newHideFlag);
+        SetDescription();
+    }
+
+    protected virtual void SetDescription()
+    {
+        Description.Type = NodeDescription.BT_NodeType.Action;
+        Description.Name = "NoName";
+        Description.Description = "Please set the SetDescription of the used behavior";
+    }
+
+    #endregion
 }

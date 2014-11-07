@@ -29,13 +29,6 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     #region Constructors
 
-    public override void Init(HideFlags newHideFlag = HideFlags.None)
-    {
-        base.Init(newHideFlag);
-        description();
-    }
-
-
     public override void SetNodeParameters(BT_TreeNode node)
     {
         node[P1Str]        = new AI_AgentParameter();
@@ -44,8 +37,8 @@ public class BT_CheckEqualBBParameter : BT_Condition
         node[ObjStr]       = null;
         
     }
-    
-    private void description()
+
+    protected override void SetDescription()
     {
         Description.Type = NodeDescription.BT_NodeType.Condition;
         Description.Name = "CheckEqualBBParameter";
@@ -91,15 +84,6 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     protected override Status update()
     {      
-        //// Get the objects
-        //object obj1 = GetAgentObject(Par(P1Str),Agent);
-        //object obj2;
-        //if ((bool)this[IsObject])
-        //    obj2 = this[Obj];
-        //else
-        //    obj2 = GetAgentObject(Par(P2Str), Agent);
-
-        // If equals, then succes, else failed
         return Obj1.Equals(Obj2) ? Status.Succes : Status.Failed;
     }
 

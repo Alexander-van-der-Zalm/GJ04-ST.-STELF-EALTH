@@ -36,12 +36,12 @@ public class BT_TreeConstructor
     {
         //return new BT_TreeNode(new BT_CopyBBParameter(bbParameter1, param1, bbParameter2, param2));
         //return BT_CopyBBParameter.GetTreeNode();
-        return BT_CopyBBParameter.GetTreeNode(bbParameter1, param1, bbParameter2, param2);
+        return BT_Copy.GetTreeNode(bbParameter1, param1, bbParameter2, param2);
     }
 
     public static BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
     {
-        return BT_CopyBBParameter.GetTreeNode(bbParameter1, param1, obj);
+        return BT_Copy.GetTreeNode(bbParameter1, param1, obj);
     }
 
     //public static BT_TreeNode copy(AI_AgentBBAccessParameter param1, object obj)

@@ -4,33 +4,51 @@ using System.Collections;
 /// <summary>
 /// Copies an object from the blackboard or directly passed on an object on the blackboard
 /// </summary>
-public class BT_CopyBBParameter : BT_Action 
+public class BT_Copy : BT_Action 
 {
     private const string Override = "OverrideLocation";
     private const string ObjParam = "CopyParameter";
     private const string Obj = "ObjectsToCopy";
-    private const string IsObject = "UseObjectToCopy";
+    private const string IsObjectStr = "UseObjectToCopy";
 
-    #region Constructor
+    #region Properties
 
-    public BT_CopyBBParameter()
-    {
-        description();
+    private AI_AgentParameter P1 { get { return (AI_AgentParameter)Node[Override]; } }
+
+    private AI_AgentParameter P2 { get { return (AI_AgentParameter)Node[ObjParam]; } }
+
+     private object Obj1 { set { Agent[P1] = value; } }
+
+     private bool IsObject { get { return (bool)Node[IsObjectStr]; } }
+
+    private object Obj2 
+    { 
+        get 
+        {
+            if (IsObject)
+                return Node[Obj];
+            else
+                return Agent[P2]; 
+        } 
     }
+
+    #endregion
+
+    #region Initialization
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Override, node] = new AI_AgentParameter();
-        this[ObjParam, node] = new AI_AgentParameter();
-        this[Obj, node] = null;
-        this[IsObject, node] = false;
+        node[Override]  = new AI_AgentParameter();
+        node[ObjParam]  = new AI_AgentParameter();
+        node[Obj]       = null;
+        node[IsObjectStr]  = false;
     }
 
-    private void description()
+    protected override void SetDescription()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "CopyBBParameter";
-        Description.Description = "Copies the values from slot2 to slot1 and then succeeds";
+        Description.Name = "Copy";
+        Description.Description = "Copies the values from slot2 to slot1 and then succeeds (Uses blackboard)";
     }
 
     #endregion
@@ -39,7 +57,7 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, object setObject)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Copy.Create<BT_Copy>());
         return SetParameters(node, accesparam1, setObject);
     }
 
@@ -48,10 +66,9 @@ public class BT_CopyBBParameter : BT_Action
         return GetTreeNode(new AI_AgentParameter(bbParameter, accesparam1), setObject);
     }
 
-
     public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Copy.Create<BT_Copy>());
         return SetParameters(node, accesparam1, accesparam2);
     }
 
@@ -66,10 +83,10 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, object setObject)
     {
-        node.CheckAndSetClass<BT_CopyBBParameter>();
-        node.Behavior[Override, node] = accesparam1;
-        node.Behavior[Obj, node] = setObject;
-        node.Behavior[IsObject, node] = true;
+        node.CheckAndSetClass<BT_Copy>();
+        node[Override] = accesparam1;
+        node[Obj] = setObject;
+        node[IsObjectStr] = true;
         return node;
     }
 
@@ -80,10 +97,10 @@ public class BT_CopyBBParameter : BT_Action
     
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
-        node.CheckAndSetClass<BT_CopyBBParameter>();
-        node.Behavior[Override, node] = accesparam1;
-        node.Behavior[ObjParam, node] = accesparam2;
-        node.Behavior[IsObject, node] = false;
+        node.CheckAndSetClass<BT_Copy>();
+        node[Override] = accesparam1;
+        node[ObjParam] = accesparam2;
+        node[IsObjectStr] = false;
         return node;
     }
     public static BT_TreeNode SetParameters(BT_TreeNode node, string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
@@ -95,15 +112,7 @@ public class BT_CopyBBParameter : BT_Action
 
     protected override Status update()
     {
-        // Get the object from slot 2
-        object objectToCopy;
-        if ((bool)this[IsObject])
-            objectToCopy = this[Obj];
-        else
-            objectToCopy = GetAgentObject(Par(ObjParam), Agent);
-
-        // Set it on slot1
-        SetAgentObject(Par(Override), Agent, objectToCopy);
+        Obj1 = Obj2;
 
         return Status.Succes;
     }
