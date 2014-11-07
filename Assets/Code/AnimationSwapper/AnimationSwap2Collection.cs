@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
 [System.Serializable]
-public class AnimationSwap2Collection : MonoBehaviour 
+public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Collection> 
 {
+    
+
     //[SerializeField]
     //public List<string> AnimationNames;
     //[SerializeField]
@@ -22,6 +25,20 @@ public class AnimationSwap2Collection : MonoBehaviour
     //TODO
     //[SerializeField,HideInInspector]
     //m_overrideController =
+
+    [MenuItem("CustomTools/Create new AnimationSwapCollection")]
+    public static void CreateAnimationSwapCollection()
+    {
+        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/AnimationSwapCollection.asset");
+        AnimationSwap2Collection.CreateObjAndAsset(path);
+    }
+
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
+    {
+        base.Init(newHideFlag);
+        BodyVarieties = new List<AS_AnimIndexCollection>();
+        HeadVarieties = new List<AS_AnimListCollection>();
+    }
 
     public AnimatorOverrideController GetNewOverrideController()
     {

@@ -101,12 +101,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fa97ab3bdb69c45870f3f15ada595e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 9100000, guid: c9dd30085a5b0434087be976a492f9ee, type: 2}
+  Controller: {fileID: 9100000, guid: 0eaacc57d01422c4dade93b4ede4de7a, type: 2}
   BodyVarieties:
   - Animations:
-    - Animation: {fileID: 7400000, guid: 1190ca0e52ab8a547a42e5ad13c71ec5, type: 2}
-      Index: 1
-  HeadVarieties: []
+    - Animation: {fileID: 7400000, guid: 93f2a8954177a2443b65718a295cd451, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  HeadVarieties:
+  - Animations:
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
 --- !u!4 &217041918
 Transform:
   m_ObjectHideFlags: 0
@@ -404,7 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0b59c183a2a33468f4d1e51a7dac8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectionReference: {fileID: 217041917}
+  CollectionReference: {fileID: 11400000, guid: db9e40363a684df458b0b12dad1d935a,
+    type: 2}
   Head: {fileID: 951154184}
   Body: {fileID: 619003970}
   HeadVariety: 0

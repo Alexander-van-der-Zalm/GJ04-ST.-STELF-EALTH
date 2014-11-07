@@ -37,7 +37,7 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
 
         if (hideFlags == HideFlags.HideAndDontSave)
             hideFlags = HideFlags.HideInHierarchy;
-        
+
         AssetDatabase.CreateAsset(this, path);
         AssetDatabase.ImportAsset(path);
         AssetDatabase.SaveAssets();
@@ -86,10 +86,6 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
 
     public void RefreshAsset()
     {
-        // TODO checks
-        //string path = AssetDatabase.GetAssetPath(this);
-        //Debug.Log(AssetDatabase.Contains(this) + " " + AssetDatabase.IsSubAsset(this));
-
         string path = AssetDatabase.GetAssetPath(this);
         if (AssetDatabase.IsSubAsset(this))
            path = AssetDatabase.GetAssetPath(AssetDatabase.LoadMainAssetAtPath(path));
@@ -97,14 +93,6 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         AssetDatabase.ImportAsset(path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        //if (AssetDatabase.Contains(this) && AssetDatabase.IsMainAsset(this))
-        //    AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(this));
-        //else
-        //{
-            
-        //    Debug.Log("RefreshAsset: Figure out how to refresh sub asset");
-        //}
-        
     }
 
     public void Destroy()
