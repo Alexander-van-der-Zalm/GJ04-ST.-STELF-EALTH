@@ -19,6 +19,17 @@ public class AnimationSwap2Collection : MonoBehaviour
     [SerializeField]
     public List<AS_AnimListCollection> HeadVarieties;
 
+    //TODO
+    //[SerializeField,HideInInspector]
+    //m_overrideController =
+
+    public AnimatorOverrideController GetNewOverrideController()
+    {
+        AnimatorOverrideController controller = new AnimatorOverrideController();
+        controller.runtimeAnimatorController = Controller;
+        return controller;
+    }
+
     public void ApplyControllerChange()
     {
 
@@ -26,13 +37,13 @@ public class AnimationSwap2Collection : MonoBehaviour
 
     public void SetAnimator(Animator head, Animator body,  int headIndex,int bodyIndex)
     {
-        AnimatorOverrideController overideHead = new AnimatorOverrideController();
-        overideHead.runtimeAnimatorController = Controller;
+        AnimatorOverrideController controller = GetNewOverrideController();
 
         //Loop to set all the animations
-        for (int i = 0; i < overideHead.clips.Length; i++)
+        for (int i = 0; i < controller.clips.Length; i++)
         {
-            Debug.Log(overideHead.clips[i].originalClip.name);
+            Debug.Log(controller.clips[i].originalClip.name);
+
             //overide.clips[i].overrideClip = 
         }
             
@@ -43,27 +54,30 @@ public class AnimationSwap2Collection : MonoBehaviour
 
     public void AddNewBodyVariety()
     {
+        AnimatorOverrideController controller = GetNewOverrideController();
+        
         AS_AnimIndexCollection newBody = new AS_AnimIndexCollection();
-        //for(int i = 0; i < AnimationNames.Count; i++)
-        //{
-        //    newBody.Animations.Add(new AS_AnimIndex());
-        //}
+
+        for (int i = 0; i < controller.clips.Length; i++)
+        {
+            newBody.Animations.Add(new AS_AnimIndex());
+        }
+
         BodyVarieties.Add(newBody);
     }
 
     public void AddNewHeadVariety()
     {
+        AnimatorOverrideController controller = GetNewOverrideController();
+        
         AS_AnimListCollection newHead = new AS_AnimListCollection();
-        //for(int i = 0; i < AnimationNames.Count; i++)
-        //{
-        //    newHead.Animations.Add(new AS_AnimList());
-        //}
+
+        for (int i = 0; i < controller.clips.Length; i++)
+        {
+            newHead.Animations.Add(new AS_AnimList());
+        }
+
         HeadVarieties.Add(newHead);
-    }
-
-    public void UpdateAllVarietyNames()
-    {
-
     }
 
     //public void 

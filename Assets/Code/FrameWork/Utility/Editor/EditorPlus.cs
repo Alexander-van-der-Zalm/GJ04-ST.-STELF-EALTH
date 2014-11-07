@@ -17,7 +17,7 @@ public class EditorPlus : Editor
     /// </summary>
     internal bool SavedFoldout(GUIContent name, int index = 0, string uniqueID = "")
     {
-        string uniqueString = "Fold: " + target.GetInstanceID().ToString() + " - " + uniqueID + index;
+        string uniqueString = "Fold: " + name.text + " - " + target.GetInstanceID().ToString() + " - " + uniqueID + index;
         bool fold = EditorPrefs.GetBool(uniqueString, false);
         fold = EditorGUILayout.Foldout(fold, name);
         
@@ -40,7 +40,8 @@ public class EditorPlus : Editor
     /// </summary>
     internal bool SavedFoldout(GUIContent name, Rect rect, int index = 0, string uniqueID = "")
     {
-        string uniqueString = "Fold: " + target.GetInstanceID().ToString() + " - " + uniqueID + index;
+        string uniqueString = "Fold: " + name.text + " - "  + target.GetInstanceID().ToString() + " - " + uniqueID + index;
+        
         bool fold = EditorPrefs.GetBool(uniqueString, false);
         fold = EditorGUI.Foldout(rect, fold, name);
 
