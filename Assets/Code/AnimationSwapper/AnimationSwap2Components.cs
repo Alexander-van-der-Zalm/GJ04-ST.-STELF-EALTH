@@ -18,8 +18,34 @@ public class AS_AnimList
     public void OnGui(string label = "")
     {
         label += "Anim[";
+        List<int> indicesToDelete = new List<int>();
+        bool add = false;
         for (int i = 0; i < Animations.Count; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
             Animations[i] = (AnimationClip)EditorGUILayout.ObjectField(label + i + "]", Animations[i], typeof(AnimationClip), true);
+            
+            if(i!=0 && GUILayout.Button("-", GUILayout.Width(30)))
+            {
+                indicesToDelete.Add(i);
+            }
+
+            if (i == 0 && GUILayout.Button("+", GUILayout.Width(30)))
+            {
+                add = true;
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        for (int i = indicesToDelete.Count-1; i >= 0; i--)
+        {
+            Animations.RemoveAt(indicesToDelete[i]);
+        }
+            
+
+        if (add)
+            Animations.Add(null);
+            
     }
 }
 

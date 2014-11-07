@@ -7,12 +7,34 @@ public class AnimSwap2CollectionEditor : EditorPlus
 {
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
+        if(SavedFoldout("Achter de schermen"))
+        {
+            EditorGUI.indentLevel++;
+            base.OnInspectorGUI();
+            EditorGUI.indentLevel--;
+            EditorGUILayout.Space();
+        }
+
+        #region Prep
 
         AnimationSwap2Collection col = (AnimationSwap2Collection)target;
+        AnimatorOverrideController over = col.GetNewOverrideController();
 
+        // Calculate maxWidth
+        float maxWidth = 0;
+        for (int i = 0; i < over.clips.Length; i++)
+        {
+            float curWidth = GUI.skin.label.CalcSize(new GUIContent(over.clips[i].originalClip.name)).x;
+            if (curWidth > maxWidth)
+                maxWidth = curWidth;
+        }
+
+        #endregion
+
+        // Controller selector
         col.Controller = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Controller",col.Controller, typeof(RuntimeAnimatorController),true);
 
+        // New variety adding
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("NewBodyVariety"))
             col.AddNewBodyVariety();
@@ -20,24 +42,12 @@ public class AnimSwap2CollectionEditor : EditorPlus
             col.AddNewHeadVariety();
         EditorGUILayout.EndHorizontal();
 
-        AnimatorOverrideController over = col.GetNewOverrideController();
-
-        // Calculate maxWidth
-        float maxWidth = 0;
-        for(int i = 0; i < over.clips.Length; i++)
-        {
-            float curWidth = GUI.skin.label.CalcSize(new GUIContent(over.clips[i].originalClip.name)).x;
-            if(curWidth>maxWidth)
-                maxWidth = curWidth;
-        }
-        
-
         if (SavedFoldout("Head varieties",-1))
         {
             EditorGUI.indentLevel++;
             for (int i = 0; i < col.HeadVarieties.Count; i++)
             {
-                if (SavedFoldout("Head variety" + i, i))
+                if (SavedFoldout("Head variety[" + i+"]", i))
                 {
                     for (int j = 0; j < col.HeadVarieties[i].Animations.Count; j++)
                     {
@@ -55,7 +65,7 @@ public class AnimSwap2CollectionEditor : EditorPlus
             EditorGUI.indentLevel++;
             for (int i = 0; i < col.BodyVarieties.Count; i++)
             {
-                if (SavedFoldout("Body variety" + i, i))
+                if (SavedFoldout("Body variety[" + i+ "]", i))
                 {
                     for (int j = 0; j < col.BodyVarieties[i].Animations.Count; j++)
                     {
