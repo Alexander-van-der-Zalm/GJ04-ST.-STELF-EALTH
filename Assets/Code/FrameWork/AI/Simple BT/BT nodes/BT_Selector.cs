@@ -8,7 +8,7 @@ public class BT_Selector : BT_Composite
 {
     #region Constructor
 
-    public BT_Selector()
+    protected override void SetDescription()
     {
         Description.Type = NodeDescription.BT_NodeType.Selector;
         Description.Name = "Selector";

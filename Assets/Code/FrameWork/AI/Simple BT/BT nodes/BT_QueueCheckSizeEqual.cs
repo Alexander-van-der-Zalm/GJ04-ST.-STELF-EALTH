@@ -82,9 +82,9 @@ public class BT_QueueCheckSize : BT_Condition
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter sizeObj)
     {
         node.CheckAndSetClass<BT_QueueCheckSize>();
-        node.Behavior[QueueStr] = QueueParam;
-        node.Behavior[SizeObjPar] = sizeObj;
-        node.Behavior[IsObjectStr] = false;
+        node[QueueStr] = QueueParam;
+        node[SizeObjPar] = sizeObj;
+        node[IsObjectStr] = false;
         return node;
     }
 

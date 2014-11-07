@@ -82,7 +82,7 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode seq(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_Sequencer());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Sequencer.Create<BT_Sequencer>());
         node.AddChildren(children);
         return node;
     }
