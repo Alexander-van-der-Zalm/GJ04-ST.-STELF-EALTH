@@ -130,10 +130,18 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
 
     #region Description and Init (Scriptable object)
 
-    public override void Init(HideFlags newHideFlag = HideFlags.None)
+    //public override void Init(HideFlags newHideFlag = HideFlags.None)
+    //{
+    //    base.Init(newHideFlag);
+    //    SetDescription();
+    //}
+
+    public static BT_Behavior CreateBehavior(System.Type type)
     {
-        base.Init(newHideFlag);
-        SetDescription();
+        BT_Behavior derived = (BT_Behavior)ScriptableObject.CreateInstance(type);
+        derived.Init();
+        //derived.SetDescription();
+        return derived;
     }
 
     protected virtual void SetDescription()

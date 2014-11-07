@@ -14,20 +14,14 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 10
+    TreeIteration: 1
     NodeSide: 1
   treeNodes:
-  - {fileID: 11400016}
-  - {fileID: 11400022}
-  - {fileID: 11400028}
-  - {fileID: 11400034}
+  - {fileID: 11400004}
   nodeWindows:
-  - {fileID: 11400018}
-  - {fileID: 11400024}
-  - {fileID: 11400030}
-  - {fileID: 11400036}
-  root: {fileID: 0}
---- !u!114 &11400014
+  - {fileID: 11400006}
+  root: {fileID: 11400004}
+--- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -36,7 +30,76 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 0 | PARAMATERS | NoNameSet
+  m_Name: 0 | PARAMETERS | Selector
+  m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
+  m_Name: 0 | TREENODE | Selector
+  m_EditorClassIdentifier: 
+  id: 0
+  parent: {fileID: 0}
+  children: []
+  MaxChildren: 0
+  behavior: {fileID: 0}
+  behaviorType: BT_Selector
+  parametersBB: {fileID: 11400002}
+  tree: {fileID: 11400000}
+  Name: 
+  Description: "Keeps going if children are failing, early exits if: succes, invalid
+    \xF6r running"
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
+  m_Name: 0 | WINDOW | Selector
+  m_EditorClassIdentifier: 
+  id: 0
+  parent: {fileID: 0}
+  children: []
+  MaxChildren: 0
+  rect:
+    serializedVersion: 2
+    x: 189
+    y: 193
+    width: 100
+    height: 100
+  header:
+    m_Text: Selector [0]
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
+  treeNode: {fileID: 11400004}
+  status: 3
+  agentRunning: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
+  m_Name: 1 | PARAMETERS | QueuePop
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -51,7 +114,7 @@ MonoBehaviour:
     - QueueParameter
     - PopedObjParam
     values: 0000
---- !u!114 &11400016
+--- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -60,19 +123,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 0 | TREENODE | NoNameSet
+  m_Name: 1 | TREENODE | QueuePop
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   parent: {fileID: 0}
   children: []
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_QueuePop
-  parametersBB: {fileID: 11400014}
+  parametersBB: {fileID: 11400008}
   tree: {fileID: 11400000}
   Name: 
-  Description: I need a description.
---- !u!114 &11400018
+  Description: Pop one of the queue, into the parameterdestination of choice
+--- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -81,145 +144,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 0 | WINDOW | NoNameSet
-  m_EditorClassIdentifier: 
-  id: 0
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  rect:
-    serializedVersion: 2
-    x: 141
-    y: 325
-    width: 100
-    height: 100
-  header:
-    m_Text: Action [0]
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
-  treeNode: {fileID: 11400016}
-  status: 3
-  agentRunning: 0
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 1 | PARAMATERS | NoNameSet
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
-  objectPool:
-    keys: []
-    values: []
-  isVariableObject:
-    keys: []
-    values: 
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 1 | TREENODE | NoNameSet
+  m_Name: 1 | WINDOW | QueuePop
   m_EditorClassIdentifier: 
   id: 1
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  behavior: {fileID: 0}
-  behaviorType: BT_AlwayFail
-  parametersBB: {fileID: 11400020}
-  tree: {fileID: 11400000}
-  Name: 
-  Description: I need a description.
---- !u!114 &11400024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 1 | WINDOW | NoNameSet
-  m_EditorClassIdentifier: 
-  id: 1
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  rect:
-    serializedVersion: 2
-    x: 357
-    y: 127
-    width: 100
-    height: 100
-  header:
-    m_Text: Decorator [1]
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
-  treeNode: {fileID: 11400022}
-  status: 3
-  agentRunning: 0
---- !u!114 &11400026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 2 | PARAMATERS | NoName
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
-  objectPool:
-    keys: []
-    values: []
-  isVariableObject:
-    keys: []
-    values: 
---- !u!114 &11400028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 2 | TREENODE | NoName
-  m_EditorClassIdentifier: 
-  id: 2
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  behavior: {fileID: 0}
-  behaviorType: BT_Selector
-  parametersBB: {fileID: 11400026}
-  tree: {fileID: 11400000}
-  Name: 
-  Description: Please set the SetDescription of the used behavior
---- !u!114 &11400030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 2 | WINDOW | NoName
-  m_EditorClassIdentifier: 
-  id: 2
   parent: {fileID: 0}
   children: []
   MaxChildren: 0
@@ -230,84 +157,10 @@ MonoBehaviour:
     width: 100
     height: 100
   header:
-    m_Text: Action [2]
+    m_Text: Action [1]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
-  treeNode: {fileID: 11400028}
-  status: 3
-  agentRunning: 0
---- !u!114 &11400032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 3 | PARAMATERS | NoNameSet
-  m_EditorClassIdentifier: 
-  Name: AI BlackBoard
-  objectPool:
-    keys:
-    - QueueParameter
-    - PopedObjParam
-    values:
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001141495f4167656e74506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001141495f4167656e74506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-  isVariableObject:
-    keys:
-    - QueueParameter
-    - PopedObjParam
-    values: 0000
---- !u!114 &11400034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062c3af9a7df17843ae9495e3f87725c, type: 3}
-  m_Name: 3 | TREENODE | NoNameSet
-  m_EditorClassIdentifier: 
-  id: 3
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  behavior: {fileID: 0}
-  behaviorType: BT_QueuePop
-  parametersBB: {fileID: 11400032}
-  tree: {fileID: 11400000}
-  Name: 
-  Description: I need a description.
---- !u!114 &11400036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7103f3fd4e34bc34da4c6bcea8860f59, type: 3}
-  m_Name: 3 | WINDOW | NoNameSet
-  m_EditorClassIdentifier: 
-  id: 3
-  parent: {fileID: 0}
-  children: []
-  MaxChildren: 0
-  rect:
-    serializedVersion: 2
-    x: 483
-    y: 147
-    width: 100
-    height: 100
-  header:
-    m_Text: Action [3]
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  bgColor: {r: .800000012, g: .899999976, b: .899999976, a: 1}
-  treeNode: {fileID: 11400034}
+  bgColor: {r: 1, g: 1, b: 1, a: 1}
+  treeNode: {fileID: 11400010}
   status: 3
   agentRunning: 0

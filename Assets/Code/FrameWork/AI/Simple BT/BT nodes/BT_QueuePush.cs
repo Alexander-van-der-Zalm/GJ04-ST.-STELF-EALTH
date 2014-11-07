@@ -4,9 +4,34 @@ using Framework.Collections;
 public class BT_QueuePush : BT_Action  
 {
     private const string PushObjPar = "ObjectToPushParameter";
-    private const string Obj = "ObjectToPush";
-    private const string IsObject = "UseObjectToPush";
-    protected const string Queue = "QueueParameter";
+    private const string ObjStr = "ObjectToPush";
+    private const string IsObjectStr = "UseObjectToPush";
+    protected const string QueueStr = "QueueParameter";
+
+    #region Properties
+
+    private AI_AgentParameter queueParam { get { return (AI_AgentParameter)Node[QueueStr]; } }
+    private AI_AgentParameter P2 { get { return (AI_AgentParameter)Node[PushObjPar]; } }
+    private IQueue Queue
+    {
+        // Handle exceptions?
+        get { return (IQueue)Agent[queueParam]; }
+    }
+
+    private bool IsObject { get { return (bool)Node[IsObjectStr]; } }
+
+    private object PushObject
+    {
+        get
+        {
+            if (IsObject)
+                return Node[ObjStr];
+            else
+                return Agent[P2];
+        }
+    }
+
+    #endregion
 
     #region Constructor
 
@@ -19,10 +44,10 @@ public class BT_QueuePush : BT_Action
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Queue, node] = new AI_AgentParameter();
-        this[PushObjPar, node] = new AI_AgentParameter();
-        this[Obj, node] = null;
-        this[IsObject, node] = false;
+        node[QueueStr] = new AI_AgentParameter();
+        node[PushObjPar] = new AI_AgentParameter();
+        node[ObjStr] = null;
+        node[IsObjectStr] = false;
     }
 
     #endregion
@@ -31,31 +56,31 @@ public class BT_QueuePush : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object pushObj)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePush.Create<BT_QueuePush>());
         return SetParameters(node, QueueParam, pushObj);
     }
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, object toPushObject)
     {
         node.CheckAndSetClass<BT_QueuePush>();
-        node.Behavior[Queue, node] = QueueParam;
-        node.Behavior[Obj, node] = toPushObject;
-        node.Behavior[IsObject, node] = true;
+        node[QueueStr] = QueueParam;
+        node[ObjStr] = toPushObject;
+        node[IsObjectStr] = true;
         return node;
     }
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter PushParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePush.Create<BT_QueuePush>());
         return SetParameters(node, QueueParam, PushParam);
     }
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter PushParam)
     {
         node.CheckAndSetClass<BT_QueuePush>();
-        node.Behavior[Queue, node] = QueueParam;
-        node.Behavior[PushObjPar, node] = PushParam;
-        node.Behavior[IsObject, node] = false;
+        node[QueueStr] = QueueParam;
+        node[PushObjPar] = PushParam;
+        node[IsObjectStr] = false;
         return node;
     }
 
@@ -63,33 +88,7 @@ public class BT_QueuePush : BT_Action
     
     protected override Status update()
     {
-        // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue), Agent);
-
-        //if(obj == null)
-        //{
-        //    obj = new Queue<
-        //}
-
-        // Check if it is actually the right type of queue
-        if (!BT_QueueHelper.HasIQueue(obj))
-        {
-            Debug.LogError("BT_QueuePush: No queue exists in the blackboard");
-            return Status.Invalid;
-        }
-       
-        // Cast
-        IQueue q = (IQueue)obj;
-        
-        // Get the object
-        object objectToPush;
-        if ((bool)this[IsObject])
-            objectToPush = this[Obj];
-        else
-            objectToPush = GetAgentObject(Par(PushObjPar), Agent);
-
-        // Push item to the blackboard
-        q.Add(objectToPush);
+        Queue.Add(PushObject); 
 
         return Status.Succes;
     }

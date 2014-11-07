@@ -565,7 +565,7 @@ public class BTNodeWindowEditor : NodeEditorWindow
         var l1 = q1.ToList();
         if (GUILayout.Button("Create node"))
         {
-            SelectedTree.CreateNode((BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass]));
+            SelectedTree.CreateNode((BT_BBParameters)BT_Behavior.CreateBehavior(l1[selectedClass]));//System.Activator.CreateInstance(l1[selectedClass]));
             //createNode<l1[selectedClass]>();//(BT_BBParameters)System.Activator.CreateInstance(l1[selectedClass])
             refreshWindows();
             Repaint();
@@ -598,6 +598,4 @@ public class BTNodeWindowEditor : NodeEditorWindow
     }
 
     #endregion
-
-    
 }
