@@ -10,6 +10,7 @@ public class AnimationSwap2Collection : MonoBehaviour
     //[SerializeField]
     //public RuntimeAnimationController Controller; 
 
+    [SerializeField]
     public RuntimeAnimatorController Controller;
 
     [SerializeField]
@@ -18,7 +19,27 @@ public class AnimationSwap2Collection : MonoBehaviour
     [SerializeField]
     public List<AS_AnimListCollection> HeadVarieties;
 
-    // Property get private set
+    public void ApplyControllerChange()
+    {
+
+    }
+
+    public void SetAnimator(Animator head, Animator body,  int headIndex,int bodyIndex)
+    {
+        AnimatorOverrideController overideHead = new AnimatorOverrideController();
+        overideHead.runtimeAnimatorController = Controller;
+
+        //Loop to set all the animations
+        for (int i = 0; i < overideHead.clips.Length; i++)
+        {
+            Debug.Log(overideHead.clips[i].originalClip.name);
+            //overide.clips[i].overrideClip = 
+        }
+            
+
+        // Set all the overrided animations to the animator
+        //head.runtimeAnimatorController = overideHead;
+    }
 
     public void AddNewBodyVariety()
     {

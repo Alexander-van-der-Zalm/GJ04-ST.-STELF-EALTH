@@ -8,7 +8,10 @@ public class AnimationSwap2Selector : MonoBehaviour
     public AnimationSwap2Collection CollectionReference;
 
     [SerializeField]
-    private AnimatorOverrideController overrideController;// = new AnimatorOverrideController();
+    public Animator Head;
+
+    [SerializeField]
+    public Animator Body;
 
     [SerializeField]
     public int HeadVariety;
@@ -20,25 +23,7 @@ public class AnimationSwap2Selector : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        Animator anim = GetComponent<Animator>();
-        overrideController = new AnimatorOverrideController();
-        overrideController.runtimeAnimatorController = anim.runtimeAnimatorController;
-
-        //overrideController.runtimeAnimatorController = anim;
-        //anim.runtimeAnimatorController = overrideController;
-
-        //for (int i = 0; i < overrideController.clips.Length; i++)
-        //{
-        //    Debug.Log(overrideController.clips[i].originalClip.name);
-        //}
-
-        Debug.Log("  aa" + CollectionReference.BodyVarieties[0].Animations[0].Animation.name);
-
-        overrideController.clips[0].overrideClip = CollectionReference.BodyVarieties[0].Animations[0].Animation;
-
-        overrideController["NPC01_A_Walk_Side"] = CollectionReference.BodyVarieties[0].Animations[0].Animation;
-
-        anim.runtimeAnimatorController = overrideController;
+        CollectionReference.SetAnimator(Head, Body, HeadVariety, BodyVariety);
 	}
 	
 }
