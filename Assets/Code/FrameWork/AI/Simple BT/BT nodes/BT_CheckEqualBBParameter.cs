@@ -3,29 +3,51 @@ using System.Collections;
 
 public class BT_CheckEqualBBParameter : BT_Condition
 {
-    private const string P1 = "Parameter1ToCompare";
-    private const string P2 = "Parameter2ToCompare";
-    private const string Obj = "ObjectToCompare";
-    private const string IsObject = "UseObjectToCompare";
+    private const string P1Str = "Parameter1ToCompare";
+    private const string IsObjectStr = "UseObjectToCompare";
+    private const string P2Str = "Parameter2ToCompare";
+    private const string ObjStr = "ObjectToCompare";
+
+    private AI_AgentParameter P1 { get { return (AI_AgentParameter)Node[P1Str]; } }
+
+    private AI_AgentParameter P2 { get { return (AI_AgentParameter)Node[P2Str]; } }
+
+    private object Obj1 { get { return Agent[P1]; } }
+
+    private bool IsObject { get { return (bool)Node[IsObjectStr]; } }
+
+    private object Obj2 
+    { 
+        get 
+        {
+            if (IsObject)
+                return Node[ObjStr];
+            else
+                return Agent[P2]; 
+        } 
+    }
 
     #region Constructors
 
-    public BT_CheckEqualBBParameter()
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
     {
+        base.Init(newHideFlag);
         description();
     }
 
+
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[P1, node] = new AI_AgentParameter();
-        this[P2, node] = new AI_AgentParameter();
-        this[Obj, node] = null;
-        this[IsObject, node] = false;
+        node[P1Str]        = new AI_AgentParameter();
+        node[IsObjectStr]  = false;
+        node[P2Str]        = new AI_AgentParameter();
+        node[ObjStr]       = null;
+        
     }
     
     private void description()
     {
-        Description.Type = NodeDescription.BT_NodeType.Action;
+        Description.Type = NodeDescription.BT_NodeType.Condition;
         Description.Name = "CheckEqualBBParameter";
         Description.Description = "Succeeds if objects are equal and fails otherwise";
     }
@@ -36,16 +58,16 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, object equalObject)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CheckEqualBBParameter());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_CheckEqualBBParameter.Create<BT_CheckEqualBBParameter>());
         return SetParameters(node, accesparam1, equalObject);
     }
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, object equalObject)
     {
         node.CheckAndSetClass<BT_CheckEqualBBParameter>();
-        node.Behavior[P1, node] = accesparam1;
-        node.Behavior[Obj, node] = equalObject;
-        node.Behavior[IsObject, node] = true;
+        node[P1Str]         = accesparam1;
+        node[ObjStr]        = equalObject;
+        node[IsObjectStr]   = true;
         return node;
     }
 
@@ -58,52 +80,27 @@ public class BT_CheckEqualBBParameter : BT_Condition
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
         node.CheckAndSetClass<BT_CheckEqualBBParameter>();
-        node.Behavior[P1,node] = accesparam1;
-        node.Behavior[P2, node] = accesparam2;
-        node.Behavior[IsObject, node] = false;
+        node[P1Str]     = accesparam1;
+        node[P2Str]     = accesparam2;
+        node[IsObjectStr]  = false;
         return node;
     }
-
-    //public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, object equalObject)
-    //{
-    //    description();
-    //    this[P1] = accesparam1;
-    //    this[Obj] = equalObject;
-    //    this[IsObject] = true;
-    //}
-
-    //public BT_CheckEqualBBParameter(string bbParameter, AI_Agent.BlackBoard accesparam1, object equalObject)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), equalObject)
-    //{
-    //}
-    //public BT_CheckEqualBBParameter(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
-    //{
-    //    description();
-    //    this[P1] = accesparam1;
-    //    this[P2] = accesparam2;
-    //    this[IsObject] = false;
-    //}
-    //public BT_CheckEqualBBParameter(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
-    //{
-    //}
-
 
     #endregion
 
 
     protected override Status update()
     {      
-        // Get the objects
-        object obj1 = GetAgentObject(Par(P1),Agent);
-        object obj2;
-        if ((bool)this[IsObject])
-            obj2 = this[Obj];
-        else
-            obj2 = GetAgentObject(Par(P2), Agent);
+        //// Get the objects
+        //object obj1 = GetAgentObject(Par(P1Str),Agent);
+        //object obj2;
+        //if ((bool)this[IsObject])
+        //    obj2 = this[Obj];
+        //else
+        //    obj2 = GetAgentObject(Par(P2Str), Agent);
 
         // If equals, then succes, else failed
-        return obj1.Equals(obj2) ? Status.Succes : Status.Failed;
+        return Obj1.Equals(Obj2) ? Status.Succes : Status.Failed;
     }
 
    
