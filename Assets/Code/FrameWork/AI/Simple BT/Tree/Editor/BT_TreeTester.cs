@@ -9,6 +9,7 @@ using NUnit.Framework;
 public class BT_TreeTesterBasicComponents
 {
     #region Basic
+
     [Test]
     public void BasicFail()
     {
@@ -326,28 +327,10 @@ public class BT_TreeTesterActions
 
         // Check size
         Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 3)) == Status.Succes);
-        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
 
         // Check push
         Assert.That(agent.NewTreeTick(T.qPush(queueP1, local, 4)) == Status.Succes);
         Assert.That(agent.NewTreeTick(T.qSize(queueP1, local, 4)) == Status.Succes);
-        //errorCheck(T.qPush(queueP1, local, 4), Status.Succes, ref errors, agent);
-        //errorCheck(T.qSize(queueP1, local, 4), Status.Succes, ref errors, agent);
-
-        //// Check pop
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(T.qSize(queueP1, local, 3), Status.Succes, ref errors, agent);
-        //errorCheck(T.eqBB(qCompare, local, 1), Status.Succes, ref errors, agent);
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(T.eqBB(qCompare, local, 2), Status.Succes, ref errors, agent);
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(T.eqBB(qCompare, local, 3), Status.Succes, ref errors, agent);
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(T.eqBB(qCompare, local, 4), Status.Succes, ref errors, agent);
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        ////Debug.Log(agent[qCompare, local]);
-        //errorCheck(T.qPop(queueP1, local, qCompare, local), Status.Succes, ref errors, agent);
-        //errorCheck(T.qSize(queueP1, local, 0), Status.Succes, ref errors, agent);
     }
 
     [Test]
@@ -460,8 +443,8 @@ public class BT_TreeTesterActions
 
         #endregion
 
-        if ((int)agent["Depth"] != 0)
-            errors++;
+        //if ((int)agent["Depth"] != 0)
+        //    errors++;
 
         //SetAgentDebug(true);
 
@@ -674,8 +657,8 @@ public class BT_TreeTesterActions
         #endregion
 
         //Debug.Log("Depth" + (int)agent["Depth"]);
-        if ((int)agent["Depth"] != 0)
-            errors++;
+        //if ((int)agent["Depth"] != 0)
+        //    errors++;
 
         if (errors != 0)
             Debug.Log("Behavior Tree test FAILED - " + errors + " Errors.");

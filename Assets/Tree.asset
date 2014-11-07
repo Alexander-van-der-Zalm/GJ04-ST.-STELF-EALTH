@@ -14,16 +14,18 @@ MonoBehaviour:
   Info:
     Name: TreeNoName
     UpdateFrequency: 10
-    TreeIteration: 5
+    TreeIteration: 7
     NodeSide: 1
   treeNodes:
   - {fileID: 11400004}
   - {fileID: 11400010}
   - {fileID: 11400016}
+  - {fileID: 11400022}
   nodeWindows:
   - {fileID: 11400006}
   - {fileID: 11400012}
   - {fileID: 11400018}
+  - {fileID: 11400024}
   root: {fileID: 11400004}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -84,17 +86,17 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 378
-    y: 124
+    x: 356
+    y: 127
     width: 100
     height: 100
   header:
     m_Text: Selector [0]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: .400000006, g: .400000006, b: .400000006, a: 1}
+  bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
   treeNode: {fileID: 11400004}
-  status: 3
+  status: 2
   agentRunning: 1
 --- !u!114 &11400008
 MonoBehaviour:
@@ -155,17 +157,17 @@ MonoBehaviour:
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 262
-    y: 241
+    x: 240
+    y: 244
     width: 100
     height: 100
   header:
     m_Text: Selector [1]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: .400000006, g: .400000006, b: .400000006, a: 1}
+  bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
   treeNode: {fileID: 11400010}
-  status: 3
+  status: 2
   agentRunning: 1
 --- !u!114 &11400014
 MonoBehaviour:
@@ -198,7 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   parent: {fileID: 11400010}
-  children: []
+  children:
+  - {fileID: 11400022}
   MaxChildren: 0
   behavior: {fileID: 0}
   behaviorType: BT_Inverter
@@ -220,21 +223,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   parent: {fileID: 11400012}
-  children: []
+  children:
+  - {fileID: 11400024}
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 196
-    y: 350
+    x: 174
+    y: 353
     width: 100
     height: 100
   header:
     m_Text: Decorator [2]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: .400000006, g: .400000006, b: .400000006, a: 1}
+  bgColor: {r: .899999976, g: .200000003, b: .200000003, a: 1}
   treeNode: {fileID: 11400016}
-  status: 3
+  status: 2
   agentRunning: 1
 --- !u!114 &11400020
 MonoBehaviour:
@@ -245,7 +249,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
-  m_Name: 3 | PARAMETERS | CopyBBParameter
+  m_Name: 3 | PARAMATERS | CopyBBParameter
   m_EditorClassIdentifier: 
   Name: AI BlackBoard
   objectPool:
@@ -255,10 +259,10 @@ MonoBehaviour:
     - ObjectsToCopy
     - UseObjectToCopy
     values:
+    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f00080200000000000000060500000004546573740a0b
     - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 0001000000ffffffff01000000000000000c020000000f417373656d626c792d4353686172700c030000000b556e697479456e67696e6505010000001941495f4167656e744242416363657373506172616d65746572030000000e4167656e744163636573547970650d506172616d657465724e616d6507436f6e74656e740401041341495f4167656e742b426c61636b426f6172640200000016556e697479456e67696e652e475549436f6e74656e74030000000200000005040000001341495f4167656e742b426c61636b426f617264010000000776616c75655f5f000802000000000000000a0a0b
-    - byteArray: 
-    - byteArray: 0001000000ffffffff010000000000000004010000000e53797374656d2e426f6f6c65616e01000000076d5f76616c75650001000b
+    - byteArray: 0001000000ffffffff010000000000000004010000000c53797374656d2e496e74333201000000076d5f76616c756500080c0000000b
+    - byteArray: 0001000000ffffffff010000000000000004010000000e53797374656d2e426f6f6c65616e01000000076d5f76616c75650001010b
   isVariableObject:
     keys:
     - OverrideLocation
@@ -278,7 +282,7 @@ MonoBehaviour:
   m_Name: 3 | TREENODE | CopyBBParameter
   m_EditorClassIdentifier: 
   id: 3
-  parent: {fileID: 0}
+  parent: {fileID: 11400016}
   children: []
   MaxChildren: 0
   behavior: {fileID: 0}
@@ -299,20 +303,20 @@ MonoBehaviour:
   m_Name: 3 | WINDOW | CopyBBParameter
   m_EditorClassIdentifier: 
   id: 3
-  parent: {fileID: 0}
+  parent: {fileID: 11400018}
   children: []
   MaxChildren: 0
   rect:
     serializedVersion: 2
-    x: 100
-    y: 100
+    x: 138
+    y: 472
     width: 100
     height: 100
   header:
     m_Text: Action [3]
     m_Image: {fileID: 0}
     m_Tooltip: 
-  bgColor: {r: 1, g: 1, b: 1, a: 1}
+  bgColor: {r: .300000012, g: .899999976, b: .5, a: 1}
   treeNode: {fileID: 11400022}
-  status: 3
-  agentRunning: 0
+  status: 1
+  agentRunning: 1

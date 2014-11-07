@@ -20,8 +20,8 @@ public class BT_QueueCheckSizeEqual : BT_Condition
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Queue, node] = new AI_AgentBBAccessParameter();
-        this[SizeObjPar, node] = new AI_AgentBBAccessParameter();
+        this[Queue, node] = new AI_AgentParameter();
+        this[SizeObjPar, node] = new AI_AgentParameter();
         //this[Obj, node] = null;
         node.ParametersBB[Obj] = null;
         this[IsObject, node] = false;
@@ -31,13 +31,13 @@ public class BT_QueueCheckSizeEqual : BT_Condition
 
     #region Get and Set
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, object sizeObject)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object sizeObject)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
         return SetParameters(node, QueueParam, sizeObject);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, object sizeObject)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, object sizeObject)
     {
         node.CheckAndSetClass<BT_QueueCheckSizeEqual>();
         node.Behavior[Queue, node] = QueueParam;
@@ -46,13 +46,13 @@ public class BT_QueueCheckSizeEqual : BT_Condition
         return node;
     }
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter sizeObjParam)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter sizeObjParam)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
         return SetParameters(node, QueueParam, sizeObjParam);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter sizeObj)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter sizeObj)
     {
         node.CheckAndSetClass<BT_QueueCheckSizeEqual>();
         node.Behavior[Queue, node] = QueueParam;

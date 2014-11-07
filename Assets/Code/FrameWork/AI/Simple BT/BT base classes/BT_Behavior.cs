@@ -94,17 +94,20 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
     /// </summary>
     protected BT_TreeNode Node { get { return Agent.Tree.TreeNodes[ID]; } }
 
+    private Status NodeStatus { get { return Agent.NodeStatus[ID]; } set { Agent.NodeStatus[ID] = value; } }
+
     #endregion
 
     #region Tick function
 
-    public Status Tick(AI_Agent agent, int id)
+    public Status Tick(AI_Agent agent, int nodeID)
     {
-        ID = id;
+        // Set agent and node id for the current tick
+        ID = nodeID;
         Agent = agent;
 
         // Start if not yet initialized
-        if (agent[id] == Status.Invalid)
+        if (NodeStatus == Status.Invalid)
             onInitialize();
 
         onEnter();
@@ -112,7 +115,7 @@ public class BT_Behavior:EasyScriptableObject<BT_Behavior>
         // Update the behaviour
         // Save the state to the agent
         Status status = update();
-        agent[id] = status;
+        NodeStatus = status;
 
         onExit(status);
 

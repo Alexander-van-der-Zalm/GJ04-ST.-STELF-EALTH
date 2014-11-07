@@ -9,27 +9,27 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode qPush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return BT_QueuePush.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return BT_QueuePush.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     public static BT_TreeNode qPush(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
     {
-        return BT_QueuePush.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+        return BT_QueuePush.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), obj);
     }
 
     public static BT_TreeNode qPop(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return BT_QueuePop.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return BT_QueuePop.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     public static BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     public static BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
     {
-        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), obj);
     }
 
     public static BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
@@ -51,12 +51,12 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     public static BT_TreeNode eqBB(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
     {
-        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), obj);
+        return BT_CheckEqualBBParameter.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), obj);
     }
 
     public static BT_TreeNode fail(BT_TreeNode child)
@@ -133,7 +133,7 @@ public class BT_TreeConstructor
 
     public static BT_Behavior.Status pauseUpdate(AI_Agent agent, BT_TreeNode node)
     {
-        int Depth = (int)agent["Depth"];
+        //int Depth = (int)agent["Depth"];
         Debug.Break();
         return Status.Succes;
     }

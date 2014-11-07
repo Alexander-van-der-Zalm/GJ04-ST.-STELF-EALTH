@@ -1,8 +1,8 @@
-//using System;
-//using System.Collections.Generic;
-//using System.Threading;
-//using NUnit.Framework;
-//using UnityEngine;
+////using System;
+////using System.Collections.Generic;
+////using System.Threading;
+////using NUnit.Framework;
+////using UnityEngine;
 
 //namespace UnityTest
 //{
@@ -68,7 +68,7 @@
 //        [Culture("pl-PL")]
 //        public void CultureSpecificTest()
 //        {
-//        }   
+//        }
 
 //        [Test]
 //        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "expected message")]

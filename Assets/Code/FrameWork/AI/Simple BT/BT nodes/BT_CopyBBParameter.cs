@@ -20,8 +20,8 @@ public class BT_CopyBBParameter : BT_Action
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Override, node] = new AI_AgentBBAccessParameter();
-        this[ObjParam, node] = new AI_AgentBBAccessParameter();
+        this[Override, node] = new AI_AgentParameter();
+        this[ObjParam, node] = new AI_AgentParameter();
         this[Obj, node] = null;
         this[IsObject, node] = false;
     }
@@ -37,7 +37,7 @@ public class BT_CopyBBParameter : BT_Action
 
     #region Get
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, object setObject)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, object setObject)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
         return SetParameters(node, accesparam1, setObject);
@@ -45,11 +45,11 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
     {
-        return GetTreeNode(new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject);
+        return GetTreeNode(new AI_AgentParameter(bbParameter, accesparam1), setObject);
     }
 
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CopyBBParameter());
         return SetParameters(node, accesparam1, accesparam2);
@@ -57,14 +57,14 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode GetTreeNode(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return GetTreeNode(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     #endregion
 
     #region Set
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, object setObject)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, object setObject)
     {
         node.CheckAndSetClass<BT_CopyBBParameter>();
         node.Behavior[Override, node] = accesparam1;
@@ -75,10 +75,10 @@ public class BT_CopyBBParameter : BT_Action
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
     {
-        return SetParameters(node, new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject);
+        return SetParameters(node, new AI_AgentParameter(bbParameter, accesparam1), setObject);
     }
     
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
         node.CheckAndSetClass<BT_CopyBBParameter>();
         node.Behavior[Override, node] = accesparam1;
@@ -88,7 +88,7 @@ public class BT_CopyBBParameter : BT_Action
     }
     public static BT_TreeNode SetParameters(BT_TreeNode node, string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return SetParameters(node, new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2));
+        return SetParameters(node, new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     #endregion

@@ -9,6 +9,16 @@ public class BT_BBParameters : BT_Behavior
         //Debug.Log("BT_BBParameters.SetNodeParameters: No parameters to set");
     }
 
+    // Revamp TODO:
+    // V - node parameters - Set Via Node[blabla]
+    // V - Agent local - Set Via Agent[BBParameters] or Agent.LocalBlackboard[string]
+    // V - Agent global - Set Via Agent[BBParameters] or Agent.GlobalBlackboard[string]
+    // V - Syntax sugar one
+    // X - Clear old references
+    // X - Redo all
+
+    // Each class that uses parameters - syntax sugar with properties
+
     /// <summary>
     /// Get objects from the node's memory (shared across agents)
     /// </summary>
@@ -26,12 +36,12 @@ public class BT_BBParameters : BT_Behavior
         set { node.ParametersBB[name] = value; }
     }
 
-    public AI_AgentBBAccessParameter Par(string name)
+    public AI_AgentParameter Par(string name)
     {
-        return (AI_AgentBBAccessParameter)Agent.Tree[ID].ParametersBB[name];
+        return (AI_AgentParameter)Agent.Tree[ID].ParametersBB[name];
     }
 
-    public object GetAgentObject(AI_AgentBBAccessParameter a, AI_Agent agent)
+    public object GetAgentObject(AI_AgentParameter a, AI_Agent agent)
     {
         if (a.AgentAccesType == AI_Agent.BlackBoard.local)
             return agent.LocalBlackboard[a.ParameterName];
@@ -39,7 +49,7 @@ public class BT_BBParameters : BT_Behavior
             return agent.GlobalBlackboard[a.ParameterName];
     }
 
-    public void SetAgentObject(AI_AgentBBAccessParameter a, AI_Agent agent, object obj)
+    public void SetAgentObject(AI_AgentParameter a, AI_Agent agent, object obj)
     {
         if (a.AgentAccesType == AI_Agent.BlackBoard.local)
             agent.LocalBlackboard[a.ParameterName] = obj;

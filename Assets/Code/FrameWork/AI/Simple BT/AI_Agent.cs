@@ -78,6 +78,8 @@ public class AI_Agent
 
     public BT_Tree Tree { get { return tree; } set { tree = value; nodeStatus = tree.GetNodeStatus(); } }
     
+
+
     public AI_Blackboard GlobalBlackboard { get { return globalBlackboard; } set { globalBlackboard = value; } }
     
     public AI_Blackboard LocalBlackboard { get { return localBlackboard; } set { localBlackboard = value; } }
@@ -118,15 +120,23 @@ public class AI_Agent
         set { LocalBlackboard.SetObject(name, value); }
     }
 
-    /// <summary>
-    /// Get or Set Default in local blackboard
-    /// </summary>
-    public object GSD(string name, object Default, BlackBoard acces = BlackBoard.local)
+    ///// <summary>
+    ///// Get or Set Default in local blackboard
+    ///// </summary>
+    //public object GSD(string name, object Default, BlackBoard acces = BlackBoard.local)
+    //{
+    //    if (acces == BlackBoard.local)
+    //        return LocalBlackboard.GetObjectOrSetDefault(name, Default); 
+    //    else
+    //        return GlobalBlackboard.GetObjectOrSetDefault(name, Default); 
+    //}
+
+    //public object this[Paramet]
+
+    public object this[AI_AgentParameter param]
     {
-        if (acces == BlackBoard.local)
-            return LocalBlackboard.GetObjectOrSetDefault(name, Default); 
-        else
-            return GlobalBlackboard.GetObjectOrSetDefault(name, Default); 
+        get { return this[param.ParameterName, param.AgentAccesType]; }
+        set { this[param.ParameterName, param.AgentAccesType] = value; }
     }
 
     public object this[string name, BlackBoard acces]
@@ -139,11 +149,11 @@ public class AI_Agent
 
     #endregion
 
-    public Status this[int index]
-    {
-        get { return NodeStatus[index]; }
-        set { NodeStatus[index] = value; }
-    }
+    //public Status this[int index]
+    //{
+    //    get { return NodeStatus[index]; }
+    //    set { NodeStatus[index] = value; }
+    //}
 
     ///// <summary>
     ///// Returns the ID of the child

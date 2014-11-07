@@ -19,8 +19,8 @@ public class BT_QueuePush : BT_Action
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Queue, node] = new AI_AgentBBAccessParameter();
-        this[PushObjPar, node] = new AI_AgentBBAccessParameter();
+        this[Queue, node] = new AI_AgentParameter();
+        this[PushObjPar, node] = new AI_AgentParameter();
         this[Obj, node] = null;
         this[IsObject, node] = false;
     }
@@ -29,13 +29,13 @@ public class BT_QueuePush : BT_Action
 
     #region Get Set
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, object pushObj)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object pushObj)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
         return SetParameters(node, QueueParam, pushObj);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, object toPushObject)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, object toPushObject)
     {
         node.CheckAndSetClass<BT_QueuePush>();
         node.Behavior[Queue, node] = QueueParam;
@@ -44,13 +44,13 @@ public class BT_QueuePush : BT_Action
         return node;
     }
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PushParam)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter PushParam)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePush());
         return SetParameters(node, QueueParam, PushParam);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PushParam)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter PushParam)
     {
         node.CheckAndSetClass<BT_QueuePush>();
         node.Behavior[Queue, node] = QueueParam;
@@ -60,32 +60,6 @@ public class BT_QueuePush : BT_Action
     }
 
     #endregion
-
-
-    //public BT_QueuePush(AI_AgentBBAccessParameter QueueParam, object pushObj)
-    //{
-    //    description();
-    //    this[Queue] = QueueParam;
-    //    this[Obj] = pushObj;
-    //    this[IsObject] = true;
-    //}
-
-    //public BT_QueuePush(string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject)
-    //{
-    //}
-    //public BT_QueuePush(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PushParam)
-    //{
-    //    description();
-    //    this[Queue] = QueueParam;
-    //    this[PushObjPar] = PushParam;
-    //    this[IsObject] = false;
-    //}
-    //public BT_QueuePush(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
-    //{
-    //}
-
     
     protected override Status update()
     {

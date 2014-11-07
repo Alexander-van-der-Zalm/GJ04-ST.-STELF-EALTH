@@ -164,7 +164,7 @@ public class EditorPlus : Editor
                 returnvalue = EditorGUILayout.TextField(label, (string)value, options);
                 break;
             case "AI_AgentBBAccessParameter":
-                returnvalue = AI_AgentBlackBoardAccessParameterDrawer.CustomDraw(label,(AI_AgentBBAccessParameter)value);
+                returnvalue = AI_AgentBlackBoardAccessParameterDrawer.CustomDraw(label,(AI_AgentParameter)value);
                 break;
             default:
                 EditorGUILayout.LabelField(label, value.ToString() + " - undefined", options);

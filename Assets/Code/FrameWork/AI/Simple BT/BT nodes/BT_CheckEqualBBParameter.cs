@@ -17,8 +17,8 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[P1, node] = new AI_AgentBBAccessParameter();
-        this[P2, node] = new AI_AgentBBAccessParameter();
+        this[P1, node] = new AI_AgentParameter();
+        this[P2, node] = new AI_AgentParameter();
         this[Obj, node] = null;
         this[IsObject, node] = false;
     }
@@ -34,13 +34,13 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     #region Get Set
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, object equalObject)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, object equalObject)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CheckEqualBBParameter());
         return SetParameters(node, accesparam1, equalObject);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, object equalObject)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, object equalObject)
     {
         node.CheckAndSetClass<BT_CheckEqualBBParameter>();
         node.Behavior[P1, node] = accesparam1;
@@ -49,13 +49,13 @@ public class BT_CheckEqualBBParameter : BT_Condition
         return node;
     }
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
         BT_TreeNode node = BT_TreeNode.CreateNode(new BT_CheckEqualBBParameter());
         return SetParameters(node, accesparam1, accesparam2);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter accesparam1, AI_AgentBBAccessParameter accesparam2)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter accesparam1, AI_AgentParameter accesparam2)
     {
         node.CheckAndSetClass<BT_CheckEqualBBParameter>();
         node.Behavior[P1,node] = accesparam1;

@@ -4,8 +4,6 @@ using System.Collections;
 [System.Serializable]
 public class BT_HasChild : BT_BBParameters
 {
-    protected string depth = "Depth";
-
      protected override void onEnter()
     {
         if (Agent != null)

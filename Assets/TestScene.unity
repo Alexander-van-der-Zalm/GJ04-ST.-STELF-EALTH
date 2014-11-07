@@ -212,13 +212,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Agent:
     Name: Default Agent
-    TreeMem:
-      CurrentTick: -1
+    TreeInfo:
+      CurrentTick: 15
+      Depth: 0
     saveTreeMemory: 0
-    tree: {fileID: 11400000, guid: 0b88dad9e3d55d04cae4519e04604cff, type: 2}
+    tree: {fileID: 11400000, guid: 39e755f4ccad30549bc6fb7da02bb300, type: 2}
     localBlackboard: {fileID: 0}
     globalBlackboard: {fileID: 0}
-    nodeStatus: 030000000300000003000000
+    nodeStatus: 02000000020000000200000001000000
     TreeVersion: 0
   GlobalBlackboardC: {fileID: 84816030}
   LocalBlackboardC: {fileID: 84816030}
+--- !u!1 &978729389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 978729391}
+  - 114: {fileID: 978729390}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &978729390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 978729389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbe041c3958dc648a8ac173381ec039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Obj:
+    byteArray: 0001000000ffffffff010000000000000004010000000d53797374656d2e53696e676c6501000000076d5f76616c7565000b000020410b
+  FloatValue: 10
+  StringValue: 
+  IntValue: 10
+  V3: {x: 0, y: 0, z: 0}
+  V4: {x: 0, y: 0, z: 0, w: 0}
+  V2: {x: 0, y: 0}
+  Q: {x: 0, y: 0, z: 0, w: 0}
+  Tr: {fileID: 0}
+  Type: 0
+  ResetObject: 0
+  PrintCurrentValue: 0
+--- !u!4 &978729391
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 978729389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2

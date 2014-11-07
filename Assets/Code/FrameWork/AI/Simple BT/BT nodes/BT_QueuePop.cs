@@ -3,12 +3,22 @@ using Framework.Collections;
 
 public class BT_QueuePop : BT_Action 
 {
-    const string Value = "PopedObjLocation";
-    protected const string Queue = "QueueParameter";
+    const string popStr = "PopedObjParam";
+    private const string queueStr = "QueueParameter";
+
+    private AI_AgentParameter popParam { get { return (AI_AgentParameter)Node[popStr]; } }
+    private AI_AgentParameter queueParam { get { return (AI_AgentParameter)Node[queueStr]; } }
+    private IQueue Queue 
+    {
+        // Handle exceptions?
+        get { return (IQueue)Agent[queueParam]; } 
+    }
+
+    private object PoppedObject { set { Agent[popParam] = value; } }
 
     #region Constructor
 
-    public BT_QueuePop()
+    public override void Init(HideFlags newHideFlag = HideFlags.None)
     {
         description();
     }
@@ -22,56 +32,35 @@ public class BT_QueuePop : BT_Action
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Queue, node] = new AI_AgentBBAccessParameter();
-        this[Value, node] = new AI_AgentBBAccessParameter();
+        node[queueStr] = new AI_AgentParameter();
+        node[popStr] = new AI_AgentParameter();
     }
 
     #endregion
 
     #region Get Set
 
-    public static BT_TreeNode GetTreeNode(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
+    public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter PopParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueuePop());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePop.Create<BT_QueuePop>());
         return SetParameters(node, QueueParam, PopParam);
     }
 
-    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter PopParam)
+    public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter PopParam)
     {
         node.CheckAndSetClass<BT_QueuePop>();
-        node.Behavior[Queue, node] = QueueParam;
-        node.Behavior[Value, node] = PopParam;
+        node[popStr] = PopParam;
+        node[queueStr] = QueueParam;
+
         return node;
     }
 
     #endregion
-
-    //public void SetParameters(BT_TreeNode node, string queueBBParameter, AI_Agent.BlackBoard queueBBAccessType, string poppedObjectSaveBBParameter, AI_Agent.BlackBoard objectBBAccessType)
-    //{
-    //    SetParameters(node, new AI_AgentBBAccessParameter(queueBBParameter, queueBBAccessType), new AI_AgentBBAccessParameter(poppedObjectSaveBBParameter, objectBBAccessType));
-    //}
-
    
-
-
     protected override Status update()
     {
-        // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue),Agent);
+        PoppedObject = Queue.Get();
         
-        // Check if it is actually the right type of queue
-        if (!BT_QueueHelper.HasIQueue(obj))
-        {
-            Debug.LogError("BT_QueueCheckSizeEqual: No queue exists in the blackboard");
-            return Status.Invalid;
-        }
-            
-
-        // Cast
-        IQueue q = (IQueue)obj;
-        // Save popped item to blackboard
-        SetAgentObject(Par(Value), Agent, (object)q.Get());
-
         return Status.Succes;
     }
 }

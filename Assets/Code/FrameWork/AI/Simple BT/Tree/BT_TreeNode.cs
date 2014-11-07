@@ -50,6 +50,12 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         set { behaviorType = value.GetType().ToString(); SetParameters(value); }
     }
 
+    public object this[string name]
+    {
+        get{return ParametersBB[name];}
+        set{ParametersBB[name]=value;}
+    }
+
     public AI_Blackboard ParametersBB { get { return parametersBB; } private set { parametersBB = value; } }
 
     public BT_Tree Tree { get { return tree; } private set { tree = value; } }

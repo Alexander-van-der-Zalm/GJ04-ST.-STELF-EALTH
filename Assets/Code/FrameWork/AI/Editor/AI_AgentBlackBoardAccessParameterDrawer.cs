@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[CustomPropertyDrawer(typeof(AI_AgentBBAccessParameter))]
+[CustomPropertyDrawer(typeof(AI_AgentParameter))]
 public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
 {
     const string access = "AgentAccesType";
@@ -32,7 +32,7 @@ public class AI_AgentBlackBoardAccessParameterDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 
-    public static AI_AgentBBAccessParameter CustomDraw(string label, AI_AgentBBAccessParameter bb)
+    public static AI_AgentParameter CustomDraw(string label, AI_AgentParameter bb)
     {
         EditorGUILayout.BeginHorizontal();
         using (new FixedWidthLabel(label))

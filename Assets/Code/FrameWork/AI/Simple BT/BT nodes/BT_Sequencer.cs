@@ -19,9 +19,7 @@ public class BT_Sequencer : BT_Composite
 
     protected override Status update()
     {
-        //base.update(agent,id);
-
-        List<BT_TreeNode> nodes = Node.Children;//agent.Tree.GetChildren(id);
+        List<BT_TreeNode> nodes = Node.Children;
 
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -30,10 +28,10 @@ public class BT_Sequencer : BT_Composite
             // Continue on succes
             // Return failed, invalid and running
             if (s != Status.Succes)
-                return s;// exit(agent, s);
+                return s;
         }
 
         // Return succes if all the nodes are hit
-        return Status.Succes;// exit(agent, Status.Succes);
+        return Status.Succes;
     }
 }

@@ -53,7 +53,7 @@ public class AI_BlackboardComponentEditor : EditorPlus
             bb["TestInt"] = 1;
             bb["TestFloat"] = 1.0f;
             bb["TestVariable"] = null;
-            bb["TestParamater"] = new AI_AgentBBAccessParameter();
+            bb["TestParamater"] = new AI_AgentParameter();
         }
 
         GUILayout.EndHorizontal();
