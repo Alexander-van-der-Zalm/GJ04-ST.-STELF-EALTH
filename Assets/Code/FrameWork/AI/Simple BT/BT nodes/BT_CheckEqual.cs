@@ -8,6 +8,8 @@ public class BT_CheckEqualBBParameter : BT_Condition
     private const string P2Str = "Parameter2ToCompare";
     private const string ObjStr = "ObjectToCompare";
 
+    #region Properties
+
     private AI_AgentParameter P1 { get { return (AI_AgentParameter)Node[P1Str]; } }
 
     private AI_AgentParameter P2 { get { return (AI_AgentParameter)Node[P2Str]; } }
@@ -27,6 +29,8 @@ public class BT_CheckEqualBBParameter : BT_Condition
         } 
     }
 
+    #endregion
+
     #region Constructors
 
     public override void SetNodeParameters(BT_TreeNode node)
@@ -41,7 +45,7 @@ public class BT_CheckEqualBBParameter : BT_Condition
     protected override void SetDescription()
     {
         Description.Type = NodeDescription.BT_NodeType.Condition;
-        Description.Name = "CheckEqualBBParameter";
+        Description.Name = "CheckEqual";
         Description.Description = "Succeeds if objects are equal and fails otherwise";
     }
 
@@ -80,7 +84,6 @@ public class BT_CheckEqualBBParameter : BT_Condition
     }
 
     #endregion
-
 
     protected override Status update()
     {      
