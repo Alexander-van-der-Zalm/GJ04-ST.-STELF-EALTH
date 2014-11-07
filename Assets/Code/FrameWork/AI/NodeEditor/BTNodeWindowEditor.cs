@@ -524,6 +524,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
 
         SelectedTree.DestroyNode(FocusID);
 
+        Selection.objects = new Object[] { SelectedTree };
+
         if (FocusID >= SelectedTree.TreeNodes.Count)
         {
             FocusID = SelectedTree.NodeWindows.Count - 1;

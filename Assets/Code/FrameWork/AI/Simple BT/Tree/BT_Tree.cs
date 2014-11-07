@@ -258,8 +258,9 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Reorder indices
         SimpleReOrderIndices();
 
-        // Y U NO WORK :##
+        // ISWORK :3
         RefreshAsset();
+
     }
 
     // Connect (child & parent)

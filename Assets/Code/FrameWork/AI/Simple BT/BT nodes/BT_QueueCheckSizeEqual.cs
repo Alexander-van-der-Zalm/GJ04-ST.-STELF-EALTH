@@ -2,29 +2,56 @@
 using System.Linq;
 using Framework.Collections;
 
-public class BT_QueueCheckSizeEqual : BT_Condition
+public class BT_QueueCheckSize : BT_Condition
 {
     private const string SizeObjPar = "SizeBBParameter";
-    private const string Obj = "SizeObject";
-    private const string IsObject = "UseObjectToCompare";
-    protected const string Queue = "QueueParameter";
+    private const string ObjStr = "SizeCount";
+    private const string IsObjectStr = "UseObjectToCompare";
+    protected const string QueueStr = "QueueParameter";
+
+    #region Properties
+
+    // Parameters
+
+    private AI_AgentParameter queueParam { get { return (AI_AgentParameter)Node[QueueStr]; } }
+    private AI_AgentParameter P2 { get { return (AI_AgentParameter)Node[ObjStr]; } }
+    private IQueue Queue
+    {
+        // Handle exceptions?
+        get { return (IQueue)Agent[queueParam]; }
+    }
+
+    private bool IsObject { get { return (bool)Node[IsObjectStr]; } }
+
+    private object CountToCompare
+    {
+        get
+        {
+            if (IsObject)
+                return Node[ObjStr];
+            else
+                return Agent[P2];
+        }
+    }
+
+    #endregion
 
     #region Constructor
 
-    public BT_QueueCheckSizeEqual()
+    protected override void SetDescription()
     {
         Description.Type = NodeDescription.BT_NodeType.Action;
-        Description.Name = "QueueCheckSizeEqual";
-        Description.Description = "Check if the queue size is equal to the object (use int/a number)";
+        Description.Name = "QueueCheckSize";
+        Description.Description = "Check if the queue size is equal to the count (use int with parameter)";
     }
 
     public override void SetNodeParameters(BT_TreeNode node)
     {
-        this[Queue, node] = new AI_AgentParameter();
-        this[SizeObjPar, node] = new AI_AgentParameter();
-        //this[Obj, node] = null;
-        node.ParametersBB[Obj] = null;
-        this[IsObject, node] = false;
+        node[QueueStr] = new AI_AgentParameter();
+        node[SizeObjPar] = new AI_AgentParameter();
+        node[ObjStr] = (int)0;
+        node.ParametersBB[ObjStr] = null;
+        node[IsObjectStr] = false;
     }
 
     #endregion
@@ -33,87 +60,40 @@ public class BT_QueueCheckSizeEqual : BT_Condition
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object sizeObject)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueueCheckSize.Create<BT_QueueCheckSize>());
         return SetParameters(node, QueueParam, sizeObject);
     }
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, object sizeObject)
     {
-        node.CheckAndSetClass<BT_QueueCheckSizeEqual>();
-        node.Behavior[Queue, node] = QueueParam;
-        node.Behavior[Obj, node] = sizeObject;
-        node.Behavior[IsObject, node] = true;
+        node.CheckAndSetClass<BT_QueueCheckSize>();
+        node[QueueStr] = QueueParam;
+        node[ObjStr] = sizeObject;
+        node[IsObjectStr] = true;
         return node;
     }
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter sizeObjParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(new BT_QueueCheckSizeEqual());
+        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueueCheckSize.Create<BT_QueueCheckSize>());
         return SetParameters(node, QueueParam, sizeObjParam);
     }
 
     public static BT_TreeNode SetParameters(BT_TreeNode node, AI_AgentParameter QueueParam, AI_AgentParameter sizeObj)
     {
-        node.CheckAndSetClass<BT_QueueCheckSizeEqual>();
-        node.Behavior[Queue, node] = QueueParam;
-        node.Behavior[SizeObjPar, node] = sizeObj;
-        node.Behavior[IsObject, node] = false;
+        node.CheckAndSetClass<BT_QueueCheckSize>();
+        node.Behavior[QueueStr] = QueueParam;
+        node.Behavior[SizeObjPar] = sizeObj;
+        node.Behavior[IsObjectStr] = false;
         return node;
     }
 
     #endregion
 
-    //public BT_QueueCheckSizeEqual(AI_AgentBBAccessParameter QueueParam, object sizeObj)
-    //{
-    //    description();
-    //    this[Queue] = QueueParam;
-    //    this[Obj] = sizeObj;
-    //    this[IsObject] = true;
-    //}
-
-    //public BT_QueueCheckSizeEqual(string bbParameter, AI_Agent.BlackBoard accesparam1, object setObject)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter, accesparam1), setObject)
-    //{
-    //}
-    //public BT_QueueCheckSizeEqual(AI_AgentBBAccessParameter QueueParam, AI_AgentBBAccessParameter sizeObj)
-    //{
-    //    description();
-    //    this[Queue] = QueueParam;
-    //    this[SizeObjPar] = sizeObj;
-    //    this[IsObject] = false;
-    //}
-    //public BT_QueueCheckSizeEqual(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
-    //    : this(new AI_AgentBBAccessParameter(bbParameter1, param1), new AI_AgentBBAccessParameter(bbParameter2, param2))
-    //{
-    //}
-
-    
-
     protected override Status update()
     {
-        // Get queue from the blackboard
-        object obj = GetAgentObject(Par(Queue), Agent);
+        int size = (int)CountToCompare; 
         
-        // If there is no Queue return invalid
-        if (obj == null || !BT_QueueHelper.HasIQueue(obj))
-        {
-            Debug.LogError("BT_QueueCheckSizeEqual: No queue exists in the blackboard");
-            return Status.Invalid;
-        }
-            
-        
-        // Cast
-        IQueue q = (IQueue)obj;
-
-        object SizeObj;
-        if ((bool)this[IsObject])
-            SizeObj = this[Obj];
-        else
-            SizeObj = GetAgentObject(Par(SizeObjPar), Agent);
-        // Check if it is actually the right type of queue
-    
-        int size = (int)SizeObj;
-        
-        return q.Count == size ? Status.Succes : Status.Failed;
+        return Queue.Count == size ? Status.Succes : Status.Failed;
     }
 }

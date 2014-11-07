@@ -6,6 +6,8 @@ public class BT_QueuePop : BT_Action
     const string popStr = "PopedObjParam";
     private const string queueStr = "QueueParameter";
 
+    #region Properties
+
     private AI_AgentParameter popParam { get { return (AI_AgentParameter)Node[popStr]; } }
     private AI_AgentParameter queueParam { get { return (AI_AgentParameter)Node[queueStr]; } }
     private IQueue Queue 
@@ -15,6 +17,8 @@ public class BT_QueuePop : BT_Action
     }
 
     private object PoppedObject { set { Agent[popParam] = value; } }
+
+    #endregion
 
     #region Constructor
 

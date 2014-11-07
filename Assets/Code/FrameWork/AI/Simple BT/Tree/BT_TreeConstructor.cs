@@ -24,12 +24,12 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)
     {
-        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
+        return BT_QueueCheckSize.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), new AI_AgentParameter(bbParameter2, param2));
     }
 
     public static BT_TreeNode qSize(string bbParameter1, AI_Agent.BlackBoard param1, object obj)
     {
-        return BT_QueueCheckSizeEqual.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), obj);
+        return BT_QueueCheckSize.GetTreeNode(new AI_AgentParameter(bbParameter1, param1), obj);
     }
 
     public static BT_TreeNode copy(string bbParameter1, AI_Agent.BlackBoard param1, string bbParameter2, AI_Agent.BlackBoard param2)

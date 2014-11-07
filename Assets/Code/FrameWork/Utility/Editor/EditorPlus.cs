@@ -163,7 +163,7 @@ public class EditorPlus : Editor
             case "System.String":
                 returnvalue = EditorGUILayout.TextField(label, (string)value, options);
                 break;
-            case "AI_AgentBBAccessParameter":
+            case "AI_AgentParameter":
                 returnvalue = AI_AgentBlackBoardAccessParameterDrawer.CustomDraw(label,(AI_AgentParameter)value);
                 break;
             default:
