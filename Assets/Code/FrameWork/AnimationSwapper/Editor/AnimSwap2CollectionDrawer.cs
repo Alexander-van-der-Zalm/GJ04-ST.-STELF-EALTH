@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(AnimationSwap2Selector))]
 public class AnimationSwap2SelectorEditor : EditorPlus
@@ -31,13 +32,16 @@ public class AnimSwap2CollectionEditor : EditorPlus
         #region Prep
 
         AnimationSwap2Collection col = (AnimationSwap2Collection)target;
-        AnimatorOverrideController over = col.GetNewOverrideController();
+        //AnimatorOverrideController over = col.GetNewOverrideController();
+
+        
 
         // Calculate maxWidth
         float maxWidth = GUI.skin.label.CalcSize(new GUIContent("PreviewSprite")).x;
-        for (int i = 0; i < over.clips.Length; i++)
+        for (int i = 0; i < col.ClipNames.Count; i++)
         {
-            float curWidth = GUI.skin.label.CalcSize(new GUIContent(over.clips[i].originalClip.name)).x;
+            //Debug.Log(col.ClipNames[i]);
+            float curWidth = GUI.skin.label.CalcSize(new GUIContent(col.ClipNames[i])).x;
             if (curWidth > maxWidth)
                 maxWidth = curWidth;
         }
@@ -45,7 +49,18 @@ public class AnimSwap2CollectionEditor : EditorPlus
         #endregion
 
         // Controller selector
+        EditorGUILayout.BeginHorizontal();
         col.Controller = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Controller",col.Controller, typeof(RuntimeAnimatorController),true);
+        
+        if(GUILayout.Button("ResetClipNames"))
+            col.ResetClipNames();
+        EditorGUILayout.EndHorizontal();
+
+        if (col.ClipNames.Count == 0)
+        {
+            EditorGUILayout.LabelField("No clips, please reset");
+            return;
+        }
 
         #region Add & Save
 
@@ -65,21 +80,21 @@ public class AnimSwap2CollectionEditor : EditorPlus
 
         if (SavedFoldout("Body varieties", -1))
         {
-            
+
             EditorGUI.indentLevel++;
             for (int i = 0; i < col.BodyVarieties.Count; i++)
             {
-                if (SavedFoldout("Body variety[" + i+ "]", i))
+                if (SavedFoldout("Body variety[" + i + "]", i))
                 {
                     // PreviewSprite
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField("PreviewSprite", GUILayout.Width(maxWidth + 5 +10 * EditorGUI.indentLevel));
+                    EditorGUILayout.LabelField("PreviewSprite", GUILayout.Width(maxWidth + 5 + 10 * EditorGUI.indentLevel));
                     col.BodyVarieties[i].PreviewSprite = (Sprite)EditorGUILayout.ObjectField(col.BodyVarieties[i].PreviewSprite, typeof(Sprite), true);//, GUILayout.Width(maxWidth));
                     EditorGUILayout.EndHorizontal();
 
                     for (int j = 0; j < col.BodyVarieties[i].Animations.Count; j++)
                     {
-                        col.BodyVarieties[i].Animations[j].OnGui(over.clips[j].originalClip.name,maxWidth);
+                        col.BodyVarieties[i].Animations[j].OnGui(col.ClipNames[j], maxWidth);
                     }
                 }
             }
@@ -105,7 +120,7 @@ public class AnimSwap2CollectionEditor : EditorPlus
 
                     for (int j = 0; j < col.HeadVarieties[i].Animations.Count; j++)
                     {
-                        col.HeadVarieties[i].Animations[j].OnGui(over.clips[j].originalClip.name);
+                        col.HeadVarieties[i].Animations[j].OnGui(col.ClipNames[j]);
 
                     }
                 }

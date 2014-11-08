@@ -208,8 +208,8 @@ MonoBehaviour:
     type: 2}
   Head: {fileID: 9500002}
   Body: {fileID: 9500000}
-  HeadVariety: 0
-  BodyVariety: 0
+  HeadVariety: 4
+  BodyVariety: 3
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 2016619577c90c04ea6d8b8988acde5e, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 46d27b1b6b13ca5428452f2b1052ab8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:
@@ -279,7 +279,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
+  m_Sprite: {fileID: 21300008, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

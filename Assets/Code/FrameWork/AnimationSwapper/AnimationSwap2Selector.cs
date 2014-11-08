@@ -23,7 +23,7 @@ public class AnimationSwap2Selector : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        CollectionReference.SetAnimator(Head, Body, HeadVariety, BodyVariety);
+        //CollectionReference.SetAnimator(Head, Body, HeadVariety, BodyVariety);
 	}
 	
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -21,6 +22,24 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
 
     [SerializeField]
     public List<AS_AnimListCollection> HeadVarieties;
+
+    [SerializeField,HideInInspector]
+    private List<string> clipNames;
+
+    public List<string> ClipNames 
+    { 
+        get 
+        {
+            // Reset if there is no clip
+            if(clipNames == null)
+            {
+                AnimatorOverrideController ctr = GetNewOverrideController();
+                clipNames = ctr.clips.Select(k => k.originalClip.name).Distinct().ToList();
+                ctr = null;
+            }
+            return clipNames;// != null ? clipNames : clipNames = GetNewOverrideController().clips.Select(k => k.originalClip.name).Distinct().ToList(); 
+        } 
+    }
 
     //TODO
     //[SerializeField,HideInInspector]
@@ -52,6 +71,8 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
     public AnimatorOverrideController GetNewOverrideController()
     {
         AnimatorOverrideController controller = new AnimatorOverrideController();
+        AnimatorOverrideController old = (AnimatorOverrideController)controller.runtimeAnimatorController;
+        old = null;
         controller.runtimeAnimatorController = Controller;
         return controller;
     }
@@ -76,7 +97,7 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
         body.GetComponent<SpriteRenderer>().sprite = BodyVarieties[bodyIndex].PreviewSprite;
 
         //Loop to set all the animations
-        for (int i = 0; i < headOverride.clips.Length; i++)
+        for (int i = 0; i < ClipNames.Count; i++)
         {
             //Debug.Log(headOverride.clips[i].originalClip.name);
 
@@ -115,11 +136,11 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
 
     public void AddNewBodyVariety()
     {
-        AnimatorOverrideController controller = GetNewOverrideController();
+        //AnimatorOverrideController controller = GetNewOverrideController();
         
         AS_AnimIndexCollection newBody = new AS_AnimIndexCollection();
 
-        for (int i = 0; i < controller.clips.Length; i++)
+        for (int i = 0; i < ClipNames.Count; i++)
         {
             newBody.Animations.Add(new AS_AnimIndex());
         }
@@ -129,11 +150,11 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
 
     public void AddNewHeadVariety()
     {
-        AnimatorOverrideController controller = GetNewOverrideController();
+        //AnimatorOverrideController controller = GetNewOverrideController();
         
         AS_AnimListCollection newHead = new AS_AnimListCollection();
 
-        for (int i = 0; i < controller.clips.Length; i++)
+        for (int i = 0; i < ClipNames.Count; i++)
         {
             newHead.Animations.Add(new AS_AnimList());
         }
@@ -142,4 +163,15 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
     }
 
     //public void 
+
+    public void ResetClipNames()
+    {
+        clipNames = null;
+        
+        for (int i = 0; i < ClipNames.Count; i++)
+        {
+            //Debug.Log(ClipNames[i]);
+            Debug.Log("TODO need to add extra clips if needed");
+        }
+    }
 }

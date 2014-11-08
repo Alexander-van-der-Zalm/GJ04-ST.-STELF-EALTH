@@ -354,3 +354,20 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
+  clipNames:
+  - WalkUp
+  - WalkDown
+  - WalkSide
+  - Bump
+  - Steal
+  - Recieve
+  - Talk
+  - Give
+  - Drink
+  - DanceDown
+  - DanceSide
+  - DanceUp
+  - IdleDown
+  - IdleSide
+  - IdleUp
+  - Angry
