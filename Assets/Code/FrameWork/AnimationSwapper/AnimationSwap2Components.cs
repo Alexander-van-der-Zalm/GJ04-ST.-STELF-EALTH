@@ -17,7 +17,7 @@ public class AS_AnimList
 
     public void OnGui(string label = "")
     {
-        label += "Anim[";
+        label += "[";
         List<int> indicesToDelete = new List<int>();
         bool add = false;
         for (int i = 0; i < Animations.Count; i++)
