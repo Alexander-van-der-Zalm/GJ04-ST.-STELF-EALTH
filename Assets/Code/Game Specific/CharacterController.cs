@@ -13,12 +13,7 @@ public class CharacterController : MonoBehaviour
 
     private Transform tr;
     private Rigidbody2D rb;
-    //private Animator an;
-    AnimationSwapAnimatorWrapper anim;
-
-    //private string velXStr = "VelocityX";
-    //private string velYStr = "VelocityY";
-    //private string bounceAnimVar = "Bounce";
+    private AnimationSwapAnimatorWrapper anim;
 
     private string bounceSoundString = "Bump";
     private int bounceSoundVariations = 1;

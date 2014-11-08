@@ -32,4 +32,15 @@ public class ControlHelper
             Debug.LogError("String "+ value+ " is not contained in enumtype:"+  typeof(T).ToString());
         return en;
     }
+    [SerializeField]
+    private static string[] keyCodeOptions;
+    public static string[] KeyCodeOptions { get { return keyCodeOptions != null ? keyCodeOptions : keyCodeOptions = Enum.GetNames(typeof(KeyCode)); } }
+
+    [SerializeField]
+    private static string[] dpadOptions;
+    public static string[] DPadOptions { get { return dpadOptions != null ? dpadOptions : dpadOptions = Enum.GetNames(typeof(XboxDPad)); } }//new string[] { "left", "right", "up", "down" }; } }
+
+    [SerializeField]
+    private static string[] xboxAxixOptions;
+    public static string[] XboxAxixOptions { get { return xboxAxixOptions != null ? xboxAxixOptions : xboxAxixOptions = Enum.GetNames(typeof(XboxAxis)); } }
 }

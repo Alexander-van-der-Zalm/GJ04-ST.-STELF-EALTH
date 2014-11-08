@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using XboxCtrlrInput;
 
 // Make generic
 [Serializable]
@@ -111,4 +112,6 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
             action.Update(this);
         }
     }
+
+    
 }

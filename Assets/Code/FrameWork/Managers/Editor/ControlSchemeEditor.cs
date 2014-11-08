@@ -1,16 +1,29 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
+[CustomEditor(typeof(ControlScheme))]
 public class ControlSchemeEditor : EditorPlus 
 {
+    public override void OnInspectorGUI()
+    {
+        if (SavedFoldout("OriginalGUI"))
+        {
+            EditorGUI.indentLevel++;
+            base.OnInspectorGUI();
+            EditorGUI.indentLevel--;
+            EditorGUILayout.Space();
+        }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        //Prep
+        ControlScheme ct = (ControlScheme)target;
+
+        if (SavedFoldout("Horizontal"))
+        {
+            for(int i = 0; i < ct.Horizontal.AxisKeys.Count; i++)
+            {
+                ct.Horizontal.AxisKeys[i].OnGui();
+            }
+        }
+    }
 }

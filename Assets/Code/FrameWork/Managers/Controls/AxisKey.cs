@@ -2,14 +2,23 @@
 using System.Collections;
 using XboxCtrlrInput;
 using System.Collections.Generic;
+using UnityEditor;
 
 [System.Serializable]
 public class AxisKey
 {
+    #region Fields
+
     public ControlKeyType Type;
     public List<string> keys = new List<string>();
     public XboxAxisType xboxAxisType;
     //private HorVert horVert;
+
+    private int selectedIndex1, selectedIndex2;
+
+    #endregion
+
+    #region Enums
 
     public enum HorVert
     {
@@ -22,6 +31,10 @@ public class AxisKey
         dpad,
         axis
     }
+
+    #endregion
+
+    #region Creates
 
     public static AxisKey XboxAxis(XboxAxis axis)
     {
@@ -64,6 +77,10 @@ public class AxisKey
         return ak;
     }
 
+    #endregion
+
+    #region Value
+
     public float Value(int xboxController)
     {
         float v = 0;
@@ -93,4 +110,94 @@ public class AxisKey
         }
         return v;
     }
+
+    #endregion
+
+    #region GUI
+
+    public void OnGui()
+    {
+        EditorGUILayout.BeginHorizontal();
+
+        Type = (ControlKeyType)EditorGUILayout.EnumPopup(Type, GUILayout.Width(50.0f));
+        if (GUI.changed)
+            changed();
+
+        switch(Type)
+        {
+            case ControlKeyType.PC:
+                pcGui();
+                break;
+
+            case ControlKeyType.Xbox:
+                xboxGui();
+                break;
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void xboxGui()
+    {
+        xboxAxisType = (XboxAxisType)EditorGUILayout.EnumPopup(xboxAxisType, GUILayout.Width(40.0f));
+        if (GUI.changed)
+            changed();
+
+        switch(xboxAxisType)
+        {
+            case XboxAxisType.axis:
+                xboxAxisGUI();
+                break;
+            case XboxAxisType.dpad:
+                xboxDpadGUI();
+                break;
+        }
+    }
+
+    private void changed()
+    {
+        //TODO
+    }
+
+    private void xboxDpadGUI()
+    {
+        while(keys.Count < 2)
+            keys.Add(ControlHelper.DPadOptions[0]);
+
+        EditorGUILayout.LabelField("+", GUILayout.Width(15.0f));
+        selectedIndex1 = EditorGUILayout.Popup(selectedIndex1, ControlHelper.DPadOptions, GUILayout.Width(60.0f));
+        keys[0] = ControlHelper.DPadOptions[selectedIndex1];
+
+        GUILayout.Space(20.0f);
+
+        EditorGUILayout.LabelField("-", GUILayout.Width(15.0f));
+        selectedIndex2 = EditorGUILayout.Popup(selectedIndex2, ControlHelper.DPadOptions, GUILayout.Width(60.0f));
+        keys[1] = ControlHelper.DPadOptions[selectedIndex2];
+    }
+
+    private void xboxAxisGUI()
+    {
+        while (keys.Count < 1)
+            keys.Add(ControlHelper.XboxAxixOptions[0]);
+        GUILayout.Space(20.0f);
+        //EditorGUILayout.LabelField("Axis", GUILayout.Width(20.0f));
+        selectedIndex1 = EditorGUILayout.Popup(selectedIndex1, ControlHelper.XboxAxixOptions, GUILayout.Width(80.0f));
+        keys[0] = ControlHelper.XboxAxixOptions[selectedIndex1];
+    }
+
+    private void pcGui()
+    {
+        while (keys.Count < 1)
+            keys.Add(ControlHelper.KeyCodeOptions[0]);
+
+        GUILayout.Space(45.0f);
+
+        EditorGUILayout.LabelField("+", GUILayout.Width(15.0f));
+        selectedIndex1 = EditorGUILayout.Popup(selectedIndex1, ControlHelper.KeyCodeOptions, GUILayout.Width(80.0f));
+        keys[0] = ControlHelper.KeyCodeOptions[selectedIndex1];
+        EditorGUILayout.LabelField("-", GUILayout.Width(15.0f));
+        selectedIndex2 = EditorGUILayout.Popup(selectedIndex2, ControlHelper.KeyCodeOptions, GUILayout.Width(80.0f));
+        keys[1] = ControlHelper.KeyCodeOptions[selectedIndex2];
+    }
+
+    #endregion
 }

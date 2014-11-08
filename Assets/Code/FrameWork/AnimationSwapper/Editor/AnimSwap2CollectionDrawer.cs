@@ -20,7 +20,7 @@ public class AnimSwap2CollectionEditor : EditorPlus
 {
     public override void OnInspectorGUI()
     {
-        if(SavedFoldout("Achter de schermen"))
+        if(SavedFoldout("OriginalGUI"))
         {
             EditorGUI.indentLevel++;
             base.OnInspectorGUI();
