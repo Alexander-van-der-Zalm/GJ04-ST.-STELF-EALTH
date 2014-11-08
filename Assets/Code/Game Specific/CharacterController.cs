@@ -32,7 +32,7 @@ public class CharacterController : MonoBehaviour
         tr = transform;
         rb = rigidbody2D;
         anim = new AnimationSwapAnimatorWrapper(gameObject);
-        an = GetComponentInChildren<Animator>();
+        //an = GetComponentInChildren<Animator>();
         rb.gravityScale = 0;
         rb.fixedAngle = true;
 	}
