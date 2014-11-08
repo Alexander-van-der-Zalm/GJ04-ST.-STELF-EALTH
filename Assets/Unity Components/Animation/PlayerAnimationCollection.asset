@@ -1,0 +1,214 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fa97ab3bdb69c45870f3f15ada595e, type: 3}
+  m_Name: PlayerAnimationCollection
+  m_EditorClassIdentifier: 
+  Controller: {fileID: 9100000, guid: 0eaacc57d01422c4dade93b4ede4de7a, type: 2}
+  BodyVarieties:
+  - Animations:
+    - Animation: {fileID: 7400000, guid: 4d6744416a543e749ab0f2f349e74d82, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 91bbc5ef9ce67054a9b65320f1797f36, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: ddb28ff5407710f439a21394110a6591, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  - Animations:
+    - Animation: {fileID: 7400000, guid: 8692ea0513d7a0d4a94e2c3871b0b82b, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 06a95116cb6d15d45bb0f76603ff5eb5, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 5204f81d6c14a0547ad49c510a3d9d90, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  - Animations:
+    - Animation: {fileID: 7400000, guid: ae4506c7bd325d84890ed0658bf6ebed, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: eaf0d8ce06faf6b469ba6a34e2b101a3, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 89600f1ad5f2d4843adaf95f0759093b, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  - Animations:
+    - Animation: {fileID: 7400000, guid: 615933cd2470dc24c90d5187cd0547fd, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 536ffabd882145845aad3af0b7110b23, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 41f4414f4a2ff0848a4cf60c39aa40c6, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  - Animations:
+    - Animation: {fileID: 7400000, guid: f0273eaab6b76144395879c2a1b3853f, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 35e8b553c8a89884ba0882283b03b48d, type: 2}
+      Index: 0
+    - Animation: {fileID: 7400000, guid: 8cc161fb6a6686649b5763a8bde2ce03, type: 2}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+  HeadVarieties:
+  - Animations:
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
