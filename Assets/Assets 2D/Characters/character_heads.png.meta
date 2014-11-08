@@ -2,26 +2,26 @@ fileFormatVersion: 2
 guid: e8f7733a68e223545ae3886b17bf89f3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: character_heads_0
-    21300002: character_heads_1
-    21300004: character_heads_2
-    21300006: character_heads_3
-    21300008: character_heads_4
-    21300010: character_heads_5
-    21300012: character_heads_6
-    21300014: character_heads_7
-    21300016: character_heads_8
-    21300018: character_heads_9
-    21300020: character_heads_10
-    21300022: character_heads_11
-    21300024: character_heads_12
-    21300026: character_heads_13
-    21300028: character_heads_14
-    21300030: character_heads_15
-    21300032: character_heads_16
-    21300034: character_heads_17
-    21300036: character_heads_18
-    21300038: character_heads_19
+    21300000: c_heads_00
+    21300002: c_heads_01
+    21300004: c_heads_02
+    21300006: c_heads_03
+    21300008: c_heads_04
+    21300010: c_heads_05
+    21300012: c_heads_06
+    21300014: c_heads_07
+    21300016: c_heads_08
+    21300018: c_heads_09
+    21300020: c_heads_back_00
+    21300022: c_heads_back_01
+    21300024: c_heads_back_03
+    21300026: c_heads_back_04
+    21300028: c_heads_back_05
+    21300030: c_heads_back_05
+    21300032: c_heads_back_06
+    21300034: c_heads_back_07
+    21300036: c_heads_back_08
+    21300038: c_heads_back_09
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -63,7 +63,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: character_heads_0
+    - name: c_heads_00
       rect:
         serializedVersion: 2
         x: 0
@@ -71,9 +71,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_1
+    - name: c_heads_01
       rect:
         serializedVersion: 2
         x: 24
@@ -81,9 +81,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_2
+    - name: c_heads_02
       rect:
         serializedVersion: 2
         x: 48
@@ -91,9 +91,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_3
+    - name: c_heads_03
       rect:
         serializedVersion: 2
         x: 72
@@ -101,9 +101,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_4
+    - name: c_heads_04
       rect:
         serializedVersion: 2
         x: 96
@@ -111,9 +111,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_5
+    - name: c_heads_05
       rect:
         serializedVersion: 2
         x: 0
@@ -121,9 +121,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_6
+    - name: c_heads_06
       rect:
         serializedVersion: 2
         x: 24
@@ -131,9 +131,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_7
+    - name: c_heads_07
       rect:
         serializedVersion: 2
         x: 48
@@ -141,9 +141,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_8
+    - name: c_heads_08
       rect:
         serializedVersion: 2
         x: 72
@@ -151,9 +151,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_9
+    - name: c_heads_09
       rect:
         serializedVersion: 2
         x: 96
@@ -161,9 +161,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_10
+    - name: c_heads_back_00
       rect:
         serializedVersion: 2
         x: 0
@@ -171,9 +171,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_11
+    - name: c_heads_back_01
       rect:
         serializedVersion: 2
         x: 24
@@ -181,9 +181,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_12
+    - name: c_heads_back_03
       rect:
         serializedVersion: 2
         x: 48
@@ -191,9 +191,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_13
+    - name: c_heads_back_04
       rect:
         serializedVersion: 2
         x: 72
@@ -201,9 +201,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_14
+    - name: c_heads_back_05
       rect:
         serializedVersion: 2
         x: 96
@@ -211,9 +211,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_15
+    - name: c_heads_back_05
       rect:
         serializedVersion: 2
         x: 0
@@ -221,9 +221,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_16
+    - name: c_heads_back_06
       rect:
         serializedVersion: 2
         x: 24
@@ -231,9 +231,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_17
+    - name: c_heads_back_07
       rect:
         serializedVersion: 2
         x: 48
@@ -241,9 +241,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_18
+    - name: c_heads_back_08
       rect:
         serializedVersion: 2
         x: 72
@@ -251,9 +251,9 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: character_heads_19
+    - name: c_heads_back_09
       rect:
         serializedVersion: 2
         x: 96
@@ -261,7 +261,7 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 7
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

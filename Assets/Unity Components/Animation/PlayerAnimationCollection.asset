@@ -47,7 +47,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300002, guid: 1f41c19cc10c2174aa5699e91b70385d, type: 3}
     Animations:
     - Animation: {fileID: 7400000, guid: 8692ea0513d7a0d4a94e2c3871b0b82b, type: 2}
       Index: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300004, guid: 1f311036da1dfbe439138eabca4d2064, type: 3}
     Animations:
     - Animation: {fileID: 7400000, guid: ae4506c7bd325d84890ed0658bf6ebed, type: 2}
       Index: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300006, guid: 46d27b1b6b13ca5428452f2b1052ab8e, type: 3}
     Animations:
     - Animation: {fileID: 7400000, guid: 615933cd2470dc24c90d5187cd0547fd, type: 2}
       Index: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300002, guid: b1eb0f0ef85cb9745a673ff20c47871f, type: 3}
     Animations:
     - Animation: {fileID: 7400000, guid: f0273eaab6b76144395879c2a1b3853f, type: 2}
       Index: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
     - Animation: {fileID: 0}
       Index: 0
   HeadVarieties:
-  - PreviewSprite: {fileID: 21300006, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
+  - PreviewSprite: {fileID: 21300000, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
     Animations:
     - Animations:
       - {fileID: 7400000, guid: 59d97369ace7ab2458a067666e65baa1, type: 2}
@@ -218,7 +218,7 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300002, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
     Animations:
     - Animations:
       - {fileID: 7400000, guid: 5876255a8a3f91a47bd7a84e5fa56543, type: 2}
@@ -252,7 +252,7 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300004, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
     Animations:
     - Animations:
       - {fileID: 7400000, guid: 6959571b7a238d54db5acb8310994a14, type: 2}
@@ -286,7 +286,7 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300006, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
     Animations:
     - Animations:
       - {fileID: 7400000, guid: dc25660f535893c4fa168d458a445529, type: 2}
@@ -320,7 +320,7 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
-  - PreviewSprite: {fileID: 0}
+  - PreviewSprite: {fileID: 21300008, guid: e8f7733a68e223545ae3886b17bf89f3, type: 3}
     Animations:
     - Animations:
       - {fileID: 7400000, guid: 53bc53a0a2c0142489baefb9e3b52e74, type: 2}
