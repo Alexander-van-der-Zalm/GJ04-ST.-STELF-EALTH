@@ -32,7 +32,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: 536ffabd882145845aad3af0b7110b23, type: 2}
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 7400000, guid: 5204f81d6c14a0547ad49c510a3d9d90, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: da7facb5788fe28408747168cfa1b935, type: 2}
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
@@ -65,11 +65,11 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: aad26acaf654ed44c9d251b08ee9276c, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: aad26acaf654ed44c9d251b08ee9276c, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: aad26acaf654ed44c9d251b08ee9276c, type: 2}
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 7400000, guid: 89600f1ad5f2d4843adaf95f0759093b, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: 7f50f9eb610454746ab32e5361c1e56e, type: 2}
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
@@ -98,11 +98,11 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: 077be7005e8951c4c9bf37ff973b08be, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: 077be7005e8951c4c9bf37ff973b08be, type: 2}
       Index: 0
-    - Animation: {fileID: 0}
+    - Animation: {fileID: 7400000, guid: 077be7005e8951c4c9bf37ff973b08be, type: 2}
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
@@ -181,7 +181,11 @@ MonoBehaviour:
   HeadVarieties:
   - Animations:
     - Animations:
-      - {fileID: 0}
+      - {fileID: 7400000, guid: 59d97369ace7ab2458a067666e65baa1, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b99136fc50b082647984c6d76e6a99de, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b99136fc50b082647984c6d76e6a99de, type: 2}
     - Animations:
       - {fileID: 0}
     - Animations:
@@ -195,7 +199,11 @@ MonoBehaviour:
     - Animations:
       - {fileID: 0}
     - Animations:
-      - {fileID: 0}
+      - {fileID: 7400000, guid: b99136fc50b082647984c6d76e6a99de, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b99136fc50b082647984c6d76e6a99de, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b99136fc50b082647984c6d76e6a99de, type: 2}
     - Animations:
       - {fileID: 0}
     - Animations:
@@ -204,6 +212,130 @@ MonoBehaviour:
       - {fileID: 0}
     - Animations:
       - {fileID: 0}
+  - Animations:
+    - Animations:
+      - {fileID: 7400000, guid: 5876255a8a3f91a47bd7a84e5fa56543, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+  - Animations:
+    - Animations:
+      - {fileID: 7400000, guid: 6959571b7a238d54db5acb8310994a14, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 5fba339b25aeda949b2b867eedd7878f, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 5fba339b25aeda949b2b867eedd7878f, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 7400000, guid: 5fba339b25aeda949b2b867eedd7878f, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 5fba339b25aeda949b2b867eedd7878f, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: 5fba339b25aeda949b2b867eedd7878f, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+  - Animations:
+    - Animations:
+      - {fileID: 7400000, guid: dc25660f535893c4fa168d458a445529, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b4cb72ef28496704896b61f9fac04b91, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b4cb72ef28496704896b61f9fac04b91, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 7400000, guid: b4cb72ef28496704896b61f9fac04b91, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b4cb72ef28496704896b61f9fac04b91, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: b4cb72ef28496704896b61f9fac04b91, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+  - Animations:
+    - Animations:
+      - {fileID: 7400000, guid: 53bc53a0a2c0142489baefb9e3b52e74, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: e40e114d76d97c94791344d792789375, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: e40e114d76d97c94791344d792789375, type: 2}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 0}
+    - Animations:
+      - {fileID: 7400000, guid: e40e114d76d97c94791344d792789375, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: e40e114d76d97c94791344d792789375, type: 2}
+    - Animations:
+      - {fileID: 7400000, guid: e40e114d76d97c94791344d792789375, type: 2}
     - Animations:
       - {fileID: 0}
     - Animations:
