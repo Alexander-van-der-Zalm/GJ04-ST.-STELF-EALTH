@@ -4,15 +4,27 @@ using System.Collections.Generic;
 using XboxCtrlrInput;
 
 [System.Serializable]
-public class Axis : Control
+public class Axis //: Control
 {
+    [SerializeField]
+    public string Name;
+
+    [SerializeField]
+    protected ControlScheme scheme;
+    
+    [SerializeField]
     public List<AxisKey> AxisKeys;// = new List<ControlKey>();
+
+    [SerializeField]
     private int lastAxis;
 
     public Axis(ControlScheme scheme, string name = "defaultAxis")
-        : base(scheme, name)
+        //: base(scheme, name)
     {
         AxisKeys = new List<AxisKey>();
+
+        this.scheme = scheme;
+        this.Name = name;
     }
 
     public float Value()

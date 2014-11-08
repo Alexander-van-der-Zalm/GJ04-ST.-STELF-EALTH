@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b57b65fb1fc5464fbc02247c5d76611, type: 3}
+  m_Name: ControlScheme
+  m_EditorClassIdentifier: 
+  Name: PlayerControl+PlayerActions
+  controllerID: 1
+  playerID: 1
+  UpdateType: 1
+  InputType: 0
+  Horizontal:
+    Name: Horizontal
+    scheme: {fileID: 11400000}
+    AxisKeys:
+    - Type: 1
+      keys:
+      - LeftStickX
+      xboxAxisType: 1
+    - Type: 1
+      keys:
+      - Left
+      - Right
+      xboxAxisType: 0
+    - Type: 0
+      keys:
+      - A
+      - D
+      xboxAxisType: 0
+    - Type: 0
+      keys:
+      - LeftArrow
+      - RightArrow
+      xboxAxisType: 0
+    lastAxis: 0
+  Vertical:
+    Name: Vertical
+    scheme: {fileID: 11400000}
+    AxisKeys:
+    - Type: 1
+      keys:
+      - LeftStickY
+      xboxAxisType: 1
+    - Type: 1
+      keys:
+      - Down
+      - Up
+      xboxAxisType: 0
+    - Type: 0
+      keys:
+      - S
+      - W
+      xboxAxisType: 0
+    - Type: 0
+      keys:
+      - DownArrow
+      - UpArrow
+      xboxAxisType: 0
+    lastAxis: 0
+  Actions:
+  - Name: PickPocket
+    scheme: {fileID: 11400000}
+    Keys:
+    - Type: 0
+      KeyValue: Space
+      LastState: 0
+      CurState: 0
+    - Type: 1
+      KeyValue: A
+      LastState: 0
+      CurState: 0

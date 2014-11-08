@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
     
     public ControlScheme ControlScheme;
     
-    [SerializeField]
+    [SerializeField,HideInInspector]
     private CharacterController cc;
 
 
@@ -29,7 +29,8 @@ public class PlayerControl : MonoBehaviour
             ControlScheme = ControlScheme.CreateScheme<PlayerActions>();
             ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.PCKey(KeyCode.Space));
             ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.XboxButton(XboxCtrlrInput.XboxButton.A));
-            
+
+            ScriptableObjectHelper.SaveAssetAutoNaming(ControlScheme);
             //ControlScheme.hideFlags = HideFlags.DontSave;
 
         }

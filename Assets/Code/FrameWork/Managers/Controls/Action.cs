@@ -4,13 +4,23 @@ using System.Collections.Generic;
 using XboxCtrlrInput;
 
 [System.Serializable]
-public class Action : Control 
+public class Action// : Control 
 {
+    [SerializeField]
+    public string Name;
+
+    [SerializeField]
+    protected ControlScheme scheme;
+
+    [SerializeField]
     public List<ControlKey> Keys;// = new List<ControlKey>();
 
-    public Action(ControlScheme scheme, string name = "defaultAction"):base(scheme, name)
+    public Action(ControlScheme scheme, string name = "defaultAction")//:base(scheme, name)
     {
         Keys = new List<ControlKey>();
+
+        this.scheme = scheme;
+        this.Name = name;
     }
 
     public bool IsDown()

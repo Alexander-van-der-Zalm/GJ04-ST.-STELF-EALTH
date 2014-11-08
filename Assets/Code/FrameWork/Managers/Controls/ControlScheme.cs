@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
 // Make generic
 [Serializable]
@@ -28,9 +29,16 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
     public Axis Horizontal;
     public Axis Vertical;
 
+    [SerializeField]
     public List<Action> Actions = new List<Action>();
 
     #endregion
+
+    //[MenuItem("CustomTools/Create new playerController")]
+    //public static void CreateControlScheme()
+    //{
+
+    //}
 
     public static ControlScheme CreateScheme<T>(UpdateTypeE updateType = UpdateTypeE.FixedUpdate, bool xboxLeftStick = true, bool xboxDPad = true, bool arrows = true, bool wasd = true) where T : struct, IConvertible
     {
