@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 
 [System.Serializable]
-public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Collection> 
+public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Collection>
 {
-    
+    #region Fields
 
     //[SerializeField]
     //public List<string> AnimationNames;
@@ -26,6 +26,10 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
     //[SerializeField,HideInInspector]
     //m_overrideController =
 
+    #endregion
+
+    #region Constructor
+
     [MenuItem("CustomTools/Create new AnimationSwapCollection")]
     public static void CreateAnimationSwapCollection()
     {
@@ -40,18 +44,14 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
         HeadVarieties = new List<AS_AnimListCollection>();
     }
 
+    #endregion
+
     public AnimatorOverrideController GetNewOverrideController()
     {
         AnimatorOverrideController controller = new AnimatorOverrideController();
         controller.runtimeAnimatorController = Controller;
         return controller;
     }
-
-    public void ApplyControllerChange()
-    {
-
-    }
-
 
     public void SetAnimator(Animator head, Animator body,  int headIndex,int bodyIndex)
     {

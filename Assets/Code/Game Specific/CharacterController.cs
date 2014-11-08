@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour
     private Transform tr;
     private Rigidbody2D rb;
     private Animator an;
+    AnimationSwapAnimatorWrapper anim;
 
     private string velXStr = "VelocityX";
     private string velYStr = "VelocityY";
@@ -30,6 +31,7 @@ public class CharacterController : MonoBehaviour
     {
         tr = transform;
         rb = rigidbody2D;
+        anim = new AnimationSwapAnimatorWrapper(gameObject);
         an = GetComponentInChildren<Animator>();
         rb.gravityScale = 0;
         rb.fixedAngle = true;
