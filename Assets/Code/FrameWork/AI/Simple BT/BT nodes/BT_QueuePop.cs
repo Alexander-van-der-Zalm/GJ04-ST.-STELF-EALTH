@@ -46,7 +46,7 @@ public class BT_QueuePop : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter PopParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePop.Create<BT_QueuePop>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_QueuePop>());
         return SetParameters(node, QueueParam, PopParam);
     }
 

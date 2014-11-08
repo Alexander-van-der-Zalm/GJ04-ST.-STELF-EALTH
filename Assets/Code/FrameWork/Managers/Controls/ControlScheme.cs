@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 // Make generic
 [Serializable]
-public class ControlScheme// : MonoBehaviour 
+public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour 
 {
     public enum UpdateTypeE
     {
@@ -39,7 +39,7 @@ public class ControlScheme// : MonoBehaviour
             throw new ArgumentException("T must be an enumerated type");
         }
 
-        ControlScheme controlScheme = new ControlScheme();
+        ControlScheme controlScheme = ControlScheme.Create();
         controlScheme.Name = typeof(T).ToString();
         controlScheme.UpdateType = updateType;
         controlScheme.SetActionsFromEnum<T>();

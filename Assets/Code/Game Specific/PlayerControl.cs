@@ -12,7 +12,10 @@ public class PlayerControl : MonoBehaviour
     
     public ControlScheme ControlScheme;
     
+    [SerializeField]
     private CharacterController cc;
+
+
     private PickPocket pp;
 
 	// Use this for initialization
@@ -20,10 +23,17 @@ public class PlayerControl : MonoBehaviour
     {
         cc = gameObject.GetComponent<CharacterController>();
         pp = gameObject.GetComponent<PickPocket>();
+       
+        if(ControlScheme == null)
+        {
+            ControlScheme = ControlScheme.CreateScheme<PlayerActions>();
+            ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.PCKey(KeyCode.Space));
+            ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.XboxButton(XboxCtrlrInput.XboxButton.A));
+            
+            //ControlScheme.hideFlags = HideFlags.DontSave;
 
-        ControlScheme = ControlScheme.CreateScheme<PlayerActions>();
-        ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.PCKey(KeyCode.Space));
-        ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.XboxButton(XboxCtrlrInput.XboxButton.A));
+        }
+        
 	}
 	
 	// Update is called once per frame

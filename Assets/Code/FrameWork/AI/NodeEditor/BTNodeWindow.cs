@@ -72,6 +72,7 @@ public class BTNodeWindow : NodeWindow
         window.status = Status.Invalid;
 
         // Add object to asset
+        //ScriptableObjectHelper.AddObjectToAsset(asset, window);
         window.AddObjectToAsset(asset);
 
         return window;

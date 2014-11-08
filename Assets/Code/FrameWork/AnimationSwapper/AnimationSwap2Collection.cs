@@ -33,8 +33,11 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
     [MenuItem("CustomTools/Create new AnimationSwapCollection")]
     public static void CreateAnimationSwapCollection()
     {
-        string path = AssetDatabase.GenerateUniqueAssetPath("Assets/AnimationSwapCollection.asset");
-        AnimationSwap2Collection.CreateObjAndAsset(path);
+        //string path = AssetDatabase.GenerateUniqueAssetPath("Assets/");
+        //EasyScriptableObjectHelper
+        //AnimationSwap2Collection.CreateObjAndAsset(path);
+        //AnimationSwap2Collection col = AnimationSwap2Collection.Create();
+        ScriptableObjectHelper.SaveAssetAutoNaming(AnimationSwap2Collection.Create());
     }
 
     public override void Init(HideFlags newHideFlag = HideFlags.None)

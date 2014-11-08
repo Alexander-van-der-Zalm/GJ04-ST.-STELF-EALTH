@@ -373,7 +373,8 @@ public class BTNodeWindowEditor : NodeEditorWindow
                 createButtonText = "Replace Tree @";
             if (GUILayout.Button(createButtonText))
             {
-                SelectedTree = BT_Tree.CreateObjAndAsset(path);
+                SelectedTree = BT_Tree.Create();// CreateObjAndAsset(path);
+                ScriptableObjectHelper.SaveAsset(SelectedTree,path);
                 Selection.objects = new Object[] { SelectedTree };
             }
             using(new FixedWidthLabel(path))

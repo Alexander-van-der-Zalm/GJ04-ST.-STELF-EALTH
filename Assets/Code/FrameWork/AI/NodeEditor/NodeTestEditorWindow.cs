@@ -88,10 +88,11 @@ public class NodeTestEditorWindow : NodeEditorWindow
         }
         EditorGUILayout.BeginHorizontal();
         path = EditorGUILayout.TextField("Path", path);
-        if (GUILayout.Button("AddNode"))
-            BT_TreeNode.CreateObjAddToAsset(path);
-        if (GUILayout.Button("CreateTree"))
-            BT_Tree.CreateObjAndAsset(path);
+        //if (GUILayout.Button("AddNode"))
+        //    ScriptableObjectHelper.AddObjectToAsset()
+        //    BT_TreeNode.CreateObjAddToAsset(path);
+        //if (GUILayout.Button("CreateTree"))
+        //    BT_Tree.CreateObjAndAsset(path);
         EditorGUILayout.EndHorizontal();
     }
 

@@ -2,6 +2,60 @@
 using System.Collections;
 using UnityEditor;
 
+public class ScriptableObjectHelper
+{
+    public static V Create<V>() where V : ScriptableObject, IInitSO
+    {
+        V so = ScriptableObject.CreateInstance<V>();
+        so.Init();
+        return so;
+    }
+    
+    public static void SaveAssetAutoNaming(ScriptableObject asset, string path = "Assets", bool unique = true)
+    {
+        if (!asset.name.Equals(string.Empty))
+            path += "/" + asset.name + ".asset";
+        else
+            path += "/" + asset.GetType().Name + ".asset";
+
+        if (unique)
+            path = AssetDatabase.GenerateUniqueAssetPath(path);
+
+        SaveAsset(asset, path);
+    }
+
+    public static void SaveAsset(ScriptableObject asset, string path)
+    {
+        correctHideFlagsForSaving(asset);
+
+        AssetDatabase.CreateAsset(asset, path);
+
+        AssetDatabase.ImportAsset(path);
+        AssetDatabase.SaveAssets();
+    }
+
+    private static void correctHideFlagsForSaving(ScriptableObject asset)
+    {
+        Debug.Log(asset.hideFlags.ToString());
+        if (asset.hideFlags == HideFlags.DontSave)
+            asset.hideFlags = HideFlags.None;
+
+        if (asset.hideFlags == HideFlags.HideAndDontSave)
+            asset.hideFlags = HideFlags.HideInHierarchy;
+    }
+
+    public static void RefreshAsset(ScriptableObject asset)
+    {
+        string path = AssetDatabase.GetAssetPath(asset);
+        if (AssetDatabase.IsSubAsset(asset))
+            path = AssetDatabase.GetAssetPath(AssetDatabase.LoadMainAssetAtPath(path));
+
+        AssetDatabase.ImportAsset(path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+}
+
 public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, IInitSO where T : ScriptableObject, IEasyScriptableObject, IInitSO
 {
     public static T Create()
@@ -11,46 +65,24 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         return obj;
     }
 
-    public static T CreateObjAndAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
-    {
-        T obj = Create();
+    //public static T CreateObjAndAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
+    //{
+    //    T obj = Create();
 
-        obj.CreateAsset(path);
+    //    obj.CreateAsset(path);
 
-        return obj;
-    }
+    //    return obj;
+    //}
 
-    public static T CreateObjAddToAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
-    {
-        T obj = Create();
+    //public static T CreateObjAddToAsset(string path, HideFlags newHideFlag = HideFlags.DontSave)
+    //{
+    //    T obj = Create();
 
-        obj.AddObjectToAsset(path);
+    //    obj.AddObjectToAsset(path);
         
-        return obj;
-    }
+    //    return obj;
+    //}
 
-    public void CreateAsset(string path)
-    {
-        //correctHideFlagsForSaving();
-        if (hideFlags == HideFlags.DontSave)
-            hideFlags = HideFlags.None;
-
-        if (hideFlags == HideFlags.HideAndDontSave)
-            hideFlags = HideFlags.HideInHierarchy;
-
-        AssetDatabase.CreateAsset(this, path);
-        AssetDatabase.ImportAsset(path);
-        AssetDatabase.SaveAssets();
-    }
-
-    private void correctHideFlagsForSaving()
-    {
-        if (hideFlags == HideFlags.DontSave)
-            hideFlags = HideFlags.None;
-
-        if (hideFlags == HideFlags.HideAndDontSave)
-            hideFlags = HideFlags.HideInHierarchy;
-    }
 
     public void AddObjectToAsset(UnityEngine.Object obj)
     {
@@ -84,17 +116,6 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         AssetDatabase.ImportAsset(path);
     }
 
-    public void RefreshAsset()
-    {
-        string path = AssetDatabase.GetAssetPath(this);
-        if (AssetDatabase.IsSubAsset(this))
-           path = AssetDatabase.GetAssetPath(AssetDatabase.LoadMainAssetAtPath(path));
-
-        AssetDatabase.ImportAsset(path);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }
-
     public void Destroy()
     {
         UnityEngine.Object.Destroy(this);
@@ -105,13 +126,6 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         UnityEngine.Object.DestroyImmediate(this, true);
     }
 
-    public static V Create<V>() where V : ScriptableObject, IInitSO
-    {
-        V so = ScriptableObject.CreateInstance<V>();
-        so.Init();
-        return so;
-    }
-
     public virtual void Init(HideFlags newHideFlag = HideFlags.None)
     {
         hideFlags = newHideFlag;
@@ -120,7 +134,7 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
 
 public interface IEasyScriptableObject
 {
-    void CreateAsset(string path);
+    //void CreateAsset(string path);
     void AddObjectToAsset(string path);
     void AddObjectToAsset(UnityEngine.Object obj);
     void Destroy();

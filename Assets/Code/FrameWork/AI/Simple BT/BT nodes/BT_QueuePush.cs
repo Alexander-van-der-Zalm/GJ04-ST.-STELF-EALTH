@@ -56,7 +56,7 @@ public class BT_QueuePush : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object pushObj)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePush.Create<BT_QueuePush>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_QueuePush>());
         return SetParameters(node, QueueParam, pushObj);
     }
 
@@ -71,7 +71,7 @@ public class BT_QueuePush : BT_Action
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter PushParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueuePush.Create<BT_QueuePush>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_QueuePush>());
         return SetParameters(node, QueueParam, PushParam);
     }
 

@@ -61,28 +61,28 @@ public class BT_TreeConstructor
 
     public static BT_TreeNode fail(BT_TreeNode child)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_AlwayFail.Create<BT_AlwayFail>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_AlwayFail>());
         node.AddChildren(child);
         return node;
     }
 
     public static BT_TreeNode inv(BT_TreeNode child)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Inverter.Create<BT_Inverter>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_Inverter>());
         node.AddChildren(child);
         return node;
     }
 
     public static BT_TreeNode sel(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Selector.Create<BT_Selector>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_Selector>());
         node.AddChildren(children);
         return node;
     }
 
     public static BT_TreeNode seq(params BT_TreeNode[] children)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_Sequencer.Create<BT_Sequencer>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_Sequencer>());
         node.AddChildren(children);
         return node;
     }

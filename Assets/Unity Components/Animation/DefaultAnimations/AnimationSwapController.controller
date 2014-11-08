@@ -8,12 +8,6 @@ AnimatorController:
   m_Name: AnimationSwapController
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: VelocityX
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: VelocityY
     m_Type: 1
     m_DefaultFloat: 0
@@ -46,12 +40,6 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: Talk
     m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: BumpTrigger
-    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -99,6 +87,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Angry
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Bump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -251,7 +245,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: BumpTrigger
+    m_ConditionEvent: Bump
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -311,7 +305,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Bump
     m_EventTreshold: 0
     m_ExitTime: .75
   m_Atomic: 1
@@ -430,8 +424,8 @@ Transition:
   m_TransitionDuration: .25
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: Moving
+  - m_ConditionMode: 2
+    m_ConditionEvent: Bump
     m_EventTreshold: 0
     m_ExitTime: .75
   m_Atomic: 1
@@ -749,13 +743,11 @@ StateMachine:
   - {x: -144, y: 36, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110215997}
+      first: {fileID: 0}
       second:
-      - {fileID: 110100675}
-    data:
-      first: {fileID: 110279352}
-      second:
-      - {fileID: 110109843}
+      - {fileID: 110100581}
+      - {fileID: 110192459}
+      - {fileID: 110185194}
     data:
       first: {fileID: 110237388}
       second:
@@ -765,6 +757,22 @@ StateMachine:
       - {fileID: 110173913}
       - {fileID: 110134216}
       - {fileID: 110100000}
+    data:
+      first: {fileID: 110200000}
+      second:
+      - {fileID: 110132237}
+    data:
+      first: {fileID: 110291179}
+      second:
+      - {fileID: 110135726}
+    data:
+      first: {fileID: 110279352}
+      second:
+      - {fileID: 110109843}
+    data:
+      first: {fileID: 110215997}
+      second:
+      - {fileID: 110100675}
     data:
       first: {fileID: 110264231}
       second:
@@ -785,20 +793,6 @@ StateMachine:
       first: {fileID: 110244467}
       second:
       - {fileID: 110175543}
-    data:
-      first: {fileID: 110291179}
-      second:
-      - {fileID: 110135726}
-    data:
-      first: {fileID: 110200000}
-      second:
-      - {fileID: 110132237}
-    data:
-      first: {fileID: 0}
-      second:
-      - {fileID: 110100581}
-      - {fileID: 110192459}
-      - {fileID: 110185194}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -132, y: -180, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

@@ -120,7 +120,11 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
         
         // Add object to asset
         if(treeObj != null)
+        {
+            //ScriptableObjectHelper.AddObjectToAsset(treeObj, node);
             node.AddObjectToAsset(treeObj);
+        }
+            
             
         return node;
     }
@@ -135,13 +139,16 @@ public class BT_TreeNode : TreeNodeLogic<BT_TreeNode>
     }
 
 
-    public static BT_TreeNode CreateNode(BT_BBParameters behavior, string filepath = "")
+    public static BT_TreeNode CreateNode(BT_BBParameters behavior)//, string filepath = "")
     {
         BT_TreeNode node = Create();
         node.Behavior = behavior;
 
-        if (filepath != string.Empty)
-            node.AddObjectToAsset(filepath);
+        //if (filepath != string.Empty)
+        //{
+
+        //}
+            //node.AddObjectToAsset(filepath);
 
         return node;
     }

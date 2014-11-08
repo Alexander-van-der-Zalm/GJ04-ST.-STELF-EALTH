@@ -207,6 +207,7 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         // Node Parameters
         AI_Blackboard newBB = AI_Blackboard.Create();
         //newBB.name = id + " | PARAMATERS | " + behavior.Description.Name;
+        //ScriptableObjectHelper.AddObjectToAsset(this, newBB);
         newBB.AddObjectToAsset(this);
 
         // Functional node part
@@ -259,7 +260,8 @@ public class BT_Tree : EasyScriptableObject<BT_Tree>
         SimpleReOrderIndices();
 
         // ISWORK :3
-        RefreshAsset();
+        ScriptableObjectHelper.RefreshAsset(this);
+        //RefreshAsset();
 
     }
 

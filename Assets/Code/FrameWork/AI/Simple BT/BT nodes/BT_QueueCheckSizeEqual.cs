@@ -60,7 +60,7 @@ public class BT_QueueCheckSize : BT_Condition
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, object sizeObject)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueueCheckSize.Create<BT_QueueCheckSize>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_QueueCheckSize>());
         return SetParameters(node, QueueParam, sizeObject);
     }
 
@@ -75,7 +75,7 @@ public class BT_QueueCheckSize : BT_Condition
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter QueueParam, AI_AgentParameter sizeObjParam)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_QueueCheckSize.Create<BT_QueueCheckSize>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_QueueCheckSize>());
         return SetParameters(node, QueueParam, sizeObjParam);
     }
 

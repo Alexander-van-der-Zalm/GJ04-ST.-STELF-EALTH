@@ -55,7 +55,7 @@ public class BT_CheckEqualBBParameter : BT_Condition
 
     public static BT_TreeNode GetTreeNode(AI_AgentParameter accesparam1, object equalObject)
     {
-        BT_TreeNode node = BT_TreeNode.CreateNode(BT_CheckEqualBBParameter.Create<BT_CheckEqualBBParameter>());
+        BT_TreeNode node = BT_TreeNode.CreateNode(ScriptableObjectHelper.Create<BT_CheckEqualBBParameter>());
         return SetParameters(node, accesparam1, equalObject);
     }
 

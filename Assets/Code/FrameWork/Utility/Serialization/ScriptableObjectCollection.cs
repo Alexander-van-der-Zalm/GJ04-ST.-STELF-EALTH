@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 /// <typeparam name="T"></typeparam>
 [System.Serializable]
-public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObjectCollection<T>>, IList<T> where T : IInitSO, IEasyScriptableObject
+public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObjectCollection<T>>, IList<T> where T : ScriptableObject, IInitSO, IEasyScriptableObject
 {
     [SerializeField]
     private List<T> soCollection;
@@ -34,7 +34,11 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
         // Add to list
         Collection.Add(newSO);
         if (AddObjectToAsset)
+        {
+            //ScriptableObjectHelper.AddObjectToAsset(this, newSO);
             newSO.AddObjectToAsset(this);
+        }
+            
     }
 
     public int IndexOf(T item)
@@ -46,6 +50,7 @@ public class ScriptableObjectCollection<T> : EasyScriptableObject<ScriptableObje
     {
         Collection.Insert(index, item);
         if (AddObjectToAsset)
+            //ScriptableObjectHelper.AddObjectToAsset(this, item);
             item.AddObjectToAsset(this);
     }
 
