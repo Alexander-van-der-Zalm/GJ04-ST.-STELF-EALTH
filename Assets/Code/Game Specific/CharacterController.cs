@@ -51,6 +51,11 @@ public class CharacterController : MonoBehaviour
         rb.velocity = movementInput * MaximumVelocity;
 
         // Set animator
+        if (rb.velocity.magnitude > 0)
+            anim.Moving = true;
+        else
+            anim.Moving = false;
+
         anim.VelocityX = rb.velocity.x;
         anim.VelocityXAbs = Mathf.Abs(rb.velocity.x);
         anim.VelocityY = rb.velocity.y;

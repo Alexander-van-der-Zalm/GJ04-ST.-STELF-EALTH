@@ -13,7 +13,7 @@ public class Axis //: Control
     protected ControlScheme scheme;
     
     [SerializeField]
-    public List<AxisKey> AxisKeys;// = new List<ControlKey>();
+    public List<AxisKey> AxisKeys;
 
     [SerializeField]
     private int lastAxis;

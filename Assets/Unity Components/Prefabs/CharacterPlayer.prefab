@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c42b3770ca5c24aab13779b11018d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControlScheme: {fileID: 11400000, guid: d5e53bfe6fe395044851568246362d4c, type: 2}
+  ControlScheme: {fileID: 11400000, guid: e668c7722f87e1445aacf4d146000c02, type: 2}
   cc: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:

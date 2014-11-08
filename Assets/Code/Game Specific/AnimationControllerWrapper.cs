@@ -20,7 +20,7 @@ public class AnimationSwapAnimatorWrapper:AnimatorCollectionWrapper
 {
     // Parameters
     private string velocityX = "VelocityX";
-    private string velocityY = "VelocitY";
+    private string velocityY = "VelocityY";
     private string inputX = "InputX";
     private string inputY = "InputY";
     private string drink = "Drink";
