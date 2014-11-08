@@ -26,7 +26,7 @@ public class AnimationSwapAnimatorWrapper:AnimatorCollectionWrapper
     private string drink = "Drink";
     private string dance = "Dance";
     private string talk = "Talk";
-    private string bumpTrigger = "BumpTrigger";
+    private string bump = "Bump";
     private string stealTrigger = "StealTrigger";
     private string give = "Give";
     private string recieve = "Recieve";
@@ -96,10 +96,10 @@ public class AnimationSwapAnimatorWrapper:AnimatorCollectionWrapper
         set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(talk, value); }
     }
 
-    public bool BumpTrigger
+    public bool Bump
     {
-        //get { return animators.First().GetBool(bumpTrigger); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetTrigger(bumpTrigger); }
+        get { return animators.First().GetBool(bump); }
+        set { for (int i = 0; i < animators.Count; i++)animators[i].SetTrigger(bump); }
     }
 
     public bool StealTrigger

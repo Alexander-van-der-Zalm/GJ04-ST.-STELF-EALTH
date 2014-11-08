@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D))]//,RequireComponent(typeof(Animator))]
-public class CharacterController : MonoBehaviour 
+//[RequireComponent(typeof(Rigidbody2D))]//,RequireComponent(typeof(Animator))]
+public class CharacterController : MonoBehaviour
 {
-    public GameObject Sprite;
+    #region Fields
+
+    public GameObject Body;
     public float MaximumVelocity = 10;
 
     private bool facingLeft = true;
 
     private Transform tr;
     private Rigidbody2D rb;
-    private Animator an;
+    //private Animator an;
     AnimationSwapAnimatorWrapper anim;
 
-    private string velXStr = "VelocityX";
-    private string velYStr = "VelocityY";
-    private string bounceAnimVar = "Bounce";
+    //private string velXStr = "VelocityX";
+    //private string velYStr = "VelocityY";
+    //private string bounceAnimVar = "Bounce";
 
     private string bounceSoundString = "Bump";
     private int bounceSoundVariations = 1;
@@ -24,13 +26,14 @@ public class CharacterController : MonoBehaviour
     public float BounceTime = 0.3f;
 
     private Vector2 movementInput = new Vector2();
-    
+
+    #endregion
 
     // Use this for initialization
 	void Start () 
     {
         tr = transform;
-        rb = rigidbody2D;
+        rb = GetComponentInChildren<Rigidbody2D>();
         anim = new AnimationSwapAnimatorWrapper(gameObject);
         //an = GetComponentInChildren<Animator>();
         rb.gravityScale = 0;
@@ -41,14 +44,18 @@ public class CharacterController : MonoBehaviour
 	void FixedUpdate () 
     {
         // Change this potentially
-        if(!an.GetBool(bounceAnimVar))
+        if(!anim.Bump)
             CheckFlipBy(rb.velocity.x);
+        
         // Change this potentially
         rb.velocity = movementInput * MaximumVelocity;
 
         // Set animator
-        an.SetFloat(velXStr, rb.velocity.x);
-        an.SetFloat(velYStr, rb.velocity.y);
+        anim.VelocityX = rb.velocity.x;
+        anim.VelocityXAbs = Mathf.Abs(rb.velocity.x);
+        anim.VelocityY = rb.velocity.y;
+        //an.SetFloat(velXStr, rb.velocity.x);
+        //an.SetFloat(velYStr, rb.velocity.y);
 
         
         //HandleZDepth();
@@ -79,8 +86,8 @@ public class CharacterController : MonoBehaviour
     {
         facingLeft = !facingLeft;
         Transform tra = tr;
-        if (Sprite != null)
-            tra = Sprite.transform;
+        if (Body != null)
+            tra = Body.transform;
         Vector3 localScale = tra.localScale;
         localScale.x = -localScale.x;
         tra.localScale = localScale;
@@ -110,11 +117,13 @@ public class CharacterController : MonoBehaviour
 
     private IEnumerator SetBounceCR()
     {
-        an.SetBool(bounceAnimVar, true);
+        //an.SetBool(bounceAnimVar, true);
+        anim.Bump = true;
         PlayBounceSound();
         CheckFlipBy(-rb.velocity.x);
         yield return new WaitForSeconds(BounceTime);
-        an.SetBool(bounceAnimVar, false);
+        anim.Bump = false;
+        //an.SetBool(bounceAnimVar, false);
     }
 
     private void PlayBounceSound()
