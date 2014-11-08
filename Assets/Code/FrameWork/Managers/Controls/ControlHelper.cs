@@ -43,4 +43,8 @@ public class ControlHelper
     [SerializeField]
     private static string[] xboxAxixOptions;
     public static string[] XboxAxixOptions { get { return xboxAxixOptions != null ? xboxAxixOptions : xboxAxixOptions = Enum.GetNames(typeof(XboxAxis)); } }
+
+    [SerializeField]
+    private static string[] xboxButtonOptions;
+    public static string[] XboxButtonOptions { get { return xboxButtonOptions != null ? xboxButtonOptions : xboxButtonOptions = Enum.GetNames(typeof(XboxButton)); } }
 }
