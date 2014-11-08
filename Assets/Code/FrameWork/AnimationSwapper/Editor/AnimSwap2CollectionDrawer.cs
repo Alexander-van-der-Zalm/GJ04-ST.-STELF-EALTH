@@ -47,7 +47,7 @@ public class AnimSwap2CollectionEditor : EditorPlus
         // Controller selector
         col.Controller = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Controller",col.Controller, typeof(RuntimeAnimatorController),true);
 
-        #region Add
+        #region Add & Save
 
         // New variety adding
         EditorGUILayout.BeginHorizontal();
@@ -55,6 +55,8 @@ public class AnimSwap2CollectionEditor : EditorPlus
             col.AddNewBodyVariety();
         if (GUILayout.Button("NewHeadVariety"))
             col.AddNewHeadVariety();
+        //if (GUILayout.Button("Save"))
+        //    ScriptableObjectHelper.RefreshAsset(col);
         EditorGUILayout.EndHorizontal();
 
         #endregion
@@ -99,5 +101,8 @@ public class AnimSwap2CollectionEditor : EditorPlus
         }
 
         #endregion
+
+        if(GUI.changed)
+            ScriptableObjectHelper.RefreshAsset(col);
     }
 }

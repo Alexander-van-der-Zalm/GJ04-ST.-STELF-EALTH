@@ -50,6 +50,10 @@ public class ScriptableObjectHelper
         if (AssetDatabase.IsSubAsset(asset))
             path = AssetDatabase.GetAssetPath(AssetDatabase.LoadMainAssetAtPath(path));
 
+        EditorUtility.SetDirty(asset);
+        //AssetDatabase.StartAssetEditing();
+        //AssetDatabase.StopAssetEditing();
+
         AssetDatabase.ImportAsset(path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -116,6 +120,11 @@ public class EasyScriptableObject<T> : ScriptableObject, IEasyScriptableObject, 
         AssetDatabase.ImportAsset(path);
     }
 
+    //public void Save()
+    //{
+
+    //}
+
     public void Destroy()
     {
         UnityEngine.Object.Destroy(this);
@@ -139,6 +148,7 @@ public interface IEasyScriptableObject
     void AddObjectToAsset(UnityEngine.Object obj);
     void Destroy();
     void DestroyImmediate();
+    //void Save();
 }
 
 public interface IInitSO
