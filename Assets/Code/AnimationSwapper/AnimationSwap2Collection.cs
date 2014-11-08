@@ -52,21 +52,58 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
 
     }
 
+
     public void SetAnimator(Animator head, Animator body,  int headIndex,int bodyIndex)
     {
-        AnimatorOverrideController controller = GetNewOverrideController();
+        AnimatorOverrideController headOverride = GetNewOverrideController();
+        AnimatorOverrideController bodyOverride = GetNewOverrideController();
+
+        AnimationClipPair[] headAnims = headOverride.clips;
+        AnimationClipPair[] bodyAnims = bodyOverride.clips;
+
+        #region Check if indices are legal
+        if (headIndex >= HeadVarieties.Count || bodyIndex >= BodyVarieties.Count)
+        {
+            Debug.LogException(new System.IndexOutOfRangeException("AnimationSwap2Collection.SetAnimator body or head index out of range"));
+        }
+        #endregion
 
         //Loop to set all the animations
-        for (int i = 0; i < controller.clips.Length; i++)
+        for (int i = 0; i < headOverride.clips.Length; i++)
         {
-            Debug.Log(controller.clips[i].originalClip.name);
+            //Debug.Log(headOverride.clips[i].originalClip.name);
 
-            //overide.clips[i].overrideClip = 
-        }
+            // Get the right variety
+            AS_AnimIndex bodyVariety = BodyVarieties[bodyIndex].Animations[i];
+            AS_AnimList headVariety = HeadVarieties[headIndex].Animations[i];
+
+            #region Check if the bodyVarieties head index is legal
+            if (bodyVariety.Index >= headVariety.Animations.Count)
+                Debug.LogException(new System.IndexOutOfRangeException("AnimationSwap2Collection.SetAnimator body index is illegal head index"));
+            #endregion
+
+            // Set the head based on the bodyIIndex
+            if (headVariety.Animations[bodyVariety.Index] != null)
+            {
+                headAnims[i].overrideClip = headVariety.Animations[bodyVariety.Index];
+                //Debug.Log(headAnims[i].overrideClip.name + " is now: " + headVariety.Animations[bodyVariety.Index].name);
+            }
             
+            // Set the body
+            if (bodyVariety.Animation != null)
+            {
+                bodyAnims[i].overrideClip = bodyVariety.Animation;
+                //Debug.Log(bodyAnims[i].overrideClip.name + " is now: " + bodyVariety.Animation.name);
+            }
+        }
 
-        // Set all the overrided animations to the animator
-        //head.runtimeAnimatorController = overideHead;
+
+        headOverride.clips = headAnims;
+        bodyOverride.clips = bodyAnims;
+
+        // Set all the overrided animations to the animators
+        head.runtimeAnimatorController = headOverride;
+        body.runtimeAnimatorController = bodyOverride;
     }
 
     public void AddNewBodyVariety()

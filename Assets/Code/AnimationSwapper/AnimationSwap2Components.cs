@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class AS_AnimList
 {
     [SerializeField]
-    List<AnimationClip> Animations;
+    public List<AnimationClip> Animations;
 
     public AS_AnimList()
     {

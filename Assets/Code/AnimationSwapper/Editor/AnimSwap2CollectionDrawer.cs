@@ -2,6 +2,19 @@
 using UnityEditor;
 using System.Collections;
 
+[CustomEditor(typeof(AnimationSwap2Selector))]
+public class AnimationSwap2SelectorEditor : EditorPlus
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        AnimationSwap2Selector sel = (AnimationSwap2Selector)target;
+
+        if (GUILayout.Button("SetAnimators"))
+            sel.CollectionReference.SetAnimator(sel.Head, sel.Body, sel.HeadVariety, sel.BodyVariety);
+    }
+}
+
 [CustomEditor(typeof(AnimationSwap2Collection))]
 public class AnimSwap2CollectionEditor : EditorPlus 
 {
@@ -34,6 +47,8 @@ public class AnimSwap2CollectionEditor : EditorPlus
         // Controller selector
         col.Controller = (RuntimeAnimatorController)EditorGUILayout.ObjectField("Controller",col.Controller, typeof(RuntimeAnimatorController),true);
 
+        #region Add
+
         // New variety adding
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("NewBodyVariety"))
@@ -42,23 +57,9 @@ public class AnimSwap2CollectionEditor : EditorPlus
             col.AddNewHeadVariety();
         EditorGUILayout.EndHorizontal();
 
-        if (SavedFoldout("Head varieties",-1))
-        {
-            EditorGUI.indentLevel++;
-            for (int i = 0; i < col.HeadVarieties.Count; i++)
-            {
-                if (SavedFoldout("Head variety[" + i+"]", i))
-                {
-                    for (int j = 0; j < col.HeadVarieties[i].Animations.Count; j++)
-                    {
-                        col.HeadVarieties[i].Animations[j].OnGui(over.clips[j].originalClip.name);
-                        
-                    }
-                }
-            }
-            EditorGUI.indentLevel--;
-        }
+        #endregion
 
+        #region Body
 
         if (SavedFoldout("Body varieties", -1))
         {
@@ -75,7 +76,28 @@ public class AnimSwap2CollectionEditor : EditorPlus
             }
             EditorGUI.indentLevel--;
         }
+
+        #endregion
+
+        #region Head
+
+        if (SavedFoldout("Head varieties", -1))
+        {
+            EditorGUI.indentLevel++;
+            for (int i = 0; i < col.HeadVarieties.Count; i++)
+            {
+                if (SavedFoldout("Head variety[" + i + "]", i))
+                {
+                    for (int j = 0; j < col.HeadVarieties[i].Animations.Count; j++)
+                    {
+                        col.HeadVarieties[i].Animations[j].OnGui(over.clips[j].originalClip.name);
+
+                    }
+                }
+            }
+            EditorGUI.indentLevel--;
+        }
+
+        #endregion
     }
-
-
 }
