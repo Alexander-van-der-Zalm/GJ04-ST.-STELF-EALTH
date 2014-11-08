@@ -53,6 +53,9 @@ public class AS_AnimList
 public class AS_AnimListCollection
 {
     [SerializeField]
+    public Sprite PreviewSprite;
+
+    [SerializeField]
     public List<AS_AnimList> Animations;
 
     public AS_AnimListCollection()
@@ -94,7 +97,11 @@ public class AS_AnimIndex
 public class AS_AnimIndexCollection
 {
     [SerializeField]
+    public Sprite PreviewSprite;
+
+    [SerializeField]
     public List<AS_AnimIndex> Animations;
+    
 
     public AS_AnimIndexCollection()
     {

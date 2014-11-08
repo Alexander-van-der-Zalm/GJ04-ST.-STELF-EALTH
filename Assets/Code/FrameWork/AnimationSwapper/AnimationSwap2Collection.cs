@@ -71,6 +71,10 @@ public class AnimationSwap2Collection : EasyScriptableObject<AnimationSwap2Colle
         }
         #endregion
 
+        // Set preview sprites
+        head.GetComponent<SpriteRenderer>().sprite = HeadVarieties[headIndex].PreviewSprite;
+        body.GetComponent<SpriteRenderer>().sprite = BodyVarieties[bodyIndex].PreviewSprite;
+
         //Loop to set all the animations
         for (int i = 0; i < headOverride.clips.Length; i++)
         {

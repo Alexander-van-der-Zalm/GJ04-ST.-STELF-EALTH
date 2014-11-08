@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 9100000, guid: 0eaacc57d01422c4dade93b4ede4de7a, type: 2}
   BodyVarieties:
-  - Animations:
+  - PreviewSprite: {fileID: 0}
+    Animations:
     - Animation: {fileID: 7400000, guid: dc25660f535893c4fa168d458a445529, type: 2}
       Index: 0
     - Animation: {fileID: 7400000, guid: 7f50f9eb610454746ab32e5361c1e56e, type: 2}
@@ -46,8 +47,43 @@ MonoBehaviour:
       Index: 0
     - Animation: {fileID: 0}
       Index: 0
+  - PreviewSprite: {fileID: 0}
+    Animations:
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
+    - Animation: {fileID: 0}
+      Index: 0
   HeadVarieties:
-  - Animations:
+  - PreviewSprite: {fileID: 0}
+    Animations:
     - Animations:
       - {fileID: 7400000, guid: 9eac427443b2ac24db1a968d85be286c, type: 2}
     - Animations:
