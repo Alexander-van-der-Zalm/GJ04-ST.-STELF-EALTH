@@ -11,7 +11,10 @@ public class HandleSpriteOrdering : MonoBehaviour
 
     public int Offset = 0;
 
+    public float YPosOffset = 0;
+
     public bool Static;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -33,7 +36,7 @@ public class HandleSpriteOrdering : MonoBehaviour
     {
         foreach (SpriteRenderer rndr in renderers)
         {
-            rndr.sortingOrder = (int)(tr.position.y * -10) + Offset;
+            rndr.sortingOrder = (int)((tr.position.y - YPosOffset)* -1000) + Offset;
         }
     }
 }

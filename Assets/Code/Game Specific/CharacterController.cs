@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
 {
     #region Fields
 
-    public GameObject Body;
+    //public GameObject Body;
     public float MaximumVelocity = 10;
 
     private bool facingLeft = true;
@@ -79,8 +79,8 @@ public class CharacterController : MonoBehaviour
     {
         facingLeft = !facingLeft;
         Transform tra = tr;
-        if (Body != null)
-            tra = Body.transform;
+        //if (Body != null)
+        //    tra = Body.transform;
         Vector3 localScale = tra.localScale;
         localScale.x = -localScale.x;
         tra.localScale = localScale;
