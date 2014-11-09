@@ -33,6 +33,8 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
     [SerializeField]
     public List<Action> Actions = new List<Action>();
 
+    public bool XboxSupport { get { return Horizontal.AxisKeys.Any(k => k.Type == ControlKeyType.Xbox) || Vertical.AxisKeys.Any(k => k.Type == ControlKeyType.Xbox) || Actions.Any(a => a.Keys.Any(k => k.Type == ControlKeyType.Xbox)); } }
+
     #endregion
 
     public static ControlScheme CreateScheme<T>(UpdateTypeE updateType = UpdateTypeE.FixedUpdate, bool xboxLeftStick = true, bool xboxDPad = true, bool arrows = true, bool wasd = true) where T : struct, IConvertible

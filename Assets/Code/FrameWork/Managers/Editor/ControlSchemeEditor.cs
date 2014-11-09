@@ -17,6 +17,8 @@ public class ControlSchemeEditor : EditorPlus
     [SerializeField]
     private int selectedIndex;
 
+    private bool xboxSupport;
+
     string prefID { get { return "ControlSchemeEditor - SelectedEnumIndex[int]:" + target.GetInstanceID().ToString(); } }
 
     void OnEnable()
@@ -41,6 +43,8 @@ public class ControlSchemeEditor : EditorPlus
 
         if (selectedIndex >= AllEnums.Count)
             selectedIndex = 0;
+
+        xboxSupport = ((ControlScheme)(target)).XboxSupport;
     }
 
     void OnDisable()
@@ -67,19 +71,39 @@ public class ControlSchemeEditor : EditorPlus
 
         EditorGUILayout.Space();
 
+        #region Action selection and setting
+
+        // Set & select a new action list
         EditorGUILayout.BeginHorizontal();
-        int oldIndex = selectedIndex;
         selectedIndex = EditorGUILayout.Popup(selectedIndex, AllEnumsNames);
-        if(GUILayout.Button("SetActions"))
-        {
+        if (GUILayout.Button("SetActions"))
             ct.SetActionsFromEnum(AllEnums[selectedIndex]);
-        }
-        if (oldIndex!=selectedIndex)
-        {
-            Debug.Log("Changed");
-        }
-            
         EditorGUILayout.EndHorizontal();
+
+        #endregion
+
+        #region PlayerID & Xbox ID
+        // PlayerID
+        EditorGUILayout.BeginHorizontal();
+        {
+            EditorGUILayout.LabelField("PlayerID", GUILayout.Width(60.0f));
+            ct.playerID = EditorGUILayout.IntField(ct.playerID, GUILayout.Width(20.0f));
+            EditorGUILayout.LabelField("XboxSupport: " + ct.XboxSupport.ToString());
+        }
+        EditorGUILayout.EndHorizontal();
+
+        if (xboxSupport)
+        {
+            EditorGUILayout.BeginHorizontal();
+            {
+                EditorGUILayout.LabelField("ControllerID", GUILayout.Width(80.0f));
+                ct.controllerID = EditorGUILayout.IntField(ct.controllerID, GUILayout.Width(20.0f));
+                EditorGUILayout.LabelField("LastInput: " + ct.InputType.ToString());
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        #endregion
 
         #region Horizontal
 
@@ -87,14 +111,14 @@ public class ControlSchemeEditor : EditorPlus
         {
             int delete = -1;
             bool add = false;
-            for(int i = 0; i < ct.Horizontal.AxisKeys.Count; i++)
+            for (int i = 0; i < ct.Horizontal.AxisKeys.Count; i++)
             {
                 GUILayout.BeginHorizontal();
-                if (i==0 && GUILayout.Button("+",GUILayout.Width(20.0f)))
+                if (i == 0 && GUILayout.Button("+", GUILayout.Width(20.0f)))
                 {
                     add = true;
                 }
-                else if (i!=0 && GUILayout.Button("x", GUILayout.Width(20.0f)))
+                else if (i != 0 && GUILayout.Button("x", GUILayout.Width(20.0f)))
                 {
                     delete = i;
                 }
@@ -141,7 +165,6 @@ public class ControlSchemeEditor : EditorPlus
 
         if (SavedFoldout("Actions"))
         {
-           
             for (int i = 0; i < ct.Actions.Count; i++)
             {
                 EditorGUI.indentLevel++;
@@ -154,7 +177,7 @@ public class ControlSchemeEditor : EditorPlus
                     if (ct.Actions[i].Keys.Count == 0 && GUILayout.Button("Add a key"))
                         add = true;
 
-                    for(int j = 0; j < ct.Actions[i].Keys.Count; j++)
+                    for (int j = 0; j < ct.Actions[i].Keys.Count; j++)
                     {
                         GUILayout.BeginHorizontal();
 
@@ -178,8 +201,12 @@ public class ControlSchemeEditor : EditorPlus
                 }
                 EditorGUI.indentLevel--;
             }
+
         }
 
         #endregion
+
+        if (GUI.changed)
+            xboxSupport = ((ControlScheme)(target)).XboxSupport;
     }
 }
