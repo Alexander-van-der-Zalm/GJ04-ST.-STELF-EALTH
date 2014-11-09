@@ -207,6 +207,10 @@ public class ControlSchemeEditor : EditorPlus
         #endregion
 
         if (GUI.changed)
+        {
             xboxSupport = ((ControlScheme)(target)).XboxSupport;
+            ScriptableObjectHelper.RefreshAsset(ct);
+        }
+            
     }
 }

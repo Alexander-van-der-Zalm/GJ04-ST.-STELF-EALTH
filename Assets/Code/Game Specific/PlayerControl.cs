@@ -6,8 +6,8 @@ public class PlayerControl : MonoBehaviour
 {
     public enum PlayerActions
     {
-        PickPocket = 0
-
+        PickPocket = 0,
+        Dance = 1
     }
     
     public ControlScheme ControlScheme;

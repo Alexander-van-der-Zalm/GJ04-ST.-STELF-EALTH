@@ -26,18 +26,18 @@ MonoBehaviour:
       xboxAxisType: 1
     - Type: 1
       keys:
-      - Left
-      - Right
+      - Up
+      - Up
       xboxAxisType: 0
     - Type: 0
       keys:
-      - A
-      - D
+      - None
+      - None
       xboxAxisType: 0
     - Type: 0
       keys:
-      - LeftArrow
-      - RightArrow
+      - None
+      - None
       xboxAxisType: 0
     lastAxis: 0
   Vertical:
@@ -46,22 +46,22 @@ MonoBehaviour:
     AxisKeys:
     - Type: 1
       keys:
-      - LeftStickY
+      - LeftStickX
       xboxAxisType: 1
     - Type: 1
       keys:
-      - Down
+      - Up
       - Up
       xboxAxisType: 0
     - Type: 0
       keys:
-      - S
-      - W
+      - None
+      - None
       xboxAxisType: 0
     - Type: 0
       keys:
-      - DownArrow
-      - UpArrow
+      - None
+      - None
       xboxAxisType: 0
     lastAxis: 0
   Actions:
@@ -78,3 +78,16 @@ MonoBehaviour:
       LastState: 0
       CurState: 0
       selectedIndex: 0
+  - Name: Dance
+    scheme: {fileID: 11400000}
+    Keys:
+    - Type: 0
+      KeyValue: Q
+      LastState: 0
+      CurState: 0
+      selectedIndex: 61
+    - Type: 1
+      KeyValue: B
+      LastState: 0
+      CurState: 0
+      selectedIndex: 1
