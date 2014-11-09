@@ -62,7 +62,7 @@ public class ControlKey
 
             case ControlKeyType.Xbox:
                 selectedIndex = EditorGUILayout.Popup(selectedIndex, ControlHelper.XboxButtonOptions, GUILayout.Width(60.0f + 10 * EditorGUI.indentLevel));
-                KeyValue = ControlHelper.KeyCodeOptions[selectedIndex];
+                KeyValue = ControlHelper.XboxButtonOptions[selectedIndex];
                 break;
         }
     }
