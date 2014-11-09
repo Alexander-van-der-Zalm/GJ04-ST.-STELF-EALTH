@@ -99,7 +99,7 @@ public class AnimationSwapAnimatorWrapper:AnimatorCollectionWrapper
     public bool Bump
     {
         get { return animators.First().GetBool(bump); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetTrigger(bump); }
+        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(bump,value); }
     }
 
     public bool StealTrigger

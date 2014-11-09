@@ -17,7 +17,7 @@ public class PickPocket : MonoBehaviour
 
     private bool pressed;
     private bool wantToPickPocket = false;
-    private bool collided;
+    //private bool collided;
     private int bouncesAllowed;
     private IHasMoolah wallet;
     private string validTag = "IHasMoolah";
@@ -109,7 +109,10 @@ public class PickPocket : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag(validTag))
+        //Debug.Log("TRIGGER" + other.gameObject.name);
+        if (other.CompareTag(validTag))
+            bouncesAllowed = 1;
+        else if(other.transform.parent.gameObject.CompareTag(validTag))
             bouncesAllowed = 1;
     }
 
@@ -126,7 +129,7 @@ public class PickPocket : MonoBehaviour
     {
         if (bouncesAllowed > 0 && other.gameObject.CompareTag(validTag))
         {
-            Debug.Log("ValidBounce");
+            //Debug.Log("ValidBounce");
             other.gameObject.GetComponent<CharacterController>().SetBounce();
             IHasMoolah otherMoolah = other.gameObject.GetComponent<IHasMoolah>();
             // Handle Bounce
