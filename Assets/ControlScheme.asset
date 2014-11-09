@@ -26,18 +26,18 @@ MonoBehaviour:
       xboxAxisType: 1
     - Type: 1
       keys:
-      - Up
-      - Up
+      - Left
+      - Right
       xboxAxisType: 0
     - Type: 0
       keys:
-      - None
-      - None
+      - A
+      - D
       xboxAxisType: 0
     - Type: 0
       keys:
-      - None
-      - None
+      - LeftArrow
+      - RightArrow
       xboxAxisType: 0
     lastAxis: 0
   Vertical:
@@ -46,22 +46,22 @@ MonoBehaviour:
     AxisKeys:
     - Type: 1
       keys:
-      - LeftStickX
+      - LeftStickY
       xboxAxisType: 1
     - Type: 1
       keys:
-      - Up
+      - Down
       - Up
       xboxAxisType: 0
     - Type: 0
       keys:
-      - None
-      - None
+      - S
+      - W
       xboxAxisType: 0
     - Type: 0
       keys:
-      - None
-      - None
+      - DownArrow
+      - UpArrow
       xboxAxisType: 0
     lastAxis: 0
   Actions:
