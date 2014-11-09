@@ -35,12 +35,6 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
 
     #endregion
 
-    //[MenuItem("CustomTools/Create new playerController")]
-    //public static void CreateControlScheme()
-    //{
-
-    //}
-
     public static ControlScheme CreateScheme<T>(UpdateTypeE updateType = UpdateTypeE.FixedUpdate, bool xboxLeftStick = true, bool xboxDPad = true, bool arrows = true, bool wasd = true) where T : struct, IConvertible
     {
         if (!typeof(T).IsEnum)
@@ -85,17 +79,31 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
     /// </summary>
     public void SetActionsFromEnum<T>() where T : struct, IConvertible
     {
-       if (!typeof(T).IsEnum) 
-       {
-          throw new ArgumentException("T must be an enumerated type");
-       }
+        SetActionsFromEnum(typeof(T));
+    }
 
-        IEnumerable<T> values = Enum.GetValues(typeof(T)).Cast<T>();
-
-        foreach (T value in values)
+    public void SetActionsFromEnum(Type type)
+    {
+        if (!type.IsEnum)
         {
-            Actions.Add(new Action(this, value.ToString()));
+            throw new ArgumentException("T must be an enumerated type");
         }
+
+        Actions = new List<Action>();
+
+        string[] names = Enum.GetNames(type);
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            Actions.Add(new Action(this, names[i]));
+        }
+
+        //IEnumerable<T> values = Enum.GetValues(typeof(T)).Cast<T>();
+
+        //foreach (T value in values)
+        //{
+        //    Actions.Add(new Action(this, value.ToString()));
+        //}
     }
 
     //public ControlScheme(int controllerID = 1, int playerID = 1)

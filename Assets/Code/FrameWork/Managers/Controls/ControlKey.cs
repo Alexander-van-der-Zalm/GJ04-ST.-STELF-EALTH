@@ -50,17 +50,18 @@ public class ControlKey
 
     public void OnGui()
     {
-        Type = (ControlKeyType)EditorGUILayout.EnumPopup(Type, GUILayout.Width(50.0f));
-
+        GUILayout.Space(-20);
+        Type = (ControlKeyType)EditorGUILayout.EnumPopup(Type, GUILayout.Width(70.0f + 10 * EditorGUI.indentLevel));
+        GUILayout.Space(-20);
         switch (Type)
         {
             case ControlKeyType.PC:
-                selectedIndex = EditorGUILayout.Popup(selectedIndex, ControlHelper.KeyCodeOptions, GUILayout.Width(80.0f));
+                selectedIndex = EditorGUILayout.Popup(selectedIndex, ControlHelper.KeyCodeOptions, GUILayout.Width(80.0f + 10 * EditorGUI.indentLevel));
                 KeyValue = ControlHelper.KeyCodeOptions[selectedIndex];
                 break;
 
             case ControlKeyType.Xbox:
-                selectedIndex = EditorGUILayout.Popup(selectedIndex, ControlHelper.XboxButtonOptions, GUILayout.Width(60.0f));
+                selectedIndex = EditorGUILayout.Popup(selectedIndex, ControlHelper.XboxButtonOptions, GUILayout.Width(60.0f + 10 * EditorGUI.indentLevel));
                 KeyValue = ControlHelper.KeyCodeOptions[selectedIndex];
                 break;
         }
