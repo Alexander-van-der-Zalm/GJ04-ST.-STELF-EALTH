@@ -12,10 +12,10 @@ public class PlayerControl : MonoBehaviour
     
     public ControlScheme ControlScheme;
     
-    [SerializeField,HideInInspector]
+    //[SerializeField,HideInInspector]
     private CharacterController cc;
 
-
+    private AnimationSwapAnimatorWrapper anim;
     private PickPocket pp;
 
 	// Use this for initialization
@@ -23,7 +23,8 @@ public class PlayerControl : MonoBehaviour
     {
         cc = gameObject.GetComponent<CharacterController>();
         pp = gameObject.GetComponent<PickPocket>();
-       
+        anim = new AnimationSwapAnimatorWrapper(gameObject);
+
         if(ControlScheme == null)
         {
             ControlScheme = ControlScheme.CreateScheme<PlayerActions>();
@@ -44,5 +45,8 @@ public class PlayerControl : MonoBehaviour
 
         cc.SetInput(ControlScheme.Horizontal.Value(), ControlScheme.Vertical.Value());
         pp.SetInput(ControlScheme.Actions[(int)PlayerActions.PickPocket].IsPressed());
+
+        //if(ControlScheme.Actions[(int)PlayerActions.Dance])
+        //    cc.A
 	}
 }

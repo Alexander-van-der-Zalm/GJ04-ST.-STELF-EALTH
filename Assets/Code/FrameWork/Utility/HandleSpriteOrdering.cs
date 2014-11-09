@@ -8,6 +8,9 @@ public class HandleSpriteOrdering : MonoBehaviour
 {
     List<SpriteRenderer> renderers;
     Transform tr;
+
+    public int Offset = 0;
+
     public bool Static;
 	// Use this for initialization
 	void Start () 
@@ -30,7 +33,7 @@ public class HandleSpriteOrdering : MonoBehaviour
     {
         foreach (SpriteRenderer rndr in renderers)
         {
-            rndr.sortingOrder = (int)(tr.position.y * -10);
+            rndr.sortingOrder = (int)(tr.position.y * -10) + Offset;
         }
     }
 }

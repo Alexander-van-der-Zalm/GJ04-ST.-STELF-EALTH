@@ -75,13 +75,6 @@ public class CharacterController : MonoBehaviour
             movementInput.Normalize();
     }
 
-    private void HandleZDepth()
-    {
-        Vector3 pos = tr.position;
-        pos.z = pos.y;
-        tr.position = pos;
-    }
-
     private void Flip()
     {
         facingLeft = !facingLeft;
