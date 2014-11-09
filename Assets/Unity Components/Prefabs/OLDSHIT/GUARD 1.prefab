@@ -330,8 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e55aa73d71c92d41aef856080c56ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Blackboard:
-    Name: AI BlackBoard
+  blackBoard: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,44 +342,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834905afdc45a964a8af4facdebaf1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateFrequency: 10
-  Root:
-    Children:
-    - Children:
-      - Children:
-        - Children:
-          - Children: []
-            ID: 7
-            NodeSpecificParameters:
-              Name: AI BlackBoard
-          - Children: []
-            ID: 1
-            NodeSpecificParameters:
-              Name: AI BlackBoard
-          ID: 2
-          NodeSpecificParameters:
-            Name: AI BlackBoard
-        - Children: []
-          ID: 7
-          NodeSpecificParameters:
-            Name: AI BlackBoard
-        ID: 4
-        NodeSpecificParameters:
-          Name: AI BlackBoard
-      - Children: []
-        ID: 7
-        NodeSpecificParameters:
-          Name: AI BlackBoard
-      ID: 6
-      NodeSpecificParameters:
-        Name: AI BlackBoard
-    - Children: []
-      ID: 7
-      NodeSpecificParameters:
-        Name: AI BlackBoard
-    ID: 8
-    NodeSpecificParameters:
-      Name: AI BlackBoard
+  Info:
+    Name: TreeNoName
+    UpdateFrequency: 10
+    TreeIteration: 0
+    NodeSide: 1
+  treeNodes: []
+  nodeWindows: []
+  root: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f81a03ff8423e4f81bfb1fb5ae4eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 100002}
+  Body: {fileID: 0}
   MaximumVelocity: 3
   BounceTime: .300000012
 --- !u!114 &11400012

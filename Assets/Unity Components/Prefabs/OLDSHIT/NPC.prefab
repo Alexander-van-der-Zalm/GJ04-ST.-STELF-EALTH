@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f81a03ff8423e4f81bfb1fb5ae4eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Body: {fileID: 0}
   MaximumVelocity: 3
   BounceTime: .300000012
 --- !u!114 &11400006

@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f81a03ff8423e4f81bfb1fb5ae4eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 100014}
+  Body: {fileID: 0}
   MaximumVelocity: 3
   BounceTime: .300000012
 --- !u!114 &11400010
@@ -555,7 +555,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834905afdc45a964a8af4facdebaf1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateFrequency: 60
+  Info:
+    Name: TreeNoName
+    UpdateFrequency: 10
+    TreeIteration: 0
+    NodeSide: 1
+  treeNodes: []
+  nodeWindows: []
+  root: {fileID: 0}
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -582,6 +589,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0d2311a538a2e42a865fbf560a35b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: AI BlackBoard
+  objectPool:
+    keys: []
+    values: []
+  isVariableObject:
+    keys: []
+    values: 
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
