@@ -4,14 +4,25 @@ using System.Collections.Generic;
 
 public class ColorTinterMaterialHelper : MonoBehaviour 
 {
-    //public enum IndexChannel
-    //{
-    //    R,
-    //    G,
-    //    B,
-    //    A,
-    //    RGBA
-    //}
+    public enum ColorChannel
+    {
+        R,
+        G,
+        B,
+        A,
+        RG,
+        GB,
+        BA,
+        RGB,
+        GBA,
+        RGBA
+    }
+
+    public enum ReplacementMode
+    {
+        ReplaceColor,
+        ReplaceAll
+    }
     //public class TintDescription
     //{
     //    public enum Channel

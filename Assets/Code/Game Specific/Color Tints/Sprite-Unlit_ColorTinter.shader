@@ -73,11 +73,54 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 				float r = IN.color.r;
 				int test = round(c.r * 255);
 				
+				fixed u = IN.texcoord.r;
+				fixed v = IN.texcoord.g;
+				
+				// Hoe werken die colorwaardes uit sprites -> naar kleurenkiezen
+				// Palette van grijswaardes in orginele sprites
+				// Gedefineerd in material nivo
+				
+				// Double - shader suicide
+				// Float 32bit -2 tot de 32ste - supergrote waardes
+				// half 16bit - 2 tot de 16ste - waardes tussen -100000 en 100000
+				// fixed 8 bit - 256 2 tot de 8ste - waardes tussen -2 en 2
 				if(test%2 == 0)
 					return float4(1,0,0,1);
 				else
 					return float4(0,1,0,1);
 					
+					// Palette = [5]
+					// 2 pallettes
+					
+					// Dit is gevoelig
+					
+					
+					// Memory efficient
+					// 2 texture lookups in de fragment shader
+					// 1 texture - [1,256] -> niet directe kleur - maar de index
+					// 1 texture - [versie,maxkleuren] -> [2,5]
+					// 2x tex2D (2x texture lookups)
+					// totaal 3x tex2D
+					
+					// GPU efficient
+					// 1 texture lookup
+					// maar heeft grotere textures COlor palette (support voor 256 indices) - texture[versies,256] is texture[u,v] 244 - mijnmooiekleur
+					// pallet1[1,,,,128,,,,,,244,,,]256 breed
+					// pallet2[,,,,,] 256 breed
+					// pallet3[,,,,,]256 breed
+					//=mijnmooiekleur
+					// totaal 2x tex2D
+					
+					// Material nivo
+					// lijstje van kleuren palettes
+					// lijstje van grayvalues naar index
+					// -> texture op shader nivo
+					
+					// User nivo
+					// Bedoel je dit???
+					// Reference sprite - 128 = 1,,,,, 244 = 10
+					// Sprite (character) 5 verschillende tinten - head,clothing1,etc.
+					// ??? - Hoe zit het dan met verschillende palette grotes
 				
 				//float ind = 2/(fixed)8.0f;
 				//float2 index = (0.5,ind);

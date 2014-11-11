@@ -52,8 +52,17 @@ public class SpriteRendererOverride : Editor
         ShowSprite(rnds);
         // Material
         ShowMaterial(rnds);
-        // Setting:
-        // - Mode(instance): Replace Index Colors(X), replace all colors(X)
+        // Setting: 0.1
+        // - Mode(instance): 
+        //    - Replace Index Colors(X) - standard sprite (like what u usualy put in game) - color picked values for replacement
+        //    - Replace all colors(X) - r channel is colortint - g channel is ao (lighting info) - a is alpha
+        //         Seperated channels for info
+
+        // Later termijn - Asset store versie 0.2
+        // Diffuse lighting, normals, spec, etc.
+        // Je levert een hoop sprites packs (animated en alles) - diffuse versie, normal versie, spec versie
+        // -> wij genereren daar een 1 compacte sprite van (met achter de schermen allerlei indices) (op knopje)
+
         // - Channels(instance): 
         // RampSelector:
         // 1. Prepare sprite - Create asset next to sprite
@@ -65,6 +74,18 @@ public class SpriteRendererOverride : Editor
         ShowSortingLayer(rnds);
         // OrderInLayer
         ShowOrderInLayer(rnds);
+
+        EditorGUILayout.Space();
+
+        
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("ColorPalette");
+        EditorGUILayout.ColorField(Color.green);
+        EditorGUILayout.ColorField(Color.blue);
+        EditorGUILayout.ColorField(Color.yellow);
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.IntField("ColorPalette Index", 10);
     }
 
     private void drawOldInspector(List<SpriteRenderer> rnds)
