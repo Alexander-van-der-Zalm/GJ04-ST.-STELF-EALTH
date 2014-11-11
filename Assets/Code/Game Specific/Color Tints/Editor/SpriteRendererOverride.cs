@@ -22,22 +22,6 @@ public class SpriteRendererOverride : Editor
     {
         List<SpriteRenderer> rnds = targets.Cast<SpriteRenderer>().ToList();
 
-        //base.OnInspectorGUI();
-        //return;
-
-        ////TODO Fix issue with missing reference
-
-        //// if there is any renderer where one of the materials is not set
-        //if(rnds.Any(r => r.sharedMaterials.IsNullOrEmpty() || r.sharedMaterials.Any(m => m == null)))
-        //{
-        //    // If it is multi selected with the colortinter
-        //    if(rnds.Any(r => r.sharedMaterials.Any(m => m != null && m.name.Contains(ColorTinterMaterialHelper.ShaderNameIncludes))))
-        //        drawCommonFields(rnds);
-        //    else
-        //        drawOldInspector(rnds);
-        //    return;
-        //}
-
         // If no single renderer has any ref to the Color Tinter shader name
         if (rnds.All(r => !r.sharedMaterials.Any(m => m != null && m.name.Contains(ColorTinterMaterialHelper.ShaderNameIncludes))))
         {
@@ -79,7 +63,7 @@ public class SpriteRendererOverride : Editor
 
         // - Channels(instance): 
         // RampSelector:
-        // 1. Prepare sprite - Create asset next to sprite
+        // 1. Prepare sprite - Create asset next to sprite (?)
         // 2. Add palette - Palette is added to material
         // 3. Select ramps - If there is no palette hide
         // Space

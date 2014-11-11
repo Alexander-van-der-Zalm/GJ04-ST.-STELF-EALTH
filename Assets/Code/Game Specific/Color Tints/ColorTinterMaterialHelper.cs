@@ -173,4 +173,65 @@ public class ColorTinterMaterialHelper : ScriptableObject
         
     //    // ColorRamp?
     //}
+
+    public void TestPopulate()
+    {
+        colorPalettes = new List<ColorPalette>();
+        colorPalettes.Add(new ColorPalette(5));
+        colorPalettes[0][0] = new Color(1, 0, 0, 1);
+        colorPalettes[0][1] = new Color(1, 1, 0, 1);
+        colorPalettes[0][2] = new Color(0, 1, 1, 1);
+        colorPalettes[0][3] = new Color(1, .5f, 0, 1);
+        colorPalettes[0][4] = new Color(1, 0, 1, 1);
+
+        ColorPaletteIndices = new List<ColorPaletteIndex>();
+        ColorPaletteIndices.Add(new ColorPaletteIndex(){Color = new Color(0,0,0,1), Index = 0 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(30.0f / 255.0f, 0, 0, 1), Index = 1 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(90.0f / 255.0f, 0, 0, 1), Index = 2 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(120.0f / 255.0f, 0, 0, 1), Index = 3 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(150.0f / 255.0f, 0, 0, 1), Index = 4 });
+    }
+
+    public void CreateAndSetPaletteTexture()
+    {
+        int width = 256;
+        int height = 1; // Replace by the amount of colorPalettes
+
+        // Create texture
+        Texture2D tex = new Texture2D(width,height,TextureFormat.RGBA32,false);
+        Color[] colors = new Color[width * height];
+        
+        // Set default empty non replacing colors
+        for (int y = 0; y < height; y++)
+        for (int x = 0; x < width; x++)
+        {
+            colors[x + y * width] = new Color(1, 1, 0, 0); // Default empty
+        }
+
+        // Texture[versions,spriteIndex] 
+        // -> ReplaceColor
+
+        for (int y = 0; y < colorPalettes.Count; y++)
+        {
+            ColorPalette palette = colorPalettes[y];
+            for (int i = 0; i < ColorPaletteIndices.Count; i++)
+            {
+                
+                ColorPaletteIndex indexer = ColorPaletteIndices[i];
+                
+                // Use the red channel for now
+                int spriteIndex = (int)Mathf.Round(indexer.Color.r * 256);
+                colors[y * width + spriteIndex] = palette[indexer.Index];
+
+            }
+        }
+        
+        tex.SetPixels(colors);
+        tex.name = material.name + "_PaletteTexture";
+
+        // Set shader properties(tex, width, height)
+        material.SetTexture("_PaletteTex", tex);
+        material.SetInt("_PaletteTexWidth", width);
+        material.SetInt("_PaletteTexHeight", height);
+    }
 }

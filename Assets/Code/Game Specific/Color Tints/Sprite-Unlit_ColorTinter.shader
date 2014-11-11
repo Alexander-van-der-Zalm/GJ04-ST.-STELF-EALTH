@@ -2,9 +2,9 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 	Properties {
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
-		_ColorTintTex ("ColorTintLookupTex", 2D) = "white" {}
-		_TintTexWidth("ColorTintLookupWidth",int) = 0
-		_TintTexHeight("ColorTintLookupHeight",int) = 0
+		_PaletteTex ("PaletteTexture", 2D) = "white" {}
+		_PaletteTexWidth("PaletteWidth",int) = 0
+		_PaletteTexHeight("PaletteVersions/Height",int) = 0
 	}
 	SubShader 
 	{
@@ -61,33 +61,49 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 			}
 
 			sampler2D _MainTex;
-			sampler2D _ColorTintTex;
+			sampler2D _PaletteTex;
 			
-			// Pixel shader (without lighting/unity hax style)
+			int _PaletteTexWidth;
+			int _PaletteTexHeight;
+			
+			// fragment shader (without lighting/unity hax style)
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				// Get the sprite color
-				// Put it in inside a 
+				// TODO: Replace color method
+				// (V) - Grab the color
+				// (X) - Test using the mainsprite with a colorPalette
+				// (X) - Check if the r channel returns a color that is not 0,0,0,0
+				// (X) - Replace color if previous is true
+				// (X) - combine with the index number from the vertex for multi tint palette support
+				// (X) - Make it into a function
+				// (X) - Check how to use function in other shader scripts
+				// (X) - Diffuse version
+				// (X) - Normal,Spec version
 				
-				fixed4 c = tex2D(_MainTex, IN.texcoord); // contains index
-				float r = IN.color.r;
-				int test = round(c.r * 255);
+				// original sprite color
+				fixed4 c = tex2D(_MainTex, IN.texcoord); 
+				//fixed i = (fixed)1/_PaletteTexWidth; // index1 for testing
+				// fixed i = IN.color.r; // index1 with instance vertex driven index (variant
+				//fixed j = round(c.r*255)/_PaletteTexWidth; // index2
 				
-				fixed u = IN.texcoord.r;
-				fixed v = IN.texcoord.g;
+				// palette color
+				fixed4 r = tex2D(_PaletteTex, half2(c.r,0.5));
 				
-				// Hoe werken die colorwaardes uit sprites -> naar kleurenkiezen
-				// Palette van grijswaardes in orginele sprites
-				// Gedefineerd in material nivo
-				
-				// Double - shader suicide
-				// Float 32bit -2 tot de 32ste - supergrote waardes
-				// half 16bit - 2 tot de 16ste - waardes tussen -100000 en 100000
-				// fixed 8 bit - 256 2 tot de 8ste - waardes tussen -2 en 2
-				if(test%2 == 0)
-					return float4(1,0,0,1);
+				if(r.r == 1 && r.g == 1 &&r.a == 0)
+				{
+					c.rgb *= c.a;// Prepare result
+					return c;
+				}
 				else
-					return float4(0,1,0,1);
+				{
+					r.rgb *= r.a;// Prepare result
+					return r;
+				}
+				
+				//if(test%2 == 0)
+				//	return float4(1,0,0,1);
+				//else
+				//	return float4(0,1,0,1);
 					
 					// Palette = [5]
 					// 2 pallettes
@@ -125,7 +141,7 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 				
 				//float ind = 2/(fixed)8.0f;
 				//float2 index = (0.5,ind);
-				//fixed4 colortTint = tex2D(_ColorTintTex, index);
+				//fixed4 colortTint = tex2D(_PaletteTex, index);
 				//colortTint.rgb *= c.a;
 				//return colortTint;
 				//return float4(1,1,1,1);
@@ -152,7 +168,7 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 					//	return float4(1,1,1,1);
 				//	float2 index = (c.r*256,1);
 					
-				//	fixed4 colortTint = tex2D(_ColorTintTex, index); // RGB is color // Alpha is value to grab from the 
+				//	fixed4 colortTint = tex2D(_PaletteTex, index); // RGB is color // Alpha is value to grab from the 
 					//c.rgb *= c.a;
 				//	colortTint.rgb *= c.a;
 					
