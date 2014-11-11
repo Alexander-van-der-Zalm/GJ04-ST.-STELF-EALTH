@@ -56,7 +56,7 @@ public class ControlSchemeEditor : EditorPlus
     {
         #region Original
 
-        if (SavedFoldout("OriginalGUI"))
+        if (SavedFoldoutShared("OriginalGUI"))
         {
             EditorGUI.indentLevel++;
             base.OnInspectorGUI();
@@ -107,7 +107,7 @@ public class ControlSchemeEditor : EditorPlus
 
         #region Horizontal
 
-        if (SavedFoldout("Horizontal Axis"))
+        if (SavedFoldoutShared("Horizontal Axis"))
         {
             int delete = -1;
             bool add = false;
@@ -135,7 +135,7 @@ public class ControlSchemeEditor : EditorPlus
 
         #region Vertical
 
-        if (SavedFoldout("Vertical Axis"))
+        if (SavedFoldoutShared("Vertical Axis"))
         {
             int delete = -1;
             bool add = false;
@@ -163,13 +163,13 @@ public class ControlSchemeEditor : EditorPlus
 
         #region Actions
 
-        if (SavedFoldout("Actions"))
+        if (SavedFoldoutShared("Actions"))
         {
             for (int i = 0; i < ct.Actions.Count; i++)
             {
                 EditorGUI.indentLevel++;
                 // For each action - Show a foldout
-                if (SavedFoldout(ct.Actions[i].Name))
+                if (SavedFoldoutShared(ct.Actions[i].Name))
                 {
                     int delete = -1;
                     bool add = false;

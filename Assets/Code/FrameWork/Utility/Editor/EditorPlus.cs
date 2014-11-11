@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class EditorPlus : Editor
+public class EditorPlus:Editor
 {
     private static List<Type> ValidTypes;
     private static string[] ValidTypeStrings;
@@ -15,9 +15,10 @@ public class EditorPlus : Editor
     /// <summary>
     /// Uses EditorPrefs to save and load fold boolean data
     /// </summary>
-    internal bool SavedFoldout(GUIContent name, int index = 0, string uniqueID = "")
+    internal static bool SavedFoldoutInstance(GUIContent name, UnityEngine.Object target, int index = 0, string uniqueID = "")
     {
-        string uniqueString = "Fold: " + name.text + " - " + target.GetInstanceID().ToString() + " - " + uniqueID + index;
+        string uniqueString = GetUniqueString(name.text, target, index, uniqueID);
+
         bool fold = EditorPrefs.GetBool(uniqueString, false);
         fold = EditorGUILayout.Foldout(fold, name);
         
@@ -30,17 +31,25 @@ public class EditorPlus : Editor
     /// <summary>
     /// Uses EditorPrefs to save and load fold boolean data
     /// </summary>
-    internal bool SavedFoldout(string name, int index = -1, string uniqueID = "")
+    internal static bool SavedFoldoutShared(string name, int index = -1, string uniqueID = "")
     {
-        return SavedFoldout(new GUIContent(name, ""), index, uniqueID);
+        return SavedFoldoutInstance(new GUIContent(name, ""), null, index, uniqueID);
+    }
+
+
+
+    private static string GetUniqueString(string name, UnityEngine.Object target, int index, string uniqueID = "")
+    {
+        // NEEDS REVAMP
+        return "Fold: " + (target != null ? target.GetInstanceID().ToString() : "") + " - " + uniqueID + index;
     }
 
     /// <summary>
     /// Uses EditorPrefs to save and load fold boolean data
     /// </summary>
-    internal bool SavedFoldout(GUIContent name, Rect rect, int index = 0, string uniqueID = "")
+    internal static bool SavedFoldoutInstance(GUIContent name, Rect rect, UnityEngine.Object target, int index = 0, string uniqueID = "")
     {
-        string uniqueString = "Fold: " + name.text + " - "  + target.GetInstanceID().ToString() + " - " + uniqueID + index;
+        string uniqueString = GetUniqueString(name.text, target, index, uniqueID);
         
         bool fold = EditorPrefs.GetBool(uniqueString, false);
         fold = EditorGUI.Foldout(rect, fold, name);
@@ -54,12 +63,12 @@ public class EditorPlus : Editor
     /// <summary>
     /// Uses EditorPrefs to save and load fold boolean data
     /// </summary>
-    internal bool SavedFoldout(string name, Rect rect, int index = 0, string uniqueID = "")
+    internal static bool SavedFoldoutShared(string name, Rect rect, int index = 0, string uniqueID = "")
     {
-        return SavedFoldout(new GUIContent(name, ""), rect, index, uniqueID);
+        return SavedFoldoutInstance(new GUIContent(name, ""), rect, null, index, uniqueID);
     }
 
-    internal void RemoveSavedFoldout(string uniqueID, int index = 0)
+    internal static void RemoveSavedFoldout(string uniqueID, UnityEngine.Object target, int index = 0)
     {
         string baseString = "Fold: " + target.GetInstanceID().ToString() + " - " + uniqueID;
         string curString = baseString + index;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 
 [CustomEditor(typeof(AudioLibrary))]
-public class AudioLibraryEditor : EditorPlus
+public class AudioLibraryEditor : Editor
 {
     #region Fields
 
@@ -131,7 +131,7 @@ public class AudioLibraryEditor : EditorPlus
             Rect hor = EditorGUILayout.BeginHorizontal();
             {
                 Rect rect = new Rect(hor.xMin, hor.yMin, 15, hor.height);
-                fold = SavedFoldout("", rect, i,"base");
+                fold = EditorPlus.SavedFoldoutShared("", rect, i,"base");
 
                 sample.Clip = EditorGUILayout.ObjectField("", sample.Clip, typeof(AudioClip), false, audioClipStyle) as AudioClip;
                 sample.Layer = (AudioLayer)EditorGUILayout.EnumPopup("", sample.Layer, audioLayerStyle);
@@ -167,7 +167,7 @@ public class AudioLibraryEditor : EditorPlus
                 sample.Settings.BypassReverbZones = EditorGUILayout.Toggle("BypassReverbZones:",sample.Settings.BypassReverbZones);
 
                 // 3D Sound Settings
-                if (SavedFoldout("3D Settings",i,"3D"))
+                if (EditorPlus.SavedFoldoutShared("3D Settings", i, "3D"))
                 {
                     EditorGUI.indentLevel++;
                     //[RangeAttribute(0, 5)]
@@ -182,7 +182,7 @@ public class AudioLibraryEditor : EditorPlus
 
                  // 2D Sound Settings
                 //data._2DSettings[i] = EditorGUILayout.Foldout(data._2DSettings[i], "2D Settings");
-                if (SavedFoldout("2D Settings",i,"2D"))
+                if (EditorPlus.SavedFoldoutShared("2D Settings", i, "2D"))
                 {
                     EditorGUI.indentLevel++;
                     //[RangeAttribute(-1, 1)]
@@ -218,9 +218,9 @@ public class AudioLibraryEditor : EditorPlus
         //data._3DSettings.RemoveAt(removeAt);
         //data._2DSettings.RemoveAt(removeAt);
         AudioLib.Samples.RemoveAt(removeAt);
-        RemoveSavedFoldout("2D", removeAt);
-        RemoveSavedFoldout("3D", removeAt);
-        RemoveSavedFoldout("base", removeAt);
+        EditorPlus.RemoveSavedFoldout("2D",target, removeAt);
+        EditorPlus.RemoveSavedFoldout("3D", target, removeAt);
+        EditorPlus.RemoveSavedFoldout("base", target, removeAt);
     }
 
     private void AddClipToList(AudioLibrary AudioLib, AudioClip audioClip)

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [CustomEditor(typeof(AudioLayerManager))]
-public class AudioLayerManagerEditor : EditorPlus
+public class AudioLayerManagerEditor : Editor
 {
     private string description = "The layers are based on the hardcoded AudioLayersEnum.\n The enum can be found in the AudioLayerManager.cs file. This might change in the future.";
     private string settingsNameTooltip = "The layer names are hardcoded in the AudioLayerManager";
@@ -18,7 +18,7 @@ public class AudioLayerManagerEditor : EditorPlus
         if (count == 0)
             manager.Init();
 
-        if(SavedFoldout("Description"))
+        if(EditorPlus.SavedFoldoutShared("Description"))
             EditorGUILayout.TextArea(description);
         
         for (int i = 0; i < count; i++)
@@ -26,7 +26,7 @@ public class AudioLayerManagerEditor : EditorPlus
             AudioLayerSettings settings = manager.audioLayerSettings[i]; 
             GUIContent name = new GUIContent("AudioLayer: " + settings.Layer.ToString() + " Clips: " + settings.ClipsPlaying.ToString(), settingsNameTooltip);
 
-            if (SavedFoldout(name, i))
+            if (EditorPlus.SavedFoldoutInstance(name, target, i))
             {
                 EditorGUI.BeginChangeCheck();
                 EditorGUI.indentLevel++;

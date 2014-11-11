@@ -21,7 +21,7 @@ public class AnimSwap2CollectionEditor : EditorPlus
 {
     public override void OnInspectorGUI()
     {
-        if(SavedFoldout("OriginalGUI"))
+        if(SavedFoldoutShared("OriginalGUI"))
         {
             EditorGUI.indentLevel++;
             base.OnInspectorGUI();
@@ -78,13 +78,13 @@ public class AnimSwap2CollectionEditor : EditorPlus
 
         #region Body
 
-        if (SavedFoldout("Body varieties", -1))
+        if (SavedFoldoutShared("Body varieties", -1))
         {
 
             EditorGUI.indentLevel++;
             for (int i = 0; i < col.BodyVarieties.Count; i++)
             {
-                if (SavedFoldout("Body variety[" + i + "]", i))
+                if (SavedFoldoutShared("Body variety[" + i + "]", i))
                 {
                     // PreviewSprite
                     EditorGUILayout.BeginHorizontal();
@@ -105,13 +105,13 @@ public class AnimSwap2CollectionEditor : EditorPlus
 
         #region Head
 
-        if (SavedFoldout("Head varieties", -1))
+        if (SavedFoldoutShared("Head varieties", -1))
         {
             EditorGUI.indentLevel++;
 
             for (int i = 0; i < col.HeadVarieties.Count; i++)
             {
-                if (SavedFoldout("Head variety[" + i + "]", i))
+                if (SavedFoldoutShared("Head variety[" + i + "]", i))
                 {
                     // PreviewSprite
                     //EditorGUILayout.LabelField("PreviewSprite", GUILayout.Width(maxWidth));
