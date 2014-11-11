@@ -14,32 +14,46 @@ public class SpriteRendererOverride : Editor
     void OnEnable()
     {
         sortingLayerNames = GetSortingLayerNames();
+
+        // Get the asset for saving material info before baked into textures etc.
     }
 
     public override void OnInspectorGUI()
     {
         List<SpriteRenderer> rnds = targets.Cast<SpriteRenderer>().ToList();
 
-        // Check if custom material Type
-        if (rnds.All(r => r.sharedMaterials.Any(m => m.name.Contains("ColorTinter"))))
-        {
-            //EditorGUILayout.LabelField("CUSTOM INSPECTOR");
-            drawCustomInspector(rnds);
-            return;
-        }
+        //base.OnInspectorGUI();
+        //return;
 
-        if (rnds.All(r => !r.sharedMaterials.Any(m => m.name.Contains("ColorTinter"))))
+        ////TODO Fix issue with missing reference
+
+        //// if there is any renderer where one of the materials is not set
+        //if(rnds.Any(r => r.sharedMaterials.IsNullOrEmpty() || r.sharedMaterials.Any(m => m == null)))
+        //{
+        //    // If it is multi selected with the colortinter
+        //    if(rnds.Any(r => r.sharedMaterials.Any(m => m != null && m.name.Contains(ColorTinterMaterialHelper.ShaderNameIncludes))))
+        //        drawCommonFields(rnds);
+        //    else
+        //        drawOldInspector(rnds);
+        //    return;
+        //}
+
+        // If no single renderer has any ref to the Color Tinter shader name
+        if (rnds.All(r => !r.sharedMaterials.Any(m => m != null && m.name.Contains(ColorTinterMaterialHelper.ShaderNameIncludes))))
         {
-            //EditorGUILayout.LabelField("DEFAULT");
             drawOldInspector(rnds);
             return;
         }
 
-        // Do common fields
-        //EditorGUILayout.LabelField("MULTIPLE MATERIALS");
-        drawCommonFields(rnds);
-        //base.OnInspectorGUI();
+        // Check if all are of the custom material Type
+        if (rnds.All(r => r.sharedMaterials.Any(m => m != null && m.name.Contains(ColorTinterMaterialHelper.ShaderNameIncludes))))
+        {
+            drawCustomInspector(rnds);
+            return;
+        }
 
+        // Do common fields
+        drawCommonFields(rnds);
     }
 
     #region Versions
@@ -77,15 +91,20 @@ public class SpriteRendererOverride : Editor
 
         EditorGUILayout.Space();
 
-        
+        ColorTinterMaterialHelper.ReplacementMode mode = ColorTinterMaterialHelper.ReplacementMode.ReplaceColor;
 
+        EditorGUILayout.EnumPopup("Mode", mode);
+
+        // IF no pallete show add pallete to material
+        EditorGUILayout.IntField("ColorPalette Index", 10);
+
+        // 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("ColorPalette");
         EditorGUILayout.ColorField(Color.green);
         EditorGUILayout.ColorField(Color.blue);
         EditorGUILayout.ColorField(Color.yellow);
         EditorGUILayout.EndHorizontal();
-        EditorGUILayout.IntField("ColorPalette Index", 10);
     }
 
     private void drawOldInspector(List<SpriteRenderer> rnds)
@@ -120,8 +139,6 @@ public class SpriteRendererOverride : Editor
         //OrderInLayer
         ShowOrderInLayer(rnds);
     }
-
-
 
     #endregion
 

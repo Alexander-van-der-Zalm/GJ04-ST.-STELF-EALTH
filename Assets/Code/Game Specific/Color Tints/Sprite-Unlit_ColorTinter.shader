@@ -3,8 +3,8 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 		_ColorTintTex ("ColorTintLookupTex", 2D) = "white" {}
-		_SpriteColorToIndex ("RColorToIndex", 2D) = "white" {}
 		_TintTexWidth("ColorTintLookupWidth",int) = 0
+		_TintTexHeight("ColorTintLookupHeight",int) = 0
 	}
 	SubShader 
 	{
@@ -103,7 +103,8 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 					// totaal 3x tex2D
 					
 					// GPU efficient
-					// 1 texture lookup
+					// 1 texture lookup in de fragment shader
+					// texture2D[versions,supportedIndices]
 					// maar heeft grotere textures COlor palette (support voor 256 indices) - texture[versies,256] is texture[u,v] 244 - mijnmooiekleur
 					// pallet1[1,,,,128,,,,,,244,,,]256 breed
 					// pallet2[,,,,,] 256 breed

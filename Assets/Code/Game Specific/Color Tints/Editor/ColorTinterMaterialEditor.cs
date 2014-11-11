@@ -4,7 +4,13 @@ using UnityEditor;
 
 public class ColorTinterMaterialEditor : MaterialEditor 
 {
-   
+    //private ColorTinterMaterialHelper helper;
+
+    //void OnEnable()
+    //{
+    //    //helper = ColorTinterMaterialHelper.GetHelper((Material)target);
+    //}
+
     public override void OnInspectorGUI () 
     {
         if(EditorPlus.SavedFoldoutShared("DefaultInspector",-1,"Inspector"))
@@ -31,7 +37,8 @@ public class ColorTinterMaterialEditor : MaterialEditor
             GUILayout.Button("-");
             EditorGUILayout.EndHorizontal();
 
-            GUILayout.Button("Add new index");
+            if (GUILayout.Button("Add new index"))
+                ColorTinterMaterialHelper.GetHelper((Material)target);
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Button("Add indices from grayvalue index picture");
