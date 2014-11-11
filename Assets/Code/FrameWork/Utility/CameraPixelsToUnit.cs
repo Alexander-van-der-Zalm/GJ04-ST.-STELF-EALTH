@@ -5,7 +5,7 @@ using System.Collections;
 public class CameraPixelsToUnit : MonoBehaviour 
 {
     public float PixelsToUnit = 24;
-    private float TargetWidth = 588;
+    public float TargetWidth = 588;
 
 	// Use this for initialization
 	void Start () 

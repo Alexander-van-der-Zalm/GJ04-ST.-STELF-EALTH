@@ -53,7 +53,6 @@ public class AnimationReference : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Awake");
         headTr = Head.transform;
         shadowTr = Shadow.transform;
         itemTr = Item.transform;
