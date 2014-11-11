@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(SimpleIsoCharacterController))]
 public class PlayerControl : MonoBehaviour 
 {
     public enum PlayerActions
@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     public ControlScheme ControlScheme;
     
     //[SerializeField,HideInInspector]
-    private CharacterController cc;
+    private SimpleIsoCharacterController cc;
 
     private AnimationSwapAnimatorWrapper anim;
     private PickPocket pp;
@@ -21,7 +21,7 @@ public class PlayerControl : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        cc = gameObject.GetComponent<CharacterController>();
+        cc = gameObject.GetComponent<SimpleIsoCharacterController>();
         pp = gameObject.GetComponent<PickPocket>();
         anim = new AnimationSwapAnimatorWrapper(gameObject);
 

@@ -2,7 +2,7 @@
 using System.Collections;
 
 //[RequireComponent(typeof(Rigidbody2D))]//,RequireComponent(typeof(Animator))]
-public class CharacterController : MonoBehaviour
+public class SimpleIsoCharacterController : MonoBehaviour
 {
     #region Fields
 
@@ -123,7 +123,9 @@ public class CharacterController : MonoBehaviour
     {
         int indexNumber = Random.Range(1, bounceSoundVariations+1);
         string sampleName = bounceSoundString + indexNumber;
-        Debug.Log("PlayBounceSound: "+sampleName);
+        //Debug.Log("PlayBounceSound: "+sampleName);
         AudioManager.Play(AudioManager.FindSampleFromCurrentLibrary(sampleName), tr);
     }
+
+    
 }

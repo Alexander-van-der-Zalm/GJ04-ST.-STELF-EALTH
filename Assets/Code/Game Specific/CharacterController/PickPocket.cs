@@ -130,7 +130,7 @@ public class PickPocket : MonoBehaviour
         if (bouncesAllowed > 0 && other.gameObject.CompareTag(validTag))
         {
             //Debug.Log("ValidBounce");
-            other.gameObject.GetComponent<CharacterController>().SetBounce();
+            other.gameObject.GetComponent<SimpleIsoCharacterController>().SetBounce();
             IHasMoolah otherMoolah = other.gameObject.GetComponent<IHasMoolah>();
             // Handle Bounce
             newValidBounceDelay(otherMoolah);

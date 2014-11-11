@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(SimpleIsoCharacterController))]
 public class AI_MovementController : MonoBehaviour 
 {
     private Transform tr;
-    private CharacterController cc;
+    private SimpleIsoCharacterController cc;
 
     
     public bool ClickToOrder = false;
@@ -19,7 +19,7 @@ public class AI_MovementController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        cc = GetComponent<CharacterController>();
+        cc = GetComponent<SimpleIsoCharacterController>();
         tr = transform;
 	}
 	
