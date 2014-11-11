@@ -23,20 +23,20 @@ public class SpriteRendererOverride : Editor
         // Check if custom material Type
         if (rnds.All(r => r.sharedMaterials.Any(m => m.name.Contains("ColorTinter"))))
         {
-            EditorGUILayout.LabelField("CUSTOM INSPECTOR");
+            //EditorGUILayout.LabelField("CUSTOM INSPECTOR");
             drawCustomInspector(rnds);
             return;
         }
 
         if (rnds.All(r => !r.sharedMaterials.Any(m => m.name.Contains("ColorTinter"))))
         {
-            EditorGUILayout.LabelField("DEFAULT");
+            //EditorGUILayout.LabelField("DEFAULT");
             drawOldInspector(rnds);
             return;
         }
 
         // Do common fields
-        EditorGUILayout.LabelField("MULTIPLE MATERIALS");
+        //EditorGUILayout.LabelField("MULTIPLE MATERIALS");
         drawCommonFields(rnds);
         //base.OnInspectorGUI();
 
