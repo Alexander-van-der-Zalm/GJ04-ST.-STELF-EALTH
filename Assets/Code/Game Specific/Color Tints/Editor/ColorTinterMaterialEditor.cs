@@ -24,7 +24,11 @@ public class ColorTinterMaterialEditor : MaterialEditor
         Material mat = (Material)target;
 
         // TODO replace bs with actual functionality
-        EditorGUILayout.LabelField("PaletteTexture and other info not set!");
+        var tex = mat.GetTexture("_PaletteTex");
+        if (tex == null)
+            EditorGUILayout.LabelField("PaletteTexture and other info not set!");
+
+        #region Test & Bake button
 
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Test Populate"))
@@ -37,6 +41,9 @@ public class ColorTinterMaterialEditor : MaterialEditor
         }
         EditorGUILayout.EndHorizontal();
 
+        #endregion
+
+        #region Indices
         if (EditorPlus.SavedFoldoutShared("Sprite Color Index", -1, "Sprite Color Index"))
         {
             EditorGUILayout.BeginHorizontal();
@@ -66,6 +73,10 @@ public class ColorTinterMaterialEditor : MaterialEditor
             GUILayout.Button("Clear all");
             EditorGUILayout.EndHorizontal();
         }
+
+        #endregion
+
+        #region Palettes
 
         if (EditorPlus.SavedFoldoutShared("Color Palettes", -1, "Color Palettes"))
         {
@@ -100,6 +111,8 @@ public class ColorTinterMaterialEditor : MaterialEditor
             GUILayout.Button("Clear all");
             EditorGUILayout.EndHorizontal();
         }
+
+        #endregion
         // Show Sprite
         // Do a correct preview
 
