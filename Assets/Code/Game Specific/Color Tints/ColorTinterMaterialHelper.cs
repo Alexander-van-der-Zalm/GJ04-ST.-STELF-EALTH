@@ -250,10 +250,13 @@ public class ColorTinterMaterialHelper : ScriptableObject
        // AssetDatabase.Refresh();
         Debug.Log("Created PNG at " + path);
 
+        //Sprite spr = new Sprite();
+        //spr.
+        Texture matTex = (Texture)AssetDatabase.LoadAssetAtPath(path, typeof(Texture));
         // Set shader properties(tex, width, height)
-        //material.SetTexture("_PaletteTex", tex);
-        //material.SetInt("_PaletteTexWidth", width);
-        //material.SetInt("_PaletteTexHeight", height);
+        material.SetTexture("_PaletteTex", matTex);
+        material.SetInt("_PaletteTexWidth", width);
+        material.SetInt("_PaletteTexHeight", height);
     }
 
     #region GUI

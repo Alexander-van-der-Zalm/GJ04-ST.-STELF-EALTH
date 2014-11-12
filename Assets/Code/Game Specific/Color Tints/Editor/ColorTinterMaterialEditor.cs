@@ -8,8 +8,10 @@ public class ColorTinterMaterialEditor : MaterialEditor
 
     //void OnEnable()
     //{
-    //    //helper = ColorTinterMaterialHelper.GetHelper((Material)target);
+    //    helper = ColorTinterMaterialHelper.GetHelper((Material)target);
     //}
+
+    private ColorTinterMaterialHelper Helper { get { return helper == null ? helper = ColorTinterMaterialHelper.GetHelper((Material)target) : helper; } }
 
     public override void OnInspectorGUI()
     {
@@ -21,16 +23,19 @@ public class ColorTinterMaterialEditor : MaterialEditor
 
         Material mat = (Material)target;
 
-
+        // TODO replace bs with actual functionality
         EditorGUILayout.LabelField("PaletteTexture and other info not set!");
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Test Populate"))
+        {
+            Helper.TestPopulate();
+        }
         if(GUILayout.Button("Bake palettes"))
         {
-            if(helper == null)
-                helper = ColorTinterMaterialHelper.GetHelper(mat);
-            helper.TestPopulate();
-            helper.CreateAndSetPaletteTexture();
+            Helper.CreateAndSetPaletteTexture();
         }
-
+        EditorGUILayout.EndHorizontal();
 
         if (EditorPlus.SavedFoldoutShared("Sprite Color Index", -1, "Sprite Color Index"))
         {
@@ -64,27 +69,29 @@ public class ColorTinterMaterialEditor : MaterialEditor
 
         if (EditorPlus.SavedFoldoutShared("Color Palettes", -1, "Color Palettes"))
         {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.IntField(10);
-            EditorGUILayout.ColorField(Color.green);
-            EditorGUILayout.ColorField(Color.blue);
-            EditorGUILayout.ColorField(Color.yellow);
-            EditorGUILayout.ColorField(Color.red);
-            EditorGUILayout.ColorField(Color.magenta);
-            EditorGUILayout.ColorField(Color.cyan);
-            GUILayout.Button("-");
-            EditorGUILayout.EndHorizontal();
+            //EditorGUILayout.BeginHorizontal();
+            //EditorGUILayout.IntField(10);
+            //EditorGUILayout.ColorField(Color.green);
+            //EditorGUILayout.ColorField(Color.blue);
+            //EditorGUILayout.ColorField(Color.yellow);
+            //EditorGUILayout.ColorField(Color.red);
+            //EditorGUILayout.ColorField(Color.magenta);
+            //EditorGUILayout.ColorField(Color.cyan);
+            //GUILayout.Button("-");
+            //EditorGUILayout.EndHorizontal();
 
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.IntField(1);
-            EditorGUILayout.ColorField(Color.red);
-            EditorGUILayout.ColorField(Color.magenta);
-            EditorGUILayout.ColorField(Color.cyan);
-            EditorGUILayout.ColorField(Color.red);
-            EditorGUILayout.ColorField(Color.magenta);
-            EditorGUILayout.ColorField(Color.cyan);
-            GUILayout.Button("-");
-            EditorGUILayout.EndHorizontal();
+            //EditorGUILayout.BeginHorizontal();
+            //EditorGUILayout.IntField(1);
+            //EditorGUILayout.ColorField(Color.red);
+            //EditorGUILayout.ColorField(Color.magenta);
+            //EditorGUILayout.ColorField(Color.cyan);
+            //EditorGUILayout.ColorField(Color.red);
+            //EditorGUILayout.ColorField(Color.magenta);
+            //EditorGUILayout.ColorField(Color.cyan);
+            //GUILayout.Button("-");
+            //EditorGUILayout.EndHorizontal();
+
+            Helper.ColorPaletteGUI();
 
             GUILayout.Button("Add new palette");
 
@@ -99,5 +106,11 @@ public class ColorTinterMaterialEditor : MaterialEditor
         // Foldout Color Palettes
         // - Show All color Palettes
         // Differ between mem and gpu version
+
+        if(GUI.changed)
+        {
+            //Helper.CreateAndSetPaletteTexture();
+            Helper.Save();
+        }
     }
 }
