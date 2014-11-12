@@ -6,6 +6,8 @@ using Channel = ColorTinterMaterialHelper.ColorChannel;
 public class ColorPaletteIndex
 {
     public Channel Channel;
-    public Color Color;
+    [Range(0,255)]
+    public int ColorChannelValue;
+    //public Color Color;
     public int Index;
 }

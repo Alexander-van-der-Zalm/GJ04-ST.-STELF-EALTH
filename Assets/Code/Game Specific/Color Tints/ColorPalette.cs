@@ -41,9 +41,6 @@ public class ColorPalette
 
     public void OnGui(float startX, float startY, float width, float rowHeight, float minColorWidth)
     {
-        // Settings
-        int colorPickerOverride = 15;
-
         // Precalculate
         float colf = Mathf.Floor(width / minColorWidth);
         int columns = Mathf.Min(Count,(int)(Mathf.Floor(width / minColorWidth))); // over x
@@ -54,10 +51,6 @@ public class ColorPalette
         //// Get StartPos
         Rect rec = new Rect(startX, startY, width, height);
         GUILayoutUtility.BeginGroup("test");
-
-        //Debug.Log(string.Format("Width {0} scrWidth {1}", width, Screen.width));
-
-        //Debug.Log(string.Format("Height {0} Width {1} xy [{2},{3}] rows{6} cols{7} color wh [{4},{5}] min {8}", height, width, startX, startY, colorWidth, rowHeight,rows,columns, minColorWidth));
 
         if(!rec.Equals(curRec))
         {
@@ -72,19 +65,10 @@ public class ColorPalette
             curRec = rec;
         }
 
-        //for (int i = Count-1; i >= 0; i--)
-        //{
-        //    Rect copy = new Rect(posRec[i]);
-        //    copy.width += colorPickerOverride;
-        //    colors[i] = EditorGUI.ColorField(copy, colors[i]);
-        //}
-
         // Draw the Color Field
         for (int i = 0; i < Count; i++)
         {
-            //GUI.depth = 
-            //colors[i] = 
-            //EditorGUIUtility.DrawColorSwatch(posRec[i], colors[i]);//EditorGUI.ColorField(posRec[i], colors[i]);
+            //Replace with: EditorGUIUtility.DrawColorSwatch(posRec[i], colors[i]); ??
 
             colors[i] = EditorGUI.ColorField(posRec[i], colors[i]);
             

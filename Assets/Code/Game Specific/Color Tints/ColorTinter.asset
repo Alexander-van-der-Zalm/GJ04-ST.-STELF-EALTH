@@ -20,18 +20,18 @@ MonoBehaviour:
     - {r: 1, g: 0, b: 1, a: 1}
   ColorPaletteIndices:
   - Channel: 0
-    Color: {r: 0, g: 0, b: 0, a: 1}
+    ColorChannelValue: 0
     Index: 0
   - Channel: 0
-    Color: {r: .117647059, g: 0, b: 0, a: 1}
+    ColorChannelValue: 30
     Index: 1
   - Channel: 0
-    Color: {r: .352941185, g: 0, b: 0, a: 1}
+    ColorChannelValue: 90
     Index: 2
   - Channel: 0
-    Color: {r: .470588237, g: 0, b: 0, a: 1}
+    ColorChannelValue: 120
     Index: 3
   - Channel: 0
-    Color: {r: .588235319, g: 0, b: 0, a: 1}
+    ColorChannelValue: 150
     Index: 4
   material: {fileID: 2100000, guid: 7ecd92f3c58c84b4daaf0ebe08bb3f00, type: 2}

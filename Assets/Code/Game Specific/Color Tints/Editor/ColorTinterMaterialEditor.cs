@@ -23,7 +23,7 @@ public class ColorTinterMaterialEditor : MaterialEditor
 
 
         EditorGUILayout.LabelField("PaletteTexture and other info not set!");
-        GUILayout.Button("Bake palettes");
+        if(GUILayout.Button("Bake palettes"))
         {
             if(helper == null)
                 helper = ColorTinterMaterialHelper.GetHelper(mat);

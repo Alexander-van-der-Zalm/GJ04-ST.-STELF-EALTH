@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using System.IO;
 
 public class ColorTinterMaterialHelper : ScriptableObject
 {
@@ -10,16 +11,16 @@ public class ColorTinterMaterialHelper : ScriptableObject
 
     public enum ColorChannel
     {
-        R,
-        G,
-        B,
-        A,
-        RG,
-        GB,
-        BA,
-        RGB,
-        GBA,
-        RGBA
+        R//,
+        //G,
+        //B,
+        //A//,
+        //RG,
+        //GB,
+        //BA,
+        //RGB,
+        //GBA,
+        //RGBA
     }
 
     public enum ReplacementMode
@@ -187,11 +188,13 @@ public class ColorTinterMaterialHelper : ScriptableObject
         colorPalettes[0].Add(new Color(1, 0, 1, 1));
 
         ColorPaletteIndices = new List<ColorPaletteIndex>();
-        ColorPaletteIndices.Add(new ColorPaletteIndex(){Color = new Color(0,0,0,1), Index = 0 });
-        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(30.0f / 255.0f, 0, 0, 1), Index = 1 });
-        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(90.0f / 255.0f, 0, 0, 1), Index = 2 });
-        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(120.0f / 255.0f, 0, 0, 1), Index = 3 });
-        ColorPaletteIndices.Add(new ColorPaletteIndex() { Color = new Color(150.0f / 255.0f, 0, 0, 1), Index = 4 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { ColorChannelValue = 0, Index = 0 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { ColorChannelValue = 30, Index = 1 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { ColorChannelValue = 90, Index = 2 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { ColorChannelValue = 120, Index = 3 });
+        ColorPaletteIndices.Add(new ColorPaletteIndex() { ColorChannelValue = 150, Index = 4 });
+
+        Save();
     }
 
     public void CreateAndSetPaletteTexture()
@@ -222,19 +225,35 @@ public class ColorTinterMaterialHelper : ScriptableObject
                 ColorPaletteIndex indexer = ColorPaletteIndices[i];
                 
                 // Use the red channel for now
-                int spriteIndex = (int)Mathf.Round(indexer.Color.r * 256);
+                int spriteIndex = indexer.ColorChannelValue;//(int)Mathf.Round(indexer.Color.r * 256);
                 colors[y * width + spriteIndex] = palette[indexer.Index];
 
             }
         }
         
         tex.SetPixels(colors);
+        tex.Apply();
         tex.name = material.name + "_PaletteTexture";
 
+        byte[] texData = tex.EncodeToPNG();
+
+
+        // Create path based on the materials filepath
+        string path = AssetDatabase.GetAssetPath(material);
+        path = path.Replace(material.name, tex.name);
+        path = path.Replace(".mat", ".png");
+
+        // Create the file and import it to the assetDatabase
+        File.WriteAllBytes(path, texData);
+        
+        AssetDatabase.ImportAsset(path);
+       // AssetDatabase.Refresh();
+        Debug.Log("Created PNG at " + path);
+
         // Set shader properties(tex, width, height)
-        material.SetTexture("_PaletteTex", tex);
-        material.SetInt("_PaletteTexWidth", width);
-        material.SetInt("_PaletteTexHeight", height);
+        //material.SetTexture("_PaletteTex", tex);
+        //material.SetInt("_PaletteTexWidth", width);
+        //material.SetInt("_PaletteTexHeight", height);
     }
 
     #region GUI
@@ -246,15 +265,22 @@ public class ColorTinterMaterialHelper : ScriptableObject
         int buttonwidth = 20;
         int indexwidth = 30;
         float width = Screen.width;
-        float colorPaletteWidth = width - buttonwidth - indexwidth;
+        float colorPaletteWidth = width - buttonwidth - indexwidth-20;
         int colorHeight = 15;
         float minColorWidht = 45;
 
         for(int i = 0; i < colorPalettes.Count; i++)
         {
             float height = colorPalettes[i].GUIHeight(colorPaletteWidth,colorHeight,minColorWidht);
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("ID:" + i,GUILayout.Width(indexwidth),GUILayout.MinWidth(indexwidth),GUILayout.MaxWidth(indexwidth));
             Rect rec = GUILayoutUtility.GetRect(width, height);
             colorPalettes[i].OnGui(rec.x,rec.y,colorPaletteWidth,colorHeight,minColorWidht);
+            if(GUILayout.Button("-",GUILayout.Width(buttonwidth),GUILayout.MinWidth(buttonwidth),GUILayout.MaxWidth(buttonwidth)))
+            {
+                Debug.Log("Delete" + i);
+            }
+            EditorGUILayout.EndHorizontal();
         }
     }
 
