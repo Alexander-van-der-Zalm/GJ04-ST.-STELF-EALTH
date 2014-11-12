@@ -104,12 +104,7 @@ Shader "Custom/Sprite-Unlit_ColorTinter" {
 				//	return float4(1,0,0,1);
 				//else
 				//	return float4(0,1,0,1);
-					
-					// Palette = [5]
-					// 2 pallettes
-					
-					// Dit is gevoelig
-					
+								
 					
 					// Memory efficient
 					// 2 texture lookups in de fragment shader

@@ -22,14 +22,7 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _ColorTintTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _SpriteColorToIndex
+          name: _PaletteTex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -41,8 +34,12 @@ Material:
         second: 0
       data:
         first:
-          name: _TintTexWidth
-        second: 0
+          name: _PaletteTexWidth
+        second: 256
+      data:
+        first:
+          name: _PaletteTexHeight
+        second: 1
     m_Colors:
       data:
         first:

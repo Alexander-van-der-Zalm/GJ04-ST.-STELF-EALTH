@@ -41,6 +41,8 @@ public class ColorTinterMaterialHelper : ScriptableObject
     [SerializeField]
     private Material material;
 
+    //public 
+
     #endregion
 
     #region Properties
@@ -177,12 +179,12 @@ public class ColorTinterMaterialHelper : ScriptableObject
     public void TestPopulate()
     {
         colorPalettes = new List<ColorPalette>();
-        colorPalettes.Add(new ColorPalette(5));
-        colorPalettes[0][0] = new Color(1, 0, 0, 1);
-        colorPalettes[0][1] = new Color(1, 1, 0, 1);
-        colorPalettes[0][2] = new Color(0, 1, 1, 1);
-        colorPalettes[0][3] = new Color(1, .5f, 0, 1);
-        colorPalettes[0][4] = new Color(1, 0, 1, 1);
+        colorPalettes.Add(new ColorPalette());
+        colorPalettes[0].Add(new Color(1, 0, 0, 1));
+        colorPalettes[0].Add(new Color(1, 1, 0, 1));
+        colorPalettes[0].Add( new Color(0, 1, 1, 1));
+        colorPalettes[0].Add(new Color(1, .5f, 0, 1));
+        colorPalettes[0].Add(new Color(1, 0, 1, 1));
 
         ColorPaletteIndices = new List<ColorPaletteIndex>();
         ColorPaletteIndices.Add(new ColorPaletteIndex(){Color = new Color(0,0,0,1), Index = 0 });
@@ -234,4 +236,32 @@ public class ColorTinterMaterialHelper : ScriptableObject
         material.SetInt("_PaletteTexWidth", width);
         material.SetInt("_PaletteTexHeight", height);
     }
+
+    #region GUI
+
+   
+
+    public void ColorPaletteGUI()
+    {
+        int buttonwidth = 20;
+        int indexwidth = 30;
+        float width = Screen.width;
+        float colorPaletteWidth = width - buttonwidth - indexwidth;
+        int colorHeight = 15;
+        float minColorWidht = 45;
+
+        for(int i = 0; i < colorPalettes.Count; i++)
+        {
+            float height = colorPalettes[i].GUIHeight(colorPaletteWidth,colorHeight,minColorWidht);
+            Rect rec = GUILayoutUtility.GetRect(width, height);
+            colorPalettes[i].OnGui(rec.x,rec.y,colorPaletteWidth,colorHeight,minColorWidht);
+        }
+    }
+
+    public void ColorIndexGUI()
+    {
+        float width = Screen.width;
+    }
+
+    #endregion
 }

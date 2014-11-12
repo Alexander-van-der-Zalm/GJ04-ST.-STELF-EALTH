@@ -2,18 +2,18 @@
 using System.Collections;
 using UnityEditor;
 
-public class ColorTinterMaterialEditor : MaterialEditor 
+public class ColorTinterMaterialEditor : MaterialEditor
 {
     private ColorTinterMaterialHelper helper;
 
-    void OnEnable()
-    {
-        helper = ColorTinterMaterialHelper.GetHelper((Material)target);
-    }
+    //void OnEnable()
+    //{
+    //    //helper = ColorTinterMaterialHelper.GetHelper((Material)target);
+    //}
 
-    public override void OnInspectorGUI () 
+    public override void OnInspectorGUI()
     {
-        if(EditorPlus.SavedFoldoutShared("DefaultInspector",-1,"Inspector"))
+        if (EditorPlus.SavedFoldoutShared("DefaultInspector", -1, "Inspector"))
         {
             base.OnInspectorGUI();
             EditorGUILayout.Space();
@@ -25,10 +25,12 @@ public class ColorTinterMaterialEditor : MaterialEditor
         EditorGUILayout.LabelField("PaletteTexture and other info not set!");
         GUILayout.Button("Bake palettes");
         {
+            if(helper == null)
+                helper = ColorTinterMaterialHelper.GetHelper(mat);
             helper.TestPopulate();
             helper.CreateAndSetPaletteTexture();
         }
-            
+
 
         if (EditorPlus.SavedFoldoutShared("Sprite Color Index", -1, "Sprite Color Index"))
         {

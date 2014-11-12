@@ -11,5 +11,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83a06471210d664e8a1457233f10e06, type: 3}
   m_Name: ColorTinter
   m_EditorClassIdentifier: 
-  colorPalettes: []
-  material: {fileID: 2100000, guid: 1f10951acffd8f1449b71e7e27f709ed, type: 2}
+  colorPalettes:
+  - colors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 1, a: 1}
+    - {r: 1, g: .5, b: 0, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+  ColorPaletteIndices:
+  - Channel: 0
+    Color: {r: 0, g: 0, b: 0, a: 1}
+    Index: 0
+  - Channel: 0
+    Color: {r: .117647059, g: 0, b: 0, a: 1}
+    Index: 1
+  - Channel: 0
+    Color: {r: .352941185, g: 0, b: 0, a: 1}
+    Index: 2
+  - Channel: 0
+    Color: {r: .470588237, g: 0, b: 0, a: 1}
+    Index: 3
+  - Channel: 0
+    Color: {r: .588235319, g: 0, b: 0, a: 1}
+    Index: 4
+  material: {fileID: 2100000, guid: 7ecd92f3c58c84b4daaf0ebe08bb3f00, type: 2}
