@@ -30,13 +30,13 @@ public class ColorTinterMaterialEditor : MaterialEditor
         #region Test & Bake button
 
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Test Populate"))
-        {
-            Helper.TestPopulate();
-        }
         if(GUILayout.Button("Bake palettes"))
         {
             Helper.CreateAndSetPaletteTexture();
+        }
+        if (GUILayout.Button("Test Populate"))
+        {
+            Helper.TestPopulate();
         }
         EditorGUILayout.EndHorizontal();
 
@@ -46,12 +46,6 @@ public class ColorTinterMaterialEditor : MaterialEditor
         if (EditorPlus.SavedFoldoutShared("Sprite Color Index", -1, "Sprite Color Index"))
         {
             Helper.ColorIndexGUI();
-
-            if (GUILayout.Button("Add new index"))
-            {
-
-            }
-
             //EditorGUILayout.BeginHorizontal();
             //GUILayout.Button("Add indices from grayvalue index picture");
             //GUILayout.Button("Clear all");

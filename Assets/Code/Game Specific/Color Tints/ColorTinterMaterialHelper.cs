@@ -289,10 +289,13 @@ public class ColorTinterMaterialHelper : ScriptableObject
         width = Screen.width;
         float colorPaletteWidth = width - buttonwidth - indexwidth - 20;
 
+        //EditorGUILayout.IntField
+
         for(int i = 0; i < colorPalettes.Count; i++)
         {
             float height = colorPalettes[i].GUIHeight(colorPaletteWidth, colorHeight, minColorWidht);
-            
+
+            // Delete or add button
             EditorGUILayout.BeginHorizontal();
             {
                 // ID
@@ -306,9 +309,6 @@ public class ColorTinterMaterialHelper : ScriptableObject
                 // Palette
                 Rect rec = GUILayoutUtility.GetRect(width, height);
                 colorPalettes[i].OnGui(rec.x, rec.y, colorPaletteWidth, colorHeight, minColorWidht);
-
-                // Delete or add button
-                
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -328,6 +328,8 @@ public class ColorTinterMaterialHelper : ScriptableObject
     {
         float width = Screen.width;
 
+        int deleteIndex = -1;
+
         for(int i = 0; i < ColorPaletteIndices.Count; i++)
         {
             EditorGUILayout.BeginHorizontal();
@@ -335,9 +337,30 @@ public class ColorTinterMaterialHelper : ScriptableObject
             ColorPaletteIndices[i].Index = (int)Mathf.Clamp(EditorGUILayout.IntField("PaletteIndexer", ColorPaletteIndices[i].Index), 0, 255);
             ColorPaletteIndices[i].Channel = (ColorChannel)EditorGUILayout.EnumPopup(ColorPaletteIndices[i].Channel);
             ColorPaletteIndices[i].ColorChannelValue = (int)Mathf.Clamp(EditorGUILayout.IntField(ColorPaletteIndices[i].ColorChannelValue), 0, 255);
-                
+
+            if (GUILayout.Button("-", GUILayout.Width(buttonwidth), GUILayout.MinWidth(buttonwidth), GUILayout.MaxWidth(buttonwidth)))
+            {
+                deleteIndex = i;
+            }
+
             EditorGUILayout.EndHorizontal();
         }
+
+        if(deleteIndex>=0)
+        {
+            ColorPaletteIndices.RemoveAt(deleteIndex);
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Add new index"))
+        {
+            ColorPaletteIndices.Add(new ColorPaletteIndex());
+        }
+        if (GUILayout.Button("Clear All"))
+        {
+            ColorPaletteIndices.Clear();
+        }
+        EditorGUILayout.EndHorizontal();
     }
 
     #endregion
