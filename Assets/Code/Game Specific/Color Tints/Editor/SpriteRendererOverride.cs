@@ -89,8 +89,6 @@ public class SpriteRendererOverride : Editor
         ShowIndexAndPalette(rnds);
     }
 
-   
-
     private void drawOldInspector(List<SpriteRenderer> rnds)
     {
         // DefaultFoldOut();

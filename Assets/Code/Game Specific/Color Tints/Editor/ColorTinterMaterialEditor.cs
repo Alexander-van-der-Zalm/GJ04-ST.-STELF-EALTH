@@ -45,32 +45,17 @@ public class ColorTinterMaterialEditor : MaterialEditor
         #region Indices
         if (EditorPlus.SavedFoldoutShared("Sprite Color Index", -1, "Sprite Color Index"))
         {
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.IntField(1);
-            EditorGUILayout.ColorField(Color.green);
-            EditorGUILayout.ColorField(Color.green);
-            GUILayout.Button("-");
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.IntField(2);
-            EditorGUILayout.ColorField(Color.black);
-            GUILayout.Button("-");
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.IntField(1);
-            EditorGUILayout.ColorField(Color.blue);
-            GUILayout.Button("-");
-            EditorGUILayout.EndHorizontal();
+            Helper.ColorIndexGUI();
 
             if (GUILayout.Button("Add new index"))
-                ColorTinterMaterialHelper.GetHelper((Material)target);
+            {
 
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Button("Add indices from grayvalue index picture");
-            GUILayout.Button("Clear all");
-            EditorGUILayout.EndHorizontal();
+            }
+
+            //EditorGUILayout.BeginHorizontal();
+            //GUILayout.Button("Add indices from grayvalue index picture");
+            //GUILayout.Button("Clear all");
+            //EditorGUILayout.EndHorizontal();
         }
 
         #endregion

@@ -327,6 +327,17 @@ public class ColorTinterMaterialHelper : ScriptableObject
     public void ColorIndexGUI()
     {
         float width = Screen.width;
+
+        for(int i = 0; i < ColorPaletteIndices.Count; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+
+            ColorPaletteIndices[i].Index = (int)Mathf.Clamp(EditorGUILayout.IntField("PaletteIndexer", ColorPaletteIndices[i].Index), 0, 255);
+            ColorPaletteIndices[i].Channel = (ColorChannel)EditorGUILayout.EnumPopup(ColorPaletteIndices[i].Channel);
+            ColorPaletteIndices[i].ColorChannelValue = (int)Mathf.Clamp(EditorGUILayout.IntField(ColorPaletteIndices[i].ColorChannelValue), 0, 255);
+                
+            EditorGUILayout.EndHorizontal();
+        }
     }
 
     #endregion
