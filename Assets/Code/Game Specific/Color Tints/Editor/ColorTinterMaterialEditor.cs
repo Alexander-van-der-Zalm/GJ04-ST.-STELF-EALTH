@@ -6,20 +6,19 @@ public class ColorTinterMaterialEditor : MaterialEditor
 {
     private ColorTinterMaterialHelper helper;
 
-    //void OnEnable()
-    //{
-    //    helper = ColorTinterMaterialHelper.GetHelper((Material)target);
-    //}
-
     private ColorTinterMaterialHelper Helper { get { return helper == null ? helper = ColorTinterMaterialHelper.GetHelper((Material)target) : helper; } }
 
     public override void OnInspectorGUI()
     {
+        #region Default layout
+
         if (EditorPlus.SavedFoldoutShared("DefaultInspector", -1, "Inspector"))
         {
             base.OnInspectorGUI();
             EditorGUILayout.Space();
         }
+
+        #endregion
 
         Material mat = (Material)target;
 
@@ -80,34 +79,11 @@ public class ColorTinterMaterialEditor : MaterialEditor
 
         if (EditorPlus.SavedFoldoutShared("Color Palettes", -1, "Color Palettes"))
         {
-            //EditorGUILayout.BeginHorizontal();
-            //EditorGUILayout.IntField(10);
-            //EditorGUILayout.ColorField(Color.green);
-            //EditorGUILayout.ColorField(Color.blue);
-            //EditorGUILayout.ColorField(Color.yellow);
-            //EditorGUILayout.ColorField(Color.red);
-            //EditorGUILayout.ColorField(Color.magenta);
-            //EditorGUILayout.ColorField(Color.cyan);
-            //GUILayout.Button("-");
-            //EditorGUILayout.EndHorizontal();
-
-            //EditorGUILayout.BeginHorizontal();
-            //EditorGUILayout.IntField(1);
-            //EditorGUILayout.ColorField(Color.red);
-            //EditorGUILayout.ColorField(Color.magenta);
-            //EditorGUILayout.ColorField(Color.cyan);
-            //EditorGUILayout.ColorField(Color.red);
-            //EditorGUILayout.ColorField(Color.magenta);
-            //EditorGUILayout.ColorField(Color.cyan);
-            //GUILayout.Button("-");
-            //EditorGUILayout.EndHorizontal();
-
-            Helper.ColorPaletteGUI();
-
-            GUILayout.Button("Add new palette");
+            Helper.ColorPalettesGUI();
 
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Button("Add color palette from grayvalue color palette picture");
+            GUILayout.Button("Add new palette");
+            //GUILayout.Button("Add color palette from grayvalue color palette picture");
             GUILayout.Button("Clear all");
             EditorGUILayout.EndHorizontal();
         }

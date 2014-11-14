@@ -60,7 +60,8 @@ public class ColorTinterMaterialHelper : ScriptableObject
 
     public static string ShaderNameIncludes { get { return "ColorTinter"; } }
 
-    
+
+    public int PaletteCount { get { return colorPalettes.Count; } }
 
     #endregion
 
@@ -79,7 +80,7 @@ public class ColorTinterMaterialHelper : ScriptableObject
     {
         string path = AssetDatabase.GetAssetPath(material);
         path = path.Replace(".mat", ".asset");
-        Debug.Log(path);
+       // Debug.Log(path);
         return path;
     }
 
@@ -140,21 +141,34 @@ public class ColorTinterMaterialHelper : ScriptableObject
     public static bool SetPaletteIndex(SpriteRenderer renderer, int index)
     {
         // Fail if the material has not been properly set
-        if (renderer.sharedMaterials.IsNullOrEmpty() || !renderer.sharedMaterials.Any(m => m.shader.name.Contains(ShaderNameIncludes)))
+        if (IsInvalidRenderer(renderer))
         {
             throw new UnassignedReferenceException("ColorTinterMaterialHelper.SetPaletteIndex: the renderer has no material or does not contain the right shader.");
             return false;
         }
 
+        Color newInfo = renderer.color;
+        newInfo.r = (float)index / 255;
+        renderer.color = newInfo;
 
-        throw new System.NotImplementedException();
-
-
-        return false;
+        return true;
     }
 
+    public static int GetPaletteIndex(SpriteRenderer renderer)
+    {
+        // Fail if the material has not been properly set
+        if (IsInvalidRenderer(renderer))
+        {
+            throw new UnassignedReferenceException("ColorTinterMaterialHelper.SetPaletteIndex: the renderer has no material or does not contain the right shader.");
+        }
 
+        return (int)(renderer.color.r * 255.0f);
+    }
 
+    private static bool IsInvalidRenderer(SpriteRenderer renderer)
+    {
+        return renderer.sharedMaterials.IsNullOrEmpty() || !renderer.sharedMaterials.Any(m => m.shader.name.Contains(ShaderNameIncludes));
+    }
     #endregion
 
     //// Use this for initialization
@@ -261,30 +275,53 @@ public class ColorTinterMaterialHelper : ScriptableObject
 
     #region GUI
 
-   
+    private int colorHeight = 15;
+    private float minColorWidht = 45;
 
-    public void ColorPaletteGUI()
+    private int buttonwidth = 20;
+    private int indexwidth = 30;
+
+    private float width;
+    
+
+    public void ColorPalettesGUI()
     {
-        int buttonwidth = 20;
-        int indexwidth = 30;
-        float width = Screen.width;
-        float colorPaletteWidth = width - buttonwidth - indexwidth-20;
-        int colorHeight = 15;
-        float minColorWidht = 45;
+        width = Screen.width;
+        float colorPaletteWidth = width - buttonwidth - indexwidth - 20;
 
         for(int i = 0; i < colorPalettes.Count; i++)
         {
-            float height = colorPalettes[i].GUIHeight(colorPaletteWidth,colorHeight,minColorWidht);
+            float height = colorPalettes[i].GUIHeight(colorPaletteWidth, colorHeight, minColorWidht);
+            
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("ID:" + i,GUILayout.Width(indexwidth),GUILayout.MinWidth(indexwidth),GUILayout.MaxWidth(indexwidth));
-            Rect rec = GUILayoutUtility.GetRect(width, height);
-            colorPalettes[i].OnGui(rec.x,rec.y,colorPaletteWidth,colorHeight,minColorWidht);
-            if(GUILayout.Button("-",GUILayout.Width(buttonwidth),GUILayout.MinWidth(buttonwidth),GUILayout.MaxWidth(buttonwidth)))
             {
-                Debug.Log("Delete" + i);
+                // ID
+                if (GUILayout.Button("-", GUILayout.Width(buttonwidth), GUILayout.MinWidth(buttonwidth), GUILayout.MaxWidth(buttonwidth)))
+                {
+                    Debug.Log("Delete" + i);
+                }
+
+                EditorGUILayout.LabelField("ID:" + i, GUILayout.Width(indexwidth), GUILayout.MinWidth(indexwidth), GUILayout.MaxWidth(indexwidth));
+
+                // Palette
+                Rect rec = GUILayoutUtility.GetRect(width, height);
+                colorPalettes[i].OnGui(rec.x, rec.y, colorPaletteWidth, colorHeight, minColorWidht);
+
+                // Delete or add button
+                
             }
             EditorGUILayout.EndHorizontal();
         }
+    }
+
+    public void ColorPaletteGUI(int index, float colorPaletteWidth)
+    {
+        width = Screen.width;
+        float height = colorPalettes[index].GUIHeight(colorPaletteWidth, colorHeight, minColorWidht);
+        colorPaletteWidth = width;
+
+        Rect rec = GUILayoutUtility.GetRect(width, height);
+        colorPalettes[index].OnGui(rec.x, rec.y, colorPaletteWidth, colorHeight, minColorWidht);
     }
 
     public void ColorIndexGUI()

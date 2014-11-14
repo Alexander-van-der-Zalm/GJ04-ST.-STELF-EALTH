@@ -16,7 +16,7 @@ public class ColorTinterMaterialHelperEditor : Editor
 
         if (EditorPlus.SavedFoldoutShared("ColorTints", -1, "ColorTinterMaterialHelperEditor - ColorPaletteGUI"))
         {
-            help.ColorPaletteGUI();
+            help.ColorPalettesGUI();
         }
 
         if (EditorPlus.SavedFoldoutShared("ColorTints", -1, "ColorTinterMaterialHelperEditor - ColorIndexGUI"))

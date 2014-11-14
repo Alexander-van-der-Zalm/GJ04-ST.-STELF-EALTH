@@ -32,8 +32,8 @@ public class ColorPalette
 
     public float GUIHeight(float width, float rowHeight, float minColorWidth)
     {
-        int columns = (int)Mathf.Floor(width / minColorWidth); // over x
-        int rows = (int)Mathf.Ceil(Count / columns); // over y
+        int columns = Mathf.Min(Count, (int)(Mathf.Floor(width / minColorWidth))); // over x
+        int rows = (int)(Mathf.Ceil((float)Count / columns)); // over y
 
         // Height
         return rowHeight * rows;
@@ -59,7 +59,7 @@ public class ColorPalette
             for (int i = 0; i < Count; i++)
             {
                 float x = startX + colorWidth * (i % columns);
-                float y = startY + rowHeight * (i/Count);
+                float y = startY + (rowHeight + 2)* ((i) / columns);
                 posRec[i] = new Rect(x, y, colorWidth, rowHeight);
             }
             curRec = rec;
@@ -69,9 +69,7 @@ public class ColorPalette
         for (int i = 0; i < Count; i++)
         {
             //Replace with: EditorGUIUtility.DrawColorSwatch(posRec[i], colors[i]); ??
-
             colors[i] = EditorGUI.ColorField(posRec[i], colors[i]);
-            
         }
 
         GUILayoutUtility.EndGroup("test");

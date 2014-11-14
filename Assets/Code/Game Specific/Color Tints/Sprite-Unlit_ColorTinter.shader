@@ -92,9 +92,9 @@ Shader "Custom/Sprite-Unlit_ColorTinter"
 				}
 				// TODO: Replace color method
 				// (V) - Grab the color
-				// (X) - Test using the mainsprite with a colorPalette
-				// (X) - Check if the r channel returns a color that is not 0,0,0,0
-				// (X) - Replace color if previous is true
+				// (V) - Test using the mainsprite with a colorPalette
+				// (V) - Check if the r channel returns a color that is not 0,0,0,0
+				// (V) - Replace color if previous is true
 				// (X) - combine with the index number from the vertex for multi tint palette support
 				// (X) - Make it into a function
 				// (X) - Check how to use function in other shader scripts
@@ -128,7 +128,6 @@ Shader "Custom/Sprite-Unlit_ColorTinter"
 				// totaal 3x tex2D
 				// - Doesnt save a significant amount of memory
 				// - Still uses just one channel
-				
 				
 				// Sprite changing methods
 				

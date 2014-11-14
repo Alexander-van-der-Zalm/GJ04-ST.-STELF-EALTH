@@ -11,10 +11,14 @@ using System.Reflection;
 public class SpriteRendererOverride : Editor
 {
     string[] sortingLayerNames;
+
+    private ColorTinterMaterialHelper helper;
+
+    private ColorTinterMaterialHelper Helper { get { return helper == null ? helper = ColorTinterMaterialHelper.GetHelper(((SpriteRenderer)target).sharedMaterial) : helper; } }
+
     void OnEnable()
     {
         sortingLayerNames = GetSortingLayerNames();
-
         // Get the asset for saving material info before baked into textures etc.
     }
 
@@ -80,16 +84,12 @@ public class SpriteRendererOverride : Editor
         EditorGUILayout.EnumPopup("Mode", mode);
 
         // IF no pallete show add pallete to material
-        EditorGUILayout.IntField("ColorPalette Index", 10);
 
-        // 
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("ColorPalette");
-        EditorGUILayout.ColorField(Color.green);
-        EditorGUILayout.ColorField(Color.blue);
-        EditorGUILayout.ColorField(Color.yellow);
-        EditorGUILayout.EndHorizontal();
+        // Else show index and the matching color Palette
+        ShowIndexAndPalette(rnds);
     }
+
+   
 
     private void drawOldInspector(List<SpriteRenderer> rnds)
     {
@@ -291,6 +291,51 @@ public class SpriteRendererOverride : Editor
         Type internalEditorUtilityType = typeof(InternalEditorUtility);
         PropertyInfo sortingLayersProperty = internalEditorUtilityType.GetProperty("sortingLayerNames", BindingFlags.Static | BindingFlags.NonPublic);
         return (string[])sortingLayersProperty.GetValue(null, new object[0]);
+    }
+
+    #endregion
+
+    #region Custom Material Specific
+
+    private void ShowIndexAndPalette(List<SpriteRenderer> rnds)
+    {
+        // Check if there are any palettes
+        if(Helper.PaletteCount == 0)
+        {
+            if(GUILayout.Button("AddNewPalette"))
+            {
+                Debug.Log("TODO ADD AND DECIDE ON PALETTESIZE");
+            }
+            return;
+        }
+        
+        // CHeck if mixed values
+        bool mixedValues = rnds.Select(r => ColorTinterMaterialHelper.GetPaletteIndex(r)).Distinct().Count() > 1;
+        int newIndex;
+
+        EditorGUI.BeginChangeCheck();
+
+        if (mixedValues)
+        {
+            // Mixed values handling
+            EditorGUI.showMixedValue = true;
+            newIndex = (int)EditorGUILayout.IntSlider("PaletteIndex", 0, 0, Helper.PaletteCount-1);
+        }
+        else
+        {
+            // All the same value
+            newIndex = (int)EditorGUILayout.IntSlider("PaletteIndex", ColorTinterMaterialHelper.GetPaletteIndex(rnds[0]),0, Helper.PaletteCount-1);
+        }
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            for (int i = 0; i < rnds.Count; i++)
+                ColorTinterMaterialHelper.SetPaletteIndex(rnds[i], newIndex);
+        }
+
+        Helper.ColorPaletteGUI(newIndex,Screen.width);
+
+        EditorGUI.showMixedValue = false;
     }
 
     #endregion
