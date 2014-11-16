@@ -4,14 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 // TODOOOO
-// X - Think about if and how multiple actions are handled
+// V - Think about if and how multiple actions are handled - 1 Action mAx
 // X - Finish stopaction
+// X - ICharacterController -> IActionController
+// X - Base implements an actionController (also possible to have multipe action controllers (run n gun)
+// X - Implementation has a list of exposeable actions binded to the metalogic described in the character controllers to easily make variations (like Jump, run, etc)
 
 /// <summary>
 /// Can be inherented from to avoid reimplementing a basic action handling system.
 /// Does not implement everything (like movement) marked virtual.
 /// </summary>
-[System.Serializable]
+[System.Serializable] // Becomes actionController
 public class BaseCharacterController : MonoBehaviour , ICharacterController
 {
     #region Fields

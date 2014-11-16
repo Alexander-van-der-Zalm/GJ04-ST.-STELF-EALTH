@@ -16,7 +16,7 @@ public interface ICharacterAction
     void StartAction(ICharacterController controller);
 
     /// <summary>
-    /// Also possible to call if it is not interuptable (do an interuptable check if you dont want that to happen).
+    /// Also possible to call if it is not interruptable (do an interuptable check if you dont want that to happen).
     /// </summary>
     void StopAction();
 }

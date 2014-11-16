@@ -11,6 +11,7 @@ public interface ICharacterController
 
     List<string> GetAllPossibleActionNames { get; }
 
+	// Becomes one action max
     List<ICharacterAction> ActiveActions { get; }
 
     /// <summary>
