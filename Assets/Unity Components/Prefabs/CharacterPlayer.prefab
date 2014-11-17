@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0bac4368078cd418ea08cdc6155d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControlScheme: {fileID: 0}
+  ControlScheme: {fileID: 11400000, guid: ff09e617097b01e4c9d627b88089012a, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,6 +251,8 @@ MonoBehaviour:
     animators: []
   danceAction:
     DanceAnimationVar: Dance
+  Iso2DMovement:
+    MaximumVelocity: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -356,7 +358,7 @@ MonoBehaviour:
   Head: {fileID: 9500000}
   Body: {fileID: 9500002}
   HeadVariety: 4
-  BodyVariety: 3
+  BodyVariety: 2
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -443,7 +445,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1708189487
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 46d27b1b6b13ca5428452f2b1052ab8e, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 1f311036da1dfbe439138eabca4d2064, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

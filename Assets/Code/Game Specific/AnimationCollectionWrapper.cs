@@ -41,7 +41,10 @@ public class AnimatorCollectionWrapper
     public void SetFloat(string param, float value)
     {
         for (int i = 0; i < animators.Count; i++)
-            animators[i].SetFloat(param, value); 
+        {
+            animators[i].SetFloat(param, value);
+        }
+            
     }
 
     #endregion

@@ -5,6 +5,8 @@ public class Iso2DCharacterController : Character2DBaseController
 {
     public DanceAction danceAction;
 
+    public Iso2DMovementController Iso2DMovement;
+
     private AnimationSwapAnimatorWrapper anim;
 
     #region Properties
@@ -24,7 +26,9 @@ public class Iso2DCharacterController : Character2DBaseController
     protected override void Init()
     {
         ActionController = new CharacterActionController();
-        MovementController = new Iso2DMovementController();
+        if (Iso2DMovement == null)
+            Iso2DMovement = new Iso2DMovementController();
+        MovementController = Iso2DMovement;
         AnimationController = new AnimatorCollectionWrapper(gameObject);
         anim = new AnimationSwapAnimatorWrapper(gameObject);
         Debug.Log("Start");

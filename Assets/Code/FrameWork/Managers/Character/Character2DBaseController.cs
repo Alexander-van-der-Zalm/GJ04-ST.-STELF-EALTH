@@ -77,7 +77,7 @@ public class Character2DBaseController : MonoBehaviour
         if (ActionController.CanMove)
             MovementController.FixedPhysicsUpdate(rb);
 
-        //FixedUpdateEnd();
+        FixedUpdateEnd();
     }
 
     protected virtual void FixedUpdateEnd()
