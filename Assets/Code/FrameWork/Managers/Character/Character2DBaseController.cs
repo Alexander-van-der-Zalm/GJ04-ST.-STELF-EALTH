@@ -12,7 +12,7 @@ using System.Collections.Generic;
 // X - Think about how to change movement from action (Fraction multiplier)
 // X - Think about how to initiate movement from action (override input?)
 // V - Think about how to prevent Flip from action (expose to action?)
-// X - Think about how to expose animation to action
+// X - Think about how to expose animation to action (required component of an action?)
 
 /// <summary>
 /// Can be inherented from to avoid reimplementing a basic flip
