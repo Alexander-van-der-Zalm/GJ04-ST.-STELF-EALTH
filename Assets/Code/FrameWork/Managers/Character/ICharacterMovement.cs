@@ -3,6 +3,8 @@ using System.Collections;
 
 public interface ICharacter2DMovement  
 {
+    //float MaximumVelocity { get; set; }
+    
     /// <summary>
     /// Initiate the movement of the character
     /// </summary>
