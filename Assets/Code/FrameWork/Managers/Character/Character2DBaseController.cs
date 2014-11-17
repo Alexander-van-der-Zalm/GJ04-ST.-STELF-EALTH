@@ -11,7 +11,8 @@ using System.Collections.Generic;
 // X - Implementation has a list of exposeable actions binded to the metalogic described in the character controllers to easily make variations (like Jump, run, etc)
 // X - Think about how to change movement from action (Fraction multiplier)
 // X - Think about how to initiate movement from action (override input?)
-// X - Think about how to prevent Flip from action (expose to action?)
+// V - Think about how to prevent Flip from action (expose to action?)
+// X - Think about how to expose animation to action
 
 /// <summary>
 /// Can be inherented from to avoid reimplementing a basic flip
@@ -22,10 +23,10 @@ public class Character2DBaseController : MonoBehaviour
     #region Fields
 
     [SerializeField]
-    private ICharacterActionController ActionController;
+    protected ICharacterActionController ActionController;
 
     [SerializeField]
-    private ICharacter2DMovement MovementController;
+    protected ICharacter2DMovement MovementController;
 
     [System.NonSerialized]
     private Rigidbody2D rb;

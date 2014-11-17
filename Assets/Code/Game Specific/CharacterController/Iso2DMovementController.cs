@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Iso2DCharacterController : ICharacter2DMovement
+public class Iso2DMovementController : ICharacter2DMovement
 {
     #region Fields
 
