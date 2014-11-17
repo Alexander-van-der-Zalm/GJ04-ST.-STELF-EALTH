@@ -18,7 +18,10 @@ public class AxisKey
     public XboxAxisType xboxAxisType;
     //private HorVert horVert;
 
-    private int selectedIndex1, selectedIndex2;
+    [SerializeField,HideInInspector]
+    private int selectedIndex1;
+    [SerializeField, HideInInspector]
+    private int selectedIndex2;
 
     #endregion
 
