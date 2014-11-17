@@ -4,36 +4,37 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Guarantees a moveable controller with the possibility to perform actions
+/// One active action max per ICharacterActionController
 /// </summary>
-public interface ICharacterController 
+public interface ICharacterActionController 
 {
     bool CanMove { get; }
 
-    List<string> GetAllPossibleActionNames { get; }
+    List<string> GetDefaultActionNames { get; }
+
+    bool HasActiveAction { get; }
 
 	// Becomes one action max
-    List<ICharacterAction> ActiveActions { get; }
+    ICharacterAction ActiveAction { get; }
 
-    /// <summary>
-    /// Initiate the movement of the character
-    /// </summary>
-    /// <param name="horizontalInput"></param>
-    /// <param name="verticalInput"></param>
-    /// <returns>Succes if can move</returns>
-    bool SetMovementInput(float horizontalInput, float verticalInput);
-    
     /// <summary>
     /// Try let the character controller do an action
     /// </summary>
     /// <typeparam name="T">A characterAction with ICharacterAction</typeparam>
     /// <returns>Returns if the action has started</returns>
-    bool DoAction<T>() where T : ICharacterAction;
+    bool StartAction<T>() where T : ICharacterAction;
+
 
     /// <summary>
-    /// Stop all active actions with the generic type (even if uninteruptable)
+    /// Try let the character controller do an action
+    /// </summary>
+    bool StartAction(ICharacterAction action);
+
+    /// <summary>
+    /// Stop active actin if it has the generic type (even if uninteruptable)
     /// </summary>
     /// <typeparam name="T">Action type to stop : ICharacterAction</typeparam>
-    /// <returns>If any actions w</returns>
+    /// <returns>Did the action exist and stop?</returns>
     bool StopAction<T>() where T : ICharacterAction;
 
     /// <summary>
@@ -44,9 +45,9 @@ public interface ICharacterController
     bool StopAction(ICharacterAction action);
 
     /// <summary>
-    /// Stops all actions 
+    /// Stops the active action
     /// </summary>
     /// <param name="overrideUninteruptables">If true even stops if the actions are flagged as uninteruptable</param>
-    /// <returns>Succes of stopping all the actions</returns>
-    bool StopAllActions(bool overrideUninteruptables);
+    /// <returns>Succes of stopping the action</returns>
+    bool StopAction(bool overrideUninteruptable);
 }

@@ -13,7 +13,7 @@ public interface ICharacterAction
     /// <summary>
     /// Start the action (could start a coroutine)
     /// </summary>
-    void StartAction(ICharacterController controller);
+    void StartAction(ICharacterActionController controller);
 
     /// <summary>
     /// Also possible to call if it is not interruptable (do an interuptable check if you dont want that to happen).

@@ -2,78 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class IsoCharacterController : MonoBehaviour, ICharacterController
+[System.Serializable]
+public class Iso2DCharacterController : ICharacter2DMovement
 {
     #region Fields
 
-    #endregion
+    [SerializeField]
+    public float MaximumVelocity = 1;
 
-    #region Properties
-
-    public List<string> GetAllPossibleActionNames
-    {
-        get { throw new System.NotImplementedException(); }
-    }
-
-    public List<ICharacterAction> ActiveActions
-    {
-        get { throw new System.NotImplementedException(); }
-    }
+    [System.NonSerialized]
+    private Vector2 movementInput = new Vector2();
 
     #endregion
 
-    #region Start
+    #region FixedUpdate
 
-    // Use this for initialization 
-	void Start () {
-	
-	}
-
-    #endregion
-
-    #region Update
-
-    // Update is called once per frame
-	void Update () {
-	
-	}
-
-    #endregion
-
-    #region ICharacterController
-
-    public bool SetMovementInput(float horizontalInput, float verticalInput)
+    public void FixedPhysicsUpdate(Rigidbody2D rb)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public bool DoAction<T>() where T : ICharacterAction
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public bool StopAllActions(bool overrideInteruptables)
-    {
-        throw new System.NotImplementedException();
+        // Change this potentially
+        rb.velocity = movementInput * MaximumVelocity;
     }
 
     #endregion
 
-    public bool CanMove
+    public void SetMovementInput(float horizontalInput, float verticalInput)
     {
-        get { throw new System.NotImplementedException(); }
-    }
-
-
-
-
-    public bool StopAction<T>() where T : ICharacterAction
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public bool StopAction(ICharacterAction action)
-    {
-        throw new System.NotImplementedException();
+        movementInput.x = horizontalInput;
+        movementInput.y = verticalInput;
+        if (movementInput.magnitude > 1)
+            movementInput.Normalize();
     }
 }
