@@ -76,7 +76,7 @@ public class ControlSchemeEditor : EditorPlus
         // Set & select a new action list
         EditorGUILayout.BeginHorizontal();
         selectedIndex = EditorGUILayout.Popup(selectedIndex, AllEnumsNames);
-        if (GUILayout.Button("SetActions"))
+        if (GUILayout.Button("ResetActions"))
             ct.SetActionsFromEnum(AllEnums[selectedIndex]);
         EditorGUILayout.EndHorizontal();
 

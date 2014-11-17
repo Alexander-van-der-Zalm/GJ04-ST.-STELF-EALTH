@@ -35,7 +35,7 @@ public class ControlKey
         if (Type == ControlKeyType.PC)
             selectedIndex = Enum.GetNames(typeof(KeyCode)).ToList().FindIndex(e => e == KeyValue);
         else
-            selectedIndex = Enum.GetNames(typeof(KeyCode)).ToList().FindIndex(e => e == KeyValue);
+            selectedIndex = Enum.GetNames(typeof(XboxButton)).ToList().FindIndex(e => e == KeyValue);
     }
 
     public static ControlKey XboxButton(XboxCtrlrInput.XboxButton btn)

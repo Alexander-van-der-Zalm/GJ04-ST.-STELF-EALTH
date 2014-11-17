@@ -76,9 +76,6 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
         return controlScheme;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void SetActionsFromEnum<T>() where T : struct, IConvertible
     {
         SetActionsFromEnum(typeof(T));
@@ -99,21 +96,7 @@ public class ControlScheme:EasyScriptableObject<ControlScheme>// : MonoBehaviour
         {
             Actions.Add(new Action(this, names[i]));
         }
-
-        //IEnumerable<T> values = Enum.GetValues(typeof(T)).Cast<T>();
-
-        //foreach (T value in values)
-        //{
-        //    Actions.Add(new Action(this, value.ToString()));
-        //}
     }
-
-    //public ControlScheme(int controllerID = 1, int playerID = 1)
-    //{
-    //    this.controllerID = controllerID;
-    //    this.playerID = playerID;
-    //    Actions = new List<Action>();
-    //}
 
     public void Update()
     {
