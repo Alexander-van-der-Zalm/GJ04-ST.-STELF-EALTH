@@ -54,9 +54,16 @@ public class Iso2DCharacterController : Character2DBaseController
 
     #region Wrap Actions
 
+
+
     public bool Dance()
     {
         return ActionController.StartAction(danceAction, AnimationController);
+    }
+
+    public bool StopDance()
+    {
+        return ActionController.StopAction(danceAction);
     }
 
     public bool PickPocket()

@@ -37,12 +37,17 @@ public class Iso2DPlayerController : MonoBehaviour
     {
         ControlScheme.Update();
 
-        cc.SetMovementInput(ControlScheme.Horizontal.Value(), ControlScheme.Vertical.Value());
-
-        if(ControlScheme.Actions[(int)PlayerActions.Dance].IsDown())
+        // First do actions
+        if (ControlScheme.Actions[(int)PlayerActions.Dance].IsDown())
         {
             cc.Dance();
-            Debug.Log("Dance");
         }
+        if (ControlScheme.Actions[(int)PlayerActions.Dance].IsReleased())
+        {
+            cc.StopDance();
+        }
+
+        // Finally do movement (can override actions)
+        cc.SetMovementInput(ControlScheme.Horizontal.Value(), ControlScheme.Vertical.Value());
 	}
 }

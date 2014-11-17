@@ -44,15 +44,13 @@ public class DanceAction : ICharacterAction
 
     #region Start & Stop
 
-    public ICharacterAction StartAction(AnimatorCollectionWrapper animator)
+    public void StartAction(AnimatorCollectionWrapper animator)
     {
-        DanceAction copy = new DanceAction();
-        copy.finished = false;
-        copy.anim = animator;
+        finished = false;
+        anim = animator;
 
         animator.SetBool(DanceAnimationVar, true);
         // Set Dancing animation = true
-        return copy;
     }
 
     public void StopAction()

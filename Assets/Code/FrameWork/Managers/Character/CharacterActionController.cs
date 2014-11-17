@@ -124,7 +124,8 @@ public class CharacterActionController : ICharacterActionController
 
     protected bool ControllerStartAction(ICharacterAction action, AnimatorCollectionWrapper anim)
     {
-        activeAction = action.StartAction(anim);
+        action.StartAction(anim);
+        activeAction = action;
         return true;
     }
 

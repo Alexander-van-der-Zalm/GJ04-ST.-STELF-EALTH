@@ -75,7 +75,12 @@ public class Character2DBaseController : MonoBehaviour
             CheckFlipBy(rb.velocity.x);
 
         if (ActionController.CanMove)
+        {
             MovementController.FixedPhysicsUpdate(rb);
+        }
+        else
+            rb.velocity = Vector2.zero;
+            
 
         FixedUpdateEnd();
     }

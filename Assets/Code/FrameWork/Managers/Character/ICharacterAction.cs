@@ -12,7 +12,7 @@ public interface ICharacterAction
     /// <summary>
     /// Start the action (could start a coroutine)
     /// </summary>
-    ICharacterAction StartAction(AnimatorCollectionWrapper animator);
+    void StartAction(AnimatorCollectionWrapper animator);
 
     /// <summary>
     /// Also possible to call if it is not interruptable (do an interuptable check if you dont want that to happen).
