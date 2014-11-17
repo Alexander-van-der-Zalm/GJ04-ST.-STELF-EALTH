@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b57b65fb1fc5464fbc02247c5d76611, type: 3}
   m_Name: ControlScheme
   m_EditorClassIdentifier: 
-  Name: PlayerControl+PlayerActions
+  Name: Iso2DPlayerController+PlayerActions
   controllerID: 1
   playerID: 1
   UpdateType: 1
-  InputType: 1
+  InputType: 0
   Horizontal:
     Name: Horizontal
     scheme: {fileID: 11400000}
@@ -24,21 +24,29 @@ MonoBehaviour:
       keys:
       - LeftStickX
       xboxAxisType: 1
+      selectedIndex1: 0
+      selectedIndex2: 0
     - Type: 1
       keys:
       - Left
       - Right
       xboxAxisType: 0
+      selectedIndex1: 2
+      selectedIndex2: 3
     - Type: 0
       keys:
       - A
       - D
       xboxAxisType: 0
+      selectedIndex1: 45
+      selectedIndex2: 48
     - Type: 0
       keys:
       - LeftArrow
       - RightArrow
       xboxAxisType: 0
+      selectedIndex1: 92
+      selectedIndex2: 91
     lastAxis: 0
   Vertical:
     Name: Vertical
@@ -48,21 +56,29 @@ MonoBehaviour:
       keys:
       - LeftStickY
       xboxAxisType: 1
+      selectedIndex1: 1
+      selectedIndex2: 0
     - Type: 1
       keys:
       - Down
       - Up
       xboxAxisType: 0
+      selectedIndex1: 1
+      selectedIndex2: 0
     - Type: 0
       keys:
       - S
       - W
       xboxAxisType: 0
+      selectedIndex1: 63
+      selectedIndex2: 67
     - Type: 0
       keys:
       - DownArrow
       - UpArrow
       xboxAxisType: 0
+      selectedIndex1: 90
+      selectedIndex2: 89
     lastAxis: 0
   Actions:
   - Name: PickPocket

@@ -24,7 +24,7 @@ public class Iso2DPlayerController : MonoBehaviour
             ControlScheme = ControlScheme.CreateScheme<PlayerActions>();
             ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.PCKey(KeyCode.Space));
             ControlScheme.Actions[(int)PlayerActions.PickPocket].Keys.Add(ControlKey.XboxButton(XboxCtrlrInput.XboxButton.A));
-            ControlScheme.Actions[(int)PlayerActions.Dance].Keys.Add(ControlKey.PCKey(KeyCode.LeftShift));
+            ControlScheme.Actions[(int)PlayerActions.Dance].Keys.Add(ControlKey.PCKey(KeyCode.Q));
             ControlScheme.Actions[(int)PlayerActions.Dance].Keys.Add(ControlKey.XboxButton(XboxCtrlrInput.XboxButton.B));
             ScriptableObjectHelper.SaveAssetAutoNaming(ControlScheme);
             //ControlScheme.hideFlags = HideFlags.DontSave;
@@ -37,11 +37,12 @@ public class Iso2DPlayerController : MonoBehaviour
     {
         ControlScheme.Update();
 
-        //cc.SetInput(ControlScheme.Horizontal.Value(), ControlScheme.Vertical.Value());
+        cc.SetMovementInput(ControlScheme.Horizontal.Value(), ControlScheme.Vertical.Value());
 
-        if(ControlScheme.Actions[(int)PlayerActions.Dance].IsPressed())
+        if(ControlScheme.Actions[(int)PlayerActions.Dance].IsDown())
         {
             cc.Dance();
+            Debug.Log("Dance");
         }
 	}
 }

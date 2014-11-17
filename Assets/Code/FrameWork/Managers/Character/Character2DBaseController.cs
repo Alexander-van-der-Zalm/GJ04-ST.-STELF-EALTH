@@ -23,19 +23,22 @@ public class Character2DBaseController : MonoBehaviour
     #region Fields
 
     [SerializeField]
-    protected ICharacterActionController ActionController;
+    protected CharacterActionController ActionController;
 
     [SerializeField]
     protected ICharacter2DMovement MovementController;
 
+    [SerializeField]
+    protected AnimatorCollectionWrapper AnimationController;
+
     [System.NonSerialized]
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     [System.NonSerialized]
     private Transform tr;
 
     [System.NonSerialized]
-    private bool facingLeft;
+    private bool facingLeft = true;
 
     #endregion
 
@@ -56,8 +59,8 @@ public class Character2DBaseController : MonoBehaviour
 
     protected virtual void Init()
     {
-        if (ActionController == null || MovementController == null)
-            throw new System.NullReferenceException("Character2DBaseController.Init movement or action controller not set");
+        if (ActionController == null || MovementController == null || AnimationController == null)
+            throw new System.NullReferenceException("Character2DBaseController.Init movement, animation or action controller not set");
     }
 
     #endregion
@@ -74,7 +77,7 @@ public class Character2DBaseController : MonoBehaviour
         if (ActionController.CanMove)
             MovementController.FixedPhysicsUpdate(rb);
 
-        FixedUpdateEnd();
+        //FixedUpdateEnd();
     }
 
     protected virtual void FixedUpdateEnd()
@@ -88,6 +91,24 @@ public class Character2DBaseController : MonoBehaviour
     }
 
     #endregion
+
+    #region SetMovementInput
+
+    public void SetMovementInput(float horizontal, float vertical)
+    {
+        // Stop action if it is interruptable, prevents movement and if the input is not 0
+        if((horizontal != 0 || vertical != 0) && !ActionController.CanMove && !ActionController.Uninterruptable)
+        {
+            ActionController.StopAction(false);
+            Debug.Log("SetMovementInput: Stopping all actions");
+        }
+        
+        MovementController.SetMovementInput(horizontal, vertical);
+    }
+
+    #endregion
+
+    #region Flip
 
     private void Flip()
     {
@@ -115,4 +136,5 @@ public class Character2DBaseController : MonoBehaviour
             Flip();
     }
 
+    #endregion
 }

@@ -22,13 +22,13 @@ public interface ICharacterActionController
     /// </summary>
     /// <typeparam name="T">A characterAction with ICharacterAction</typeparam>
     /// <returns>Returns if the action has started</returns>
-    bool StartAction<T>() where T : ICharacterAction;
+    bool StartAction<T>(AnimatorCollectionWrapper anim) where T : ICharacterAction;
 
 
     /// <summary>
     /// Try let the character controller do an action
     /// </summary>
-    bool StartAction(ICharacterAction action);
+    bool StartAction(ICharacterAction action,AnimatorCollectionWrapper anim);
 
     /// <summary>
     /// Stop active actin if it has the generic type (even if uninteruptable)

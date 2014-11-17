@@ -3,6 +3,21 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+//[System.Serializable]
+//public struct AnimatorParameter
+//{
+//    public enum APType
+//    {
+//        Bool,
+//        Trigger,
+//        Int,
+//        Float
+//    }
+
+//    public APType Type;
+//    public string ParameterName;
+//}
+
 [System.Serializable]
 public class AnimatorCollectionWrapper 
 {
@@ -13,6 +28,65 @@ public class AnimatorCollectionWrapper
     {
         animators = rootGO.GetComponentsInChildren<Animator>().ToList();
     }
+
+    #region Get Set
+
+    #region Float
+
+    public float GetFloat(string param)
+    {
+        return animators.First().GetFloat(param);
+    }
+
+    public void SetFloat(string param, float value)
+    {
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetFloat(param, value); 
+    }
+
+    #endregion
+
+    #region Bool
+
+    public bool GetBool(string param)
+    {
+        return animators.First().GetBool(param);
+    }
+
+    public void SetBool(string param, bool value)
+    {
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetBool(param, value);
+    }
+
+    #endregion
+
+    #region Trigger
+
+    public void SetTrigger(string param)
+    {
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetTrigger(param);
+    }
+
+    #endregion
+
+    #region Int
+
+    public int GetInt(string param)
+    {
+        return animators.First().GetInteger(param);
+    }
+
+    public void SetInt(string param, int value)
+    {
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].SetInteger(param, value);
+    }
+
+    #endregion
+
+    #endregion
 }
 
 [System.Serializable]
@@ -40,92 +114,92 @@ public class AnimationSwapAnimatorWrapper:AnimatorCollectionWrapper
 
     public float VelocityX
     {
-        get { return animators.First().GetFloat(velocityX); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(velocityX, value); }
+        get { return GetFloat(velocityX); }
+        set { SetFloat(velocityX, value); }
     }
 
     public float VelocityY
     {
-        get { return animators.First().GetFloat(velocityY); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(velocityY, value); }
+        get { return GetFloat(velocityY); }
+        set { SetFloat(velocityY, value); }
     }
 
     public float VelocityXAbs
     {
-        get { return animators.First().GetFloat(velocityXAbs); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(velocityXAbs, value); }
+        get { return GetFloat(velocityXAbs); }
+        set { SetFloat(velocityXAbs, value); }
     }
 
     public float InputX
     {
-        get { return animators.First().GetFloat(inputX); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(inputX, value); }
+        get { return GetFloat(inputX); }
+        set { SetFloat(inputX, value); }
     }
 
     public float InputY
     {
-        get { return animators.First().GetFloat(inputY); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(inputY, value); }
+        get { return GetFloat(inputY); }
+        set { SetFloat(inputY, value); }
     }
 
     public float LookY
     {
-        get { return animators.First().GetFloat(lookY); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(lookY, value); }
+        get { return GetFloat(lookY); }
+        set { SetFloat(lookY, value); }
     }
     public float LookXAbs
     {
-        get { return animators.First().GetFloat(lookXAbs); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetFloat(lookXAbs, value); }
+        get { return GetFloat(lookXAbs); }
+        set { SetFloat(lookXAbs, value); }
     }
 
     public bool Drink
     {
-        get { return animators.First().GetBool(drink); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(drink,value); }
+        get { return GetBool(drink); }
+        set { SetBool(drink,value); }
     }
     public bool Dance
     {
-        get { return animators.First().GetBool(dance); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(dance, value); }
+        get { return GetBool(dance); }
+        set { SetBool(dance, value); }
     }
 
     public bool Talk
     {
-        get { return animators.First().GetBool(talk); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(talk, value); }
+        get { return GetBool(talk); }
+        set { SetBool(talk, value); }
     }
 
     public bool Bump
     {
-        get { return animators.First().GetBool(bump); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(bump,value); }
+        get { return GetBool(bump); }
+        set { SetBool(bump,value); }
     }
 
     public bool StealTrigger
     {
         //get { return animators.First().Get(stealTrigger); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetTrigger(stealTrigger); }
+        set { SetTrigger(stealTrigger); }
     }
 
     public bool Give
     {
-        get { return animators.First().GetBool(give); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(give, value); }
+        get { return GetBool(give); }
+        set { SetBool(give, value); }
     }
     public bool Recieve
     {
-        get { return animators.First().GetBool(recieve); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(recieve, value); }
+        get { return GetBool(recieve); }
+        set { SetBool(recieve, value); }
     }
     public bool Moving
     {
-        get { return animators.First().GetBool(moving); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(moving, value); }
+        get { return GetBool(moving); }
+        set { SetBool(moving, value); }
     }
     public bool Angry
     {
-        get { return animators.First().GetBool(angry); }
-        set { for (int i = 0; i < animators.Count; i++)animators[i].SetBool(angry, value); }
+        get { return GetBool(angry); }
+        set { SetBool(angry, value); }
     }
 }

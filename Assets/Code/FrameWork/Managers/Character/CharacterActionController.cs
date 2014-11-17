@@ -49,7 +49,7 @@ public class CharacterActionController : ICharacterActionController
         get { return HasActiveAction && activeAction.CannotMoveDuringAction; }
     }
 
-    protected bool actionUninterruptable
+    public bool Uninterruptable
     {
         get { return HasActiveAction && !activeAction.Interuptable; }
     }
@@ -76,7 +76,7 @@ public class CharacterActionController : ICharacterActionController
     /// </summary>
     /// <typeparam name="T">Type : ICharacterAction to start</typeparam>
     /// <returns>If the action has started</returns>
-    public bool StartAction<T>() where T : ICharacterAction
+    public bool StartAction<T>(AnimatorCollectionWrapper anim) where T : ICharacterAction
     {
         // Possibly remove possibleAction from controller:
         // Cannot do the action if there is no possible action
@@ -92,7 +92,7 @@ public class CharacterActionController : ICharacterActionController
         ICharacterAction action = defaultActions.Where(a => a.GetType() == typeof(T)).First();
 
         // Use the standard startAction logic
-        return StartAction(action);
+        return StartAction(action, anim);
     }
 
     /// <summary>
@@ -100,32 +100,31 @@ public class CharacterActionController : ICharacterActionController
     /// </summary>
     /// <param name="action">Action to start</param>
     /// <returns>If the action has started</returns>
-    public bool StartAction(ICharacterAction action)
+    public bool StartAction(ICharacterAction action, AnimatorCollectionWrapper anim)
     {
         // Stop if it cannot be interrupted
-        if (actionUninterruptable)
+        if (Uninterruptable)
             return false;
 
         // If it is not currently doing an action start the action
         if (!HasActiveAction)
         {
-            return ControllerStartAction(action);
+            return ControllerStartAction(action, anim);
         }
 
         // Interrupt the currently active action if it is interruptable
         if (action.CanInterupt && StopAction(false))
         {
-            return ControllerStartAction(action);
+            return ControllerStartAction(action, anim);
         }
 
         // Couldn't start the action
         return false;
     }
 
-    protected bool ControllerStartAction(ICharacterAction action)
+    protected bool ControllerStartAction(ICharacterAction action, AnimatorCollectionWrapper anim)
     {
-        action.StartAction(this);
-        activeAction = action;
+        activeAction = action.StartAction(anim);
         return true;
     }
 

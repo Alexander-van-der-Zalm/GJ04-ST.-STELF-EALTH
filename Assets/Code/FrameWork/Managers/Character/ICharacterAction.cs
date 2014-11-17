@@ -9,11 +9,10 @@ public interface ICharacterAction
     bool CannotMoveDuringAction { get; }
     string Name { get; }
 
-
     /// <summary>
     /// Start the action (could start a coroutine)
     /// </summary>
-    void StartAction(ICharacterActionController controller);
+    ICharacterAction StartAction(AnimatorCollectionWrapper animator);
 
     /// <summary>
     /// Also possible to call if it is not interruptable (do an interuptable check if you dont want that to happen).

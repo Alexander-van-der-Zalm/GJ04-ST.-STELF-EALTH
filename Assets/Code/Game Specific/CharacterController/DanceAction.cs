@@ -1,10 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DanceAction : ICharacterAction 
+[System.Serializable]
+public class DanceAction : ICharacterAction
 {
+    #region Fields
+
+    public string DanceAnimationVar = "Dance";
+
     private bool finished;
-    
+    private AnimatorCollectionWrapper anim;
+
+    #endregion
+
+    #region Properties
+
     public bool Interuptable
     {
         get { return true; }
@@ -30,15 +40,27 @@ public class DanceAction : ICharacterAction
         get { return "Dance"; }
     }
 
-    public void StartAction(ICharacterActionController controller)
+    #endregion
+
+    #region Start & Stop
+
+    public ICharacterAction StartAction(AnimatorCollectionWrapper animator)
     {
-        finished = false;
+        DanceAction copy = new DanceAction();
+        copy.finished = false;
+        copy.anim = animator;
+
+        animator.SetBool(DanceAnimationVar, true);
         // Set Dancing animation = true
+        return copy;
     }
 
     public void StopAction()
     {
         finished = true;
         // Set Dancing animation = false
+        anim.SetBool(DanceAnimationVar, false);
     }
+
+    #endregion
 }
